@@ -2,6 +2,7 @@ package ru.znay.znay.he.gfx.model;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
@@ -44,6 +45,39 @@ public class Bitmap {
 
     public void draw(Bitmap bitmap, int scale, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits) {
         BitmapHelper.scaleDraw(bitmap, scale, xOffs, yOffs, xo, yo, w, h, colors, bits, this);
+    }
+
+
+    public static GraphicsConfiguration getDefaultConfiguration() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        return gd.getDefaultConfiguration();
+    }
+
+    public BufferedImage tilt(BufferedImage image, double angle, GraphicsConfiguration gc) {
+        int transparency = image.getColorModel().getTransparency();
+        BufferedImage result = gc.createCompatibleImage(width, height, transparency);
+        Graphics2D g = result.createGraphics();
+        g.rotate(angle, width / 2, height / 2);
+        g.drawRenderedImage(image, null);
+        return result;
+    }
+
+    public void rotate(double theta) {
+
+        this.image = tilt(image, Math.toRadians(theta), getDefaultConfiguration());
+
+        this.pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+    }
+
+    public void draw(double angle, Bitmap bitmap, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits) {
+        Bitmap tempBitmap = new Bitmap(w, h);
+
+        BitmapHelper.copy(bitmap, xo, yo, 0, 0, w, h, tempBitmap);
+
+        tempBitmap.rotate(angle);
+
+        BitmapHelper.scaleDraw(tempBitmap, 1, xOffs, yOffs, 0, 0, w, h, colors, bits, this);
     }
 
     public int getWidth() {

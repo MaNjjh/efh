@@ -34,6 +34,10 @@ public class Screen {
         this.viewPort.draw(this.sprites, scale, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, w, h, colors, bits);
     }
 
+    public void render(double angle, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits) {
+        this.viewPort.draw(angle, this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, w, h, colors, bits);
+    }
+
     public Bitmap getViewPort() {
         return viewPort;
     }
