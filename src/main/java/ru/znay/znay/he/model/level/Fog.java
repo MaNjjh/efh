@@ -15,6 +15,7 @@ public class Fog {
     private boolean[] fog;
     private int width;
     private int height;
+    private CircleMap circleMap;
 
     public Fog(int width, int height) {
         this.width = width;
@@ -34,7 +35,7 @@ public class Fog {
             for (int i = 0; i < w; i++) {
                 try {
 
-                    fog[i + xOffs + (j + yOffs) * this.width] = !src[i + j * w];
+                    fog[i + xOffs + (j + yOffs) * this.width] = !src[i + j * w] && fog[i + xOffs + (j + yOffs) * this.width];
                 } catch (Exception e) {
                     //ignore
                 }
@@ -42,11 +43,21 @@ public class Fog {
         }
     }
 
-    void clearFog2(int xCenter, int yCenter, int radius) {
-        CircleMap circleMap = new CircleMap(radius);
-        circleMap.drawCircle();
-        copyFromMap(circleMap.getCircle(), xCenter - radius, yCenter - radius, radius << 1, radius << 1);
+    private CircleMap getCircleMap(int radius) {
+        if (this.circleMap != null) {
+            if (this.circleMap.getRadius() == radius) {
+                return this.circleMap;
+            }
+        }
 
+        this.circleMap = new CircleMap(radius);
+        this.circleMap.drawCircle();
+        this.circleMap.fillCircle();
+        return this.circleMap;
+    }
+
+    void clearFog2(int xCenter, int yCenter, int radius) {
+        copyFromMap(getCircleMap(radius).getCircle(), xCenter - radius, yCenter - radius, radius << 1, radius << 1);
     }
 
 

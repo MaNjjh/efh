@@ -73,13 +73,41 @@ public class CircleMap {
         }
     }
 
-    public void fillCircle() {
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
-                if (circle[i + j * width]) {
+    private int findRightRow(int col) {
+        for (int row = width; row > width >> 1; row--) {
+            boolean currentCol = circle[row + col * width];
+            boolean nextCol = circle[(row - 1) + col * width];
+            if (currentCol && !nextCol) {
+                return row;
+            }
+        }
+        return -1;
+    }
 
+    private int findLeftRow(int col) {
+        for (int row = 0; row < width >> 1; row++) {
+            boolean currentCol = circle[row + col * width];
+            boolean nextCol = circle[(row + 1) + col * width];
+            if (currentCol && !nextCol) {
+                return row;
+            }
+        }
+        return -1;
+    }
+
+    public void fillCircle() {
+        for (int col = 0; col < height; col++) {
+            int leftRow = findLeftRow(col);
+            if (leftRow < 0) continue;
+            int rightRow = findRightRow(col);
+            if (rightRow < 0) continue;
+
+            if (leftRow != rightRow) {
+                for (int row = leftRow; row < rightRow; row++) {
+                    fillMap(row, col);
                 }
             }
+
         }
     }
 
