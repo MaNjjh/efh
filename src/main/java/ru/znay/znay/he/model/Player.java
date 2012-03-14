@@ -24,7 +24,7 @@ public class Player extends Mob {
     private int color;
     private Game game;
     private int score = 1000;
-    private int clearFogRadius = 3;
+    private int clearFogRadius = 4;
 
     public Player(Game game, InputHandler inputHandler) {
         this.team = ETeam.PLAYER_TEAM;
