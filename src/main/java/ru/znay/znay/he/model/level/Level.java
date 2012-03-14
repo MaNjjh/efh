@@ -1,10 +1,10 @@
 package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.SlimeFactory;
