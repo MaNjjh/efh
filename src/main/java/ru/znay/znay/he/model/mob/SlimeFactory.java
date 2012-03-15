@@ -47,7 +47,7 @@ public class SlimeFactory extends Mob {
         super.die();
         int count = random.nextInt(6) + 2;
         for (int i = 0; i < count; i++) {
-            this.level.add(new Coin(x, y, random.nextInt(20) + 56));
+            this.level.add(new Coin(x, y, random.nextInt(20) + 5));
         }
     }
 

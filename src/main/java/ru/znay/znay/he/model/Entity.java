@@ -67,9 +67,11 @@ public class Entity {
             for (int xt = xt0; xt <= xt1; xt++) {
                 if (xt >= xto0 && xt <= xto1 && yt >= yto0 && yt <= yto1) continue;
                 level.getTile(xt, yt).bumpedInto(level, xt, yt, this);
-                if (!level.getTile(xt, yt).mayPass(level, xt, yt, this)) {
+
+                if (!this.ignoreBlocks() && !level.getTile(xt, yt).mayPass(level, xt, yt, this)) {
                     return false;
                 }
+
             }
         }
 
@@ -99,6 +101,10 @@ public class Entity {
 
     public void touchedBy(Entity entity) {
 
+    }
+
+    public boolean ignoreBlocks() {
+        return false;
     }
 
     public boolean blocks(Entity entity) {

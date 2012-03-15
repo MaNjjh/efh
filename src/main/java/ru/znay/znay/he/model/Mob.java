@@ -28,7 +28,7 @@ public class Mob extends Entity {
     @Override
     public void tick() {
         tickTime++;
-        if (level.getTile(x >> 4, y >> 4) == Tile.lava) {
+        if (!this.ignoreBlocks() && level.getTile(x >> 4, y >> 4) == Tile.lava) {
             hurt(this, 4, dir ^ 1);
         }
 
