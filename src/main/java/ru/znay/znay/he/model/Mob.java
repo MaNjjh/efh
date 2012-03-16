@@ -114,16 +114,16 @@ public class Mob extends Entity {
             if (xd * xd + yd * yd < 80 * 80) return false;
         }
 
-        int r = level.getMonsterDensity() * Tile.SIZE;
-        if (level.getEntities(xx - r, yy - r, xx + r, yy + r, null).size() > 0) return false;
+        this.x = xx;
+        this.y = yy;
 
-        if (level.getTile(x, y).mayPass(level, x, y, this)) {
-            this.x = xx;
-            this.y = yy;
-            return true;
+        if (!this.ignoreBlocks()) {
+            int r = level.getMonsterDensity() * Tile.SIZE;
+            if (level.getEntities(xx - r, yy - r, xx + r, yy + r, null).size() > 0) return false;
+            if (!level.getTile(x, y).mayPass(level, x, y, this)) return false;
         }
 
-        return false;
+        return true;
     }
 
     protected void die() {

@@ -41,11 +41,11 @@ public class Bird extends Mob {
     public void tick() {
         super.tick();
 
-        if (tickTime / 100 % 2 == 0) {
-            this.angleInc = 8 + random.nextInt(10);
+        if (random.nextInt(10) == 0) {
+            this.angleInc = 7 + random.nextInt(10);
         }
 
-        if (tickTime / 500 % 2 == 0) {
+        if (random.nextInt(30) == 0) {
             this.xTarget = 5 * Tile.SIZE + random.nextInt((level.getWidth() - 5) * Tile.SIZE);
             this.yTarget = 5 * Tile.SIZE + random.nextInt((level.getHeight() - 5) * Tile.SIZE);
         }
