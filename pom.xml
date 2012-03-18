@@ -10,6 +10,12 @@
     <version>0.1</version>
     <name>Escape From Hell Project</name>
 
+    <modules>
+        <module>lua-library</module>
+        <module>game</module>
+        <module>game-dist</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -25,16 +31,8 @@
         <pluginManagement>
             <plugins>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                    <version>2.3.2</version>
-                </plugin>
+
+<!--
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -46,13 +44,11 @@
                         <xmlOutput>true</xmlOutput>
                     </configuration>
                 </plugin>
+-->
+
             </plugins>
         </pluginManagement>
 
     </build>
-    <modules>
-        <module>lua-library</module>
-        <module>game</module>
-    </modules>
 
 </project>

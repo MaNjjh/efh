@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp 
+  spec="1.5+" 
+  codebase="http://jdotsoft.com/download" 
+  href="JarClassLoaderDemo.jnlp">
+  <information>
+    <title>JarClassLoader DEMO</title>
+    <vendor>JDotSoft</vendor>
+    <homepage href="http://jdotsoft.com/JarClassLoader.php"/>    
+    <description>JarClassLoader DEMO Web Start</description>
+    <offline-allowed/>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.5+"/>
+    <jar href="JarClassLoaderDemo.jar"/>
+    <property name="JarClassLoader.logger.area" value="JAR"/> 
+    <property name="JarClassLoader.logger.level" value="DEBUG"/> 
+  </resources>
+  <application-desc main-class="com.jdotsoft.jarloader.test.LauncherTestGUI">
+    <argument>Hello</argument>
+    <argument>World</argument>
+  </application-desc>
+</jnlp>

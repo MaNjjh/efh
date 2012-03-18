@@ -1,8 +1,9 @@
 package ru.znay.znay.he.lua;
 
-import org.keplerproject.luajava.LuaObject;
 import org.keplerproject.luajava.LuaState;
 import org.keplerproject.luajava.LuaStateFactory;
+
+import java.io.File;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,9 +16,15 @@ public class LuaScriptLoader {
     private LuaState luaState;
 
     public LuaScriptLoader(String fileFullName) {
-        luaState = LuaStateFactory.newLuaState();
-        luaState.openLibs();
-        luaState.LdoFile(fileFullName);
+        try {
+            luaState = LuaStateFactory.newLuaState();
+            luaState.openLibs();
+            File jarFile = new File(LuaScriptLoader.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+
+            luaState.LdoFile(new File(jarFile, "scripts" + File.separator + fileFullName).getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void closeScript() {

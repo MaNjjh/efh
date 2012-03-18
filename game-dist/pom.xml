@@ -9,34 +9,33 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lua-library</artifactId>
+    <artifactId>game-dist</artifactId>
     <packaging>pom</packaging>
-    <name>Lua Library</name>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>efh</groupId>
+            <artifactId>game</artifactId>
+            <version>0.0.16</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/dist.xml</descriptor>
+                    </descriptors>
+                </configuration>
                 <executions>
-
                     <execution>
-                        <id>install Lua</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>install-file</goal>
+                            <goal>attached</goal>
                         </goals>
-                        <phase>validate</phase>
-                        <configuration>
-                            <file>${basedir}/src/main/lib/lua/luajava.jar</file>
-                            <groupId>efh</groupId>
-                            <artifactId>lua-library</artifactId>
-                            <version>1.1</version>
-                            <packaging>jar</packaging>
-
-                        </configuration>
                     </execution>
-
-
                 </executions>
             </plugin>
         </plugins>

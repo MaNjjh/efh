@@ -24,25 +24,100 @@
 
     <build>
         <plugins>
-            <plugin>
+
+<!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <version>2.3.2</version>
+            </plugin>-->
             <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+
+
+                            <finalName>${project.artifactId}-${project.version}1</finalName>
+
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>ru.znay.znay.he.Game</mainClass>
+
+                                </transformer>
+
+<!--                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>-->
+                            </transformers>
+
+
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>executable</shadedClassifierName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
 
                 <configuration>
                     <archive>
                         <manifest>
+
                             <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>ru.znay.znay.he.Game</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
 
-            </plugin>
+            </plugin>-->
+            <!--
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-jar-plugin</artifactId>
+                            <version>2.3</version>
+                            <executions>
+                                <execution>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>jar</goal>
+                                    </goals>
+                                    <configuration>
+                                        <classifier>winbinaries</classifier>
+                                        <classesDirectory>../libs/lua/native</classesDirectory>
+
+                                        <archive>
+                                            <manifest>
+
+                                                <addClasspath>true</addClasspath>
+                                                <classpathPrefix>lib/</classpathPrefix>
+                                                <mainClass>ru.znay.znay.he.Game</mainClass>
+                                            </manifest>
+                                        </archive>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+            -->
+
         </plugins>
-        <finalName>efh-${version}</finalName>
     </build>
 </project>

@@ -11,6 +11,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URL;
 
 /**
@@ -137,7 +138,7 @@ public class Game extends Graphics implements Runnable {
             if (System.currentTimeMillis() - lastTimer1 > 1000) {
                 lastTimer1 += 1000;
                 lastFrames = frames;
-                System.out.println(ticks + " ticks, " + frames + " fps");
+                //System.out.println(ticks + " ticks, " + frames + " fps");
                 frames = 0;
                 ticks = 0;
             }
@@ -147,9 +148,8 @@ public class Game extends Graphics implements Runnable {
 
     public static void setLibraryPath() throws Exception {
 
-        if (System.getProperty("org.lwjgl.librarypath") == null) {
-            URL jarLocation = Game.class.
-                    getProtectionDomain().getCodeSource().getLocation();
+        //if (System.getProperty("java.library.path") == null) {
+            URL jarLocation = Game.class.getProtectionDomain().getCodeSource().getLocation();
             File jarFile = new File(jarLocation.toURI());
             File jarDirectory = jarFile.getParentFile();
 
@@ -170,24 +170,26 @@ public class Game extends Graphics implements Runnable {
             } else if (name != null && name.startsWith("Windows")) {
                 nativeDir = "win32";
             } else {
-                throw new IllegalStateException("Unsupported platform: \n" +
-                        "Name    : " + name + "\n" +
-                        "Arch    : " + arch);
+                throw new IllegalStateException("Unsupported platform: \n" + "Name: " + name + "\n" + "Arch: " + arch);
             }
 
-            File nativesDirectory = new File(jarDirectory,
-                    "lib" + File.separator +
-                            "natives" + File.separator +
-                            nativeDir);
-            System.setProperty("org.lwjgl.librarypath",
-                    nativesDirectory.getAbsolutePath());
-        }
+            File nativesDirectory = new File(jarFile, "native" + File.separator + "lua-5.2_" + nativeDir + "_bin");
+
+            System.out.println("set dir " + nativesDirectory.getAbsolutePath());
+
+            System.setProperty("java.library.path", nativesDirectory.getAbsolutePath());
+            Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
+            fieldSysPath.setAccessible(true);
+            fieldSysPath.set(null, null);
+        //}
     }
 
 
     public static void main(String[] args) throws Exception {
-        Game game = new Game();
+
         Game.setLibraryPath();
+
+        Game game = new Game();
 
         Dimension dimension = new Dimension(Constants.SCREEN_WIDTH * Constants.SCREEN_SCALE, Constants.SCREEN_HEIGHT * Constants.SCREEN_SCALE);
         game.setMinimumSize(dimension);

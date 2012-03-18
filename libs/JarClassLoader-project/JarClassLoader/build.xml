@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<project name="JarClassLoader" default="makeDemo">
+    
+    <!-- Values -->
+    <property name="top.jar.name" value="JarClassLoaderDemo.jar"/>
+    <property name="inner.jar.name" value="InnerJar.jar"/>
+        
+    <!-- Locations -->
+    <property name="build.dir" location="${basedir}/build"/>
+    <property name="dist.dir" location="${basedir}/dist"/>
+    <property name="lib.dir" location="${basedir}/lib"/>
+    <property name="jnlp.dir" location="${basedir}/jnlp"/>
+    <property name="bin.dir" location="${basedir}/bin"/>
+    <property name="java.src.dir" location="${basedir}/src/java"/>
+
+    <target name="makeDemo">
+        <tstamp>
+           <format property="time.now" pattern="MM-dd-yyyy hh:mma"/>
+        </tstamp>
+        
+        <!-- Init Dirs -->
+        <delete dir="${build.dir}" quiet="true" failonerror="false"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/lib"/>
+        <delete dir="${dist.dir}"  quiet="true" failonerror="false"/>
+            
+        <!-- Compile -->
+        <javac srcdir="${java.src.dir}"
+            destdir="${build.dir}"
+            classpath="${lib.dir}/substance-lite.jar"
+            source="1.5"
+            target="1.5"
+            debug="on"
+            deprecation="off"
+            optimize="on"
+            includes="**"/>
+        
+        <!-- Copy to dist -->
+        <copy todir="${dist.dir}" overwrite="true">
+            <fileset dir="${bin.dir}" includes="**"/>
+            <fileset dir="${jnlp.dir}" includes="*.jnlp"/>
+        </copy>
+        <fixcrlf srcdir="${dist.dir}" includes="*.sh" eol="unix"/>
+            
+        <!-- Make Inner JAR -->
+        <jar jarfile="${build.dir}/lib/${inner.jar.name}" compress="true">
+            <fileset dir="${build.dir}" includes="com/jdotsoft/jarloader/test/HelloInnerJar.class"/>
+            <fileset dir="${basedir}" includes="resources/InnerText.txt"/>
+            <manifest>
+                <attribute name="Build-Date" value="${time.now}"/>
+                <attribute name="Created-By" value="JDotSoft"/>
+            </manifest>
+        </jar>
+        
+        <!-- Make Top JAR -->
+        <jar jarfile="${dist.dir}/${top.jar.name}" compress="true">
+            <fileset dir="${build.dir}">
+              <include name="com/jdotsoft/jarloader/JarClassLoader*.class"/>
+              <include name="com/jdotsoft/jarloader/test/LauncherTestConsole.class"/>
+              <include name="com/jdotsoft/jarloader/test/LauncherTestGUI.class"/>
+              <include name="com/jdotsoft/jarloader/test/LauncherTestApplet.class"/>
+              <include name="com/jdotsoft/jarloader/test/TestConsole.class"/>
+              <include name="com/jdotsoft/jarloader/test/TestGUI*.class"/>
+              <include name="com/jdotsoft/jarloader/test/TestApplet.class"/>
+              <include name="com/jdotsoft/jarloader/test/HelloTopJar.class"/>
+              <include name="com/jdotsoft/jarloader/test/PrintFile.class"/>
+              <include name="com/jdotsoft/jarloader/test/NativeCode.class"/>
+              <include name="com/jdotsoft/jarloader/test/ClassForName.class"/>
+              <include name="lib/${inner.jar.name}"/>
+            </fileset>
+            <fileset dir="${basedir}/lib-native" includes="**"/>
+            <fileset dir="${basedir}/lib" includes="**"/>
+            <fileset dir="${basedir}" includes="resources/TopText.txt"/>
+            <manifest>
+                <attribute name="Build-Date" value="${time.now}"/>
+                <attribute name="Created-By" value="JDotSoft"/>
+                <attribute name="Main-Class" value="com.jdotsoft.jarloader.test.LauncherTestConsole"/>
+            </manifest>
+        </jar>
+      
+        <!-- Sign JAR -->
+        <signjar jar="${dist.dir}/${top.jar.name}"
+           keystore="${basedir}/jnlp/JarClassLoaderDemo.jks"
+           alias="jclAlias" storepass="jdotsoft"/>
+    </target>
+
+</project>

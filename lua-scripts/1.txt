@@ -1,0 +1,3 @@
+function create(player)
+player:setTest(10)
+end
