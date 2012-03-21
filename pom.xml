@@ -11,20 +11,10 @@
     <name>Escape From Hell Project</name>
 
     <modules>
-        <module>lua-library</module>
         <module>game</module>
         <module>game-dist</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>efh</groupId>
-                <artifactId>lua-library</artifactId>
-                <version>1.1</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
 

@@ -4,7 +4,6 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.lua.LuaScriptLoader;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.item.Coin;
 import ru.znay.znay.he.model.item.Life;
@@ -27,24 +26,17 @@ public class Player extends Mob {
     private Game game;
     private int score = 1000;
     private int clearFogRadius = 4;
-    private LuaScriptLoader loader;
-    protected int test;
 
     public Player(Game game, InputHandler inputHandler) {
         this.team = ETeam.PLAYER_TEAM;
         this.inputHandler = inputHandler;
         this.game = game;
         this.color = PaletteHelper.getColor(-1, 100, 522, 555);
-        System.out.println("try to create player");
-        this.loader = new LuaScriptLoader("player.lua");
-        loader.runScriptFunction("create", this);
-        System.out.println("player created");
     }
 
     @Override
     public void tick() {
 
-        score += test;
         int xa = 0;
         int ya = 0;
         if (inputHandler.up.down) ya--;
@@ -126,13 +118,5 @@ public class Player extends Mob {
 
     public int getClearFogRadius() {
         return clearFogRadius + score / 1000;
-    }
-
-    public int getTest() {
-        return test;
-    }
-
-    public void setTest(int test) {
-        this.test = test;
     }
 }

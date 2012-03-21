@@ -10,9 +10,6 @@ import ru.znay.znay.he.model.level.tile.Tile;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.net.URL;
 
 /**
  * Created by IntelliJ IDEA.
@@ -146,49 +143,7 @@ public class Game extends Graphics implements Runnable {
 
     }
 
-    public static void setLibraryPath() throws Exception {
-
-        //if (System.getProperty("java.library.path") == null) {
-            URL jarLocation = Game.class.getProtectionDomain().getCodeSource().getLocation();
-            File jarFile = new File(jarLocation.toURI());
-            File jarDirectory = jarFile.getParentFile();
-
-            String name = System.getProperty("os.name");
-            String arch = System.getProperty("os.arch");
-
-            String nativeDir = "";
-            if ("Linux".equals(name) && "i386".equals(arch)) {
-                nativeDir = "linux";
-            } else if ("Linux".equals(name) &&
-                    ("x86_64".equals(arch) || "amd64".equals(arch))) {
-                nativeDir = "linux64";
-            } else if ("Mac OS X".equals(name) &&
-                    ("i386".equals(arch) || "x86_64".equals(arch))) {
-                nativeDir = "macosx";
-            } else if ("SunOS".equals(name) && "x86".equals(arch)) {
-                nativeDir = "solaris";
-            } else if (name != null && name.startsWith("Windows")) {
-                nativeDir = "win32";
-            } else {
-                throw new IllegalStateException("Unsupported platform: \n" + "Name: " + name + "\n" + "Arch: " + arch);
-            }
-
-            File nativesDirectory = new File(jarFile, "native" + File.separator + "lua-5.2_" + nativeDir + "_bin");
-
-            System.out.println("set dir " + nativesDirectory.getAbsolutePath());
-
-            System.setProperty("java.library.path", nativesDirectory.getAbsolutePath());
-            Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-            fieldSysPath.setAccessible(true);
-            fieldSysPath.set(null, null);
-        //}
-    }
-
-
     public static void main(String[] args) throws Exception {
-
-        Game.setLibraryPath();
-
         Game game = new Game();
 
         Dimension dimension = new Dimension(Constants.SCREEN_WIDTH * Constants.SCREEN_SCALE, Constants.SCREEN_HEIGHT * Constants.SCREEN_SCALE);

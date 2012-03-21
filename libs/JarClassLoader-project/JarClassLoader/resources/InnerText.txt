@@ -1,2 +1,0 @@
-This is another text
-from InnerText.txt

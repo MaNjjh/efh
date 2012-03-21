@@ -16,11 +16,6 @@ public class GameApplet extends Applet {
     private Game game = new Game();
 
     public void init() {
-        try {
-            Game.setLibraryPath();
-        } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
         setLayout(new BorderLayout());
         add(game, BorderLayout.CENTER);
     }
