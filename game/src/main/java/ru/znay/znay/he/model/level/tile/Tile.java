@@ -22,7 +22,10 @@ public class Tile {
     public int dirtMainColor = 322;
     public int sandMainColor = 550;
     public int waterMainColor = 005;
+    public int holeMainColor = 111;
 
+
+    public int holeColor = PaletteHelper.getColor(111, holeMainColor, 110, 110);
     public int dirtColor = PaletteHelper.getColor(211, dirtMainColor, 433, 544);
     public int grassColor = PaletteHelper.getColor(030, grassMainColor, 252, 353);
     public int lavaColor = PaletteHelper.getColor(500, lavaMainColor, 520, 550);
@@ -35,6 +38,7 @@ public class Tile {
     public static Tile lava = new LavaTile(2);
     public static Tile sand = new SandTile(3);
     public static Tile water = new WaterTile(4);
+    public static Tile hole = new HoleTile(5);
     public static int tickCount = 0;
 
     public boolean connectsToGrass = false;
@@ -74,5 +78,9 @@ public class Tile {
 
     public void setId(byte id) {
         this.id = id;
+    }
+
+    public boolean connectsToLiquid() {
+        return connectsToWater || connectsToLava;
     }
 }

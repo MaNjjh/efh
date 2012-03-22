@@ -53,6 +53,22 @@ public class WaterTile extends Tile {
     }
 
     @Override
+    public void tick(Level level, int xt, int yt) {
+
+        int xn = xt;
+        int yn = yt;
+
+        if (random.nextBoolean())
+            xn += random.nextInt(2) * 2 - 1;
+        else
+            yn += random.nextInt(2) * 2 - 1;
+
+        if (level.getTile(xn, yn) == Tile.hole) {
+            level.setTile(xn, yn, this, 0);
+        }
+    }
+
+    @Override
     public boolean mayPass(Level level, int x, int y, Entity e) {
         return false;
     }

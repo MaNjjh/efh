@@ -19,7 +19,6 @@ public class SandTile extends Tile {
         boolean l = !level.getTile(x - 1, y).connectsToSand;
         boolean r = !level.getTile(x + 1, y).connectsToSand;
 
-
         if (!u && !l) {
             screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + 0, 3 * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, sandColor, 0);
         } else

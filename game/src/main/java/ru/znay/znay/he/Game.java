@@ -38,7 +38,7 @@ public class Game extends Graphics implements Runnable {
     }
 
     public void init() {
-        this.level = new Level(50, 50);
+        this.level = new Level(500, 500);
         this.player = new Player(this, this.inputHandler);
         this.player.findStartPos(level);
         this.level.add(player);

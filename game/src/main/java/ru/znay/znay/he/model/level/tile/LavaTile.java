@@ -61,12 +61,6 @@ public class LavaTile extends Tile {
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
         } else
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, (r ? 16 : 15) * Tile.HALF_SIZE, (d ? 2 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (sd || sr) ? transitionColor2 : transitionColor1, 0);
-
-
-        /*screen.render(x * Tile.SIZE, y * Tile.SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
-        screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
-        screen.render(x * Tile.SIZE, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
-        screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));*/
     }
 
 
@@ -81,11 +75,9 @@ public class LavaTile extends Tile {
         else
             yn += random.nextInt(2) * 2 - 1;
 
-        if (level.getTile(xn, yn) == Tile.grass) {
+        if (level.getTile(xn, yn) == Tile.hole) {
             level.setTile(xn, yn, this, 0);
         }
-
-
     }
 
     @Override

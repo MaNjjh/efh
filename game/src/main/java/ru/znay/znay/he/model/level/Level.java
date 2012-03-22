@@ -71,8 +71,11 @@ public class Level {
                 if (random.nextInt(10)==0) {
                     setTile(x, y, Tile.sand, 0);
                 }
-                if (random.nextInt(3)==0) {
+                if (random.nextInt(50)==0) {
                     setTile(x, y, Tile.water, 0);
+                }
+                if (random.nextInt(2)==0) {
+                    setTile(x, y, Tile.hole, 0);
                 }
             }
         }
