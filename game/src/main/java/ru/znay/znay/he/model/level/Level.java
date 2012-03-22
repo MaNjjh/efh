@@ -6,6 +6,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
+import ru.znay.znay.he.model.builds.Tree;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -101,6 +102,9 @@ public class Level {
             if (mob.findStartPos(this)) {
                 add(mob);
             }
+
+            mob = new Tree();
+            if (mob.findStartPos(this)) add(mob);
         }
 
     }
