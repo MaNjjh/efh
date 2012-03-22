@@ -53,6 +53,11 @@ public class Arrow extends Mob {
     }
 
     @Override
+    public boolean isFly() {
+        return true;
+    }
+
+    @Override
     public void render(Screen screen) {
         int color = PaletteHelper.getColor(-1, 040, 330, 535);
         screen.render(x - 4, y - 5, 0, 8, 8, 8, color, 0);

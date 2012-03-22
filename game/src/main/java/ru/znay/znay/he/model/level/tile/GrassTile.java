@@ -12,12 +12,13 @@ import java.util.Random;
  * Time: 19:01
  * To change this template use File | Settings | File Templates.
  */
-public class GlassTile extends Tile {
+public class GrassTile extends Tile {
 
     private Random random = new Random();
 
-    public GlassTile(int id) {
+    public GrassTile(int id) {
         super(id);
+        connectsToGrass = true;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class GlassTile extends Tile {
     }
 
     @Override
-    public void tick() {
+    public void tick(Level level, int xt, int yt) {
 
     }
 }

@@ -61,12 +61,18 @@ public class Level {
         }
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-                setTile(x, y, Tile.glass, 0);
-                if (random.nextInt(40) == 0) {
+                setTile(x, y, Tile.grass, 0);
+                /*if (random.nextInt(40) == 0) {
                     setTile(x, y, Tile.rock, 0);
-                }
+                }*/
                 if (x < 2 || y < 2 || x > width - 3 || y > height - 3) {
                     setTile(x, y, Tile.lava, 0);
+                }
+                if (random.nextInt(10)==0) {
+                    setTile(x, y, Tile.sand, 0);
+                }
+                if (random.nextInt(3)==0) {
+                    setTile(x, y, Tile.water, 0);
                 }
             }
         }
@@ -97,6 +103,12 @@ public class Level {
     }
 
     public void tick() {
+
+        for (int i = 0; i < this.width * this.height / 50; i++) {
+            int xt = random.nextInt(this.width);
+            int yt = random.nextInt(this.height);
+            getTile(xt, yt).tick(this, xt, yt);
+        }
 
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);

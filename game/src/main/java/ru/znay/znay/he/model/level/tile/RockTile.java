@@ -16,6 +16,7 @@ public class RockTile extends Tile {
 
     public RockTile(int id) {
         super(id);
+        connectsToGrass = true;
     }
 
     @Override

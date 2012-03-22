@@ -104,7 +104,7 @@ public class Player extends Mob {
         while (true) {
             int x = random.nextInt(level.getWidth());
             int y = random.nextInt(level.getWidth());
-            if (level.getTile(x, y) == Tile.glass) {
+            if (level.getTile(x, y) == Tile.grass) {
                 this.x = x * Tile.SIZE + Tile.HALF_SIZE;
                 this.y = y * Tile.SIZE + Tile.HALF_SIZE;
                 return true;

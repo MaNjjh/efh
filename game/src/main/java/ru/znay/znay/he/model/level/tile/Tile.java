@@ -17,15 +17,30 @@ public class Tile {
     public static final int SIZE = 16;
     public static final int HALF_SIZE = 8;
 
-    public int dirtColor = PaletteHelper.getColor(211, 322, 433, 544);
-    public int grassColor = PaletteHelper.getColor(030, 141, 252, 353);
-    public int lavaColor = PaletteHelper.getColor(500, 500, 520, 550);
+    public int lavaMainColor = 500;
+    public int grassMainColor = 141;
+    public int dirtMainColor = 322;
+    public int sandMainColor = 550;
+    public int waterMainColor = 005;
+
+    public int dirtColor = PaletteHelper.getColor(211, dirtMainColor, 433, 544);
+    public int grassColor = PaletteHelper.getColor(030, grassMainColor, 252, 353);
+    public int lavaColor = PaletteHelper.getColor(500, lavaMainColor, 520, 550);
+    public int sandColor = PaletteHelper.getColor(552, sandMainColor, 440, 440);
+    public int waterColor = PaletteHelper.getColor(005, waterMainColor, 115, 115);
 
     public static Tile[] tiles = new Tile[MAX_TILES];
-    public static Tile glass = new GlassTile(0);
+    public static Tile grass = new GrassTile(0);
     public static Tile rock = new RockTile(1);
     public static Tile lava = new LavaTile(2);
+    public static Tile sand = new SandTile(3);
+    public static Tile water = new WaterTile(4);
     public static int tickCount = 0;
+
+    public boolean connectsToGrass = false;
+    public boolean connectsToSand = false;
+    public boolean connectsToLava = false;
+    public boolean connectsToWater = false;
 
     protected byte id;
 
@@ -40,8 +55,7 @@ public class Tile {
 
     }
 
-    public void tick() {
-
+    public void tick(Level level, int xt, int yt) {
     }
 
     public boolean mayPass(Level level, int x, int y, Entity e) {
