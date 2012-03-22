@@ -45,5 +45,6 @@
 
             </plugin>
         </plugins>
+        <finalName>efh-${version}</finalName>
     </build>
 </project>
