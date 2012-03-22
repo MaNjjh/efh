@@ -34,15 +34,6 @@
             <outputDirectory></outputDirectory>
         </fileSet>
 
-        <fileSet>
-            <directory>../libs/lua/native</directory>
-            <outputDirectory>lib/natives</outputDirectory>
-        </fileSet>
-
-        <fileSet>
-            <directory>../lua-scripts</directory>
-            <outputDirectory>lua-scripts</outputDirectory>
-        </fileSet>
     </fileSets>
 
 
