@@ -59,13 +59,13 @@ public class Player extends Mob {
 
         if (inputHandler.mouse.down) {
 
-            int tx = inputHandler.getXMousePos() - x;
-            int ty = inputHandler.getYMousePos() - y;
+            int xDiff = inputHandler.getXMousePos() - x;
+            int yDiff = inputHandler.getYMousePos() - y;
 
-            double m = Math.sqrt(tx * tx + ty * ty);
+            double m = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 
-            double vx = tx / m;
-            double vy = ty / m;
+            double vx = xDiff / m;
+            double vy = yDiff / m;
 
             if (tickTime % 9 == 0)
                 this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
