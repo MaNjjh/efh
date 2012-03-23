@@ -69,13 +69,13 @@ public class Level {
                 if (x < 2 || y < 2 || x > width - 3 || y > height - 3) {
                     setTile(x, y, Tile.lava, 0);
                 }
-                if (random.nextInt(10)==0) {
+                if (random.nextInt(10) == 0) {
                     setTile(x, y, Tile.sand, 0);
                 }
-                if (random.nextInt(50)==0) {
+                if (random.nextInt(50) == 0) {
                     setTile(x, y, Tile.water, 0);
                 }
-                if (random.nextInt(2)==0) {
+                if (random.nextInt(2) == 0) {
                     setTile(x, y, Tile.hole, 0);
                 }
             }
@@ -86,9 +86,9 @@ public class Level {
     }
 
     public void trySpawn() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
 
-            Mob mob = new SlimeFactory();
+          /*  Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
@@ -101,10 +101,12 @@ public class Level {
             mob = new Bird();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }
+            }*/
 
-            mob = new Tree();
-            if (mob.findStartPos(this)) add(mob);
+            Mob mob = new Tree();
+            if (mob.findStartPos(this)) {
+                add(mob);
+            }
         }
 
     }

@@ -19,8 +19,7 @@ public class Tree extends Mob {
     //яблоки на потом оставлю
     //private Long time;
 
-    public Tree(int x, int y)
-    {
+    public Tree(int x, int y) {
         this.x = x;
         this.y = y;
         this.xr = 1;
@@ -29,8 +28,7 @@ public class Tree extends Mob {
         //this.time = System.currentTimeMillis();
     }
 
-    public Tree()
-    {
+    public Tree() {
         this.xr = 1;
         this.yr = 1;
         this.team = ETeam.ENEMY_TEAM;
@@ -48,9 +46,9 @@ public class Tree extends Mob {
 
     public void render(Screen screen) {
 
-        int col = PaletteHelper.getColor(1,990, 500, -1);
+        int col = PaletteHelper.getColor(0, 520, 141, -1);
 
-        screen.render(x-4 , y-5 , 17 * Tile.HALF_SIZE, 0 , 4*Tile.HALF_SIZE, 4*Tile.HALF_SIZE, col, 0);
+        screen.render(x - 4, y - 5, 17 * Tile.HALF_SIZE, 0, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
 
         /*Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
         Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), col);*/
