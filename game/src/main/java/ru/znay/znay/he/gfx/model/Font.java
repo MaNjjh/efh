@@ -12,12 +12,14 @@ import ru.znay.znay.he.model.level.tile.Tile;
  */
 public class Font {
 
-    private final static int yStart = 30;
+    private final static int yStart = 28;
     public final static int FONT_SIZE = 8;
 
     private static String chars = "" + //
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ      " + //
-            "0123456789.,!?'\"-+=/\\%()<>:;     " + //
+            "0123456789.,!?'\"-+=/\\%()<>:;    " + //
+            "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" + //
+            "абвгдежзийклмнопрстуфхцчшщъыьэюя" + //
             "";
 
     public static void draw(String msg, Screen screen, int x, int y, int colors) {

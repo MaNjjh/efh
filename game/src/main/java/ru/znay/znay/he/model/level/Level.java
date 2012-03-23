@@ -86,9 +86,9 @@ public class Level {
     }
 
     public void trySpawn() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 15; i++) {
 
-          /*  Mob mob = new SlimeFactory();
+            Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
@@ -101,9 +101,9 @@ public class Level {
             mob = new Bird();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }*/
+            }
 
-            Mob mob = new Tree();
+            mob = new Tree();
             if (mob.findStartPos(this)) {
                 add(mob);
             }

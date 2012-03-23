@@ -83,17 +83,17 @@ public class Game extends Graphics implements Runnable {
         level.renderSprites(this.screen, xScroll, yScroll);
         level.renderFog(this.screen, xScroll, yScroll);
 
-        Font.renderFrame(this.screen, "menu", 4, 4, 11, 11);
-        Font.renderPanel("fps: " +fps + " obj: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
-        Font.renderPanel("score: " + player.getScore() + " life: " + player.getHealth(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
+        Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
+        Font.renderPanel("фпс: " +fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
+        Font.renderPanel("очков: " + player.getScore() + " жизни: " + player.getHealth(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
         //Font.draw("fps: " + fps + " obj: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(-1, 111, 111, 511));
         //Font.draw("score: " + player.getScore() + " life: " + player.getHealth(), this.screen, 10, 18, PaletteHelper.getColor(-1, 111, 111, 511));
 
         if (player.isRemoved()) {
 
-            String msg = "Game Over";
+            String msg = "конец игры";
             Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 100, PaletteHelper.getColor(555, 111, 111, 115));
-            msg = "press space button to restart";
+            msg = "нажмите пробел чтобы начать играть";
             Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 120, PaletteHelper.getColor(555, 111, 111, 115));
         }
 
