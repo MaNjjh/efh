@@ -141,7 +141,7 @@ public class BitmapHelper {
 
     public static void scaleDraw(Bitmap src, int scale, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits, Bitmap dst) {
         boolean mirrorX = (bits & BIT_MIRROR_X) > 0;
-        boolean mirrorY = (bits * BIT_MIRROR_Y) > 0;
+        boolean mirrorY = (bits & BIT_MIRROR_Y) > 0;
 
         for (int y = 0; y < h * scale; y++) {
             int yPix = y + yOffs;
