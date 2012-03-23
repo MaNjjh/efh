@@ -134,6 +134,6 @@ public class Bird extends Mob {
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 10, 511, 500);
 
-        screen.render(angle * speed + 90, xo, yo, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+        screen.render(angle * speed + 90, xo, yo, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col, 0);
     }
 }

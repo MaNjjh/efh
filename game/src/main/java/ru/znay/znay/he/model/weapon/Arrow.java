@@ -56,7 +56,7 @@ public class Arrow extends Mob {
     @Override
     public void render(Screen screen) {
         int color = PaletteHelper.getColor(-1, 555, 333, 111);
-        screen.render(Math.toDegrees(betta) + 90, x - xr, y - yr, 0, 8 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, color, 0);
+        screen.render(Math.toDegrees(betta) + 90, x - xr, y - yr, 0, 8 * Tile.HALF_SIZE, color, 0);
     }
 
     public int getDamage() {

@@ -21,7 +21,7 @@ public class RockTile extends Tile {
 
     @Override
     public void render(Screen screen, Level level, int x, int y) {
-        screen.render(2, x * SIZE, y * SIZE, 4 * HALF_SIZE, 0, HALF_SIZE, HALF_SIZE, PaletteHelper.getColor(333, 222, 0, 333), 0);
+        screen.render(2, x * SIZE, y * SIZE, 4 * HALF_SIZE, 0,  PaletteHelper.getColor(333, 222, 0, 333), 0);
     }
 
     @Override

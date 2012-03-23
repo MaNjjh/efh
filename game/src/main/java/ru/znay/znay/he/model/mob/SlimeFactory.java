@@ -72,6 +72,6 @@ public class SlimeFactory extends Mob {
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 10, 511, 555);
 
-        screen.render(2, xo, yo, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+        screen.render(2, xo, yo, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col, 0);
     }
 }

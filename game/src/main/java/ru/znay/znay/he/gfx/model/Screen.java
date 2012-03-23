@@ -1,6 +1,7 @@
 package ru.znay.znay.he.gfx.model;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,16 +31,32 @@ public class Screen {
         this.viewPort.draw(this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, w, h, colors, bits);
     }
 
+    public void render(int xOffs, int yOffs, int xo, int yo, int colors, int bits) {
+        this.viewPort.draw(this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits);
+    }
+
     public void render(int scale, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits) {
         this.viewPort.draw(this.sprites, scale, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, w, h, colors, bits);
+    }
+
+    public void render(int scale, int xOffs, int yOffs, int xo, int yo, int colors, int bits) {
+        this.viewPort.draw(this.sprites, scale, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits);
     }
 
     public void render(double angle, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits) {
         this.viewPort.draw(1, angle, this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, w, h, colors, bits);
     }
 
+    public void render(double angle, int xOffs, int yOffs, int xo, int yo, int colors, int bits) {
+        this.viewPort.draw(1, angle, this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits);
+    }
+
     public void render(int scale, double angle, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits) {
         this.viewPort.draw(scale, angle, this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, w, h, colors, bits);
+    }
+
+    public void render(int scale, double angle, int xOffs, int yOffs, int xo, int yo, int colors, int bits) {
+        this.viewPort.draw(scale, angle, this.sprites, xOffs - this.xOffset, yOffs - this.yOffset, xo, yo, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits);
     }
 
     public Bitmap getViewPort() {

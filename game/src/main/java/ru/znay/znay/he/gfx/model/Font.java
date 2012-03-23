@@ -33,9 +33,6 @@ public class Font {
     }
 
     public static void renderPanel(String msg, Screen screen, int xx, int yy, int colors) {
-
-        /*int xx = (Constants.SCREEN_WIDTH - msg.length() * Tile.HALF_SIZE) >> 1;
-        int yy = (Constants.SCREEN_HEIGHT - Tile.HALF_SIZE) >> 1;*/
         int w = msg.length();
         int h = 1;
         int col = PaletteHelper.getColor(-1, 1, 5, 445);
