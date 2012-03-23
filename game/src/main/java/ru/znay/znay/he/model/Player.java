@@ -64,11 +64,11 @@ public class Player extends Mob {
 
             double m = Math.sqrt(tx * tx + ty * ty);
 
-            tx = (int) Math.round(tx / m);
-            ty = (int) Math.round(ty / m);
+            double vx = tx / m;
+            double vy = ty / m;
 
-            if (tickTime % 6 == 0)
-                this.level.add(new Arrow(this.team, x, y, tx, ty, random.nextInt(this.score / 1000 + 3) + 1));
+            if (tickTime % 4 == 0)
+                this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
 
             color = PaletteHelper.getColor(-1, 111, 444, 555);
         }

@@ -4,6 +4,7 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Mob;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,20 +15,18 @@ import ru.znay.znay.he.model.Mob;
  */
 public class Arrow extends Mob {
 
-    private int vx;
-    private int vy;
     private int damage;
     private int timeLife;
     private ETeam ownerTeam;
+    private double betta;
 
-    public Arrow(ETeam ownerTeam, int x, int y, int vx, int vy, int damage) {
+    public Arrow(ETeam ownerTeam, int x, int y, double vx, double vy, int damage) {
         this.ownerTeam = ownerTeam;
         this.x = x;
         this.y = y;
-        this.vx = vx;
-        this.vy = vy;
         this.timeLife = 35;
         this.damage = damage;
+        this.betta = Math.atan2(vy, vx);
     }
 
     @Override
@@ -38,15 +37,12 @@ public class Arrow extends Mob {
         double xa = speed;
         double ya = Math.sin(random.nextGaussian());
 
-        double betta = Math.atan2(vy, vx);
-
         double xxa = xa * Math.cos(betta) - ya * Math.sin(betta);
         double yya = ya * Math.cos(betta) + xa * Math.sin(betta);
 
-        if (!move((int) Math.round(xxa), (int) Math.round(yya))) {
+        if (!move((int) Math.floor(xxa), (int) Math.floor(yya))) {
             removed = true;
         }
-
 
         timeLife--;
         if (timeLife < 0) removed = true;
@@ -59,8 +55,8 @@ public class Arrow extends Mob {
 
     @Override
     public void render(Screen screen) {
-        int color = PaletteHelper.getColor(-1, 040, 330, 535);
-        screen.render(x - 4, y - 5, 0, 8, 8, 8, color, 0);
+        int color = PaletteHelper.getColor(-1, 555, 333, 111);
+        screen.render(Math.toDegrees(betta) + 90, x - 4, y - 5, 0, 8 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, color, 0);
     }
 
     public int getDamage() {
