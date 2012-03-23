@@ -67,7 +67,7 @@ public class Player extends Mob {
             double vx = tx / m;
             double vy = ty / m;
 
-            if (tickTime % 4 == 0)
+            if (tickTime % 9 == 0)
                 this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
 
             color = PaletteHelper.getColor(-1, 111, 444, 555);
