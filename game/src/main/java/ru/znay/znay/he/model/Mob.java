@@ -5,6 +5,7 @@ import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.BloodParticle;
 import ru.znay.znay.he.model.weapon.Arrow;
+import ru.znay.znay.he.sound.Sound;
 
 /**
  * Created by IntelliJ IDEA.
@@ -75,12 +76,16 @@ public class Mob extends Entity {
             if (this.team != arrow.getOwnerTeam() && !(this instanceof Arrow)) {
                 hurt(this, arrow.getDamage(), arrow.getDir());
                 arrow.setRemoved(true);
+                Sound.monsterHurt.play();
             }
         }
     }
 
     @Override
     public void hurt(Mob mob, int damage, int attackDir) {
+        if (this instanceof Player) {
+            Sound.playerHurt.play();
+        }
         doHurt(damage, attackDir);
     }
 

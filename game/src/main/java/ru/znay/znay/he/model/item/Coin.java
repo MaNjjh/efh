@@ -12,7 +12,7 @@ import ru.znay.znay.he.model.particle.Particle;
  * Time: 14:17
  * To change this template use File | Settings | File Templates.
  */
-public class Coin extends Particle {
+public class Coin extends Item {
     private int cost;
     private int size = 0;
 

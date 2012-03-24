@@ -6,10 +6,12 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.item.Coin;
+import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.Life;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Arrow;
+import ru.znay.znay.he.sound.Sound;
 
 /**
  * Created by IntelliJ IDEA.
@@ -67,8 +69,9 @@ public class Player extends Mob {
             double vx = xDiff / m;
             double vy = yDiff / m;
 
-            if (tickTime % 9 == 0)
+            if (tickTime % 9 == 0) {
                 this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
+            }
 
             color = PaletteHelper.getColor(-1, 111, 444, 555);
         }
@@ -78,15 +81,20 @@ public class Player extends Mob {
 
     @Override
     public void touchedBy(Entity entity) {
+
         if (entity instanceof Coin) {
             Coin coin = (Coin) entity;
             score += coin.getCost();
-            coin.setRemoved(true);
         }
+
         if (entity instanceof Life) {
             Life life = (Life) entity;
             health += life.getLife();
-            life.setRemoved(true);
+        }
+
+        if (entity instanceof Item) {
+            Sound.pickup.play();
+            entity.setRemoved(true);
         }
         if ((entity.getTeam() != this.team)) {
             entity.touchedBy(this);

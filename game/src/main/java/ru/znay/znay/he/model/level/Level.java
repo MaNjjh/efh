@@ -106,10 +106,10 @@ public class Level {
                 add(mob);
             }
 
-            mob = new Tree();
+            /*mob = new Tree();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }
+            }*/
         }
 
     }

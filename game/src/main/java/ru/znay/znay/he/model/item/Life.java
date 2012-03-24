@@ -3,7 +3,6 @@ package ru.znay.znay.he.model.item;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.particle.Particle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +11,7 @@ import ru.znay.znay.he.model.particle.Particle;
  * Time: 10:42
  * To change this template use File | Settings | File Templates.
  */
-public class Life extends Particle {
+public class Life extends Item {
     private int life;
 
     public Life(int x, int y, int life) {

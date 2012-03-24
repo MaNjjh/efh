@@ -31,6 +31,7 @@ public class Game extends Graphics implements Runnable {
 
     public void start() {
         running = true;
+        Sound.backMusic.loop();
         new Thread(this).start();
     }
 
@@ -45,8 +46,6 @@ public class Game extends Graphics implements Runnable {
         this.level.add(player);
         this.level.add(new Board("тестовое послание!", 300, 300));
         this.inputHandler.releaseAll();
-        Sound.backMusic.play();
-
     }
 
     public void tick() {
