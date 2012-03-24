@@ -42,4 +42,16 @@ public class Sound {
             e.printStackTrace();
         }
     }
+
+    public void stop() {
+        try {
+            new Thread() {
+                public void run() {
+                    clip.stop();
+                }
+            }.start();
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
 }

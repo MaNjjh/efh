@@ -1,5 +1,7 @@
 package ru.znay.znay.he;
 
+import ru.znay.znay.he.sound.Sound;
+
 import java.applet.Applet;
 import java.awt.*;
 
@@ -26,5 +28,6 @@ public class GameApplet extends Applet {
 
     public void stop() {
         game.stop();
+        Sound.backMusic.stop();
     }
 }
