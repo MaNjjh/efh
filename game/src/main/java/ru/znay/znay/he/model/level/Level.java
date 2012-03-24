@@ -7,6 +7,7 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.Tree;
+import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -37,7 +38,7 @@ public class Level {
     private List<Entity>[] entitiesInTiles;
 
     private List<Entity> entities = new ArrayList<Entity>();
-
+    private DialogManager dialogManager;
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
@@ -57,6 +58,8 @@ public class Level {
 
         entitiesInTiles = new ArrayList[width * height];
 
+        dialogManager = new DialogManager();
+
         for (int i = 0; i < width * height; i++) {
             entitiesInTiles[i] = new ArrayList<Entity>();
         }
@@ -69,7 +72,7 @@ public class Level {
                 if (x < 2 || y < 2 || x > width - 3 || y > height - 3) {
                     setTile(x, y, Tile.lava, 0);
                 }
-                if (random.nextInt(10) == 0) {
+                /*if (random.nextInt(10) == 0) {
                     setTile(x, y, Tile.sand, 0);
                 }
                 if (random.nextInt(50) == 0) {
@@ -77,7 +80,7 @@ public class Level {
                 }
                 if (random.nextInt(2) == 0) {
                     setTile(x, y, Tile.hole, 0);
-                }
+                }*/
             }
         }
 
@@ -118,6 +121,8 @@ public class Level {
             int yt = random.nextInt(this.height);
             getTile(xt, yt).tick(this, xt, yt);
         }
+
+        this.dialogManager.tick();
 
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
@@ -178,7 +183,6 @@ public class Level {
         }
         screen.setOffset(0, 0);
     }
-
 
     private List<Entity> rowSprites = new ArrayList<Entity>();
 
@@ -296,5 +300,9 @@ public class Level {
 
     public void setMonsterDensity(int monsterDensity) {
         this.monsterDensity = monsterDensity;
+    }
+
+    public DialogManager getDialogManager() {
+        return dialogManager;
     }
 }

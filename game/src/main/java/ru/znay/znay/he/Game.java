@@ -7,6 +7,8 @@ import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.npc.Board;
+import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +29,6 @@ public class Game extends Graphics implements Runnable {
     private int xScroll;
     private int yScroll;
 
-
     public void start() {
         running = true;
         new Thread(this).start();
@@ -42,7 +43,10 @@ public class Game extends Graphics implements Runnable {
         this.player = new Player(this, this.inputHandler);
         this.player.findStartPos(level);
         this.level.add(player);
+        this.level.add(new Board("тестовое послание!", 300, 300));
         this.inputHandler.releaseAll();
+        Sound.backMusic.play();
+
     }
 
     public void tick() {
@@ -82,9 +86,10 @@ public class Game extends Graphics implements Runnable {
         level.renderBackground(this.screen, xScroll, yScroll);
         level.renderSprites(this.screen, xScroll, yScroll);
         level.renderFog(this.screen, xScroll, yScroll);
+        level.getDialogManager().render(this.screen);
 
-        Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
-        Font.renderPanel("фпс: " +fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
+        //Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
+        //Font.renderPanel("фпс: " + fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
         Font.renderPanel("очков: " + player.getScore() + " жизни: " + player.getHealth(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
         //Font.draw("fps: " + fps + " obj: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(-1, 111, 111, 511));
         //Font.draw("score: " + player.getScore() + " life: " + player.getHealth(), this.screen, 10, 18, PaletteHelper.getColor(-1, 111, 111, 511));
@@ -138,7 +143,7 @@ public class Game extends Graphics implements Runnable {
             if (System.currentTimeMillis() - lastTimer1 > 1000) {
                 lastTimer1 += 1000;
                 lastFrames = frames;
-                //System.out.println(ticks + " ticks, " + frames + " fps");
+                System.out.println(ticks + " ticks, " + frames + " fps");
                 frames = 0;
                 ticks = 0;
             }

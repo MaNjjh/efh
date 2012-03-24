@@ -3,7 +3,7 @@ package ru.znay.znay.he.model;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.particle.TextParticle;
+import ru.znay.znay.he.model.particle.BloodParticle;
 import ru.znay.znay.he.model.weapon.Arrow;
 
 /**
@@ -87,13 +87,18 @@ public class Mob extends Entity {
     protected void doHurt(int damage, int attackDir) {
         if (hurtTime > 0) return;
 
-        int col = PaletteHelper.getColor(-1, 500, 500, 500);
+        int col = PaletteHelper.getColor(-1, 0, 0, 500);
 
         if (this.team == ETeam.PLAYER_TEAM) {
-            col = PaletteHelper.getColor(-1, 505, 505, 505);
+            col = PaletteHelper.getColor(-1, 0, 0, 555);
         }
 
-        level.add(new TextParticle("" + damage, x, y, col));
+        //level.add(new TextParticle("" + damage, x, y, col));
+
+        for (int i = 0; i < damage; i++) {
+            level.add(new BloodParticle(x, y, col));
+        }
+
         health -= damage;
         if (attackDir == 0) yKnockback = +DEFAULT_KNOCKBACK;
         if (attackDir == 1) yKnockback = -DEFAULT_KNOCKBACK;
