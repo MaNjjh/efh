@@ -46,14 +46,29 @@ public class PaletteHelper {
         return colors[indexColor];
     }
 
-    public void wrapPaletteColors(Bitmap src) {
+    public void wrapPaletteColors(Bitmap src, boolean isGrey) {
 
         for (int y = 0; y < src.getHeight(); y++) {
             for (int x = 0; x < src.getWidth(); x++) {
                 int cc = src.getPixels()[x + y * src.getWidth()];
-                if (cc < 255) src.getPixels()[x + y * src.getWidth()] = colors[cc];
+                if (cc < 255) {
+                    int val = colors[cc];// ^ 0x161616;
+
+                    if (isGrey) {
+                        int red = ((val >> 16) & 0xff);
+                        int green = ((val >> 8) & 0xff);
+                        int blue = (val & 0xff);
+                        blue = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
+                        red = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
+                        green = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
+                        val = (red << 16) | (green << 8) | blue;
+                    }
+
+                    src.getPixels()[x + y * src.getWidth()] = val;
+                }
             }
         }
+
     }
 
     public static int getColor(int a, int b, int c, int d) {

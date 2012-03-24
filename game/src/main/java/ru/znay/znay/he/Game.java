@@ -65,7 +65,6 @@ public class Game extends Graphics implements Runnable {
 
     }
 
-    @Override
     public void render(int fps) {
 
         prepareGraphics();
@@ -100,7 +99,7 @@ public class Game extends Graphics implements Runnable {
             Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 120, PaletteHelper.getColor(555, 111, 111, 115));
         }
 
-        super.render(fps);
+        super.render(fps, player.isRemoved());
     }
 
     @Override

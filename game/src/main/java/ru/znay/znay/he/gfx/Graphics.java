@@ -33,11 +33,11 @@ public class Graphics extends Canvas {
             return;
         }
 
-       // BitmapHelper.fill(this.screen.getViewPort(), 0);
+        // BitmapHelper.fill(this.screen.getViewPort(), 0);
     }
 
-    public void render(int fps) {
-        PaletteHelper.getInstance().wrapPaletteColors(this.screen.getViewPort());
+    public void render(int fps, boolean isGrey) {
+        PaletteHelper.getInstance().wrapPaletteColors(this.screen.getViewPort(), isGrey);
 
         if (this.bufferStrategy != null) {
             java.awt.Graphics g = bufferStrategy.getDrawGraphics();
