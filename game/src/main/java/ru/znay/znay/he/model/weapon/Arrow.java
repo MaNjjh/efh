@@ -44,6 +44,8 @@ public class Arrow extends Mob {
             removed = true;
         }
 
+        tickTime++;
+
         timeLife--;
         if (timeLife < 0) removed = true;
     }
@@ -55,7 +57,7 @@ public class Arrow extends Mob {
 
     @Override
     public void render(Screen screen) {
-        int color = PaletteHelper.getColor(-1, 555, 333, 111);
+        int color = PaletteHelper.getColor(-1, 333, 111, 222);
         screen.render(Math.toDegrees(betta) + 90, x - xr, y - yr, 0, 8 * Tile.HALF_SIZE, color, 0);
     }
 

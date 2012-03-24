@@ -72,9 +72,10 @@ public class Level {
                 if (x < 2 || y < 2 || x > width - 3 || y > height - 3) {
                     setTile(x, y, Tile.lava, 0);
                 }
-                /*if (random.nextInt(10) == 0) {
+                if (random.nextInt(10) == 0) {
                     setTile(x, y, Tile.sand, 0);
                 }
+                /*
                 if (random.nextInt(50) == 0) {
                     setTile(x, y, Tile.water, 0);
                 }

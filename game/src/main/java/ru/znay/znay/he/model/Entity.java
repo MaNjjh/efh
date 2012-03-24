@@ -44,6 +44,7 @@ public class Entity {
                 int yt = y >> 4;
                 level.getTile(xt, yt).steppedOn(level, xt, yt, this);
             }
+
             return !stopped;
         }
         return true;
@@ -96,6 +97,7 @@ public class Entity {
 
         x += xa;
         y += ya;
+
         return true;
     }
 

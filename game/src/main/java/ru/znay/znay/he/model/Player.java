@@ -29,11 +29,14 @@ public class Player extends Mob {
     private int score = 1000;
     private int clearFogRadius = 4;
 
+
     public Player(Game game, InputHandler inputHandler) {
         this.team = ETeam.PLAYER_TEAM;
         this.inputHandler = inputHandler;
         this.game = game;
         this.color = PaletteHelper.getColor(-1, 100, 522, 555);
+        this.bloodColor = PaletteHelper.getColor(-1, 0, 0, 505);
+        this.slowPeriod = 4;
     }
 
     @Override
@@ -41,6 +44,7 @@ public class Player extends Mob {
 
         int xa = 0;
         int ya = 0;
+
         if (inputHandler.up.down) ya--;
         if (inputHandler.down.down) ya++;
         if (inputHandler.left.down) xa--;
@@ -75,7 +79,9 @@ public class Player extends Mob {
 
             color = PaletteHelper.getColor(-1, 111, 444, 555);
         }
+
         move(xa, ya);
+
         super.tick();
     }
 

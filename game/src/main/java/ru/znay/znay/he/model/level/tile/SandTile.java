@@ -8,7 +8,9 @@ public class SandTile extends Tile {
     public SandTile(int id) {
         super(id);
         connectsToSand = true;
+        slowPeriod = 4;
     }
+
 
     public void render(Screen screen, Level level, int x, int y) {
 

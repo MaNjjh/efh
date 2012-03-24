@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.level.tile;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
+import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
 
 /**
@@ -46,6 +47,8 @@ public class Tile {
     public boolean connectsToLava = false;
     public boolean connectsToWater = false;
 
+    protected int slowPeriod = 50;
+
     protected byte id;
 
     public Tile(int id) {
@@ -70,6 +73,9 @@ public class Tile {
     }
 
     public void steppedOn(Level level, int xt, int yt, Entity entity) {
+        if (entity instanceof Player) {
+            ((Player) entity).setSlowPeriod(slowPeriod);
+        }
     }
 
     public byte getId() {

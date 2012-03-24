@@ -22,10 +22,6 @@ public class Slime extends Mob {
     private int xa, ya;
     private int jumpTime = 0;
 
-    public Slime() {
-
-    }
-
     public Slime(int x, int y) {
         this.x = x;
         this.y = y;

@@ -25,6 +25,8 @@ public class Mob extends Entity {
     protected int xKnockback, yKnockback;
     protected int viewRadius = 4;
     protected Mob target = null;
+    protected int bloodColor = PaletteHelper.getColor(-1, 0, 0, 500);
+    protected int slowPeriod = 50;
 
     @Override
     public void tick() {
@@ -42,6 +44,7 @@ public class Mob extends Entity {
 
     @Override
     public boolean move(int xa, int ya) {
+
         if (xKnockback < 0) {
             move2(-1, 0);
             xKnockback++;
@@ -66,7 +69,13 @@ public class Mob extends Entity {
             if (ya < 0) dir = 1;
             if (ya > 0) dir = 0;
         }
-        return super.move(xa, ya);
+
+        if (tickTime % slowPeriod == 0) {
+            return true;
+        }
+        
+        return  super.move(xa, ya);
+
     }
 
     @Override
@@ -76,7 +85,7 @@ public class Mob extends Entity {
             if (this.team != arrow.getOwnerTeam() && !(this instanceof Arrow)) {
                 hurt(this, arrow.getDamage(), arrow.getDir());
                 arrow.setRemoved(true);
-                Sound.monsterHurt.play();
+                //Sound.monsterHurt.play();
             }
         }
     }
@@ -92,16 +101,10 @@ public class Mob extends Entity {
     protected void doHurt(int damage, int attackDir) {
         if (hurtTime > 0) return;
 
-        int col = PaletteHelper.getColor(-1, 0, 0, 500);
-
-        if (this.team == ETeam.PLAYER_TEAM) {
-            col = PaletteHelper.getColor(-1, 0, 0, 555);
-        }
-
         //level.add(new TextParticle("" + damage, x, y, col));
 
         for (int i = 0; i < damage; i++) {
-            level.add(new BloodParticle(x, y, col));
+            level.add(new BloodParticle(x, y, bloodColor));
         }
 
         health -= damage;
@@ -166,5 +169,9 @@ public class Mob extends Entity {
 
     public int getyKnockback() {
         return yKnockback;
+    }
+
+    public void setSlowPeriod(int slowPeriod) {
+        this.slowPeriod = slowPeriod;
     }
 }
