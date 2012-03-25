@@ -11,8 +11,6 @@ import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.Tree;
 import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.Bird;
-import ru.znay.znay.he.model.mob.SlimeFactory;
 
 import java.util.*;
 
@@ -90,6 +88,10 @@ public class Level {
                         setTile(i, j, Tile.hole, 0);
                         break;
                     }
+                    case 0xFF00FF00: {
+                        add(new Tree(i << 4, j << 4));
+                        break;
+                    }
                     case 0xFFFF7F00: {
                         setTile(i, j, Tile.lava, 0);
                         break;
@@ -116,7 +118,7 @@ public class Level {
                 add(mob);
             }  */
 
-            Mob  mob = new Mushroom();
+            Mob mob = new Mushroom();
             if (mob.findStartPos(this)) {
                 add(mob);
             }

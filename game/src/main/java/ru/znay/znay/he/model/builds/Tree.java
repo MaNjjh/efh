@@ -19,12 +19,20 @@ public class Tree extends Mob {
     //яблоки на потом оставлю
     private int flip = 0;
 
+
+    public Tree(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.xr = 16;
+        this.yr = 12;
+        this.flip = random.nextInt(2);
+    }
+
+
     public Tree() {
         this.xr = 16;
         this.yr = 12;
-        this.team = ETeam.ENEMY_TEAM;
         this.flip = random.nextInt(2);
-
     }
 
     @Override
