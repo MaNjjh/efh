@@ -23,7 +23,7 @@ public class Tree extends Mob {
         this.xr = 16;
         this.yr = 12;
         this.team = ETeam.ENEMY_TEAM;
-        this.flip = random.nextInt(1);
+        this.flip = random.nextInt(2);
 
     }
 

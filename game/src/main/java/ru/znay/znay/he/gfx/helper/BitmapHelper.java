@@ -163,14 +163,14 @@ public class BitmapHelper {
             int yPix = y + yOffs;
             if (yPix < 0 || yPix >= dst.getHeight()) continue;
             int ys = y;
-            if (mirrorY) ys = (h - 1) - y;
+            if (mirrorY) ys = (h*scale - 1) - y;
 
             for (int x = 0; x < w * scale; x++) {
                 int xPix = x + xOffs;
                 if (xPix < 0 || xPix >= dst.getWidth()) continue;
 
                 int xs = x;
-                if (mirrorX) xs = (w - 1) - x;
+                if (mirrorX) xs = (w*scale - 1) - x;
 
                 int color = (colors >> (src.getPixels()[(xs / scale + xo) + (ys / scale + yo) * src.getWidth()] * 8)) & 255;
                 if (color < 255) {

@@ -109,7 +109,7 @@ public class Level {
     }
 
     public void trySpawn() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 25; i++) {
 
             /*Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {
