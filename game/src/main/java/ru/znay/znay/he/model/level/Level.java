@@ -85,6 +85,14 @@ public class Level {
                         setTile(i, j, Tile.sand, 0);
                         break;
                     }
+                    case 0xFF606060: {
+                        setTile(i, j, Tile.hole, 0);
+                        break;
+                    }
+                    case 0xFFFF7F00: {
+                        setTile(i, j, Tile.lava, 0);
+                        break;
+                    }
                     case 0xFFFF0000: {
                         player.setX((i << 4) + Tile.HALF_SIZE);
                         player.setY((j << 4) + Tile.HALF_SIZE);
