@@ -8,7 +8,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.Tree;
+import ru.znay.znay.he.model.builds.AppleTree;
 import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -89,7 +89,7 @@ public class Level {
                         break;
                     }
                     case 0xFF00FF00: {
-                        add(new Tree(i << 4, j << 4));
+                        add(new AppleTree(i << 4, j << 4));
                         break;
                     }
                     case 0xFFFF7F00: {
@@ -128,7 +128,7 @@ public class Level {
                 add(mob);
             }  */
 
-            mob = new Tree();
+            mob = new AppleTree();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
