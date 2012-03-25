@@ -4,6 +4,8 @@ import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.level.tile.Tile;
 
+import java.util.Arrays;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Alexander Tarasov
@@ -29,7 +31,7 @@ public class Font {
             if (ix >= 0) {
                 int xx = ix % 32;
                 int yy = ix / 32;
-                screen.render(x + i * FONT_SIZE, y, xx * FONT_SIZE, (yStart + yy) * FONT_SIZE, FONT_SIZE, FONT_SIZE, colors, 0);
+                screen.render(x + i * (FONT_SIZE), y, xx * FONT_SIZE, (yStart + yy) * FONT_SIZE, FONT_SIZE, FONT_SIZE, colors, 0);
             }
         }
     }
@@ -37,6 +39,7 @@ public class Font {
     public static void renderPanel(String msg, Screen screen, int xx, int yy, int colors) {
         int w = msg.length();
         int h = 1;
+
         int col = PaletteHelper.getColor(-1, 1, 5, 445);
         screen.render(xx - Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
         screen.render(xx + w * Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 1);
@@ -53,6 +56,42 @@ public class Font {
         }
 
         Font.draw(msg, screen, xx, yy, colors);
+    }
+
+    public static void renderTextPanel(String msg, Screen screen, int xx, int yy, int colors) {
+        int w = msg.length();
+        final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2;
+        int h = (w < maxLen) ? 0 : (int) w / maxLen;
+        int xOFF = (w > maxLen) ? maxLen : w;
+        if (w % maxLen != 0) h++;
+
+        int col = PaletteHelper.getColor(-1, 1, 5, 445);
+        screen.render(xx - Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+        screen.render(xx + xOFF * Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 1);
+        screen.render(xx - Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 2);
+        screen.render(xx + xOFF * Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 3);
+
+        for (int x = 0; x <= maxLen; x++) {
+            screen.render(xx + x * Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 1 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+            screen.render(xx + x * Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 1 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 2);
+        }
+        for (int y = 0; y < h; y++) {
+            screen.render(xx - Tile.HALF_SIZE, yy + y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+            screen.render(xx + w * Tile.HALF_SIZE, yy + y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 1);
+        }
+        for (int a = 0; a < h; a++) {
+            String temp = msg.substring(0, (msg.length() > maxLen) ? maxLen : msg.length());
+            int i = temp.lastIndexOf(" ");
+            if (i > 0)
+               temp = String.format("%-" + maxLen + "s",temp.substring(0,i));
+            if (msg.length() > maxLen)
+                msg = msg.substring((i > 0)?i+1:maxLen, msg.length());
+            if (temp.length() < maxLen)
+                temp = String.format("%-" + maxLen + "s", temp);
+
+            Font.draw(temp, screen, xx, yy + (a * Tile.HALF_SIZE), colors);
+        }
+
     }
 
     public static void renderFrame(Screen screen, String title, int x0, int y0, int x1, int y1) {
