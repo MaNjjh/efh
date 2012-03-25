@@ -1,12 +1,13 @@
 package ru.znay.znay.he.model.level;
 
+import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.Tree;
 import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
@@ -49,9 +50,13 @@ public class Level {
     };
 
     @SuppressWarnings("unchecked")
-    public Level(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Level(Player player, int level) {
+
+        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
+
+        this.width = map.getWidth();
+        this.height = map.getHeight();
+
         tiles = new byte[width * height];
 
         fog = new Fog(width, height);
@@ -63,28 +68,33 @@ public class Level {
         for (int i = 0; i < width * height; i++) {
             entitiesInTiles[i] = new ArrayList<Entity>();
         }
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                setTile(x, y, Tile.grass, 0);
-                /*if (random.nextInt(40) == 0) {
-                    setTile(x, y, Tile.rock, 0);
-                }*/
-                if (x < 2 || y < 2 || x > width - 3 || y > height - 3) {
-                    setTile(x, y, Tile.lava, 0);
+
+        for (int j = 0; j < this.height; j++) {
+            for (int i = 0; i < this.width; i++) {
+                int value = map.getPixels()[i + j * this.width];
+                switch (value) {
+                    case 0xFFFFFFFF: {
+                        setTile(i, j, Tile.grass, 0);
+                        break;
+                    }
+                    case 0xFF0000FF: {
+                        setTile(i, j, Tile.water, 0);
+                        break;
+                    }
+                    case 0xFFFFFF00: {
+                        setTile(i, j, Tile.sand, 0);
+                        break;
+                    }
+                    case 0xFFFF0000: {
+                        player.setX((i << 4) + Tile.HALF_SIZE);
+                        player.setY((j << 4) + Tile.HALF_SIZE);
+                        break;
+                    }
                 }
-                if (random.nextInt(10) == 0) {
-                    setTile(x, y, Tile.sand, 0);
-                }
-                /*
-                if (random.nextInt(50) == 0) {
-                    setTile(x, y, Tile.water, 0);
-                }
-                if (random.nextInt(2) == 0) {
-                    setTile(x, y, Tile.hole, 0);
-                }*/
             }
         }
 
+        this.add(player);
 
         trySpawn();
     }

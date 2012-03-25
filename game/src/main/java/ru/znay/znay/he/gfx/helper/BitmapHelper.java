@@ -22,7 +22,7 @@ public class BitmapHelper {
         }
     }
 
-    public static Bitmap loadBitmapFromResources(String fileName) {
+    public static Bitmap loadTextureFromResources(String fileName) {
         try {
             BufferedImage bufferedImage = ImageIO.read(BitmapHelper.class.getResource(fileName));
 
@@ -34,6 +34,22 @@ public class BitmapHelper {
             for (int i = 0; i < result.getPixels().length; i++) {
                 result.getPixels()[i] = (result.getPixels()[i] & 0xff) / 64;
             }
+            return result;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Bitmap loadBitmapFromResources(String fileName) {
+        try {
+            BufferedImage bufferedImage = ImageIO.read(BitmapHelper.class.getResource(fileName));
+
+            int width = bufferedImage.getWidth();
+            int height = bufferedImage.getHeight();
+
+            Bitmap result = new Bitmap(width, height);
+            bufferedImage.getRGB(0, 0, width, height, result.getPixels(), 0, width);
+
             return result;
         } catch (Exception e) {
             throw new RuntimeException(e);

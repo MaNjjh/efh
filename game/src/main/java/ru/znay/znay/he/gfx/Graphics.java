@@ -36,7 +36,7 @@ public class Graphics extends Canvas {
         // BitmapHelper.fill(this.screen.getViewPort(), 0);
     }
 
-    public void render(int fps, boolean isGrey) {
+    public void render(boolean isGrey) {
         PaletteHelper.getInstance().wrapPaletteColors(this.screen.getViewPort(), isGrey);
 
         if (this.bufferStrategy != null) {

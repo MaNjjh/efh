@@ -19,7 +19,7 @@ public class Screen {
 
     public Screen(int width, int height, String spritesFileName) {
         this.viewPort = new Bitmap(width, height);
-        this.sprites = BitmapHelper.loadBitmapFromResources(spritesFileName);
+        this.sprites = BitmapHelper.loadTextureFromResources(spritesFileName);
     }
 
     public void setOffset(int xOffset, int yOffset) {

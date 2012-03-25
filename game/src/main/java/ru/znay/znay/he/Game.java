@@ -39,11 +39,11 @@ public class Game extends Graphics implements Runnable {
     }
 
     public void init() {
-        this.level = new Level(50, 50);
         this.player = new Player(this, this.inputHandler);
-        this.player.findStartPos(level);
-        this.level.add(player);
-        this.level.add(new Board("тестовое послание!", 300, 300));
+        this.level = new Level(player, 0);
+
+        //this.player.findStartPos(level);
+        this.level.add(new Board("тестовое послание!", 100, 100));
         this.inputHandler.releaseAll();
     }
 
@@ -99,7 +99,7 @@ public class Game extends Graphics implements Runnable {
             Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 120, PaletteHelper.getColor(555, 111, 111, 115));
         }
 
-        super.render(fps, player.isRemoved());
+        super.render(player.isRemoved());
     }
 
     @Override
