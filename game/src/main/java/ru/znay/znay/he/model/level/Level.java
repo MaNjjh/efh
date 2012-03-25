@@ -7,8 +7,8 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.AppleTree;
+import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -22,6 +22,15 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Level {
+
+    private final static int GRASS_TILE = 0xFFFFFFFF;
+    private final static int WATER_TILE = 0xFF0000FF;
+    private final static int SAND_TILE = 0xFFFFFF00;
+    private final static int LAVA_TILE = 0xFFFF7F00;
+
+    private final static int HOLE_TILE = 0xFF606060;
+    private final static int APPLE_TREE = 0xFF00FF00;
+    private final static int PLAYER = 0xFFFF0000;
 
     private Random random = new Random();
 
@@ -72,31 +81,31 @@ public class Level {
             for (int i = 0; i < this.width; i++) {
                 int value = map.getPixels()[i + j * this.width];
                 switch (value) {
-                    case 0xFFFFFFFF: {
+                    case GRASS_TILE: {
                         setTile(i, j, Tile.grass, 0);
                         break;
                     }
-                    case 0xFF0000FF: {
+                    case WATER_TILE: {
                         setTile(i, j, Tile.water, 0);
                         break;
                     }
-                    case 0xFFFFFF00: {
+                    case SAND_TILE: {
                         setTile(i, j, Tile.sand, 0);
                         break;
                     }
-                    case 0xFF606060: {
+                    case HOLE_TILE: {
                         setTile(i, j, Tile.hole, 0);
                         break;
                     }
-                    case 0xFF00FF00: {
+                    case APPLE_TREE: {
                         add(new AppleTree(i << 4, j << 4));
                         break;
                     }
-                    case 0xFFFF7F00: {
+                    case LAVA_TILE: {
                         setTile(i, j, Tile.lava, 0);
                         break;
                     }
-                    case 0xFFFF0000: {
+                    case PLAYER: {
                         player.setX((i << 4) + Tile.HALF_SIZE);
                         player.setY((j << 4) + Tile.HALF_SIZE);
                         break;
