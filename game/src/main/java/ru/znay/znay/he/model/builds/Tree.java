@@ -38,7 +38,14 @@ public class Tree extends Mob {
 
         int col = PaletteHelper.getColor(0, 520, 141, -1);
 
-        screen.render(x - xr, y - yr, 17 * Tile.HALF_SIZE, 0, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
+        screen.render(x - xr, y - yr, 17 * Tile.HALF_SIZE, 4*Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
+
+        col = PaletteHelper.getColor(0, 520, 141, -1);
+       screen.render(x - xr, y - yr, 21 * Tile.HALF_SIZE, 4*Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
+
+        col = PaletteHelper.getColor(0, 520, 141, -1);
+        screen.render(x - xr, y - yr, 25 * Tile.HALF_SIZE, 4*Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
+
 
         /*Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
         Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), col);*/
