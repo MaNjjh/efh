@@ -8,6 +8,7 @@ import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.npc.Board;
+import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +31,7 @@ public class Game extends Graphics implements Runnable {
 
     public void start() {
         running = true;
-        //Sound.backMusic.loop();
+        Sound.backMusic.loop();
         new Thread(this).start();
     }
 

@@ -17,11 +17,14 @@ import ru.znay.znay.he.model.level.tile.Tile;
 public class Tree extends Mob {
 
     //яблоки на потом оставлю
+    private int flip = 0;
 
     public Tree() {
-        this.xr = 8;
-        this.yr = 8;
+        this.xr = 16;
+        this.yr = 12;
         this.team = ETeam.ENEMY_TEAM;
+        this.flip = random.nextInt(1);
+
     }
 
     @Override
@@ -36,18 +39,16 @@ public class Tree extends Mob {
 
     public void render(Screen screen) {
 
-        int col = PaletteHelper.getColor(0, 520, 141, -1);
+        int xt = x - xr * 2;
+        int yt = y - yr * 2 - 24;
 
-        screen.render(x - xr, y - yr, 17 * Tile.HALF_SIZE, 4*Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
+        int col = PaletteHelper.getColor(20, 40, 30, -1);
+        screen.render(2, xt, yt, 17 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
 
-        col = PaletteHelper.getColor(0, 520, 141, -1);
-       screen.render(x - xr, y - yr, 21 * Tile.HALF_SIZE, 4*Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
+        col = PaletteHelper.getColor(10, 10, 20, -1);
+        screen.render(2, xt, yt, 21 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
 
-        col = PaletteHelper.getColor(0, 520, 141, -1);
-        screen.render(x - xr, y - yr, 25 * Tile.HALF_SIZE, 4*Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
-
-
-        /*Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
-        Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), col);*/
+        col = PaletteHelper.getColor(100, 210, 320, -1);
+        screen.render(2, xt, yt, 25 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
     }
 }
