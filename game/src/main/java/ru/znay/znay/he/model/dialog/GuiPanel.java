@@ -36,24 +36,24 @@ public class GuiPanel {
         visible = true;
     }
 
-    public void Show() {
+    public void show() {
         if (!visible) {
             visible = true;
             changed = true;
         }
     }
 
-    public void Hide() {
+    public void hide() {
         if (visible) {
             visible = false;
         }
     }
 
-    public boolean GetVisible() {
+    public boolean getVisible() {
         return visible;
     }
 
-    public void SetVisible(boolean v) {
+    public void setVisible(boolean v) {
         if (visible != v) {
             visible = v;
             if (visible) {
@@ -62,20 +62,20 @@ public class GuiPanel {
         }
     }
 
-    public void Put(int x, int y) {
+    public void put(int x, int y) {
         this.x = x;
         this.y = y;
 
         changed = true;
     }
 
-    public void SetSize(int newX, int newY) {
+    public void setSize(int newX, int newY) {
         this.x = (newX < 1) ? 1 : newX;
         this.y = (newY < 1) ? 1 : newY;
         changed = true;
     }
 
-    protected void SetChanged() {
+    protected void setChanged() {
         if (!changed) {
             changed = true;
         }
@@ -87,15 +87,15 @@ public class GuiPanel {
         changed = true;
     }
 
-    public void Paint(Screen screen) {
+    public void paint(Screen screen) {
         if (!changed) {
             return;
         }
 
-        PaintF(screen);
+        paintF(screen);
     }
 
-    public void PaintF(Screen screen) {
+    public void paintF(Screen screen) {
         Bitmap temp = new Bitmap(sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE);
         int col = PaletteHelper.getColor(-1, 1, 5, 445);
         int tx = (sizeX - 1) * Tile.HALF_SIZE;
@@ -140,7 +140,7 @@ public class GuiPanel {
             return;
         }
 
-        this.Paint(screen);
+        this.paint(screen);
 
         BitmapHelper.copy(this.image, 0, 0, x, y, sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE, screen.getViewPort());
     }
