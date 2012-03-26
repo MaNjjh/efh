@@ -72,7 +72,7 @@ public class Entity {
                 if (xt >= xto0 && xt <= xto1 && yt >= yto0 && yt <= yto1) continue;
                 level.getTile(xt, yt).bumpedInto(level, xt, yt, this);
 
-                if (!this.isFly() && !level.getTile(xt, yt).mayPass(level, xt, yt, this)) {
+                if (!this.canFly() && !level.getTile(xt, yt).mayPass(level, xt, yt, this)) {
                     return false;
                 }
 
@@ -86,7 +86,7 @@ public class Entity {
             entity.touchedBy(this);
         }
 
-        if (!this.isFly()) {
+        if (!this.canFly()) {
             List<Entity> wasInside = level.getEntities(x - xr, y - yr, x + xr, y + yr, null);
             isInside.removeAll(wasInside);
             for (Entity entity : isInside) {
@@ -111,7 +111,7 @@ public class Entity {
 
     }
 
-    public boolean isFly() {
+    public boolean canFly() {
         return false;
     }
 

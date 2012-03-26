@@ -3,7 +3,6 @@ package ru.znay.znay.he.model.item;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.particle.Particle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,6 +24,7 @@ public class Coin extends Item {
         this.time = 600;
         this.xr = 3;
         this.yr = 3;
+        this.speed = random.nextInt(2) + 1;
     }
 
     public void tick() {
@@ -40,7 +40,7 @@ public class Coin extends Item {
                 if (yd < 0) ya = -1;
                 if (yd > 0) ya = +1;
             }
-            move((int) xa, (int) ya);
+            move((int) xa * speed, (int) ya * speed);
         }
 
     }

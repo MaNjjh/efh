@@ -51,7 +51,7 @@ public class Arrow extends Mob {
     }
 
     @Override
-    public boolean isFly() {
+    public boolean canFly() {
         return true;
     }
 

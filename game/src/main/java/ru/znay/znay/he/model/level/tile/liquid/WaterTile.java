@@ -6,13 +6,12 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 
-import java.util.Random;
-
 public class WaterTile extends Tile {
     public WaterTile(int id) {
         super(id);
         connectsToSand = true;
         connectsToWater = true;
+        slowPeriod = 3;
     }
 
     public void render(Screen screen, Level level, int x, int y) {
@@ -71,5 +70,4 @@ public class WaterTile extends Tile {
     public boolean mayPass(Level level, int x, int y, Entity e) {
         return e.canSwim();
     }
-
 }

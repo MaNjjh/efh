@@ -74,7 +74,7 @@ public class DeepWaterTile extends Tile {
 
     @Override
     public boolean mayPass(Level level, int x, int y, Entity e) {
-        return e.canSwim();
+        return false;
     }
 
 

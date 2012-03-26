@@ -10,7 +10,13 @@ import ru.znay.znay.he.model.particle.Particle;
  * To change this template use File | Settings | File Templates.
  */
 public class Item extends Particle {
+
     public Item(int x, int y) {
         super(x, y);
+    }
+
+    @Override
+    public boolean canSwim() {
+        return true;
     }
 }

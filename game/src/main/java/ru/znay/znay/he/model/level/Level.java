@@ -11,6 +11,8 @@ import ru.znay.znay.he.model.builds.AppleTree;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.Bird;
+import ru.znay.znay.he.model.mob.SlimeFactory;
 
 import java.util.*;
 
@@ -137,20 +139,20 @@ public class Level {
     public void trySpawn() {
         for (int i = 0; i < 25; i++) {
 
-            /*Mob mob = new SlimeFactory();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }  */
-
-            Mob mob = new Mushroom();
+            Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
 
-            /*mob = new Bird();
+             mob = new Mushroom();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }  */
+            }
+
+            mob = new Bird();
+            if (mob.findStartPos(this)) {
+                add(mob);
+            }
 
             mob = new AppleTree();
             if (mob.findStartPos(this)) {

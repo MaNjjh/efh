@@ -31,7 +31,7 @@ public class Mob extends Entity {
     @Override
     public void tick() {
         tickTime++;
-        if (!this.isFly() && level.getTile(x >> 4, y >> 4) == Tile.lava) {
+        if (!this.canFly() && level.getTile(x >> 4, y >> 4) == Tile.lava) {
             hurt(this, 4, dir ^ 1);
         }
 
@@ -130,7 +130,7 @@ public class Mob extends Entity {
         this.x = xx;
         this.y = yy;
 
-        if (!this.isFly()) {
+        if (!this.canFly()) {
             int r = level.getMonsterDensity() * Tile.SIZE;
             if (level.getEntities(xx - r, yy - r, xx + r, yy + r, null).size() > 0) return false;
             if (!level.getTile(x, y).mayPass(level, x, y, this)) return false;

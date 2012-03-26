@@ -120,7 +120,7 @@ public class Bird extends Mob {
     }
 
     @Override
-    public boolean isFly() {
+    public boolean canFly() {
         return true;
     }
 

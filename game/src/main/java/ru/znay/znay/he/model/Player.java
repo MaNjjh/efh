@@ -114,6 +114,11 @@ public class Player extends Mob {
         screen.render(xo, yo, 0, 6 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, color, 0);
     }
 
+    @Override
+    public boolean canSwim() {
+        return true;
+    }
+
     public boolean findStartPos(Level level) {
         while (true) {
             int x = random.nextInt(level.getWidth());
