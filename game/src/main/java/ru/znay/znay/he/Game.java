@@ -8,7 +8,6 @@ import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.npc.Board;
-import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,7 +90,7 @@ public class Game extends Graphics implements Runnable {
         Font.renderPanel("золото: " + player.getScore() + " жизни: " + player.getHealth(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
         //Font.draw("fps: " + fps + " obj: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(-1, 111, 111, 511));
         //Font.draw("score: " + player.getScore() + " life: " + player.getHealth(), this.screen, 10, 18, PaletteHelper.getColor(-1, 111, 111, 511));
-        Font.renderTextPanel("test best lost fast test1 best1 lost1 fast1",this.screen,10,10,PaletteHelper.getColor(5, 555, 555, 555));
+        Font.renderTextPanel("привет как делишки",this.screen,10,10,PaletteHelper.getColor(5, 555, 555, 555));
         if (player.isRemoved()) {
 
             String msg = "конец игры";

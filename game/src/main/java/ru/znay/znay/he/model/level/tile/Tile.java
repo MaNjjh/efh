@@ -22,6 +22,7 @@ public class Tile {
     public int grassMainColor = 131;
     public int dirtMainColor = 322;
     public int sandMainColor = 550;
+    public int roadMainColor = 431;
     public int waterMainColor = 005;
     public int holeMainColor = 111;
 
@@ -31,6 +32,7 @@ public class Tile {
     public int grassColor = PaletteHelper.getColor(030, grassMainColor, 252, 353);
     public int lavaColor = PaletteHelper.getColor(500, lavaMainColor, 520, 550);
     public int sandColor = PaletteHelper.getColor(552, sandMainColor, 440, 440);
+    public int roadColor = PaletteHelper.getColor(431, roadMainColor, roadMainColor-110, 330);
     public int waterColor = PaletteHelper.getColor(005, waterMainColor, 115, 115);
 
     public static Tile[] tiles = new Tile[MAX_TILES];
@@ -40,6 +42,7 @@ public class Tile {
     public static Tile sand = new SandTile(3);
     public static Tile water = new WaterTile(4);
     public static Tile hole = new HoleTile(5);
+    public static Tile road = new RoadTile(6);
     public static int tickCount = 0;
 
     public boolean connectsToGrass = false;
@@ -47,7 +50,7 @@ public class Tile {
     public boolean connectsToLava = false;
     public boolean connectsToWater = false;
 
-    protected int slowPeriod = 50;
+    protected int slowPeriod = 10;
 
     protected byte id;
 
