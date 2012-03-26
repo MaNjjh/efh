@@ -66,12 +66,21 @@ public class Font {
         if (w % maxLen != 0) h++;
 
         int col = PaletteHelper.getColor(-1, 1, 5, 445);
-        screen.render(xx - Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
-        screen.render(xx + xOFF * Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 1);
-        screen.render(xx - Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 2);
-        screen.render(xx + xOFF * Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 3);
 
-        for (int x = 0; x <= maxLen; x++) {
+        for (int a = 0; a < h; a++) {
+            String temp = msg.substring(0, (msg.length() > maxLen) ? maxLen : msg.length());
+            int i = temp.lastIndexOf(" ");
+            if (i > 0 && msg.length() > maxLen)
+                temp = String.format("%-" + maxLen + "s", temp.substring(0, i));
+            if (msg.length() > maxLen)
+                msg = msg.substring((i > 0) ? i + 1 : maxLen, msg.length());
+            if (temp.length() < maxLen)
+                temp = String.format("%-" + maxLen + "s", temp);
+
+            Font.draw(temp, screen, xx, yy + (a * Tile.HALF_SIZE), colors);
+        }
+
+        for (int x = 0; x < xOFF; x++) {
             screen.render(xx + x * Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 1 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
             screen.render(xx + x * Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 1 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 2);
         }
@@ -79,18 +88,11 @@ public class Font {
             screen.render(xx - Tile.HALF_SIZE, yy + y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
             screen.render(xx + w * Tile.HALF_SIZE, yy + y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 1);
         }
-        for (int a = 0; a < h; a++) {
-            String temp = msg.substring(0, (msg.length() > maxLen) ? maxLen : msg.length());
-            int i = temp.lastIndexOf(" ");
-            if (i > 0)
-               temp = String.format("%-" + maxLen + "s",temp.substring(0,i));
-            if (msg.length() > maxLen)
-                msg = msg.substring((i > 0)?i+1:maxLen, msg.length());
-            if (temp.length() < maxLen)
-                temp = String.format("%-" + maxLen + "s", temp);
 
-            Font.draw(temp, screen, xx, yy + (a * Tile.HALF_SIZE), colors);
-        }
+        screen.render(xx - Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+        screen.render(xx + xOFF * Tile.HALF_SIZE, yy - Tile.HALF_SIZE, 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 1);
+        screen.render(xx - Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 2);
+        screen.render(xx + xOFF * Tile.HALF_SIZE, yy + (h * Tile.HALF_SIZE), 0, 13 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 3);
 
     }
 

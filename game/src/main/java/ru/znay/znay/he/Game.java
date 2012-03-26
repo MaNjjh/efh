@@ -5,6 +5,7 @@ import ru.znay.znay.he.gfx.Graphics;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.dialog.GuiManager;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.npc.Board;
@@ -25,6 +26,7 @@ public class Game extends Graphics implements Runnable {
     private Level level;
     private InputHandler inputHandler = new InputHandler(this);
     private Player player;
+    private GuiManager guiManager = new GuiManager();
     private int xScroll;
     private int yScroll;
 
@@ -84,13 +86,13 @@ public class Game extends Graphics implements Runnable {
         level.renderSprites(this.screen, xScroll, yScroll);
         level.renderFog(this.screen, xScroll, yScroll);
         level.getDialogManager().render(this.screen);
-
+        this.guiManager.render(this.screen);
         //Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
         //Font.renderPanel("фпс: " + fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
         Font.renderPanel("золото: " + player.getScore() + " жизни: " + player.getHealth() + " slow: " + player.getSlowPeriod(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
         //Font.draw("fps: " + fps + " obj: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(-1, 111, 111, 511));
         //Font.draw("score: " + player.getScore() + " life: " + player.getHealth(), this.screen, 10, 18, PaletteHelper.getColor(-1, 111, 111, 511));
-        Font.renderTextPanel("привет как делишки",this.screen,10,10,PaletteHelper.getColor(5, 555, 555, 555));
+        //Font.renderTextPanel("привет как делишки asdasd adqdq8fh fweflkjdfsojo nifahffasdfkjhsidf uuuuh sfwhwhl ladjw",this.screen,10,10,PaletteHelper.getColor(5, 555, 555, 555));
         if (player.isRemoved()) {
 
             String msg = "конец игры";

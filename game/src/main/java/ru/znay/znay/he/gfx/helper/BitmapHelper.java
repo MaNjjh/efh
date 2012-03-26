@@ -1,6 +1,7 @@
 package ru.znay.znay.he.gfx.helper;
 
 import ru.znay.znay.he.gfx.model.Bitmap;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -153,6 +154,11 @@ public class BitmapHelper {
         Graphics2D graphics2D = dst.getImage().createGraphics();
         graphics2D.setColor(new Color(color));
         graphics2D.fillPolygon(polygon);
+    }
+
+    public static void drawHalfTile(Bitmap src,int xOffs, int yOffs, int xo, int yo,int colors, int bits, Bitmap dst)
+    {
+        BitmapHelper.scaleDraw(src,1,xOffs,yOffs,xo,yo, Tile.HALF_SIZE,Tile.HALF_SIZE,colors,bits,dst);
     }
 
     public static void scaleDraw(Bitmap src, int scale, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits, Bitmap dst) {
