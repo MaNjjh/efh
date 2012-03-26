@@ -13,22 +13,23 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class GuiManager {
-    private LinkedList<GuiPanel> _gui = new LinkedList<GuiPanel>();
-    public boolean Visible = true;
+    private List<GuiPanel> gui = new LinkedList<GuiPanel>();
+    public boolean visible = true;
 
-    public GuiManager()
-    {
-         _gui.add(new GuiPanel(10,10,5,7));
+    public GuiManager() {
+        gui.add(new GuiPanel(10, 10, 5, 7));
     }
 
     public void add(GuiPanel GP) {
-        _gui.add(GP);
+        gui.add(GP);
     }
 
     public void render(Screen screen) {
-        if (!Visible || _gui.isEmpty())
+        if (!visible || gui.isEmpty()) {
             return;
-        for (GuiPanel GP : _gui)
+        }
+        for (GuiPanel GP : gui) {
             GP.render(screen);
+        }
     }
 }
