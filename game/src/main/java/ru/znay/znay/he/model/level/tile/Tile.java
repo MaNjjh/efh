@@ -25,6 +25,7 @@ public class Tile {
     public int roadMainColor = 431;
     public int waterMainColor = 005;
     public int holeMainColor = 111;
+    public int swampMainColor = 240;
 
 
     public int holeColor = PaletteHelper.getColor(111, holeMainColor, 110, 110);
@@ -32,8 +33,9 @@ public class Tile {
     public int grassColor = PaletteHelper.getColor(030, grassMainColor, 252, 353);
     public int lavaColor = PaletteHelper.getColor(500, lavaMainColor, 520, 550);
     public int sandColor = PaletteHelper.getColor(552, sandMainColor, 440, 440);
-    public int roadColor = PaletteHelper.getColor(431, roadMainColor, roadMainColor-110, 330);
+    public int roadColor = PaletteHelper.getColor(431, roadMainColor, roadMainColor - 110, 330);
     public int waterColor = PaletteHelper.getColor(005, waterMainColor, 115, 115);
+    public int swampColor = PaletteHelper.getColor(-1, swampMainColor, swampMainColor - 110, -1);
 
     public static Tile[] tiles = new Tile[MAX_TILES];
     public static Tile grass = new GrassTile(0);
@@ -43,11 +45,13 @@ public class Tile {
     public static Tile water = new WaterTile(4);
     public static Tile hole = new HoleTile(5);
     public static Tile road = new RoadTile(6);
+    public static Tile swamp = new SwampTile(7);
     public static int tickCount = 0;
 
     public boolean connectsToGrass = false;
     public boolean connectsToSand = false;
     public boolean connectsToLava = false;
+    public boolean connectsToSwamp = false;
     public boolean connectsToWater = false;
 
     protected int slowPeriod = 10;
@@ -77,7 +81,7 @@ public class Tile {
 
     public void steppedOn(Level level, int xt, int yt, Entity entity) {
         if (entity instanceof Player) {
-            ((Player) entity).setSlowPeriod(slowPeriod);
+            ((Player) entity).setSlowPeriod(this.slowPeriod);
         }
     }
 
@@ -90,6 +94,6 @@ public class Tile {
     }
 
     public boolean connectsToLiquid() {
-        return connectsToWater || connectsToLava;
+        return connectsToWater || connectsToLava || connectsToSwamp;
     }
 }

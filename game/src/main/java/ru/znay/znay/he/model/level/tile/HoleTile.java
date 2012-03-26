@@ -10,6 +10,7 @@ public class HoleTile extends Tile {
         super(id);
         connectsToSand = true;
         connectsToWater = true;
+        connectsToSwamp = true;
         connectsToLava = true;
     }
 

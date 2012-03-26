@@ -9,19 +9,20 @@ import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Александр Сергеевич
- * Date: 11.03.12
- * Time: 19:11
+ * User: ASTarasov
+ * Date: 26.03.12
+ * Time: 13:55
  * To change this template use File | Settings | File Templates.
  */
-public class LavaTile extends Tile {
+public class SwampTile extends Tile {
 
     private Random random = new Random();
 
-    public LavaTile(int id) {
+    public SwampTile(int id) {
         super(id);
-        connectsToSand = true;
-        connectsToLava = true;
+        connectsToGrass = true;
+        connectsToSwamp = true;
+        slowPeriod = 2;
     }
 
     @Override
@@ -29,36 +30,37 @@ public class LavaTile extends Tile {
         random.setSeed((tickCount + (x / 2 - y) * 4311) / 10 * 54687121l + x * 3271612l + y * 3412987161l);
 
 
-        int transitionColor1 = PaletteHelper.getColor(3, 500, dirtMainColor - 111, dirtMainColor);
-        int transitionColor2 = PaletteHelper.getColor(3, 500, sandMainColor - 110, sandMainColor);
+        int transitionColor1 = PaletteHelper.getColor(30, swampMainColor, dirtMainColor - 111, dirtMainColor);
+        int transitionColor2 = PaletteHelper.getColor(30, swampMainColor, grassMainColor - 110, grassMainColor);
 
-        boolean u = !level.getTile(x, y - 1).connectsToLava;
-        boolean d = !level.getTile(x, y + 1).connectsToLava;
-        boolean l = !level.getTile(x - 1, y).connectsToLava;
-        boolean r = !level.getTile(x + 1, y).connectsToLava;
+        boolean u = !level.getTile(x, y - 1).connectsToSwamp;
+        boolean d = !level.getTile(x, y + 1).connectsToSwamp;
+        boolean l = !level.getTile(x - 1, y).connectsToSwamp;
+        boolean r = !level.getTile(x + 1, y).connectsToSwamp;
 
-        boolean su = u && level.getTile(x, y - 1).connectsToSand;
-        boolean sd = d && level.getTile(x, y + 1).connectsToSand;
-        boolean sl = l && level.getTile(x - 1, y).connectsToSand;
-        boolean sr = r && level.getTile(x + 1, y).connectsToSand;
+        boolean su = u && level.getTile(x, y - 1).connectsToGrass;
+        boolean sd = d && level.getTile(x, y + 1).connectsToGrass;
+        boolean sl = l && level.getTile(x - 1, y).connectsToGrass;
+        boolean sr = r && level.getTile(x + 1, y).connectsToGrass;
+
 
         if (!u && !l) {
-            screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + 0, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
+            screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + 0, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, swampColor, random.nextInt(4));
         } else
             screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + 0, (l ? 14 : 15) * Tile.HALF_SIZE, (u ? 0 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (su || sl) ? transitionColor2 : transitionColor1, 0);
 
         if (!u && !r) {
-            screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + 0, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
+            screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + 0, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, swampColor, random.nextInt(4));
         } else
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + 0, (r ? 16 : 15) * Tile.HALF_SIZE, (u ? 0 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (su || sr) ? transitionColor2 : transitionColor1, 0);
 
         if (!d && !l) {
-            screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
+            screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, swampColor, random.nextInt(4));
         } else
             screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + Tile.HALF_SIZE, (l ? 14 : 15) * Tile.HALF_SIZE, (d ? 2 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (sd || sl) ? transitionColor2 : transitionColor1, 0);
 
         if (!d && !r) {
-            screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
+            screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, swampColor, random.nextInt(4));
         } else
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, (r ? 16 : 15) * Tile.HALF_SIZE, (d ? 2 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (sd || sr) ? transitionColor2 : transitionColor1, 0);
     }
@@ -79,4 +81,5 @@ public class LavaTile extends Tile {
             level.setTile(xn, yn, this, 0);
         }
     }
+
 }

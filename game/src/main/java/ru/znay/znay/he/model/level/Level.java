@@ -28,6 +28,7 @@ public class Level {
     private final static int SAND_TILE = 0xFFFFFF00;
     private final static int LAVA_TILE = 0xFFFF7F00;
     private final static int ROAD_TILE = 0xFF6B6B6B;
+    private final static int SWAMP_TILE = 0xFF90FF00;
 
     private final static int HOLE_TILE = 0xFF606060;
     private final static int APPLE_TREE = 0xFF00FF00;
@@ -96,6 +97,10 @@ public class Level {
                     }
                     case ROAD_TILE: {
                         setTile(i, j, Tile.road, 0);
+                        break;
+                    }
+                    case SWAMP_TILE: {
+                        setTile(i, j, Tile.swamp, 0);
                         break;
                     }
                     case HOLE_TILE: {

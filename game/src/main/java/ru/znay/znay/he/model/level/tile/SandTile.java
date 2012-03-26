@@ -8,7 +8,7 @@ public class SandTile extends Tile {
     public SandTile(int id) {
         super(id);
         connectsToSand = true;
-        slowPeriod = 4;
+        slowPeriod = 6;
     }
 
 

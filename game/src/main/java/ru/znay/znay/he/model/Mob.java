@@ -174,4 +174,8 @@ public class Mob extends Entity {
     public void setSlowPeriod(int slowPeriod) {
         this.slowPeriod = slowPeriod;
     }
+
+    public int getSlowPeriod() {
+        return slowPeriod;
+    }
 }
