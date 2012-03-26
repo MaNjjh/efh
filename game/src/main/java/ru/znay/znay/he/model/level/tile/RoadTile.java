@@ -15,7 +15,6 @@ public class RoadTile extends Tile {
 
     public RoadTile(int id) {
         super(id);
-        connectsToSand = true;
         slowPeriod = 50;
     }
 
@@ -23,10 +22,10 @@ public class RoadTile extends Tile {
 
         int transitionColor = PaletteHelper.getColor(roadMainColor - 110, roadMainColor, roadMainColor - 110, grassMainColor);
 
-        boolean u = !level.getTile(x, y - 1).connectsToSand;
-        boolean d = !level.getTile(x, y + 1).connectsToSand;
-        boolean l = !level.getTile(x - 1, y).connectsToSand;
-        boolean r = !level.getTile(x + 1, y).connectsToSand;
+        boolean u = (level.getTile(x, y - 1) != Tile.road);
+        boolean d = (level.getTile(x, y + 1) != Tile.road);
+        boolean l = (level.getTile(x - 1, y) != Tile.road);
+        boolean r = (level.getTile(x + 1, y) != Tile.road);
 
         if (!u && !l) {
             screen.render(x * Tile.SIZE + 0, y * Tile.SIZE + 0, 3 * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, roadColor, 0);
