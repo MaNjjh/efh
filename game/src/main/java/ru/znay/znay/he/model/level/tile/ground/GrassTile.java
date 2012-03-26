@@ -1,8 +1,9 @@
-package ru.znay.znay.he.model.level.tile;
+package ru.znay.znay.he.model.level.tile.ground;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.Level;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.Random;
 
@@ -14,8 +15,6 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public class GrassTile extends Tile {
-
-    private Random random = new Random();
 
     public GrassTile(int id) {
         super(id);

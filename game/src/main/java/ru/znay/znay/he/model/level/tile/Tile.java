@@ -5,6 +5,13 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
+import ru.znay.znay.he.model.level.tile.ground.*;
+import ru.znay.znay.he.model.level.tile.liquid.DeepWaterTile;
+import ru.znay.znay.he.model.level.tile.liquid.LavaTile;
+import ru.znay.znay.he.model.level.tile.liquid.SwampTile;
+import ru.znay.znay.he.model.level.tile.liquid.WaterTile;
+
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,6 +31,8 @@ public class Tile {
     public int sandMainColor = 550;
     public int roadMainColor = 431;
     public int waterMainColor = 005;
+    public int deepWaterMainColor = 002;
+
     public int holeMainColor = 111;
     public int swampMainColor = 240;
 
@@ -34,6 +43,7 @@ public class Tile {
     public int lavaColor = PaletteHelper.getColor(500, lavaMainColor, 520, 550);
     public int sandColor = PaletteHelper.getColor(552, sandMainColor, 440, 440);
     public int roadColor = PaletteHelper.getColor(431, roadMainColor, roadMainColor - 110, 330);
+    public int deepWaterColor = PaletteHelper.getColor(004, deepWaterMainColor, 114, 114);
     public int waterColor = PaletteHelper.getColor(005, waterMainColor, 115, 115);
     public int swampColor = PaletteHelper.getColor(-1, swampMainColor, swampMainColor - 110, -1);
 
@@ -46,6 +56,7 @@ public class Tile {
     public static Tile hole = new HoleTile(5);
     public static Tile road = new RoadTile(6);
     public static Tile swamp = new SwampTile(7);
+    public static Tile deepWater = new DeepWaterTile(8);
     public static int tickCount = 0;
 
     public boolean connectsToGrass = false;
@@ -55,7 +66,7 @@ public class Tile {
     public boolean connectsToWater = false;
 
     protected int slowPeriod = 10;
-
+    protected Random random = new Random();
     protected byte id;
 
     public Tile(int id) {

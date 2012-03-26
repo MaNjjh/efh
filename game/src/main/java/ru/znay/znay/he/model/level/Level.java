@@ -25,6 +25,7 @@ public class Level {
 
     private final static int GRASS_TILE = 0xFFFFFFFF;
     private final static int WATER_TILE = 0xFF0000FF;
+    private final static int DEEP_WATER_TILE = 0xFF0000CC;
     private final static int SAND_TILE = 0xFFFFFF00;
     private final static int LAVA_TILE = 0xFFFF7F00;
     private final static int ROAD_TILE = 0xFF6B6B6B;
@@ -89,6 +90,10 @@ public class Level {
                     }
                     case WATER_TILE: {
                         setTile(i, j, Tile.water, 0);
+                        break;
+                    }
+                    case DEEP_WATER_TILE: {
+                        setTile(i, j, Tile.deepWater, 0);
                         break;
                     }
                     case SAND_TILE: {
