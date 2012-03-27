@@ -1,6 +1,7 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.cfg.Constants;
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -22,13 +23,27 @@ public class TextPanel extends Panel {
 
     List<String> formatedText = new LinkedList<String>();
 
-    public TextPanel(String message, int posX, int posY, int colors) {
-        super(posX, posY);
+    public TextPanel(String message, int posX, int posY, int colorText, int colorPanel) {
+        super(posX, posY, colorPanel);
+        init(message, colorText);
+    }
 
-        originalMessage = message;
-        colorText = colors;
-        changed = true;
-        visible = true;
+    public TextPanel(String message, int posX, int posY, int colorText) {
+        super(posX, posY);
+        init(message, colorText);
+    }
+
+    public TextPanel(String message, int posX, int posY) {
+        super(posX, posY);
+        init(message, PaletteHelper.getColor(5, 555, 555, 555));
+    }
+
+
+    private void init(String message, int colorText) {
+        this.originalMessage = message;
+        this.colorText = colorText;
+        this.changed = true;
+        this.visible = true;
 
         formatString(message);
     }

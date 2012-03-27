@@ -13,8 +13,23 @@ public class TypedTextPanel extends TextPanel {
     private long time;
     private int timeLife;
 
-    public TypedTextPanel(String mes, int posX, int posY, int colors, int period) {
-        super(mes, posX, posY, colors);
+    public TypedTextPanel(String mes, int posX, int posY, int colorText, int colorPanel, int period) {
+        super(mes, posX, posY, colorText, colorPanel);
+        init(period);
+    }
+
+    public TypedTextPanel(String mes, int posX, int posY, int colorText, int period) {
+        super(mes, posX, posY, colorText);
+        init(period);
+    }
+
+    public TypedTextPanel(String mes, int posX, int posY, int period) {
+        super(mes, posX, posY);
+        init(period);
+    }
+
+
+    private void init(int period) {
         this.position = 1;
         this.period = period;
         this.time = System.currentTimeMillis();

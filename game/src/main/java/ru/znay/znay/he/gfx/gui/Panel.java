@@ -23,22 +23,33 @@ public class Panel {
     protected Bitmap image;
     protected boolean changed = true;
     protected boolean closed = false;
+    protected int panelColor;
 
     public Panel(int posX, int posY, int sizeX, int sizeY) {
-        x = posX;
-        y = posY;
-        this.sizeX = sizeX + 2;
-        this.sizeY = sizeY + 2;
+        init(posX, posY, sizeX, sizeY, PaletteHelper.getColor(-1, 1, 5, 445));
+    }
 
-        image = new Bitmap(this.sizeX * Tile.HALF_SIZE, this.sizeY * Tile.HALF_SIZE);
-
-        changed = true;
-        visible = true;
+    public Panel(int posX, int posY, int sizeX, int sizeY, int panelColor) {
+        init(posX, posY, sizeX, sizeY, panelColor);
     }
 
     public Panel(int posX, int posY) {
-        x = posX;
-        y = posY;
+        init(posX, posY, 0, 0, PaletteHelper.getColor(-1, 1, 5, 445));
+    }
+
+    public Panel(int posX, int posY, int panelColor) {
+        init(posX, posY, 0, 0, panelColor);
+    }
+
+    private void init(int posX, int posY, int sizeX, int sizeY, int panelColor) {
+        this.x = posX;
+        this.y = posY;
+        this.sizeX = sizeX + 2;
+        this.sizeY = sizeY + 2;
+
+        this.changed = true;
+        this.visible = true;
+        this.panelColor = panelColor;
 
         image = new Bitmap(this.sizeX * Tile.HALF_SIZE, this.sizeY * Tile.HALF_SIZE);
     }
@@ -104,36 +115,36 @@ public class Panel {
 
     public void paintF(Screen screen) {
         Bitmap temp = new Bitmap(sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE);
-        int col = PaletteHelper.getColor(-1, 1, 5, 445);
+
         int tx = (sizeX - 1) * Tile.HALF_SIZE;
         int ty = (sizeY - 1) * Tile.HALF_SIZE;
 
         BitmapHelper.fill(temp, 0xFF00FF);
         //top left
-        BitmapHelper.drawHalfTile(screen.getSprites(), 0, 0, 0, 13 * Tile.HALF_SIZE, col, 0, temp);
+        BitmapHelper.drawHalfTile(screen.getSprites(), 0, 0, 0, 13 * Tile.HALF_SIZE, panelColor, 0, temp);
         //top right
-        BitmapHelper.drawHalfTile(screen.getSprites(), tx, 0, 0, 13 * Tile.HALF_SIZE, col, 1, temp);
+        BitmapHelper.drawHalfTile(screen.getSprites(), tx, 0, 0, 13 * Tile.HALF_SIZE, panelColor, 1, temp);
         //bottom left
-        BitmapHelper.drawHalfTile(screen.getSprites(), 0, ty, 0, 13 * Tile.HALF_SIZE, col, 2, temp);
+        BitmapHelper.drawHalfTile(screen.getSprites(), 0, ty, 0, 13 * Tile.HALF_SIZE, panelColor, 2, temp);
         //bottom right
-        BitmapHelper.drawHalfTile(screen.getSprites(), tx, ty, 0, 13 * Tile.HALF_SIZE, col, 3, temp);
+        BitmapHelper.drawHalfTile(screen.getSprites(), tx, ty, 0, 13 * Tile.HALF_SIZE, panelColor, 3, temp);
 
         for (int x = 1; x < sizeX - 1; x++) {
             //top
-            BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, col, 0, temp);
+            BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, panelColor, 0, temp);
             //bottom
-            BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, ty, Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, col, 2, temp);
+            BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, ty, Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, panelColor, 2, temp);
         }
         for (int y = 1; y < sizeY - 1; y++) {
             //left
-            BitmapHelper.drawHalfTile(screen.getSprites(), 0, y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, col, 0, temp);
+            BitmapHelper.drawHalfTile(screen.getSprites(), 0, y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, panelColor, 0, temp);
             //right
-            BitmapHelper.drawHalfTile(screen.getSprites(), tx, y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, col, 1, temp);
+            BitmapHelper.drawHalfTile(screen.getSprites(), tx, y * Tile.HALF_SIZE, 2 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, panelColor, 1, temp);
         }
 
         for (int x = 1; x < sizeX - 1; x++) {
             for (int y = 1; y < sizeY - 1; y++) {
-                BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, y * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, col, 0, temp);
+                BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, y * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, panelColor, 0, temp);
             }
         }
 
