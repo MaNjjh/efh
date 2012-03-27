@@ -1,6 +1,11 @@
 package ru.znay.znay.he.model.builds;
 
+import ru.znay.znay.he.Game;
+import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.helper.SpriteManager;
+import ru.znay.znay.he.gfx.helper.StaticModel;
+import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
@@ -18,12 +23,14 @@ public class AppleTree extends Mob {
     private int flip = 0;
     private int apple = random.nextInt(2);
 
-    public AppleTree(int x, int y) {
+    public AppleTree(int x, int y ,SpriteManager spr) {
         this.x = x;
+        
         this.y = y;
         this.xr = 16;
         this.yr = 12;
         this.flip = random.nextInt(2);
+        sprite = spr.getSprite((apple == 0) ? StaticModel.Apple : StaticModel.Apple2);
     }
 
 
@@ -47,19 +54,10 @@ public class AppleTree extends Mob {
 
         int xt = x - xr * 2;
         int yt = y - yr * 2 - 24;
+        int xOff = xt -  screen.getXOffset();
+        int yOff = yt - screen.getYOffset();
 
-        int col = PaletteHelper.getColor(20, 40, 30, -1);
-        screen.render(2, xt, yt, 17 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
+        BitmapHelper.drawNormal(sprite,xOff,yOff,screen.getViewPort(), 0xFF00FF);
 
-        col = PaletteHelper.getColor(10, 10, 20, -1);
-        screen.render(2, xt, yt, 21 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
-
-        col = PaletteHelper.getColor(100, 210, 320, -1);
-        screen.render(2, xt, yt, 25 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
-
-        if (apple == 1) {
-            col = PaletteHelper.getColor(-1, -1, 510, -1);
-            screen.render(2, xt, yt, 17 * Tile.HALF_SIZE, 0, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
-        }
     }
 }

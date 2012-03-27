@@ -1,7 +1,9 @@
 package ru.znay.znay.he.model.level;
 
+import ru.znay.znay.he.Game;
 import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
@@ -42,6 +44,8 @@ public class Level {
     private int width;
     private int height;
 
+    private Game game;
+
     private Player player;
 
     private byte[] tiles;
@@ -53,6 +57,7 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<Entity>();
     private GuiManager guiManager;
+    private SpriteManager spriteManager = null;
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
@@ -62,8 +67,14 @@ public class Level {
         }
     };
 
+    public Level(Player pl, int lv, Game g)
+    {
+        spriteManager = new SpriteManager(g.getScreen().getSprites());
+        init(pl,lv);
+    }
+    
     @SuppressWarnings("unchecked")
-    public Level(Player player, int level) {
+    public void init(Player player, int level) {
 
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
 
@@ -115,7 +126,7 @@ public class Level {
                         break;
                     }
                     case APPLE_TREE: {
-                        add(new AppleTree(i << 4, j << 4));
+                        add(new AppleTree(i << 4, j << 4,spriteManager));
                         break;
                     }
                     case LAVA_TILE: {
@@ -154,10 +165,10 @@ public class Level {
                 add(mob);
             }
 
-            mob = new AppleTree();
+            /*mob = new AppleTree();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }
+            }  */
         }
 
     }
@@ -352,5 +363,9 @@ public class Level {
 
     public GuiManager getGuiManager() {
         return guiManager;
+    }
+
+    public SpriteManager getSpriteManager() {
+        return spriteManager;
     }
 }

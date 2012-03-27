@@ -17,7 +17,7 @@ public class GuiManager {
     private List<Panel> panelList = new LinkedList<Panel>();
 
     public GuiManager() {
-       // panelList.add(new TypedTextPanel("приветик как дела? может сходим куда-нибудь? вообще я сегодня свободен", 10, 10, PaletteHelper.getColor(5, 555, 555, 555), 100));
+        //panelList.add(new TextPanel("Мы долго ждали приветствуем тебя", 10, 10, PaletteHelper.getColor(5, 555, 555, 555)));
     }
 
     private boolean findSamePanel(Panel findPanel) {

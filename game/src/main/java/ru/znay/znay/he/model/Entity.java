@@ -1,5 +1,6 @@
 package ru.znay.znay.he.model;
 
+import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.Level;
 
@@ -21,6 +22,7 @@ public class Entity {
     protected boolean removed = false;
     protected Level level;
     protected ETeam team = ETeam.ENEMY_TEAM;
+    protected Bitmap sprite;
 
     public void init(Level level) {
         this.level = level;

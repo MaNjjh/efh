@@ -3,6 +3,7 @@ package ru.znay.znay.he;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
@@ -40,7 +41,7 @@ public class Game extends Graphics implements Runnable {
 
     public void init() {
         this.player = new Player(this, this.inputHandler);
-        this.level = new Level(player, 0);
+        this.level = new Level(player, 0, this);
         this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
         this.inputHandler.releaseAll();
     }
@@ -82,6 +83,7 @@ public class Game extends Graphics implements Runnable {
         level.renderSprites(this.screen, xScroll, yScroll);
         level.renderFog(this.screen, xScroll, yScroll);
         level.getGuiManager().render(this.screen);
+
         //Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
         //Font.renderPanel("фпс: " + fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
         Font.renderPanel("золото: " + player.getScore() + " жизни: " + player.getHealth() + " slow: " + player.getSlowPeriod(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
@@ -175,5 +177,4 @@ public class Game extends Graphics implements Runnable {
     public int getYScroll() {
         return yScroll;
     }
-
 }

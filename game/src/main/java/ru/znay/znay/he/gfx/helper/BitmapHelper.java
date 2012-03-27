@@ -79,6 +79,9 @@ public class BitmapHelper {
         h = Math.min(dst.getHeight() - 1, yo + h);
         xOffs = Math.min(src.getWidth() - w, xOffs - xo);
         yOffs = Math.min(src.getHeight() - h, yOffs - yo);
+        //System.out.println("xo-"+xo+" yo-"+yo+" w-"+w+" h-"+h+" xOffs-"+xOffs+" yOffs-"+yOffs);
+        //System.out.println("src-"+(xOffs + xo + (yOffs + yo) * src.getWidth()));
+        //System.out.println("dst-"+(xo + yo * dst.getWidth()));
         for (int j = yo; j < h; j++) {
             for (int i = xo; i < w; i++) {
                 int cell = src.getPixels()[xOffs + i + (yOffs + j) * src.getWidth()];
@@ -198,6 +201,23 @@ public class BitmapHelper {
                 if (color < 255) {
                     dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
                 }
+            }
+        }
+    }
+
+    public static void drawNormal(Bitmap src, int xOffs, int yOffs, Bitmap dst, int Alpha) {
+        for (int y = 0; y < src.getHeight(); y++) {
+            int yPix = y + yOffs;
+            if (yPix < 0 || yPix >= dst.getHeight()) continue;
+
+            for (int x = 0; x < src.getWidth(); x++) {
+                int xPix = x + xOffs;
+                if (xPix < 0 || xPix >= dst.getWidth()) continue;
+
+                int color = src.getPixels()[x + y * src.getWidth()];
+
+                if (color == Alpha) continue;
+                dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
             }
         }
     }
