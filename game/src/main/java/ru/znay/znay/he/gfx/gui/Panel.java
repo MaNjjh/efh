@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model.dialog;
+package ru.znay.znay.he.gfx.gui;
 
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
@@ -14,7 +14,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 12:23
  * To change this template use File | Settings | File Templates.
  */
-public class GuiPanel {
+public class Panel {
     protected boolean visible;
     protected int x = 0;
     protected int y = 0;
@@ -24,7 +24,7 @@ public class GuiPanel {
     protected boolean changed = true;
     protected boolean closed = false;
 
-    public GuiPanel(int posX, int posY, int sizeX, int sizeY) {
+    public Panel(int posX, int posY, int sizeX, int sizeY) {
         x = posX;
         y = posY;
         this.sizeX = sizeX + 2;
@@ -35,13 +35,12 @@ public class GuiPanel {
         changed = true;
         visible = true;
     }
-    
-    public GuiPanel(int posX,int posY)
-    {
+
+    public Panel(int posX, int posY) {
         x = posX;
         y = posY;
 
-        image = new Bitmap(this.sizeX * Tile.HALF_SIZE, this.sizeY * Tile.HALF_SIZE );
+        image = new Bitmap(this.sizeX * Tile.HALF_SIZE, this.sizeY * Tile.HALF_SIZE);
     }
 
     public void show() {
@@ -150,6 +149,22 @@ public class GuiPanel {
 
         this.paint(screen);
 
-        BitmapHelper.copy(this.image, 0, 0, x, y, sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE, screen.getViewPort(),0xFF00FF);
+        BitmapHelper.copy(this.image, 0, 0, x, y, sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE, screen.getViewPort(), 0xFF00FF);
+    }
+
+    public void tick() {
+        //inherited
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

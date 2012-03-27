@@ -1,5 +1,6 @@
 package ru.znay.znay.he.model.npc;
 
+import ru.znay.znay.he.gfx.gui.TypedTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
@@ -25,9 +26,7 @@ public class Board extends Entity {
 
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            if (!level.getDialogManager().hasText(this.message)) {
-                level.getDialogManager().addTypedText(this.message, 10, 40, PaletteHelper.getColor(5, 555, 555, 555));
-            }
+            level.getGuiManager().add(new TypedTextPanel(this.message, 10, 10, PaletteHelper.getColor(5, 555, 555, 555), 100));
         }
     }
 

@@ -1,5 +1,6 @@
 package ru.znay.znay.he.model.level;
 
+import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -9,7 +10,6 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.AppleTree;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.dialog.DialogManager;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -52,7 +52,7 @@ public class Level {
     private List<Entity>[] entitiesInTiles;
 
     private List<Entity> entities = new ArrayList<Entity>();
-    private DialogManager dialogManager;
+    private GuiManager guiManager;
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
@@ -76,7 +76,7 @@ public class Level {
 
         entitiesInTiles = new ArrayList[width * height];
 
-        dialogManager = new DialogManager();
+        guiManager = new GuiManager();
 
         for (int i = 0; i < width * height; i++) {
             entitiesInTiles[i] = new ArrayList<Entity>();
@@ -144,7 +144,7 @@ public class Level {
                 add(mob);
             }
 
-             mob = new Mushroom();
+            mob = new Mushroom();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
@@ -170,7 +170,7 @@ public class Level {
             getTile(xt, yt).tick(this, xt, yt);
         }
 
-        this.dialogManager.tick();
+        this.guiManager.tick();
 
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
@@ -350,7 +350,7 @@ public class Level {
         this.monsterDensity = monsterDensity;
     }
 
-    public DialogManager getDialogManager() {
-        return dialogManager;
+    public GuiManager getGuiManager() {
+        return guiManager;
     }
 }

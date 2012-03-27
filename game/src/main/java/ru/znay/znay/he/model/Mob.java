@@ -73,8 +73,8 @@ public class Mob extends Entity {
         if (tickTime % slowPeriod == 0) {
             return true;
         }
-        
-        return  super.move(xa, ya);
+
+        return super.move(xa, ya);
 
     }
 

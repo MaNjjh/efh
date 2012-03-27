@@ -5,8 +5,6 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 
-import java.util.Random;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Александр Сергеевич

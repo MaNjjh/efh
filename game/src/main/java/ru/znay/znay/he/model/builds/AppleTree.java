@@ -57,8 +57,7 @@ public class AppleTree extends Mob {
         col = PaletteHelper.getColor(100, 210, 320, -1);
         screen.render(2, xt, yt, 25 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, flip);
 
-        if (apple == 1)
-        {
+        if (apple == 1) {
             col = PaletteHelper.getColor(-1, -1, 510, -1);
             screen.render(2, xt, yt, 17 * Tile.HALF_SIZE, 0, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, col, 0);
         }

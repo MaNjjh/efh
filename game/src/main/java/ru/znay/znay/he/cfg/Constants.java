@@ -13,6 +13,6 @@ public class Constants {
     public static final int SCREEN_SCALE = 2;
 
     public static final String GAME_TITLE = "Escape from hell";
-    
+
     public static final String SPRITES_FILE = "/sprites.png";
 }

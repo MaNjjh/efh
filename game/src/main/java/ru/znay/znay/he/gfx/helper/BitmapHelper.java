@@ -173,9 +173,8 @@ public class BitmapHelper {
         graphics2D.fillPolygon(polygon);
     }
 
-    public static void drawHalfTile(Bitmap src,int xOffs, int yOffs, int xo, int yo,int colors, int bits, Bitmap dst)
-    {
-        BitmapHelper.scaleDraw(src,1,xOffs,yOffs,xo,yo, Tile.HALF_SIZE,Tile.HALF_SIZE,colors,bits,dst);
+    public static void drawHalfTile(Bitmap src, int xOffs, int yOffs, int xo, int yo, int colors, int bits, Bitmap dst) {
+        BitmapHelper.scaleDraw(src, 1, xOffs, yOffs, xo, yo, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits, dst);
     }
 
     public static void scaleDraw(Bitmap src, int scale, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits, Bitmap dst) {
@@ -186,14 +185,14 @@ public class BitmapHelper {
             int yPix = y + yOffs;
             if (yPix < 0 || yPix >= dst.getHeight()) continue;
             int ys = y;
-            if (mirrorY) ys = (h*scale - 1) - y;
+            if (mirrorY) ys = (h * scale - 1) - y;
 
             for (int x = 0; x < w * scale; x++) {
                 int xPix = x + xOffs;
                 if (xPix < 0 || xPix >= dst.getWidth()) continue;
 
                 int xs = x;
-                if (mirrorX) xs = (w*scale - 1) - x;
+                if (mirrorX) xs = (w * scale - 1) - x;
 
                 int color = (colors >> (src.getPixels()[(xs / scale + xo) + (ys / scale + yo) * src.getWidth()] * 8)) & 255;
                 if (color < 255) {

@@ -2,11 +2,8 @@ package ru.znay.znay.he.model.level.tile.liquid;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-
-import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
