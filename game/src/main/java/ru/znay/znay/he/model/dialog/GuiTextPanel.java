@@ -37,28 +37,27 @@ public class GuiTextPanel extends GuiPanel {
         if (mes.isEmpty())
             mes = "TEXT";
 
-        final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2 - 2;
+        final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2;
         String temp;
+        int maxlen = 0;
         while (mes.length() > maxLen) {
-            System.out.println(">"+mes+"<");
             int i = mes.substring(0, maxLen).lastIndexOf(" ");
-            System.out.println(i);
             if (i != -1 && i != maxLen) {
-                temp = String.format("%-" + maxLen + "s", mes.substring(0, i));
+                temp = mes.substring(0, i);
                 mes = mes.substring(i + 1);
             } else {
                 temp = mes.substring(0, maxLen);
                 mes = mes.substring(maxLen);
             }
-
+            maxlen = Math.max(maxlen,temp.length());
             this.mes.add(temp);
         }
 
         if (mes.length() <= maxLen) {
-            this.mes.add(String.format("%-" + maxLen + "s", mes));
+            this.mes.add(mes);
         }
 
-        sizeX = maxLen + 2;
+        sizeX = (this.mes.size() == 1) ? mes.length() + 2 : maxlen + 2;
         sizeY = this.mes.size() + 2;
     }
 

@@ -17,7 +17,7 @@ public class GuiManager {
     public boolean visible = true;
 
     public GuiManager() {
-        gui.add(new GuiTextPanel("TEXT text text",10, 10));
+        gui.add(new GuiTextPanel("приветик как дела? может сходим куда-нибудь? вообще я сегодня свободен",10, 10));
     }
 
     public void add(GuiPanel GP) {
