@@ -10,5 +10,6 @@ package ru.znay.znay.he.gfx.helper;
 public enum StaticModel {
     Dummy,
     Apple,
-    Apple2
+    Apple2,
+    Fir
 }

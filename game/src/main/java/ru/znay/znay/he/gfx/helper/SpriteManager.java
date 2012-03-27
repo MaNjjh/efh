@@ -19,6 +19,7 @@ import java.util.List;
 public class SpriteManager {
     Bitmap bitmaps[] = new Bitmap[64];
     Bitmap sprites = null;
+
     public SpriteManager(Bitmap spr) {
         this.sprites = spr;
     }
@@ -38,22 +39,25 @@ public class SpriteManager {
             case Apple:
             case Apple2:
                 final int scale = 2;
-                final int Tx4 =  4 * Tile.HALF_SIZE;
-                image = new Bitmap(Tx4*scale, Tx4*scale);
+                final int Tx4 = 4 * Tile.HALF_SIZE;
+                image = new Bitmap(Tx4 * scale, Tx4 * scale);
 
                 BitmapHelper.fill(image, 0xFF00FF);
 
                 int col = PaletteHelper.getColor(20, 40, 30, -1);
-                BitmapHelper.scaleDraw(sprites,scale, 0, 0, 17 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
 
                 col = PaletteHelper.getColor(10, 10, 20, -1);
-                BitmapHelper.scaleDraw(sprites,scale, 0, 0, 21 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 21 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
 
                 col = PaletteHelper.getColor(100, 210, 320, -1);
-                BitmapHelper.scaleDraw(sprites,scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
                 if (SM != StaticModel.Apple2) break;
                 col = PaletteHelper.getColor(-1, -1, 510, -1);
-                BitmapHelper.scaleDraw(sprites,scale, 0, 0, 17 * Tile.HALF_SIZE, 0, Tx4, Tx4, col, 0, image);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, 0, Tx4, Tx4, col, 0, image);
+                break;
+            case Fir:
+                //добавить тут
                 break;
         }
 
