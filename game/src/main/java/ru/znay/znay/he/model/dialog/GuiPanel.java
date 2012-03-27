@@ -20,7 +20,7 @@ public class GuiPanel {
     protected int y = 0;
     protected int sizeX = 2;
     protected int sizeY = 2;
-    private Bitmap image;
+    protected Bitmap image;
     protected boolean changed = true;
     protected boolean closed = false;
 
@@ -34,6 +34,14 @@ public class GuiPanel {
 
         changed = true;
         visible = true;
+    }
+    
+    public GuiPanel(int posX,int posY)
+    {
+        x = posX;
+        y = posY;
+
+        image = new Bitmap(this.sizeX * Tile.HALF_SIZE, this.sizeY * Tile.HALF_SIZE );
     }
 
     public void show() {
@@ -101,7 +109,7 @@ public class GuiPanel {
         int tx = (sizeX - 1) * Tile.HALF_SIZE;
         int ty = (sizeY - 1) * Tile.HALF_SIZE;
 
-        BitmapHelper.fill(temp, 0xFFFFFF);
+        BitmapHelper.fill(temp, 0xFF00FF);
         //top left
         BitmapHelper.drawHalfTile(screen.getSprites(), 0, 0, 0, 13 * Tile.HALF_SIZE, col, 0, temp);
         //top right
@@ -142,6 +150,6 @@ public class GuiPanel {
 
         this.paint(screen);
 
-        BitmapHelper.copy(this.image, 0, 0, x, y, sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE, screen.getViewPort());
+        BitmapHelper.copy(this.image, 0, 0, x, y, sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE, screen.getViewPort(),0xFF00FF);
     }
 }

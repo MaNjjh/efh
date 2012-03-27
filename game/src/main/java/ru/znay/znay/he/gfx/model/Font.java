@@ -1,6 +1,7 @@
 package ru.znay.znay.he.gfx.model;
 
 import ru.znay.znay.he.cfg.Constants;
+import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -32,6 +33,19 @@ public class Font {
                 int xx = ix % 32;
                 int yy = ix / 32;
                 screen.render(x + i * (FONT_SIZE), y, xx * FONT_SIZE, (yStart + yy) * FONT_SIZE, FONT_SIZE, FONT_SIZE, colors, 0);
+            }
+        }
+    }
+
+    public static void drawToBitmap(String msg, Screen screen, int x, int y, int colors,Bitmap dst)
+    {
+        msg = msg.toUpperCase();
+        for (int i = 0; i < msg.length(); i++) {
+            int ix = chars.indexOf(msg.charAt(i));
+            if (ix >= 0) {
+                int xx = ix % 32;
+                int yy = ix / 32;
+                BitmapHelper.drawHalfTile(screen.getSprites(),x + i * (FONT_SIZE), y, xx * FONT_SIZE, (yStart + yy) * FONT_SIZE, colors, 0,dst);
             }
         }
     }

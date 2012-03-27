@@ -72,6 +72,23 @@ public class BitmapHelper {
 
     }
 
+    public static void copy(Bitmap src, int xOffs, int yOffs, int xo, int yo, int w, int h, Bitmap dst, int Alpha) {
+        xo = Math.max(0, Math.min(xo, dst.getWidth() - 1));
+        yo = Math.max(0, Math.min(yo, dst.getWidth() - 1));
+        w = Math.min(dst.getWidth() - 1, xo + w);
+        h = Math.min(dst.getHeight() - 1, yo + h);
+        xOffs = Math.min(src.getWidth() - w, xOffs - xo);
+        yOffs = Math.min(src.getHeight() - h, yOffs - yo);
+        for (int j = yo; j < h; j++) {
+            for (int i = xo; i < w; i++) {
+                int cell = src.getPixels()[xOffs + i + (yOffs + j) * src.getWidth()];
+                if (cell == Alpha) continue;
+                dst.getPixels()[i + j * dst.getWidth()] = cell;
+            }
+        }
+
+    }
+
     public static void drawPoint(int xOffs, int yOffs, int color, Bitmap dst) {
         if (xOffs > 0 && xOffs < dst.getWidth() - 1 && yOffs > 0 && yOffs < dst.getHeight() - 1) {
             dst.getPixels()[xOffs + yOffs * dst.getWidth()] = color;
