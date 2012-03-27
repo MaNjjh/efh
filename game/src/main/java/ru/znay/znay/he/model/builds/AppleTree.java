@@ -23,9 +23,9 @@ public class AppleTree extends Mob {
     private int flip = 0;
     private int apple = random.nextInt(2);
 
-    public AppleTree(int x, int y ,SpriteManager spr) {
+    public AppleTree(int x, int y, SpriteManager spr) {
         this.x = x;
-        
+
         this.y = y;
         this.xr = 16;
         this.yr = 12;
@@ -52,12 +52,10 @@ public class AppleTree extends Mob {
 
     public void render(Screen screen) {
 
-        int xt = x - xr * 2;
-        int yt = y - yr * 2 - 24;
-        int xOff = xt -  screen.getXOffset();
-        int yOff = yt - screen.getYOffset();
+        int xt = (x - xr * 2) - screen.getXOffset();
+        int yt = (y - yr * 2 - 24) - screen.getYOffset();
 
-        BitmapHelper.drawNormal(sprite,xOff,yOff,screen.getViewPort(), 0xFF00FF);
+        BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
 
     }
 }
