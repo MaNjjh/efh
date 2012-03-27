@@ -42,7 +42,7 @@ public class TextPanel extends Panel {
 
         final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2;
         String temp;
-        int maxlen = 0;
+        int strWidth = 0;
         while (message.length() > maxLen) {
             int i = message.substring(0, maxLen).lastIndexOf(" ");
             if (i != -1 && i != maxLen) {
@@ -52,7 +52,8 @@ public class TextPanel extends Panel {
                 temp = message.substring(0, maxLen);
                 message = message.substring(maxLen);
             }
-            maxlen = Math.max(maxlen, temp.length());
+
+            strWidth = Math.max(strWidth, temp.length());
             this.formatedText.add(temp);
         }
 
@@ -60,7 +61,7 @@ public class TextPanel extends Panel {
             this.formatedText.add(message);
         }
 
-        sizeX = (this.formatedText.size() == 1) ? message.length() + 2 : maxlen + 2;
+        sizeX = (this.formatedText.size() == 1) ? message.length() + 2 : maxLen + 2;
         sizeY = this.formatedText.size() + 2;
     }
 

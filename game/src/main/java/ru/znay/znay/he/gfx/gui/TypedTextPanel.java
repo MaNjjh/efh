@@ -13,7 +13,6 @@ public class TypedTextPanel extends TextPanel {
     private long time;
     private int timeLife;
 
-
     public TypedTextPanel(String mes, int posX, int posY, int colors, int period) {
         super(mes, posX, posY, colors);
         this.position = 1;

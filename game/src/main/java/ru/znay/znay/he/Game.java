@@ -41,7 +41,7 @@ public class Game extends Graphics implements Runnable {
     public void init() {
         this.player = new Player(this, this.inputHandler);
         this.level = new Level(player, 0);
-        this.level.add(new Board("Привет дорогой друг! Мы постараемся сделать твое приключение интересным!", player.getX() - 20, player.getY() - 20));
+        this.level.add(new Board("Мы долго ждали приветствуем тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
         this.inputHandler.releaseAll();
     }
 
