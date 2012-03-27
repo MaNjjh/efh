@@ -23,10 +23,9 @@ public class AppleTree extends Tree {
     private int apple = random.nextInt(2);
 
     public AppleTree(int x, int y, SpriteManager spr) {
-        super(x,y,16,12);
+        super(x, y, 16, 12);
         sprite = spr.getSprite((apple == 0) ? StaticModel.Apple : StaticModel.Apple2);
     }
-
 
     @Override
     public void touchedBy(Entity entity) {
