@@ -40,7 +40,7 @@ public class TextPanel extends Panel {
         if (message.isEmpty())
             message = "TEXT";
 
-        final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2;
+        final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2 + 5;
         String temp;
         int strWidth = 0;
         while (message.length() > maxLen) {
