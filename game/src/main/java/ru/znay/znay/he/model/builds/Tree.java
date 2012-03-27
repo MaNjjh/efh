@@ -15,12 +15,11 @@ import ru.znay.znay.he.model.Mob;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class Tree extends Mob {
-    public Tree(int x, int y) {
+    public Tree(int x, int y, int xr, int yr) {
         this.x = x;
-
         this.y = y;
-        this.xr = 16;
-        this.yr = 12;
+        this.xr = xr;
+        this.yr = yr;
     }
 
 
