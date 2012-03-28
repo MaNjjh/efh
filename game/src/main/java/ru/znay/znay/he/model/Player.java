@@ -2,6 +2,7 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
+import ru.znay.znay.he.gfx.helper.Orientation;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.builds.Mushroom;
@@ -28,6 +29,8 @@ public class Player extends Mob {
     private Game game;
     private int score = 1000;
     private int clearFogRadius = 4;
+    private Orientation lastAct;
+    private Orientation curentAct;
 
 
     public Player(Game game, InputHandler inputHandler) {
@@ -45,10 +48,26 @@ public class Player extends Mob {
         int xa = 0;
         int ya = 0;
 
-        if (inputHandler.up.down) ya--;
-        if (inputHandler.down.down) ya++;
-        if (inputHandler.left.down) xa--;
-        if (inputHandler.right.down) xa++;
+        if (inputHandler.up.down) {
+            ya--;
+            lastAct = Orientation.UP_STAY;
+            curentAct = Orientation.UP_MOVE_1;
+        }
+        if (inputHandler.down.down) {
+            ya++;
+            lastAct = Orientation.DOWN_STAY;
+            curentAct = Orientation.DOWN_MOVE_1;
+        }
+        if (inputHandler.left.down) {
+            xa--;
+            lastAct = Orientation.LEFT_STAY;
+            curentAct = Orientation.LEFT_MOVE_1;
+        }
+        if (inputHandler.right.down) {
+            xa++;
+            lastAct = Orientation.RIGHT_STAY;
+            curentAct = Orientation.RIGHT_MOVE_1;
+        }
 
         if (inputHandler.attack.down) {
             if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {
