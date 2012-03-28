@@ -251,17 +251,18 @@ public class Level {
     private List<Entity> rowSprites = new ArrayList<Entity>();
 
     public void renderSprites(Screen screen, int xScroll, int yScroll) {
-        int xo = xScroll >> 4;
-        int yo = yScroll >> 4;
-        int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
-        int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
 
+        int xo = Math.max((xScroll >> 4), 0);
+        int yo = Math.max((yScroll >> 4), 0);
+        int w = ((screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4);
+        int h = ((screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4);
 
+        int offScreen = 4;
         screen.setOffset(xScroll, yScroll);
-        for (int y = yo; y <= h + yo; y++) {
-            for (int x = xo; x <= w + xo; x++) {
+        for (int y = yo - offScreen; y <= h + yo; y++) {
+            for (int x = xo - offScreen; x <= w + xo; x++) {
                 if (x < 0 || y < 0 || x >= this.width || y >= this.height) continue;
-                if (fog.getFog(x, y)) continue;
+                // if (fog.getFog(x, y)) continue;
                 rowSprites.addAll(entitiesInTiles[x + y * this.width]);
             }
             if (rowSprites.size() > 0) {

@@ -26,7 +26,7 @@ public class Tile {
     public static final int HALF_SIZE = 8;
 
     public int lavaMainColor = 500;
-    public int grassMainColor = 131;
+    public int grassMainColor = 141;
     public int dirtMainColor = 322;
     public int sandMainColor = 550;
     public int roadMainColor = 431;
