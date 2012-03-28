@@ -1,0 +1,25 @@
+<npcs>
+
+    <npc id="board">
+        <dx>10</dx>
+        <dy>10</dy>
+        <name>Юго-восток</name>
+        <message>Это табличка указывает на юго-восток. Там вы сможете найти то, чего так давно искали!</message>
+    </npc>
+
+    <npc id="warp">
+        <dx>8</dx>
+        <dy>8</dy>
+        <name>Варп</name>
+
+        <action id="move">
+            <cond></cond>
+            <dx>30</dx>
+            <dy>30</dy>
+            <level>1</level>
+        </action>
+
+        <message>Через 5 секунд мы перенесем вас на Юго-восток</message>
+    </npc>
+    
+</npcs>

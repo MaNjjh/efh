@@ -17,13 +17,15 @@ import ru.znay.znay.he.model.level.tile.Tile;
  */
 public class SlimeFactory extends Mob {
 
+    private final static int MIN_SPAWN_TIME = 300;
+    
     private int spawnTime;
 
     public SlimeFactory() {
         this.xr = 6;
         this.yr = 4;
         this.health = 50;
-        this.spawnTime = 100 + random.nextInt(100);
+        this.spawnTime = MIN_SPAWN_TIME + random.nextInt(MIN_SPAWN_TIME);
     }
 
     @Override
@@ -32,7 +34,7 @@ public class SlimeFactory extends Mob {
 
         if (hurtTime <= 0) spawnTime--;
         if (spawnTime <= 0) {
-            spawnTime = 100 + random.nextInt(100);
+            spawnTime = MIN_SPAWN_TIME + random.nextInt(MIN_SPAWN_TIME);
             level.add(new Slime(x, y));
         }
     }

@@ -290,7 +290,6 @@ public class Level {
         screen.setOffset(0, 0);
     }
 
-
     public void add(Entity entity) {
         if (entity instanceof Player) {
             player = (Player) entity;
