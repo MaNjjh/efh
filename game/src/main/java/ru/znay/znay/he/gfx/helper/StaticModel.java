@@ -8,8 +8,8 @@ package ru.znay.znay.he.gfx.helper;
  * To change this template use File | Settings | File Templates.
  */
 public enum StaticModel {
-    Dummy,
-    Apple,
-    Apple2,
-    Fir
+    DUMMY,
+    TREE,
+    APPLE,
+    FIR
 }

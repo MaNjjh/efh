@@ -1,7 +1,7 @@
 package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.Game;
-import ru.znay.znay.he.gfx.gui.*;
+import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Bitmap;
@@ -11,6 +11,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.AppleTree;
+import ru.znay.znay.he.model.builds.Fir;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
@@ -37,6 +38,7 @@ public class Level {
 
     private final static int HOLE_TILE = 0xFF606060;
     private final static int APPLE_TREE = 0xFF00FF00;
+    private final static int FIR_TREE = 0xFF00CC00;
     private final static int PLAYER = 0xFFFF0000;
 
     private Random random = new Random();
@@ -67,12 +69,11 @@ public class Level {
         }
     };
 
-    public Level(Player pl, int lv, Game g)
-    {
+    public Level(Player pl, int lv, Game g) {
         spriteManager = new SpriteManager(g.getScreen().getSprites());
-        init(pl,lv);
+        init(pl, lv);
     }
-    
+
     @SuppressWarnings("unchecked")
     public void init(Player player, int level) {
 
@@ -126,7 +127,11 @@ public class Level {
                         break;
                     }
                     case APPLE_TREE: {
-                        add(new AppleTree(i << 4, j << 4,spriteManager));
+                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteManager));
+                        break;
+                    }
+                    case FIR_TREE: {
+                        add(new Fir((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteManager));
                         break;
                     }
                     case LAVA_TILE: {

@@ -33,12 +33,5 @@ public abstract class Tree extends Mob {
         return true;
     }
 
-    public void render(Screen screen) {
 
-        int xt = (x - xr * 2) - screen.getXOffset();
-        int yt = (y - yr * 2 - 24) - screen.getYOffset();
-
-        BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
-
-    }
 }

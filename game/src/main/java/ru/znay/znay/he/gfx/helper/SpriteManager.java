@@ -1,13 +1,7 @@
 package ru.znay.znay.he.gfx.helper;
 
-import ru.znay.znay.he.Game;
 import ru.znay.znay.he.gfx.model.Bitmap;
-import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,10 +28,10 @@ public class SpriteManager {
         Bitmap image = null;
         switch (SM) {
             default:
-            case Dummy:
+            case DUMMY:
                 break;
-            case Apple:
-            case Apple2:
+            case TREE:
+            case APPLE: {
                 final int scale = 2;
                 final int Tx4 = 4 * Tile.HALF_SIZE;
                 image = new Bitmap(Tx4 * scale, Tx4 * scale);
@@ -52,13 +46,28 @@ public class SpriteManager {
 
                 col = PaletteHelper.getColor(100, 210, 320, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
-                if (SM != StaticModel.Apple2) break;
+                if (SM != StaticModel.APPLE) break;
                 col = PaletteHelper.getColor(-1, -1, 510, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, 0, Tx4, Tx4, col, 0, image);
                 break;
-            case Fir:
-                //добавить тут
+            }
+            case FIR: {
+                final int scale = 2;
+                final int Tx4 = 4 * Tile.HALF_SIZE;
+                image = new Bitmap(Tx4 * scale, (Tx4 << 1) * scale);
+
+                BitmapHelper.fill(image, 0xFF00FF);
+
+                int col = PaletteHelper.getColor(30, 20, 40, -1);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, Tx4 << 1, Tx4, Tx4 << 1, col, 0, image);
+
+                col = PaletteHelper.getColor(10, 20, 10, -1);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 21 * Tile.HALF_SIZE, Tx4 << 1, Tx4, Tx4 << 1, col, 0, image);
+
+                col = PaletteHelper.getColor(100, 210, 320, -1);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4 << 1, Tx4, Tx4 << 1, col, 0, image);
                 break;
+            }
         }
 
         return image;
