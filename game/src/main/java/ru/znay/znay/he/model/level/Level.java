@@ -252,12 +252,12 @@ public class Level {
 
     public void renderSprites(Screen screen, int xScroll, int yScroll) {
 
+        int offScreen = 4;
         int xo = Math.max((xScroll >> 4), 0);
         int yo = Math.max((yScroll >> 4), 0);
-        int w = ((screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4);
-        int h = ((screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4);
+        int w = ((screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4) + offScreen;
+        int h = ((screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4) + offScreen;
 
-        int offScreen = 4;
         screen.setOffset(xScroll, yScroll);
         for (int y = yo - offScreen; y <= h + yo; y++) {
             for (int x = xo - offScreen; x <= w + xo; x++) {
