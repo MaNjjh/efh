@@ -61,6 +61,8 @@ public class Level {
     private GuiManager guiManager;
     private SpriteManager spriteManager = null;
 
+    private MiniMap miniMap;
+
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
             if (e1.getY() < e0.getY()) return 1;
@@ -148,6 +150,8 @@ public class Level {
         }
 
         this.add(player);
+
+        miniMap = new MiniMap(this);
 
         trySpawn();
     }
@@ -288,6 +292,7 @@ public class Level {
             }
         }
         screen.setOffset(0, 0);
+        miniMap.renderMiniMap(screen, 0, 0);
     }
 
     public void add(Entity entity) {
@@ -372,5 +377,9 @@ public class Level {
 
     public SpriteManager getSpriteManager() {
         return spriteManager;
+    }
+
+    public Fog getFog() {
+        return fog;
     }
 }

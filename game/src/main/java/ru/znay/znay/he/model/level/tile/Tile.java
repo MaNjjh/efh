@@ -47,6 +47,16 @@ public class Tile {
     public int waterColor = PaletteHelper.getColor(005, waterMainColor, 115, 115);
     public int swampColor = PaletteHelper.getColor(-1, swampMainColor, swampMainColor - 110, -1);
 
+    public static final int GRASS_TILE = 0;
+    public static final int ROCK_TILE = 1;
+    public static final int LAVA_TILE = 2;
+    public static final int SAND_TILE = 3;
+    public static final int WATER_TILE = 4;
+    public static final int HOLE_TILE = 5;
+    public static final int ROAD_TILE = 6;
+    public static final int SWAMP_TILE = 7;
+    public static final int DEEP_WATER_TILE = 8;
+
     public static Tile[] tiles = new Tile[MAX_TILES];
     public static Tile grass = new GrassTile(0);
     public static Tile rock = new RockTile(1);
