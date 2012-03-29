@@ -1,6 +1,7 @@
 package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.Game;
+import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.SpriteManager;
@@ -60,8 +61,6 @@ public class Level {
     private List<Entity> entities = new ArrayList<Entity>();
     private GuiManager guiManager;
     private SpriteManager spriteManager = null;
-
-    private MiniMap miniMap;
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
@@ -151,9 +150,8 @@ public class Level {
 
         this.add(player);
 
-        miniMap = new MiniMap(this);
-
         trySpawn();
+        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));
     }
 
     public void trySpawn() {
@@ -292,7 +290,6 @@ public class Level {
             }
         }
         screen.setOffset(0, 0);
-        miniMap.renderMiniMap(screen, 0, 0);
     }
 
     public void add(Entity entity) {

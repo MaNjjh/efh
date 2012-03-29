@@ -26,7 +26,7 @@ public class Board extends Entity {
 
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            level.getGuiManager().add(new TypedTextPanel(this.message, 10, 10, 100));
+            level.getGuiManager().add(new TypedTextPanel(this.message, 4, 4, 100));
         }
     }
 

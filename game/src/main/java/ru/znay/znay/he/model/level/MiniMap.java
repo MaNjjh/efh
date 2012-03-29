@@ -22,15 +22,18 @@ import java.awt.*;
  * Time: 14:06
  * To change this template use File | Settings | File Templates.
  */
-public class MiniMap {
+public class MiniMap extends Panel {
     private Level level;
     private Bitmap miniMap;
     private Bitmap resizedMiniMap;
 
-    public MiniMap(Level level) {
+    public MiniMap(int posX, int posY, Level level) {
+
+        super(posX, posY, (level.getWidth() >> 1) >> 3, (level.getHeight() >> 1) >> 3, PaletteHelper.getColor(-1, 530, 0, 111));
         this.level = level;
         this.miniMap = new Bitmap(level.getWidth(), level.getHeight());
         this.resizedMiniMap = new Bitmap(level.getHeight() >> 1, level.getWidth() >> 1);
+
     }
 
     public void markObject(int x, int y, int color) {
@@ -54,7 +57,7 @@ public class MiniMap {
 
     }
 
-    public void buildMiniMap() {
+    public void tick() {
         for (int j = 0; j < level.getHeight(); j++) {
             for (int i = 0; i < level.getWidth(); i++) {
                 if (level.getFog().getFog(i, j)) {
@@ -121,10 +124,8 @@ public class MiniMap {
 
     }
 
-    public void renderMiniMap(Screen screen, int x, int y) {
-        buildMiniMap();
-        Panel panel = new Panel(0, 0, (resizedMiniMap.getWidth()) >> 3, (resizedMiniMap.getHeight()) >> 3, PaletteHelper.getColor(-1, 530, 0, 111));
-        panel.render(screen);
+    public void render(Screen screen) {
+        super.render(screen);
         BitmapHelper.copy(resizedMiniMap, 0, 0, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, resizedMiniMap.getWidth(), resizedMiniMap.getHeight(), screen.getViewPort());
 
     }
