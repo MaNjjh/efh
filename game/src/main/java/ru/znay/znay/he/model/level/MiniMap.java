@@ -80,6 +80,10 @@ public class MiniMap extends Panel {
                             this.miniMap.getPixels()[i + j * this.miniMap.getWidth()] = 0xffff00;
                             break;
                         }
+                        case Tile.ROAD_TILE: {
+                            this.miniMap.getPixels()[i + j * this.miniMap.getWidth()] = 0x6B6B6B;
+                            break;
+                        }
                         default: {
                             this.miniMap.getPixels()[i + j * this.miniMap.getWidth()] = 0xcc00;
                         }
