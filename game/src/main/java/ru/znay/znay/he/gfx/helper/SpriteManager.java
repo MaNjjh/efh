@@ -5,7 +5,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
- * User: denus
+ * User: Денис Сергеевич
  * Date: 27.03.12
  * Time: 15:57
  * To change this template use File | Settings | File Templates.

@@ -2,6 +2,7 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
+import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.Orientation;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -13,6 +14,8 @@ import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
+
+import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,8 +32,8 @@ public class Player extends Mob {
     private Game game;
     private int score = 1000;
     private int clearFogRadius = 4;
-    private Orientation lastAct;
-    private Orientation curentAct;
+    private Orientation lastAct = Orientation.DOWN_STAY;
+    private Orientation curentAct = Orientation.DOWN_STAY;
 
 
     public Player(Game game, InputHandler inputHandler) {
@@ -40,6 +43,7 @@ public class Player extends Mob {
         this.color = PaletteHelper.getColor(-1, 100, 522, 555);
         this.bloodColor = PaletteHelper.getColor(-1, 0, 0, 505);
         this.slowPeriod = 4;
+        this.sprite = game.getAnimationManager().getAnimation("Hero");
     }
 
     @Override
@@ -67,6 +71,10 @@ public class Player extends Mob {
             xa++;
             lastAct = Orientation.RIGHT_STAY;
             curentAct = Orientation.RIGHT_MOVE_1;
+        }
+
+        if (xa == 0 && ya == 0) {
+            curentAct = lastAct;
         }
 
         if (inputHandler.attack.down) {
@@ -130,7 +138,10 @@ public class Player extends Mob {
     public void render(Screen screen) {
         int xo = x - 4;
         int yo = y - 6;
-        screen.render(xo, yo, 0, 6 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, color, 0);
+
+        BitmapHelper.drawHero(sprite, new Point(xo, yo), Orientation.get(curentAct), new Point(16, 16), 0xFF00FF, screen.getViewPort());
+
+        //screen.render(xo, yo, 0, 6 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, color, 0);
     }
 
     @Override

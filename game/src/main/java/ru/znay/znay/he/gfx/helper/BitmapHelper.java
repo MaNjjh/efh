@@ -2,6 +2,7 @@ package ru.znay.znay.he.gfx.helper;
 
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.model.level.tile.Tile;
+import sun.awt.image.OffScreenImage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -102,6 +103,54 @@ public class BitmapHelper {
         Graphics2D graphics2D = dst.getImage().createGraphics();
         graphics2D.setColor(new Color(color));
         graphics2D.drawLine(x0, y0, x1, y1);
+    }
+    
+    public static void drawAnimation(Bitmap src, Point Off, Point xy, Point wh, int col, int bits, Bitmap dst)
+    {
+        boolean mirrorX = (bits & BIT_MIRROR_X) > 0;
+        boolean mirrorY = (bits & BIT_MIRROR_Y) > 0;
+
+        for (int y = 0; y < wh.y; y++) {
+            int yPix = y + Off.y;
+            if (yPix < 0 || yPix >= dst.getHeight()) continue;
+            int ys = y;
+            if (mirrorY) ys = (wh.y  - 1) - y;
+
+            for (int x = 0; x < wh.x; x++) {
+                int xPix = x + Off.x;
+                if (xPix < 0 || xPix >= dst.getWidth()) continue;
+
+                int xs = x;
+                if (mirrorX) xs = (wh.x - 1) - x;
+
+                int color = (col >> (src.getPixels()[(xs + xy.x) + (ys + xy.y) * src.getWidth()] * 8)) & 255;
+                if (color < 255) {
+                    dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
+                }
+            }
+        }
+    }
+
+
+    public static void drawHero(Bitmap src,Point Off,Point xy,Point wh,int Alpha, Bitmap dst)
+    {
+        for (int y = 0; y < wh.y; y++) {
+            int yPix = y + Off.y;
+            if (yPix < 0 || yPix >= dst.getHeight()) continue;
+            int ys = y;
+
+            for (int x = 0; x < wh.x; x++) {
+                int xPix = x + Off.x;
+                if (xPix < 0 || xPix >= dst.getWidth()) continue;
+
+                int xs = x;
+
+                int color = src.getPixels()[(xs + xy.x) + (ys + xy.y) * src.getWidth()];
+                if (color != Alpha) {
+                    dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
+                }
+            }
+        }
     }
 
     public static void drawLine1(int x0, int y0, int x1, int y1, int color, Bitmap dst) {

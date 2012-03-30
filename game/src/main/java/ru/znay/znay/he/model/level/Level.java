@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.level;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.helper.AnimationManager;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Bitmap;
@@ -61,6 +62,7 @@ public class Level {
     private List<Entity> entities = new ArrayList<Entity>();
     private GuiManager guiManager;
     private SpriteManager spriteManager = null;
+
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
@@ -379,4 +381,5 @@ public class Level {
     public Fog getFog() {
         return fog;
     }
+
 }

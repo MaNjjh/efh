@@ -13,7 +13,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
- * User: denus
+ * User: Денис Сергеевич
  * Date: 22.03.12
  * Time: 17:47
  * To change this template use File | Settings | File Templates.

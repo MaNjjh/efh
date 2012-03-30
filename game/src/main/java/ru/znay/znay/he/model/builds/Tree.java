@@ -9,7 +9,7 @@ import ru.znay.znay.he.model.Mob;
 
 /**
  * Created by IntelliJ IDEA.
- * User: denus
+ * User: Денис Сергеевич
  * Date: 27.03.12
  * Time: 22:41
  * To change this template use File | Settings | File Templates.
