@@ -71,8 +71,8 @@ public class PaletteHelper {
 
     }
 
-    public static int getColor(int a, int b, int c, int d) {
-        return (getColor(d) << 24) + (getColor(c) << 16) + (getColor(b) << 8) + (getColor(a));
+    public static int getColor(int black, int darkGrey, int lightGrey, int white) {
+        return (getColor(white) << 24) + (getColor(lightGrey) << 16) + (getColor(darkGrey) << 8) + (getColor(black));
     }
 
     public static int getColor(int d) {

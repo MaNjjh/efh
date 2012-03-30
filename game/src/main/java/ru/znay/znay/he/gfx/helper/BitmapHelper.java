@@ -145,7 +145,7 @@ public class BitmapHelper {
 
                 int xs = x;
 
-                int color = src.getPixels()[(xs + xy.x) + (ys + xy.y) * src.getWidth()];
+                int color = src.getPixels()[(xs + xy.x) + (ys + xy.y) * wh.y];
                 if (color != Alpha) {
                     dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
                 }

@@ -136,8 +136,8 @@ public class Player extends Mob {
 
     @Override
     public void render(Screen screen) {
-        int xo = x - 4;
-        int yo = y - 6;
+        int xo = x - 4 - screen.getXOffset();
+        int yo = y - 6 - screen.getYOffset();
 
         BitmapHelper.drawHero(sprite, new Point(xo, yo), Orientation.get(curentAct), new Point(16, 16), 0xFF00FF, screen.getViewPort());
 
