@@ -1,9 +1,5 @@
 package ru.znay.znay.he.model.builds;
 
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.SpriteManager;
-import ru.znay.znay.he.gfx.helper.StaticModel;
-import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 

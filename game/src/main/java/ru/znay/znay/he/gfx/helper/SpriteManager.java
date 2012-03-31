@@ -18,13 +18,13 @@ public class SpriteManager {
         this.sprites = spr;
     }
 
-    public Bitmap getSprite(StaticModel type) {
+    public Bitmap getSprite(ESprites type) {
         if (bitmaps[type.ordinal()] == null)
             bitmaps[type.ordinal()] = create(type);
         return bitmaps[type.ordinal()];
     }
 
-    private Bitmap create(StaticModel SM) {
+    private Bitmap create(ESprites SM) {
         Bitmap image = null;
         switch (SM) {
             default:
@@ -46,7 +46,7 @@ public class SpriteManager {
 
                 col = PaletteHelper.getColor(100, 210, 320, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
-                if (SM != StaticModel.APPLE) break;
+                if (SM != ESprites.APPLE) break;
                 col = PaletteHelper.getColor(-1, -1, 510, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, 0, Tx4, Tx4, col, 0, image);
                 break;

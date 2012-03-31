@@ -2,7 +2,6 @@ package ru.znay.znay.he.gfx.helper;
 
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.model.level.tile.Tile;
-import sun.awt.image.OffScreenImage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -73,21 +72,19 @@ public class BitmapHelper {
 
     }
 
-    public static void copy(Bitmap src, int xOffs, int yOffs, int xo, int yo, int w, int h, Bitmap dst, int Alpha) {
+    public static void copy(Bitmap src, int xOffs, int yOffs, int xo, int yo, int w, int h, Bitmap dst, int alpha) {
         xo = Math.max(0, Math.min(xo, dst.getWidth() - 1));
         yo = Math.max(0, Math.min(yo, dst.getWidth() - 1));
         w = Math.min(dst.getWidth() - 1, xo + w);
         h = Math.min(dst.getHeight() - 1, yo + h);
         xOffs = Math.min(src.getWidth() - w, xOffs - xo);
         yOffs = Math.min(src.getHeight() - h, yOffs - yo);
-        //System.out.println("xo-"+xo+" yo-"+yo+" w-"+w+" h-"+h+" xOffs-"+xOffs+" yOffs-"+yOffs);
-        //System.out.println("src-"+(xOffs + xo + (yOffs + yo) * src.getWidth()));
-        //System.out.println("dst-"+(xo + yo * dst.getWidth()));
+
         for (int j = yo; j < h; j++) {
             for (int i = xo; i < w; i++) {
-                int cell = src.getPixels()[xOffs + i + (yOffs + j) * src.getWidth()];
-                if (cell == Alpha) continue;
-                dst.getPixels()[i + j * dst.getWidth()] = cell;
+                int col = src.getPixels()[xOffs + i + (yOffs + j) * src.getWidth()];
+                if (col == alpha) continue;
+                dst.getPixels()[i + j * dst.getWidth()] = col;
             }
         }
 
@@ -103,54 +100,6 @@ public class BitmapHelper {
         Graphics2D graphics2D = dst.getImage().createGraphics();
         graphics2D.setColor(new Color(color));
         graphics2D.drawLine(x0, y0, x1, y1);
-    }
-    
-    public static void drawAnimation(Bitmap src, Point Off, Point xy, Point wh, int col, int bits, Bitmap dst)
-    {
-        boolean mirrorX = (bits & BIT_MIRROR_X) > 0;
-        boolean mirrorY = (bits & BIT_MIRROR_Y) > 0;
-
-        for (int y = 0; y < wh.y; y++) {
-            int yPix = y + Off.y;
-            if (yPix < 0 || yPix >= dst.getHeight()) continue;
-            int ys = y;
-            if (mirrorY) ys = (wh.y  - 1) - y;
-
-            for (int x = 0; x < wh.x; x++) {
-                int xPix = x + Off.x;
-                if (xPix < 0 || xPix >= dst.getWidth()) continue;
-
-                int xs = x;
-                if (mirrorX) xs = (wh.x - 1) - x;
-
-                int color = (col >> (src.getPixels()[(xs + xy.x) + (ys + xy.y) * src.getWidth()] * 8)) & 255;
-                if (color < 255) {
-                    dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
-                }
-            }
-        }
-    }
-
-
-    public static void drawHero(Bitmap src,Point Off,Point xy,Point wh,int Alpha, Bitmap dst)
-    {
-        for (int y = 0; y < wh.y; y++) {
-            int yPix = y + Off.y;
-            if (yPix < 0 || yPix >= dst.getHeight()) continue;
-            int ys = y;
-
-            for (int x = 0; x < wh.x; x++) {
-                int xPix = x + Off.x;
-                if (xPix < 0 || xPix >= dst.getWidth()) continue;
-
-                int xs = x;
-
-                int color = src.getPixels()[(xs + xy.x) + (ys + xy.y) * wh.y];
-                if (color != Alpha) {
-                    dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
-                }
-            }
-        }
     }
 
     public static void drawLine1(int x0, int y0, int x1, int y1, int color, Bitmap dst) {

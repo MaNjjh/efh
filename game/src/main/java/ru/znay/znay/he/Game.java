@@ -27,7 +27,6 @@ public class Game extends Graphics implements Runnable {
     private Player player;
     private int xScroll;
     private int yScroll;
-    private AnimationManager animationManager = null;
 
     public void start() {
         running = true;
@@ -40,7 +39,6 @@ public class Game extends Graphics implements Runnable {
     }
 
     public void init() {
-        animationManager = new AnimationManager(this.getScreen().getSprites());
         this.player = new Player(this, this.inputHandler);
         this.level = new Level(player, 0, this);
         this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
@@ -179,7 +177,4 @@ public class Game extends Graphics implements Runnable {
         return yScroll;
     }
 
-    public AnimationManager getAnimationManager() {
-        return animationManager;
-    }
 }

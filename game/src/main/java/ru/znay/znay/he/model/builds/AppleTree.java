@@ -1,15 +1,10 @@
 package ru.znay.znay.he.model.builds;
 
-import ru.znay.znay.he.Game;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.helper.ESprites;
 import ru.znay.znay.he.gfx.helper.SpriteManager;
-import ru.znay.znay.he.gfx.helper.StaticModel;
-import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
-import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,7 +19,7 @@ public class AppleTree extends Tree {
 
     public AppleTree(int x, int y, SpriteManager spr) {
         super(x, y, 16, 12);
-        sprite = spr.getSprite((apple == 0) ? StaticModel.TREE : StaticModel.APPLE);
+        sprite = spr.getSprite((apple == 0) ? ESprites.TREE : ESprites.APPLE);
     }
 
     @Override

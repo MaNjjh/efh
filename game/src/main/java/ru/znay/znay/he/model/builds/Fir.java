@@ -1,8 +1,8 @@
 package ru.znay.znay.he.model.builds;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.helper.ESprites;
 import ru.znay.znay.he.gfx.helper.SpriteManager;
-import ru.znay.znay.he.gfx.helper.StaticModel;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 
@@ -16,7 +16,7 @@ import ru.znay.znay.he.model.Entity;
 public class Fir extends Tree {
     public Fir(int x, int y, SpriteManager spr) {
         super(x, y, 10, 10);
-        sprite = spr.getSprite(StaticModel.FIR);
+        sprite = spr.getSprite(ESprites.FIR);
     }
 
     @Override

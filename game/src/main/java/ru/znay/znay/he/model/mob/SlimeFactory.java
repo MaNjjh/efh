@@ -18,7 +18,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
 public class SlimeFactory extends Mob {
 
     private final static int MIN_SPAWN_TIME = 300;
-    
+
     private int spawnTime;
 
     public SlimeFactory() {

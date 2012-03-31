@@ -7,7 +7,7 @@ package ru.znay.znay.he.gfx.helper;
  * Time: 16:19
  * To change this template use File | Settings | File Templates.
  */
-public enum StaticModel {
+public enum ESprites {
     DUMMY,
     TREE,
     APPLE,

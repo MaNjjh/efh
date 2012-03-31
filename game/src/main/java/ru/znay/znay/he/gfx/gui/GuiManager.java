@@ -1,6 +1,5 @@
 package ru.znay.znay.he.gfx.gui;
 
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 
 import java.util.LinkedList;
