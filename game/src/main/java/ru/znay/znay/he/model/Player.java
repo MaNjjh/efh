@@ -146,6 +146,11 @@ public class Player extends Mob {
 
         int col1 = PaletteHelper.getColor(-1, 100, 500, 555);
         int col2 = PaletteHelper.getColor(-1, 100, 500, 532);
+
+        if (hurtTime > 0) {
+            col1 = PaletteHelper.getColor(-1, 555, 555, 555);
+            col2 = PaletteHelper.getColor(-1, 555, 555, 555);
+        }
         screen.render(xo + Tile.HALF_SIZE * flip1, yo + 0, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
         screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip1, yo + 0, (xt + 1) * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
         if (!isSwimming()) {
