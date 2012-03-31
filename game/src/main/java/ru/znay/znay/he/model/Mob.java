@@ -4,6 +4,7 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.BloodParticle;
+import ru.znay.znay.he.model.particle.TextParticle;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
 
@@ -92,19 +93,19 @@ public class Mob extends Entity {
 
     @Override
     public void hurt(Mob mob, int damage, int attackDir) {
-        if (this instanceof Player) {
-            Sound.playerHurt.play();
-        }
         doHurt(damage, attackDir);
     }
 
     protected void doHurt(int damage, int attackDir) {
         if (hurtTime > 0) return;
 
-        //level.add(new TextParticle("" + damage, x, y, col));
-
-        for (int i = 0; i < damage; i++) {
-            level.add(new BloodParticle(x, y, bloodColor));
+        if (this instanceof Player) {
+            Sound.playerHurt.play();
+            level.add(new TextParticle(damage + "", x, y, bloodColor));
+        } else {
+            for (int i = 0; i < damage; i++) {
+                level.add(new BloodParticle(x, y, bloodColor));
+            }
         }
 
         health -= damage;
