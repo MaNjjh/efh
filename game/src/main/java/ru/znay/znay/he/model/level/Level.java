@@ -286,7 +286,7 @@ public class Level {
         screen.setOffset(xScroll, yScroll);
         for (int y = yo; y <= h + yo; y++) {
             for (int x = xo; x <= w + xo; x++) {
-                fog.render(screen, x - 1, y - 1);
+                //fog.render(screen, x - 1, y - 1);
                 fog.render(screen, x, y);
             }
         }

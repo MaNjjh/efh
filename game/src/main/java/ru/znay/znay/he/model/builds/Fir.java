@@ -16,7 +16,7 @@ import ru.znay.znay.he.model.Entity;
 public class Fir extends Tree {
     public Fir(int x, int y, SpriteManager spr) {
         super(x, y, 10, 10);
-        sprite = spr.getSprite(ESprites.FIR);
+        sprite = spr.getSprite(random.nextBoolean()?ESprites.FIR:ESprites.PINE);
     }
 
     @Override

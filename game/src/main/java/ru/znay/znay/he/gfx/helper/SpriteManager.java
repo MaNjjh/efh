@@ -46,13 +46,16 @@ public class SpriteManager {
 
                 col = PaletteHelper.getColor(100, 210, 320, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4, Tx4, Tx4, col, 0, image);
+
+                BitmapHelper.drawAura(image, 0xFF00FF, 0x000000);
+
                 if (SM != ESprites.APPLE) break;
                 col = PaletteHelper.getColor(-1, -1, 510, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, 0, Tx4, Tx4, col, 0, image);
                 break;
             }
             case FIR: {
-                final int scale = 2;
+                final int scale = 1;
                 final int Tx4 = 4 * Tile.HALF_SIZE;
                 image = new Bitmap(Tx4 * scale, (Tx4 << 1) * scale);
 
@@ -66,8 +69,27 @@ public class SpriteManager {
 
                 col = PaletteHelper.getColor(100, 210, 320, -1);
                 BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4 << 1, Tx4, Tx4 << 1, col, 0, image);
+
+                BitmapHelper.drawAura(image,0xFF00FF,0x000000);
                 break;
             }
+            case PINE:
+                final int scale = 1;
+                final int Tx4 = 4 * Tile.HALF_SIZE;
+                image = new Bitmap(Tx4 * scale, (Tx4 << 1) * scale);
+
+                BitmapHelper.fill(image, 0xFF00FF);
+
+                int col = PaletteHelper.getColor(30, 20, 40, -1);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 17 * Tile.HALF_SIZE, Tx4 << 2, Tx4, Tx4 << 1, col, 0, image);
+
+                col = PaletteHelper.getColor(10, 20, 10, -1);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 21 * Tile.HALF_SIZE, Tx4 << 2, Tx4, Tx4 << 1, col, 0, image);
+
+                col = PaletteHelper.getColor(100, 210, 320, -1);
+                BitmapHelper.scaleDraw(sprites, scale, 0, 0, 25 * Tile.HALF_SIZE, Tx4 << 2, Tx4, Tx4 << 1, col, 0, image);
+                BitmapHelper.drawAura(image,0xFF00FF,0x000000);
+                break;
         }
 
         return image;

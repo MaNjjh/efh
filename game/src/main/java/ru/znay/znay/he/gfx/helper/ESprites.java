@@ -11,5 +11,6 @@ public enum ESprites {
     DUMMY,
     TREE,
     APPLE,
-    FIR
+    FIR,
+    PINE
 }
