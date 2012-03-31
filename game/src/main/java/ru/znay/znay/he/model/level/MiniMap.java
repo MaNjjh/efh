@@ -26,6 +26,7 @@ public class MiniMap extends Panel {
     private Level level;
     private Bitmap miniMap;
     private Bitmap resizedMiniMap;
+    private int tick = 10;
 
     public MiniMap(int posX, int posY, Level level) {
 
@@ -58,6 +59,9 @@ public class MiniMap extends Panel {
     }
 
     public void tick() {
+        tick++;
+        if (tick < 25)return;
+        tick = 0;
         for (int j = 0; j < level.getHeight(); j++) {
             for (int i = 0; i < level.getWidth(); i++) {
                 if (level.getFog().getFog(i, j)) {
