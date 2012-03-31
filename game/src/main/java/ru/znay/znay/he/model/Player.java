@@ -2,7 +2,6 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.Orientation;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -14,8 +13,6 @@ import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
-
-import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -136,12 +133,45 @@ public class Player extends Mob {
 
     @Override
     public void render(Screen screen) {
+
+        int xt = 8;
+        int yt = 14;
+
+        int flip1 = (walkDist >> 3) & 1;
+        int flip2 = (walkDist >> 3) & 1;
+
+        if (dir == 1) {
+            xt += 2;
+        }
+        if (dir > 1) {
+
+            flip1 = 0;
+            flip2 = ((walkDist >> 4) & 1);
+            if (dir == 2) {
+                flip1 = 1;
+            }
+            xt += 4 + ((walkDist >> 3) & 1) * 2;
+        }
+
+
+        int xo = x - 8;
+        int yo = y - 11;
+
+
+/*
         int xo = x - 4 - screen.getXOffset();
         int yo = y - 6 - screen.getYOffset();
+*/
 
-        BitmapHelper.drawHero(sprite, new Point(xo, yo), Orientation.get(curentAct), new Point(16, 16), 0xFF00FF, screen.getViewPort());
+        // BitmapHelper.drawHero(sprite, new Point(xo, yo), Orientation.get(curentAct), new Point(16, 16), 0xFF00FF, screen.getViewPort());
 
         //screen.render(xo, yo, 0, 6 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, color, 0);
+        int col1 = PaletteHelper.getColor(-1, 100, 500, 555);
+        int col2 = PaletteHelper.getColor(-1, 100, 500, 532);
+        screen.render(xo + Tile.HALF_SIZE * flip1, yo + 0, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
+        screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip1, yo + 0, (xt + 1) * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
+        screen.render(xo + Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, xt * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
+        screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, (xt + 1) * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
     }
 
     @Override
