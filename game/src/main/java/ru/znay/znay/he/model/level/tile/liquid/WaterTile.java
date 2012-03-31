@@ -12,6 +12,7 @@ public class WaterTile extends Tile {
         connectsToSand = true;
         connectsToWater = true;
         slowPeriod = 3;
+        liquid = true;
     }
 
     public void render(Screen screen, Level level, int x, int y) {

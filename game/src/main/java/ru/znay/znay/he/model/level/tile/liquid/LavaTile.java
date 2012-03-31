@@ -18,6 +18,7 @@ public class LavaTile extends Tile {
         super(id);
         connectsToSand = true;
         connectsToLava = true;
+        liquid = true;
     }
 
     @Override

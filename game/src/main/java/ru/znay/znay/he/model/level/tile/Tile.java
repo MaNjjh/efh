@@ -77,6 +77,7 @@ public class Tile {
 
     protected int slowPeriod = 10;
     protected Random random = new Random();
+    protected boolean liquid = false;
     protected byte id;
 
     public Tile(int id) {
@@ -116,5 +117,9 @@ public class Tile {
 
     public boolean connectsToLiquid() {
         return connectsToWater || connectsToLava || connectsToSwamp;
+    }
+
+    public boolean isLiquid() {
+        return liquid;
     }
 }

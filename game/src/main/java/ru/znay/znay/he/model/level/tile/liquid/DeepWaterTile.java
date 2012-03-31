@@ -18,6 +18,8 @@ public class DeepWaterTile extends Tile {
     public DeepWaterTile(int id) {
         super(id);
         connectsToWater = true;
+        liquid = true;
+        slowPeriod = 2;
     }
 
     public void render(Screen screen, Level level, int x, int y) {
@@ -74,7 +76,7 @@ public class DeepWaterTile extends Tile {
 
     @Override
     public boolean mayPass(Level level, int x, int y, Entity e) {
-        return false;
+        return e.canSwim();
     }
 
 

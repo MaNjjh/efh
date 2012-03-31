@@ -2,6 +2,7 @@ package ru.znay.znay.he.model.level.tile.liquid;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -18,6 +19,7 @@ public class SwampTile extends Tile {
         connectsToGrass = true;
         connectsToSwamp = true;
         slowPeriod = 2;
+        liquid = true;
     }
 
     @Override
@@ -60,6 +62,11 @@ public class SwampTile extends Tile {
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, (r ? 16 : 15) * Tile.HALF_SIZE, (d ? 2 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (sd || sr) ? transitionColor2 : transitionColor1, 0);
     }
 
+
+    @Override
+    public boolean mayPass(Level level, int x, int y, Entity e) {
+        return e.canSwim();
+    }
 
     @Override
     public void tick(Level level, int xt, int yt) {
