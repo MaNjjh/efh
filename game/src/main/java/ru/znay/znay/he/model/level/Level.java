@@ -3,7 +3,6 @@ package ru.znay.znay.he.model.level;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.helper.AnimationManager;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Bitmap;

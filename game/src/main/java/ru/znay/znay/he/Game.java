@@ -2,9 +2,7 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.helper.AnimationManager;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
-import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
