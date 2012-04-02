@@ -26,6 +26,10 @@ public class SpriteCollector {
         this.source = source;
     }
 
+    public void resetWrappers() {
+        this.spriteWrappers.clear();
+    }
+
     public void addWrapper(SpriteWrapper spriteWrapper) {
         this.width = Math.max(spriteWrapper.getWidth(), this.width);
         this.height = Math.max(spriteWrapper.getHeight(), this.height);
