@@ -221,7 +221,7 @@ public class BitmapHelper {
         }
     }
 
-    public static void drawNormal(Bitmap src, int xOffs, int yOffs, Bitmap dst, int Alpha) {
+    public static void drawNormal(Bitmap src, int xOffs, int yOffs, Bitmap dst, int alpha) {
         for (int y = 0; y < src.getHeight(); y++) {
             int yPix = y + yOffs;
             if (yPix < 0 || yPix >= dst.getHeight()) continue;
@@ -232,7 +232,7 @@ public class BitmapHelper {
 
                 int color = src.getPixels()[x + y * src.getWidth()];
 
-                if (color == Alpha) continue;
+                if (color == alpha) continue;
                 dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
             }
         }
