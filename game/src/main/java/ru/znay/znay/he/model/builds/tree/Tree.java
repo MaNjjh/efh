@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model.builds;
+package ru.znay.znay.he.model.builds.tree;
 
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;

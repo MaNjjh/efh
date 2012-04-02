@@ -6,7 +6,6 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Entity;
-import ru.znay.znay.he.model.builds.Tree;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**

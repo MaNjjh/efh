@@ -8,7 +8,7 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.builds.Tree;
+import ru.znay.znay.he.model.builds.tree.Tree;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Arrow;
