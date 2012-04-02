@@ -60,7 +60,7 @@ public class MiniMap extends Panel {
 
     public void tick() {
         tick++;
-        if (tick < 25) return;
+        if (tick < 45) return;
         tick = 0;
         for (int j = 0; j < level.getHeight(); j++) {
             for (int i = 0; i < level.getWidth(); i++) {

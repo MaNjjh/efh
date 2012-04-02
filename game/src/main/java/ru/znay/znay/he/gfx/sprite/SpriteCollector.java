@@ -37,6 +37,8 @@ public class SpriteCollector {
     }
 
     public Bitmap mergedWrappers(String name, int scale, int bits, boolean drawAura) {
+        name += "_" + scale + "_" + bits + "_" + drawAura;
+
         Bitmap result = this.sprites.get(name);
         if (result != null) {
             return result;

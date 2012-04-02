@@ -1,5 +1,7 @@
 package ru.znay.znay.he.model.builds.tree;
 
+import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 
@@ -18,16 +20,19 @@ public abstract class Tree extends Mob {
         this.yr = yr;
     }
 
-
-    @Override
-    public void touchedBy(Entity entity) {
-
-    }
-
     @Override
     public boolean blocks(Entity entity) {
         return true;
     }
 
+    @Override
+    public void render(Screen screen) {
+
+        int xt = (x - xr * 2) - screen.getXOffset();
+        int yt = (y - (yr << 1) * 3 - yr) - screen.getYOffset();
+
+        BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
+
+    }
 
 }

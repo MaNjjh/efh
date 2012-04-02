@@ -32,16 +32,6 @@ public class AppleTree extends Tree {
     }
 
     @Override
-    public void touchedBy(Entity entity) {
-
-    }
-
-    @Override
-    public boolean blocks(Entity entity) {
-        return true;
-    }
-
-    @Override
     public void render(Screen screen) {
 
         int xt = (x - xr * 2) - screen.getXOffset();

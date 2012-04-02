@@ -11,6 +11,10 @@ public class Sound {
 
     private AudioClip clip;
 
+    public void init() {
+
+    }
+
     private Sound(String name) {
         try {
             clip = Applet.newAudioClip(Sound.class.getResource(name));
