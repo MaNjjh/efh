@@ -4,6 +4,7 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,12 +19,20 @@ public abstract class Tree extends Mob {
         this.y = y;
         this.xr = xr;
         this.yr = yr;
+        this.health = 100;
     }
 
     @Override
     public boolean blocks(Entity entity) {
         return true;
     }
+
+    @Override
+    protected void die() {
+        super.die();
+        this.level.setTile(x >> 4, y >> 4, Tile.hole, 0);
+    }
+
 
     @Override
     public void render(Screen screen) {
