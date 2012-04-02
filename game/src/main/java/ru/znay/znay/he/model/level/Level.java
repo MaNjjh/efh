@@ -4,16 +4,17 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.SpriteManager;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.AppleTree;
-import ru.znay.znay.he.model.builds.Fir;
 import ru.znay.znay.he.model.builds.Mushroom;
+import ru.znay.znay.he.model.builds.tree.AppleTree;
+import ru.znay.znay.he.model.builds.tree.FirTree;
+import ru.znay.znay.he.model.builds.tree.PineTree;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -60,7 +61,8 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<Entity>();
     private GuiManager guiManager;
-    private SpriteManager spriteManager = null;
+
+    private SpriteCollector spriteCollector;
 
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
@@ -72,7 +74,7 @@ public class Level {
     };
 
     public Level(Player pl, int lv, Game g) {
-        spriteManager = new SpriteManager(g.getScreen().getSprites());
+        this.spriteCollector = new SpriteCollector(g.getScreen().getSprites());
         init(pl, lv);
     }
 
@@ -129,11 +131,16 @@ public class Level {
                         break;
                     }
                     case APPLE_TREE: {
-                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteManager));
+                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
                         break;
                     }
                     case FIR_TREE: {
-                        add(new Fir((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteManager));
+                        if (random.nextBoolean()) {
+                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        } else {
+                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        }
+
                         break;
                     }
                     case LAVA_TILE: {
@@ -371,10 +378,6 @@ public class Level {
 
     public GuiManager getGuiManager() {
         return guiManager;
-    }
-
-    public SpriteManager getSpriteManager() {
-        return spriteManager;
     }
 
     public Fog getFog() {
