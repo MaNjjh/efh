@@ -17,7 +17,11 @@ import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
+import ru.znay.znay.he.model.mob.Slime;
 import ru.znay.znay.he.model.mob.SlimeFactory;
+import ru.znay.znay.he.quest.AbsQuest;
+import ru.znay.znay.he.quest.QuestHandler;
+import ru.znay.znay.he.quest.template.KillTemplate;
 
 import java.util.*;
 
@@ -56,11 +60,13 @@ public class Level {
 
     private Fog fog;
     private int monsterDensity = 4;
-
+    private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
 
     private List<Entity> entities = new ArrayList<Entity>();
     private GuiManager guiManager;
+
+    private QuestHandler questHandler;
 
     private SpriteCollector spriteCollector;
 
@@ -73,29 +79,40 @@ public class Level {
         }
     };
 
-    public Level(Player pl, int lv, Game g) {
-        this.spriteCollector = new SpriteCollector(g.getScreen().getSprites());
-        init(pl, lv);
+    public Level(Player pl, int lv, Game game) {
+        init(pl, lv, game);
     }
 
     @SuppressWarnings("unchecked")
-    public void init(Player player, int level) {
+    public void init(Player player, int level, Game game) {
 
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
 
         this.width = map.getWidth();
         this.height = map.getHeight();
+        this.game = game;
 
-        tiles = new byte[width * height];
+        this.tiles = new byte[this.width * this.height];
 
-        fog = new Fog(width, height);
+        this.fog = new Fog(this.width, this.height);
 
-        entitiesInTiles = new ArrayList[width * height];
+        this.entitiesInTiles = new ArrayList[this.width * this.height];
 
-        guiManager = new GuiManager();
+        this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
-        for (int i = 0; i < width * height; i++) {
-            entitiesInTiles[i] = new ArrayList<Entity>();
+        this.guiManager = new GuiManager();
+
+        this.questHandler = new QuestHandler(this.guiManager);
+
+
+        //Квест убить 3х слаймов.. по окончанию покажется табличка
+        AbsQuest testQuest = new KillTemplate(3, Slime.class);
+        testQuest.setName("злые зеленые гандоны");
+        testQuest.setDescription("злые зеленые гандоны уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо убить 3-х зеленых попрыгунчиков");
+        testQuest.accept(this.questHandler);
+
+        for (int i = 0; i < this.width * height; i++) {
+            this.entitiesInTiles[i] = new ArrayList<Entity>();
         }
 
         for (int j = 0; j < this.height; j++) {
@@ -196,6 +213,10 @@ public class Level {
             getTile(xt, yt).tick(this, xt, yt);
         }
 
+        if (tickTime % 100 == 0) {
+            this.questHandler.checkAllQuest();
+        }
+
         this.guiManager.tick();
 
         for (int i = 0; i < entities.size(); i++) {
@@ -208,6 +229,10 @@ public class Level {
             if (entity.isRemoved()) {
                 entities.remove(i--);
                 removeEntity(xto, yto, entity);
+                if (entity instanceof Mob) {
+
+                    this.questHandler.updateKills(((Mob) entity));
+                }
             } else {
                 int xt = entity.getX() >> 4;
                 int yt = entity.getY() >> 4;
@@ -221,7 +246,7 @@ public class Level {
                 }
             }
         }
-
+        tickTime++;
     }
 
     private void insertEntity(int x, int y, Entity entity) {
@@ -384,4 +409,7 @@ public class Level {
         return fog;
     }
 
+    public QuestHandler getQuestHandler() {
+        return questHandler;
+    }
 }
