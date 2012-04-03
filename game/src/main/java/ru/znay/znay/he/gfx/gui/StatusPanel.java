@@ -53,8 +53,6 @@ public class StatusPanel extends Panel {
 
         BitmapHelper.fill(temp, 0xFF00FF);
         
-        System.out.println(temp.getWidth()+" "+temp.getHeight());
-
         BitmapHelper.scaleDraw(screen.getSprites(), 1, xOff, yOff, 0, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, pal, 0, temp);
 
         Font.drawToBitmap(text, screen, 17, 6, PaletteHelper.getColor(-1, -1, -1, 555), temp);
