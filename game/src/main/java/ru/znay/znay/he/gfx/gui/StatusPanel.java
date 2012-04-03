@@ -23,22 +23,23 @@ public class StatusPanel extends Panel {
     int xOff;
     int yOff;
 
-    public StatusPanel(int x,int y,int xOff, int yOff, int val, int col) {
+    public StatusPanel(int x, int y, int xOff, int yOff, int val, int col) {
         this.x = x;
         this.y = y;
 
         setText(val);
-        this.sizeY = 16;
+        this.sizeY = 2;
         pal = col;
 
-        this.xOff = xOff*Tile.HALF_SIZE;
-        this.yOff = yOff*Tile.HALF_SIZE;
+        this.xOff = xOff * Tile.HALF_SIZE;
+        this.yOff = yOff * Tile.HALF_SIZE;
+
         this.visible = true;
     }
 
     private void setText2(String t) {
         text = t;
-        sizeX = 16 + text.length() * Tile.HALF_SIZE;
+        sizeX = 2+1+ text.length();
     }
 
     public void setText(int t) {
@@ -48,13 +49,15 @@ public class StatusPanel extends Panel {
 
     @Override
     protected void paintF(Screen screen) {
-        Bitmap temp = new Bitmap(sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE);
+        Bitmap temp = new Bitmap(sizeX*Tile.HALF_SIZE, sizeY*Tile.HALF_SIZE);
 
-        BitmapHelper.fill(temp,0xFF00FF);
+        BitmapHelper.fill(temp, 0xFF00FF);
         
+        System.out.println(temp.getWidth()+" "+temp.getHeight());
+
         BitmapHelper.scaleDraw(screen.getSprites(), 1, xOff, yOff, 0, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, pal, 0, temp);
 
-        Font.drawToBitmap(text, screen, 18, 6, PaletteHelper.getColor(-1, -1, -1, 555), temp);
+        Font.drawToBitmap(text, screen, 17, 6, PaletteHelper.getColor(-1, -1, -1, 555), temp);
 
         this.image = null;
         this.image = temp;
