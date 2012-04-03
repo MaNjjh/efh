@@ -52,10 +52,10 @@ public class StatusPanel extends Panel {
         Bitmap temp = new Bitmap(sizeX*Tile.HALF_SIZE, sizeY*Tile.HALF_SIZE);
 
         BitmapHelper.fill(temp, 0xFF00FF);
-        
-        BitmapHelper.scaleDraw(screen.getSprites(), 1, xOff, yOff, 0, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, pal, 0, temp);
 
-        Font.drawToBitmap(text, screen, 17, 6, PaletteHelper.getColor(-1, -1, -1, 555), temp);
+        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, xOff, yOff, Tile.HALF_SIZE<<1, Tile.HALF_SIZE<<1, pal, 0, temp);
+
+        Font.drawToBitmap(text, screen, 17, 4, PaletteHelper.getColor(-1, -1, -1, 555), temp);
 
         this.image = null;
         this.image = temp;
