@@ -18,6 +18,8 @@ public abstract class AbsQuest implements QuestStatus {
     private NPC ownerQuest;
     private int goal;
 
+    private QuestPromotion questPromotion;
+
     public boolean accept(QuestHandler questHandler) {
         if (id == null) id = UUID.randomUUID().toString();
         return questHandler.accept(this);
@@ -49,5 +51,13 @@ public abstract class AbsQuest implements QuestStatus {
 
     public String getId() {
         return id;
+    }
+
+    public QuestPromotion getQuestPromotion() {
+        return questPromotion;
+    }
+
+    public void setQuestPromotion(QuestPromotion questPromotion) {
+        this.questPromotion = questPromotion;
     }
 }

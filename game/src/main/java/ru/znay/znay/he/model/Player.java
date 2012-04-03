@@ -182,4 +182,8 @@ public class Player extends Mob {
     public int getClearFogRadius() {
         return clearFogRadius + score / 1000;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

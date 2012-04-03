@@ -21,6 +21,7 @@ import ru.znay.znay.he.model.mob.Slime;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
+import ru.znay.znay.he.quest.QuestPromotion;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
 import java.util.*;
@@ -84,7 +85,7 @@ public class Level {
     }
 
     @SuppressWarnings("unchecked")
-    public void init(Player player, int level, Game game) {
+    public void init(final Player player, int level, Game game) {
 
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
 
@@ -105,11 +106,18 @@ public class Level {
         this.questHandler = new QuestHandler(this.guiManager);
 
 
-        //Квест убить 3х слаймов.. по окончанию покажется табличка
+        //Квест убить 3х слаймов.. по окончанию игроку заплотят 20000 и покажется табличка
         AbsQuest testQuest = new KillTemplate(3, Slime.class);
         testQuest.setName("злые зеленые гандоны");
         testQuest.setDescription("злые зеленые гандоны уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо убить 3-х зеленых попрыгунчиков");
+        testQuest.setQuestPromotion(new QuestPromotion() {
+            @Override
+            public void promotion() {
+                player.setScore(player.getScore() + 20000);
+            }
+        });
         testQuest.accept(this.questHandler);
+        //---------------------------------------------------------------------------------
 
         for (int i = 0; i < this.width * height; i++) {
             this.entitiesInTiles[i] = new ArrayList<Entity>();

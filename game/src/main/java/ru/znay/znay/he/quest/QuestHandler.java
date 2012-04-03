@@ -50,7 +50,12 @@ public class QuestHandler {
             if (quest.isCompleted()) {
                 String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
 
-                guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+                this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+
+                if (quest.getQuestPromotion() != null) {
+                    quest.getQuestPromotion().promotion();
+                }
+
                 this.quests.remove(key);
             }
         }
