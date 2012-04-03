@@ -57,32 +57,32 @@ public class BitmapHelper {
         }
     }
 
-    public static void copy(Bitmap src, int xOffs, int yOffs, int xo, int yo, int w, int h, Bitmap dst) {
-        xo = Math.max(0, Math.min(xo, dst.getWidth() - 1));
-        yo = Math.max(0, Math.min(yo, dst.getWidth() - 1));
-        w = Math.min(dst.getWidth() - 1, xo + w);
-        h = Math.min(dst.getHeight() - 1, yo + h);
-        xOffs = Math.min(src.getWidth() - w, xOffs - xo);
-        yOffs = Math.min(src.getHeight() - h, yOffs - yo);
-        for (int j = yo; j < h; j++) {
-            for (int i = xo; i < w; i++) {
-                dst.getPixels()[i + j * dst.getWidth()] = src.getPixels()[xOffs + i + (yOffs + j) * src.getWidth()];
+    public static void copy(Bitmap src, int dst_x, int dst_y, int src_x, int src_y, int w, int h, Bitmap dst) {
+        src_x = Math.max(0, Math.min(src_x, dst.getWidth() - 1));
+        src_y = Math.max(0, Math.min(src_y, dst.getWidth() - 1));
+        w = Math.min(dst.getWidth() - 1, src_x + w);
+        h = Math.min(dst.getHeight() - 1, src_y + h);
+        dst_x = Math.min(src.getWidth() - w, dst_x - src_x);
+        dst_y = Math.min(src.getHeight() - h, dst_y - src_y);
+        for (int j = src_y; j < h; j++) {
+            for (int i = src_x; i < w; i++) {
+                dst.getPixels()[i + j * dst.getWidth()] = src.getPixels()[dst_x + i + (dst_y + j) * src.getWidth()];
             }
         }
 
     }
 
-    public static void copy(Bitmap src, int xOffs, int yOffs, int xo, int yo, int w, int h, Bitmap dst, int alpha) {
-        xo = Math.max(0, Math.min(xo, dst.getWidth() - 1));
-        yo = Math.max(0, Math.min(yo, dst.getWidth() - 1));
-        w = Math.min(dst.getWidth() - 1, xo + w);
-        h = Math.min(dst.getHeight() - 1, yo + h);
-        xOffs = Math.min(src.getWidth() - w, xOffs - xo);
-        yOffs = Math.min(src.getHeight() - h, yOffs - yo);
+    public static void copy(Bitmap src, int dst_x, int dst_y, int src_x, int src_y, int w, int h, Bitmap dst, int alpha) {
+        src_x = Math.max(0, Math.min(src_x, dst.getWidth() - 1));
+        src_y = Math.max(0, Math.min(src_y, dst.getWidth() - 1));
+        w = Math.min(dst.getWidth() - 1, src_x + w);
+        h = Math.min(dst.getHeight() - 1, src_y + h);
+        dst_x = Math.min(src.getWidth() - w, dst_x - src_x);
+        dst_y = Math.min(src.getHeight() - h, dst_y - src_y);
 
-        for (int j = yo; j < h; j++) {
-            for (int i = xo; i < w; i++) {
-                int col = src.getPixels()[xOffs + i + (yOffs + j) * src.getWidth()];
+        for (int j = src_y; j < h; j++) {
+            for (int i = src_x; i < w; i++) {
+                int col = src.getPixels()[dst_x + i + (dst_y + j) * src.getWidth()];
                 if (col == alpha) continue;
                 dst.getPixels()[i + j * dst.getWidth()] = col;
             }
@@ -192,28 +192,28 @@ public class BitmapHelper {
         graphics2D.fillPolygon(polygon);
     }
 
-    public static void drawHalfTile(Bitmap src, int xOffs, int yOffs, int xo, int yo, int colors, int bits, Bitmap dst) {
-        BitmapHelper.scaleDraw(src, 1, xOffs, yOffs, xo, yo, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits, dst);
+    public static void drawHalfTile(Bitmap src, int dst_x, int dst_y, int src_x, int src_y, int colors, int bits, Bitmap dst) {
+        BitmapHelper.scaleDraw(src, 1, dst_x, dst_y, src_x, src_y, Tile.HALF_SIZE, Tile.HALF_SIZE, colors, bits, dst);
     }
 
-    public static void scaleDraw(Bitmap src, int scale, int xOffs, int yOffs, int xo, int yo, int w, int h, int colors, int bits, Bitmap dst) {
+    public static void scaleDraw(Bitmap src, int scale, int dst_x, int dst_y, int src_x, int src_y, int w, int h, int colors, int bits, Bitmap dst) {
         boolean mirrorX = (bits & BIT_MIRROR_X) > 0;
         boolean mirrorY = (bits & BIT_MIRROR_Y) > 0;
 
         for (int y = 0; y < h * scale; y++) {
-            int yPix = y + yOffs;
+            int yPix = y + dst_y;
             if (yPix < 0 || yPix >= dst.getHeight()) continue;
             int ys = y;
             if (mirrorY) ys = (h * scale - 1) - y;
 
             for (int x = 0; x < w * scale; x++) {
-                int xPix = x + xOffs;
+                int xPix = x + dst_x;
                 if (xPix < 0 || xPix >= dst.getWidth()) continue;
 
                 int xs = x;
                 if (mirrorX) xs = (w * scale - 1) - x;
 
-                int color = (colors >> (src.getPixels()[(xs / scale + xo) + (ys / scale + yo) * src.getWidth()] * 8)) & 255;
+                int color = (colors >> (src.getPixels()[(xs / scale + src_x) + (ys / scale + src_y) * src.getWidth()] * 8)) & 255;
                 if (color < 255) {
                     dst.getPixels()[xPix + yPix * dst.getWidth()] = color;
                 }
@@ -221,13 +221,13 @@ public class BitmapHelper {
         }
     }
 
-    public static void drawNormal(Bitmap src, int xOffs, int yOffs, Bitmap dst, int alpha) {
+    public static void drawNormal(Bitmap src, int dst_x, int dst_y, Bitmap dst, int alpha) {
         for (int y = 0; y < src.getHeight(); y++) {
-            int yPix = y + yOffs;
+            int yPix = y + dst_y;
             if (yPix < 0 || yPix >= dst.getHeight()) continue;
 
             for (int x = 0; x < src.getWidth(); x++) {
-                int xPix = x + xOffs;
+                int xPix = x + dst_x;
                 if (xPix < 0 || xPix >= dst.getWidth()) continue;
 
                 int color = src.getPixels()[x + y * src.getWidth()];
