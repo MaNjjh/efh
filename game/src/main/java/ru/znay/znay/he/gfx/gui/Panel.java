@@ -21,7 +21,7 @@ public class Panel {
     protected int sizeX = 2;
     protected int sizeY = 2;
     protected Bitmap image;
-    protected boolean changed = true;
+    protected boolean changed = false;
     protected boolean closed = false;
     protected int panelColor;
 
@@ -39,6 +39,9 @@ public class Panel {
 
     public Panel(int posX, int posY, int panelColor) {
         init(posX, posY, 0, 0, panelColor);
+    }
+
+    protected Panel() {
     }
 
     private void init(int posX, int posY, int sizeX, int sizeY, int panelColor) {
@@ -113,7 +116,7 @@ public class Panel {
         paintF(screen);
     }
 
-    public void paintF(Screen screen) {
+    protected void paintF(Screen screen) {
         Bitmap temp = new Bitmap(sizeX * Tile.HALF_SIZE, sizeY * Tile.HALF_SIZE);
 
         int tx = (sizeX - 1) * Tile.HALF_SIZE;

@@ -1,5 +1,6 @@
 package ru.znay.znay.he.gfx.gui;
 
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 
 import java.util.LinkedList;
@@ -16,6 +17,9 @@ public class GuiManager {
     private List<Panel> panelList = new LinkedList<Panel>();
 
     public GuiManager() {
+
+        add(new StatusPanel(30,30,2,2,123, PaletteHelper.getColor(5, 555, 555, -1)));
+
         //panelList.add(new TextPanel("Мы долго ждали приветствуем тебя", 10, 10, PaletteHelper.getColor(5, 555, 555, 555)));
     }
 
