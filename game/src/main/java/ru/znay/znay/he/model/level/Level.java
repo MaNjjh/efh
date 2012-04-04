@@ -221,9 +221,9 @@ public class Level {
             getTile(xt, yt).tick(this, xt, yt);
         }
 
-        if (tickTime % 100 == 0) {
+        /*if (tickTime % 100 == 0) {
             this.questHandler.checkAllQuest();
-        }
+        }*/
 
         this.guiManager.tick();
 

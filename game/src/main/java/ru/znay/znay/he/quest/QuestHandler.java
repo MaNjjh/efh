@@ -40,7 +40,22 @@ public class QuestHandler {
             AbsQuest quest = this.quests.get(key);
             if (quest instanceof KillTemplate) {
                 ((KillTemplate) quest).updateKills(mob.getClass().getSimpleName());
+                checkQuest(quest);
             }
+        }
+    }
+
+    private void checkQuest(AbsQuest quest) {
+        if (quest.isCompleted()) {
+            String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
+
+            this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+
+            if (quest.getQuestPromotion() != null) {
+                quest.getQuestPromotion().promotion();
+            }
+
+            this.quests.remove(quest.getId());
         }
     }
 
