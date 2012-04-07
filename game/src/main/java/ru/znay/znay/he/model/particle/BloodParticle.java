@@ -21,7 +21,7 @@ public class BloodParticle extends Particle {
         super(x, y);
         this.colors = colors;
         flip = random.nextInt(4);
-        this.time = 40;
+        this.time = 100 +  random.nextInt(100);
 
     }
 

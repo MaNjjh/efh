@@ -28,8 +28,8 @@ public class Life extends Resource {
         if ((zz == 0) && level.getPlayer() != null) {
             int xd = level.getPlayer().getX() - x;
             int yd = level.getPlayer().getY() - y;
-            int mag = level.getPlayer().getScore() / 200;
-            if (xd * xd + yd * yd < mag * mag + 20 * 20) {
+            //int mag = 0*level.getPlayer().getScore() / 200;
+            if (xd * xd + yd * yd < /*mag * mag +*/ 20 * 20) {
                 if (xd < 0) xa = -1;
                 if (xd > 0) xa = +1;
                 if (yd < 0) ya = -1;

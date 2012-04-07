@@ -112,11 +112,11 @@ public class Level {
 
         List<String> strings = new LinkedList<String>();
 
-        strings.add("первый");
-        strings.add("второй");
-        strings.add("asdsadasdasdadas");
+        //strings.add("первый");
+        //strings.add("второй");
+        //strings.add("asdsadasdasdadas");
 
-        this.guiManager.add(new Menu(30, 60,game.getInputHandler()), "menu");
+        this.guiManager.add(new Menu(30, 60, game.getInputHandler()), "menu");
 
         ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.menuCallback() {
             @Override
@@ -145,7 +145,7 @@ public class Level {
         testQuest.setQuestPromotion(new QuestPromotion() {
             @Override
             public void promotion(Player player) {
-                player.setScore(player.getScore() + 20000);
+                player.setScore(player.getScore() + 2000900);
             }
         });
         testQuest.accept(this.questHandler);
@@ -281,7 +281,7 @@ public class Level {
                     removeEntity(xto, yto, entity);
                     insertEntity(xt, yt, entity);
                     if (entity instanceof Player) {
-                        fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
+                        fog.clearFog2(xt, yt, Math.min(20, ((Player) entity).getClearFogRadius()));
                     }
                 }
             }
