@@ -4,7 +4,6 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.Menu;
-import ru.znay.znay.he.gfx.gui.Panel;
 import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
@@ -25,7 +24,7 @@ import ru.znay.znay.he.model.mob.Slime;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
-import ru.znay.znay.he.quest.QuestPromotion;
+import ru.znay.znay.he.quest.promotion.QuestPromotion;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
 import java.util.*;
@@ -113,9 +112,9 @@ public class Level {
 
         List<String> strings = new LinkedList<String>();
 
-        strings.add("первый");
-        strings.add("второй");
-        strings.add("asdsadasdasdadas");
+        //strings.add("первый");
+        //strings.add("второй");
+        //strings.add("asdsadasdasdadas");
 
         this.guiManager.add(new Menu(30, 60), "menu");
 
@@ -136,7 +135,7 @@ public class Level {
             }
         });
 
-        this.questHandler = new QuestHandler(this.guiManager);
+        this.questHandler = new QuestHandler(this.guiManager, player);
 
 
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 20000 и покажется табличка
@@ -145,7 +144,7 @@ public class Level {
         testQuest.setDescription("злые зеленые гандоны уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо убить 3-х зеленых попрыгунчиков");
         testQuest.setQuestPromotion(new QuestPromotion() {
             @Override
-            public void promotion() {
+            public void promotion(Player player) {
                 player.setScore(player.getScore() + 20000);
             }
         });
@@ -371,6 +370,7 @@ public class Level {
             player = (Player) entity;
             fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
         }
+        entity.setRemoved(false);
         entities.add(entity);
         entity.init(this);
 

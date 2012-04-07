@@ -1,4 +1,4 @@
-package ru.znay.znay.he.quest;
+package ru.znay.znay.he.quest.promotion;
 
 import ru.znay.znay.he.model.Player;
 
@@ -10,5 +10,5 @@ import ru.znay.znay.he.model.Player;
  * To change this template use File | Settings | File Templates.
  */
 public interface QuestPromotion {
-    void promotion();
+    void promotion(Player player);
 }

@@ -4,14 +4,18 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.item.Coin;
+import ru.znay.znay.he.model.item.FurnitureItem;
 import ru.znay.znay.he.model.item.Item;
-import ru.znay.znay.he.model.item.Life;
+import ru.znay.znay.he.model.item.furniture.Furniture;
+import ru.znay.znay.he.model.item.resource.Coin;
+import ru.znay.znay.he.model.item.resource.Life;
+import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,6 +29,7 @@ public class Player extends Mob {
     private InputHandler inputHandler;
 
     private Game game;
+    private Item activeItem;
     private int score = 1000;
     private int clearFogRadius = 4;
 
@@ -55,18 +60,20 @@ public class Player extends Mob {
             xa++;
         }
 
-        if (inputHandler.attack.down) {
-            if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {
+        if (inputHandler.attack.clicked) {
+            take();
+
+            /*if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {
                 if (score >= Mushroom.cost) {
                     if (level != null) {
                         level.add(new Mushroom(x, y));
                         score -= Mushroom.cost;
                     }
                 }
-            }
+            }*/
         }
 
-        if (inputHandler.mouse.down) {
+        if (inputHandler.mouse.down && activeItem == null) {
 
             int xDiff = inputHandler.getXMousePos() - x;
             int yDiff = inputHandler.getYMousePos() - y;
@@ -99,7 +106,7 @@ public class Player extends Mob {
             health += life.getLife();
         }
 
-        if (entity instanceof Item) {
+        if (entity instanceof Resource) {
             Sound.pickup.play();
             entity.setRemoved(true);
         }
@@ -150,12 +157,77 @@ public class Player extends Mob {
             col1 = PaletteHelper.getColor(-1, 555, 555, 555);
             col2 = PaletteHelper.getColor(-1, 555, 555, 555);
         }
+
+        if (activeItem instanceof FurnitureItem) {
+            yt += 2;
+        }
+
         screen.render(xo + Tile.HALF_SIZE * flip1, yo + 0, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
         screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip1, yo + 0, (xt + 1) * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
         if (!isSwimming()) {
             screen.render(xo + Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, xt * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
             screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, (xt + 1) * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
         }
+
+        if (activeItem instanceof FurnitureItem) {
+            Furniture furniture = ((FurnitureItem) activeItem).getFurniture();
+            furniture.x = x;
+            furniture.y = yo;
+            furniture.render(screen);
+
+        }
+    }
+
+    public boolean take() {
+        boolean done = false;
+
+        int yo = -2;
+
+        if (activeItem == null) {
+            int range = 12;
+            if (dir == 0 && interact(x - 8, y + 4 + yo, x + 8, y + range + yo)) done = true;
+            if (dir == 1 && interact(x - 8, y - range + yo, x + 8, y - 4 + yo)) done = true;
+            if (dir == 3 && interact(x + 4, y - 8 + yo, x + range, y + 8 + yo)) done = true;
+            if (dir == 2 && interact(x - range, y - 8 + yo, x - 4, y + 8 + yo)) done = true;
+        } else {
+            int xt = x >> 4;
+            int yt = (y + yo) >> 4;
+            int r = 12;
+            if (dir == 0) yt = (y + r + yo) >> 4;
+            if (dir == 1) yt = (y - r + yo) >> 4;
+            if (dir == 2) xt = (x - r) >> 4;
+            if (dir == 3) xt = (x + r) >> 4;
+
+            if (xt >= 0 && yt >= 0 && xt < level.getWidth() && yt < level.getHeight()) {
+                if (activeItem.interactOn(level.getTile(xt, yt), level, xt, yt, this, dir)) {
+                    done = true;
+                } else {
+                    if (level.getTile(xt, yt).interact(level, xt, yt, this, activeItem, dir)) {
+                        done = true;
+                    }
+                }
+                if (activeItem.isDepleted()) {
+                    activeItem = null;
+                }
+            }
+        }
+        return done;
+
+    }
+
+    private boolean interact(int x0, int y0, int x1, int y1) {
+        List<Entity> entities = level.getEntities(x0, y0, x1, y1, null);
+        for (int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
+
+            if (e instanceof Furniture) {
+                Furniture f = (Furniture) e;
+                f.take(this);
+                return true;
+            }
+
+        }
+        return false;
     }
 
     @Override
@@ -185,5 +257,13 @@ public class Player extends Mob {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public Item getActiveItem() {
+        return activeItem;
+    }
+
+    public void setActiveItem(Item activeItem) {
+        this.activeItem = activeItem;
     }
 }

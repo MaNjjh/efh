@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quest>
+    <name>злые зеленые прыгуны</name>
+
+    <template name="kill">
+        <mob>slime</mob>
+        <count>10</count>
+    </template>
+
+    <promotion name="price">
+        <price>1000</price>
+    </promotion>
+
+    <description>
+        злые зеленые прыгуны уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо убить 10
+        зеленых попрыгунчиков
+    </description>
+</quest>

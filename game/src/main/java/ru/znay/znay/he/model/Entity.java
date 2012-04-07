@@ -2,7 +2,9 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.level.Level;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.List;
 import java.util.Random;
@@ -54,6 +56,11 @@ public class Entity {
 
     public boolean canSwim() {
         return false;
+    }
+
+    protected boolean isSwimming() {
+        Tile tile = level.getTile(x >> 4, y >> 4);
+        return tile.isLiquid();
     }
 
     protected boolean move2(int xa, int ya) {

@@ -79,11 +79,6 @@ public class Mob extends Entity {
 
     }
 
-    protected boolean isSwimming() {
-        Tile tile = level.getTile(x >> 4, y >> 4);
-        return tile.isLiquid();
-    }
-
     @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Arrow) {
@@ -183,5 +178,9 @@ public class Mob extends Entity {
 
     public int getSlowPeriod() {
         return slowPeriod;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

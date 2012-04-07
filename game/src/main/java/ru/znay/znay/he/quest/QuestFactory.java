@@ -10,6 +10,17 @@ import java.io.InputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class QuestFactory {
+
+    private static QuestFactory instance = new QuestFactory();
+
+    public static QuestFactory getInstance() {
+        return instance;
+    }
+
+    private QuestFactory() {
+
+    }
+
     public AbsQuest createQuest(InputStream inputStream) {
         return null;
     }

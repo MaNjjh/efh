@@ -4,6 +4,8 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
+import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.ground.*;
 import ru.znay.znay.he.model.level.tile.liquid.DeepWaterTile;
@@ -99,6 +101,10 @@ public class Tile {
     }
 
     public void bumpedInto(Level level, int xt, int yt, Entity entity) {
+    }
+
+    public boolean interact(Level level, int xt, int yt, Player player, Item item, int attackDir) {
+        return false;
     }
 
     public void steppedOn(Level level, int xt, int yt, Entity entity) {

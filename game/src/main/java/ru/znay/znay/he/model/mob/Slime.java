@@ -5,8 +5,8 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.item.Coin;
-import ru.znay.znay.he.model.item.Life;
+import ru.znay.znay.he.model.item.resource.Coin;
+import ru.znay.znay.he.model.item.resource.Life;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.List;

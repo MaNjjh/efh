@@ -9,7 +9,7 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.builds.tree.Tree;
-import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Arrow;
 
@@ -103,7 +103,7 @@ public class MiniMap extends Panel {
                         if (entity instanceof Tree) {
                             color = 0x009900;
                         }
-                        if (entity instanceof Item || entity instanceof Arrow) {
+                        if (entity instanceof Resource || entity instanceof Arrow) {
                             continue;
                         }
                         markObject(entity.getX(), entity.getY(), color);

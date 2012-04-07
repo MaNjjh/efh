@@ -2,14 +2,14 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.gui.Panel;
+import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.furniture.Bucket;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.npc.Board;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -44,6 +44,7 @@ public class Game extends Graphics implements Runnable {
     public void init() {
         this.player = new Player(this, this.inputHandler);
         this.level = new Level(player, 0, this);
+        this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
         //this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
         this.inputHandler.releaseAll();
     }
@@ -87,16 +88,16 @@ public class Game extends Graphics implements Runnable {
 
         Panel panel;
         if ((panel = level.getGuiManager().get("money")) != null)
-            ((StatusPanel)panel).setText(player.getScore());
+            ((StatusPanel) panel).setText(player.getScore());
 
         if ((panel = level.getGuiManager().get("health")) != null)
-            ((StatusPanel)panel).setText(player.getHealth());
+            ((StatusPanel) panel).setText(player.getHealth());
 
         if ((panel = level.getGuiManager().get("speed")) != null)
-            ((StatusPanel)panel).setText(player.getSlowPeriod());
+            ((StatusPanel) panel).setText(player.getSlowPeriod());
 
         level.getGuiManager().render(this.screen);
-        
+
         //Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
         //Font.renderPanel("фпс: " + fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
         //Font.renderPanel("золото: " + player.getScore() + " жизни: " + player.getHealth() + " скорость: " + player.getSlowPeriod(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));

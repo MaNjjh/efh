@@ -1,6 +1,7 @@
 package ru.znay.znay.he.quest;
 
 import ru.znay.znay.he.model.npc.NPC;
+import ru.znay.znay.he.quest.promotion.QuestPromotion;
 
 import java.util.UUID;
 

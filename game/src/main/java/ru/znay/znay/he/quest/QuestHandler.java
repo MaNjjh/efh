@@ -3,6 +3,9 @@ package ru.znay.znay.he.quest;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.TypedTextPanel;
 import ru.znay.znay.he.model.Mob;
+import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.quest.promotion.PricePromotion;
+import ru.znay.znay.he.quest.promotion.PromotionFactory;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
 import java.util.HashMap;
@@ -18,9 +21,11 @@ import java.util.Map;
 public class QuestHandler {
     private Map<String, AbsQuest> quests = new HashMap<String, AbsQuest>();
     private GuiManager guiManager;
+    private Player player;
 
-    public QuestHandler(GuiManager guiManager) {
+    public QuestHandler(GuiManager guiManager, Player player) {
         this.guiManager = guiManager;
+        this.player = player;
     }
 
     public boolean accept(AbsQuest absQuest) {
@@ -52,7 +57,7 @@ public class QuestHandler {
             this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
 
             if (quest.getQuestPromotion() != null) {
-                quest.getQuestPromotion().promotion();
+                quest.getQuestPromotion().promotion(this.player);
             }
 
             this.quests.remove(quest.getId());
@@ -68,11 +73,17 @@ public class QuestHandler {
                 this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
 
                 if (quest.getQuestPromotion() != null) {
-                    quest.getQuestPromotion().promotion();
+                    quest.getQuestPromotion().promotion(this.player);
                 }
 
                 this.quests.remove(key);
             }
         }
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        PricePromotion promotion = (PricePromotion) PromotionFactory.getInstance().createPromotion("Price");
+        promotion.setPrice(10);
+        System.out.println(promotion.getPrice());
     }
 }
