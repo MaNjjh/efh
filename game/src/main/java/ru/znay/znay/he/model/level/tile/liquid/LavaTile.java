@@ -2,6 +2,10 @@ package ru.znay.znay.he.model.level.tile.liquid;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.FurnitureItem;
+import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.furniture.Bucket;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -58,6 +62,22 @@ public class LavaTile extends Tile {
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, random.nextInt(4) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE, Tile.HALF_SIZE, lavaColor, random.nextInt(4));
         } else
             screen.render(x * Tile.SIZE + Tile.HALF_SIZE, y * Tile.SIZE + Tile.HALF_SIZE, (r ? 16 : 15) * Tile.HALF_SIZE, (d ? 2 : 1) * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, (sd || sr) ? transitionColor2 : transitionColor1, 0);
+    }
+
+    @Override
+    public boolean interact(Level level, int xt, int yt, Player player, Item item, int attackDir) {
+        if (item instanceof FurnitureItem) {
+            FurnitureItem furniture = (FurnitureItem) item;
+            if (furniture.getFurniture() instanceof Bucket) {
+                Bucket bucket = (Bucket) furniture.getFurniture();
+                if (bucket.isFull()) {
+                    bucket.setFull(false);
+                    level.setTile(xt, yt, Tile.sand, 0);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

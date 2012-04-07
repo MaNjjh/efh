@@ -29,19 +29,19 @@ public class Bucket extends Furniture {
         int xo = x - 8;
         int yo = y - 8;
 
-        if (isSwimming()) {
+        if (level.getTile(x >> 4, y >> 4) == Tile.water) {
             isFull = true;
         }
-        int col = PaletteHelper.getColor(-1, 111, 310, 111);
+        int col = PaletteHelper.getColor(-1, 111, 420, 111);
         if (isFull) {
             if (tickTime / 300 % 2 == 0) {
-                col = PaletteHelper.getColor(-1, 222, 310, 004);
+                col = PaletteHelper.getColor(-1, 222, 222, 004);
             } else {
-                col = PaletteHelper.getColor(-1, 333, 310, 004);
+                col = PaletteHelper.getColor(-1, 333, 222, 004);
             }
         }
 
-        int col2 = PaletteHelper.getColor(-1, 200, 310, 111);
+        int col2 = PaletteHelper.getColor(-1, 333, 222, 111);
 
 
         screen.render(xo, yo, 0 * Tile.HALF_SIZE, 9 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
@@ -57,4 +57,11 @@ public class Bucket extends Furniture {
         return false;
     }
 
+    public boolean isFull() {
+        return isFull;
+    }
+
+    public void setFull(boolean full) {
+        isFull = full;
+    }
 }

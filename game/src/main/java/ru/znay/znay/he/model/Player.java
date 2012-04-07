@@ -199,13 +199,10 @@ public class Player extends Mob {
             if (dir == 3) xt = (x + r) >> 4;
 
             if (xt >= 0 && yt >= 0 && xt < level.getWidth() && yt < level.getHeight()) {
-                if (activeItem.interactOn(level.getTile(xt, yt), level, xt, yt, this, dir)) {
-                    done = true;
-                } else {
-                    if (level.getTile(xt, yt).interact(level, xt, yt, this, activeItem, dir)) {
-                        done = true;
-                    }
-                }
+                level.getTile(xt, yt).interact(level, xt, yt, this, activeItem, dir);
+
+                activeItem.interactOn(level.getTile(xt, yt), level, xt, yt, this, dir);
+
                 if (activeItem.isDepleted()) {
                     activeItem = null;
                 }
