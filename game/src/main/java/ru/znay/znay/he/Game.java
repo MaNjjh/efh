@@ -2,6 +2,8 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
+import ru.znay.znay.he.gfx.gui.*;
+import ru.znay.znay.he.gfx.gui.Panel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
@@ -82,11 +84,22 @@ public class Game extends Graphics implements Runnable {
         level.renderBackground(this.screen, xScroll, yScroll);
         level.renderSprites(this.screen, xScroll, yScroll);
         level.renderFog(this.screen, xScroll, yScroll);
-        level.getGuiManager().render(this.screen);
 
+        Panel panel;
+        if ((panel = level.getGuiManager().get("money")) != null)
+            ((StatusPanel)panel).setText(player.getScore());
+
+        if ((panel = level.getGuiManager().get("health")) != null)
+            ((StatusPanel)panel).setText(player.getHealth());
+
+        if ((panel = level.getGuiManager().get("speed")) != null)
+            ((StatusPanel)panel).setText(player.getSlowPeriod());
+
+        level.getGuiManager().render(this.screen);
+        
         //Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
         //Font.renderPanel("фпс: " + fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));
-        Font.renderPanel("золото: " + player.getScore() + " жизни: " + player.getHealth() + " скорость: " + player.getSlowPeriod(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
+        //Font.renderPanel("золото: " + player.getScore() + " жизни: " + player.getHealth() + " скорость: " + player.getSlowPeriod(), this.screen, 10, Constants.SCREEN_HEIGHT - 20, PaletteHelper.getColor(5, 555, 555, 555));
         //Font.draw("fps: " + fps + " obj: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(-1, 111, 111, 511));
         //Font.draw("score: " + player.getScore() + " life: " + player.getHealth(), this.screen, 10, 18, PaletteHelper.getColor(-1, 111, 111, 511));
         if (player.isRemoved()) {

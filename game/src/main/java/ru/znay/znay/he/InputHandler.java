@@ -1,6 +1,9 @@
 package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
+import ru.znay.znay.he.gfx.gui.*;
+import ru.znay.znay.he.gfx.gui.Menu;
+import ru.znay.znay.he.gfx.gui.Panel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -159,6 +162,24 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (ke.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
+
+        if (ke.getKeyCode() == KeyEvent.VK_F) {
+            Panel menu;
+            if ((menu = game.getLevel().getGuiManager().get("menu")) != null && menu.getVisible())
+                ((Menu) menu).selectNext();
+        }
+
+        if (ke.getKeyCode() == KeyEvent.VK_R) {
+            Panel menu;
+            if ((menu = game.getLevel().getGuiManager().get("menu")) != null && menu.getVisible())
+                ((Menu) menu).selectPrev();
+        }
+
+        if (ke.getKeyCode() == KeyEvent.VK_E) {
+            Panel menu;
+            if ((menu = game.getLevel().getGuiManager().get("menu")) != null && menu.getVisible())
+                ((Menu) menu).select();
+        }
 
         if (ke.getKeyCode() == KeyEvent.VK_TAB) menu.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_ALT) menu.toggle(pressed);

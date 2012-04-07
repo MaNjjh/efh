@@ -70,6 +70,11 @@ public class Panel {
         }
     }
 
+    public void setPanelColor(int color) {
+        panelColor = color;
+        changed = true;
+    }
+
     public boolean getVisible() {
         return visible;
     }
@@ -147,6 +152,7 @@ public class Panel {
 
         for (int x = 1; x < sizeX - 1; x++) {
             for (int y = 1; y < sizeY - 1; y++) {
+                //center
                 BitmapHelper.drawHalfTile(screen.getSprites(), x * Tile.HALF_SIZE, y * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, panelColor, 0, temp);
             }
         }

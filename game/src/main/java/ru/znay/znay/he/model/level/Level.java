@@ -3,7 +3,11 @@ package ru.znay.znay.he.model.level;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.gui.Menu;
+import ru.znay.znay.he.gfx.gui.Panel;
+import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
@@ -102,6 +106,35 @@ public class Level {
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
         this.guiManager = new GuiManager();
+
+        this.guiManager.add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(555, 555, 555, -1)), "money");
+        this.guiManager.add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(555, 555, 555, -1)), "health");
+        this.guiManager.add(new StatusPanel(150, 220, 7, 3, 123, PaletteHelper.getColor(555, 555, 555, -1)), "speed");
+
+        List<String> strings = new LinkedList<String>();
+
+        strings.add("первый");
+        strings.add("второй");
+        strings.add("asdsadasdasdadas");
+
+        this.guiManager.add(new Menu(30, 60), "menu");
+
+        ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.menuCallback() {
+            @Override
+            public void result(int result) {
+                switch (result) {
+                    case 0:
+                        System.out.println("первый");
+                        break;
+                    case 1:
+                        System.out.println("второй");
+                        break;
+                    case 2:
+                        System.out.println("asdsadasdasdadas");
+                        break;
+                }
+            }
+        });
 
         this.questHandler = new QuestHandler(this.guiManager);
 

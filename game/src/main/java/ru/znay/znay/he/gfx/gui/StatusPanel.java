@@ -19,9 +19,10 @@ import java.awt.font.FontRenderContext;
  */
 public class StatusPanel extends Panel {
     private String text;
-    int pal;
-    int xOff;
-    int yOff;
+    private int val;
+    private int pal;
+    private int xOff;
+    private int yOff;
 
     public StatusPanel(int x, int y, int xOff, int yOff, int val, int col) {
         this.x = x;
@@ -43,6 +44,8 @@ public class StatusPanel extends Panel {
     }
 
     public void setText(int t) {
+        if (t == val) return;
+        val = t;
         setText2("" + t);
         changed = true;
     }
