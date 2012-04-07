@@ -112,11 +112,11 @@ public class Level {
 
         List<String> strings = new LinkedList<String>();
 
-        //strings.add("первый");
-        //strings.add("второй");
-        //strings.add("asdsadasdasdadas");
+        strings.add("первый");
+        strings.add("второй");
+        strings.add("asdsadasdasdadas");
 
-        this.guiManager.add(new Menu(30, 60), "menu");
+        this.guiManager.add(new Menu(30, 60,game.getInputHandler()), "menu");
 
         ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.menuCallback() {
             @Override

@@ -1,11 +1,13 @@
 package ru.znay.znay.he.gfx.gui;
 
+import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
 
+import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,12 +26,12 @@ public class Menu extends Panel {
     private List<TextPanel> panels = new LinkedList<TextPanel>();
     private menuCallback callback = null;
     private int currentCell = -1;
-    private boolean lock = false;
-    private long tick;
+    private InputHandler inputHandler;
 
-    public Menu(int x, int y) {
+    public Menu(int x, int y, InputHandler inputHandler) {
         this.x = x;
         this.y = y;
+        this.inputHandler = inputHandler;
         visible = false;
     }
 
@@ -50,8 +52,7 @@ public class Menu extends Panel {
 
     public void selectNext() {
         if (!visible) return;
-        if (lock) return;
-        lock = true;
+
         int lastCell = currentCell;
         currentCell++;
 
@@ -67,8 +68,7 @@ public class Menu extends Panel {
 
     public void selectPrev() {
         if (!visible) return;
-        if (lock) return;
-        lock = true;
+
         int lastCell = currentCell;
 
         currentCell--;
@@ -86,9 +86,18 @@ public class Menu extends Panel {
     @Override
     public void tick() {
         if (!visible) return;
-        if (System.currentTimeMillis() < this.tick) return;
-        lock = false;
-        tick = System.currentTimeMillis() + 500;
+
+        if (inputHandler.menuDown.clicked) {
+           selectNext();
+        }
+
+        if (inputHandler.menuUp.clicked) {
+            selectPrev();
+        }
+
+        if (inputHandler.menuUse.clicked) {
+            select();
+        }
     }
 
     public void select() {

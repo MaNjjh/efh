@@ -116,6 +116,9 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     public Key attack = new Key();
     public Key menu = new Key();
     public Key mouse = new Key();
+    public Key menuDown = new Key();
+    public Key menuUp = new Key();
+    public Key menuUse = new Key();
 
     public void releaseAll() {
         for (Key key : keys) {
@@ -162,25 +165,10 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (ke.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
-
-        if (ke.getKeyCode() == KeyEvent.VK_F) {
-            Panel menu;
-            if ((menu = game.getLevel().getGuiManager().get("menu")) != null && menu.getVisible())
-                ((Menu) menu).selectNext();
-        }
-
-        if (ke.getKeyCode() == KeyEvent.VK_R) {
-            Panel menu;
-            if ((menu = game.getLevel().getGuiManager().get("menu")) != null && menu.getVisible())
-                ((Menu) menu).selectPrev();
-        }
-
-        if (ke.getKeyCode() == KeyEvent.VK_E) {
-            Panel menu;
-            if ((menu = game.getLevel().getGuiManager().get("menu")) != null && menu.getVisible())
-                ((Menu) menu).select();
-        }
-
+        if (ke.getKeyCode() == KeyEvent.VK_F) menuDown.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_R) menuUp.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_E) menuUse.toggle(pressed);
+        
         if (ke.getKeyCode() == KeyEvent.VK_TAB) menu.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_ALT) menu.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_ALT_GRAPH) menu.toggle(pressed);

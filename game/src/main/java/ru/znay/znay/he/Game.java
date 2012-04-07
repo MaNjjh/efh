@@ -192,4 +192,7 @@ public class Game extends Graphics implements Runnable {
         return yScroll;
     }
 
+    public InputHandler getInputHandler() {
+        return inputHandler;
+    }
 }
