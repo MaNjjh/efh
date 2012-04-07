@@ -21,10 +21,6 @@ public class TextParticle extends Particle {
         this.col = col;
     }
 
-    public void tick() {
-        super.tick();
-    }
-
     public void render(Screen screen) {
         // Font.draw(msg, screen, x - msg.length() * 4, y, PaletteHelper.getColor(-1, 0, 0, 0));
         Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));

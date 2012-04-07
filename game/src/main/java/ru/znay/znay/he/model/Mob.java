@@ -1,10 +1,10 @@
 package ru.znay.znay.he.model;
 
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.BloodParticle;
-import ru.znay.znay.he.model.particle.TextParticle;
+import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
 
@@ -26,7 +26,7 @@ public class Mob extends Entity {
     protected int xKnockback, yKnockback;
     protected int viewRadius = 4;
     protected Mob target = null;
-    protected int bloodColor = PaletteHelper.getColor(-1, 0, 0, 500);
+    protected int bloodColor = 0xcc1100;
     protected int slowPeriod = 50;
 
     @Override
@@ -101,12 +101,15 @@ public class Mob extends Entity {
 
         if (this instanceof Player) {
             Sound.playerHurt.play();
-            level.add(new TextParticle(damage + "", x, y, bloodColor));
-        } else {
-            for (int i = 0; i < damage; i++) {
-                level.add(new BloodParticle(x, y, bloodColor));
-            }
+            // level.add(new TextParticle(damage + "", x, y, bloodColor));
         }
+
+        level.add(new FlowText("-" + damage, x, y - Tile.HALF_SIZE, Font.redColor));
+
+        for (int i = 0; i < damage; i++) {
+            level.add(new BloodParticle(x, y, bloodColor));
+        }
+
 
         health -= damage;
         if (attackDir == 0) yKnockback = +DEFAULT_KNOCKBACK;

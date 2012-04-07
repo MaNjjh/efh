@@ -15,6 +15,11 @@ public class Font {
     private final static int yStart = 28;
     public final static int FONT_SIZE = 8;
 
+    public static final int greenColor = PaletteHelper.getColor(-1, 040, 040, 040);
+    public static final int redColor = PaletteHelper.getColor(-1, 400, 400, 400);
+    public static final int yellowColor = PaletteHelper.getColor(-1, 440, 440, 440);
+
+
     private static String chars = "" + //
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ      " + //
             "0123456789.,!?'\"-+=/\\%()<>:;    " + //

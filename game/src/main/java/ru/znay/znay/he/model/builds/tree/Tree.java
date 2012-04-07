@@ -1,7 +1,6 @@
 package ru.znay.znay.he.model.builds.tree;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
@@ -22,7 +21,7 @@ public abstract class Tree extends Mob {
         this.xr = xr;
         this.yr = yr;
         this.health = 100;
-        this.bloodColor = PaletteHelper.getColor(-1, 0, 0, 320);
+        this.bloodColor = 0x7f3300;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ru.znay.znay.he.model.item.resource;
 
+import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.particle.Particle;
 
 /**
@@ -18,5 +19,9 @@ public class Resource extends Particle {
     @Override
     public boolean canFly() {
         return true;
+    }
+
+    public void touchedBy(Entity entity) {
+        entity.touchItem(this);
     }
 }

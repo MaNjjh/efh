@@ -11,6 +11,7 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.builds.tree.Tree;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.particle.Particle;
 import ru.znay.znay.he.model.weapon.Arrow;
 
 import java.awt.*;
@@ -95,6 +96,11 @@ public class MiniMap extends Panel {
 
 
                     for (Entity entity : level.getEntities((i - 1) << 4, (j - 1) << 4, (i + 1) << 4, (j + 1) << 4, null)) {
+
+                        if (entity instanceof Resource || entity instanceof Arrow || entity instanceof Particle) {
+                            continue;
+                        }
+
                         int color = 0xaabbcc;
 
                         if (entity instanceof Mob) {
@@ -103,9 +109,7 @@ public class MiniMap extends Panel {
                         if (entity instanceof Tree) {
                             color = 0x009900;
                         }
-                        if (entity instanceof Resource || entity instanceof Arrow) {
-                            continue;
-                        }
+
                         markObject(entity.getX(), entity.getY(), color);
                     }
 

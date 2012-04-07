@@ -27,10 +27,16 @@ public class KillTemplate extends AbsQuest {
         this.needToKill = needToKill;
     }
 
-    public void updateKills(String mobName) {
+    public int toCompleted() {
+        return needToKill - killed;
+    }
+
+    public boolean updateKills(String mobName) {
         if (mobName.toLowerCase().equals(this.mobName)) {
             killed++;
+            return true;
         }
+        return false;
     }
 
     @Override

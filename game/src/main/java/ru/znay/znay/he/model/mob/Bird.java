@@ -1,12 +1,18 @@
 package ru.znay.znay.he.model.mob;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.resource.Coin;
+import ru.znay.znay.he.model.item.resource.Life;
+import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.particle.FlowText;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,6 +29,7 @@ public class Bird extends Mob {
     private int xTarget;
     private int yTarget;
     private double angleInc;
+    private int coinCount = 0;
 
     public Bird() {
         this.xr = 2;
@@ -48,6 +55,17 @@ public class Bird extends Mob {
             this.xTarget = 5 * Tile.SIZE + random.nextInt((level.getWidth() - 5) * Tile.SIZE);
             this.yTarget = 5 * Tile.SIZE + random.nextInt((level.getHeight() - 5) * Tile.SIZE);
         }
+
+        int rr = 10 * Tile.HALF_SIZE;
+
+        List<Entity> entities = level.getEntities(x - rr, y - rr, x + rr, y + rr, null);
+        for (Entity entity : entities) {
+            if (entity instanceof Resource) {
+                this.xTarget = entity.getX();
+                this.yTarget = entity.getY();
+            }
+        }
+
         if (level.getPlayer() != null && !level.getPlayer().isRemoved()) {
 
             int xd = level.getPlayer().getX() - x;
@@ -105,17 +123,38 @@ public class Bird extends Mob {
     @Override
     public void die() {
         super.die();
-        int count = random.nextInt(6) + 2;
+        int count = coinCount + random.nextInt(6) + 2;
         for (int i = 0; i < count; i++) {
             this.level.add(new Coin(x, y, random.nextInt(5) + 1));
         }
     }
+
+
+    @Override
+    public void touchItem(Resource resource) {
+        if (this.isRemoved()) return;
+
+        if (resource instanceof Coin) {
+            coinCount++;
+            level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));
+        }
+
+        if (resource instanceof Life) {
+            Life life = (Life) resource;
+            health += life.getLife();
+        }
+
+
+        resource.setRemoved(true);
+    }
+
 
     @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
             entity.hurt(this, 1, dir);
         }
+
         super.touchedBy(entity);
     }
 

@@ -108,14 +108,14 @@ public class Level {
 
         this.guiManager.add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(540, 540, 540, -1)), "money");
         this.guiManager.add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(500, 500, 400, -1)), "health");
-        this.guiManager.add(new StatusPanel(150, 220, 7, 3, 123, PaletteHelper.getColor(0, 543, 503, -1)), "speed");
+        //this.guiManager.add(new StatusPanel(150, 220, 7, 3, 123, PaletteHelper.getColor(0, 543, 503, -1)), "speed");
 
         List<String> strings = new LinkedList<String>();
 
-        strings.add("первый");
+        /*strings.add("первый");
         strings.add("второй");
         strings.add("asdsadasdasdadas");
-
+*/
         this.guiManager.add(new Menu(50, 100, game.getInputHandler()), "menu");
 
         ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.menuCallback() {
@@ -139,13 +139,13 @@ public class Level {
 
 
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 20000 и покажется табличка
-        AbsQuest testQuest = new KillTemplate(3, Slime.class);
-        testQuest.setName("злые зеленые гандоны");
-        testQuest.setDescription("злые зеленые гандоны уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо убить 3-х зеленых попрыгунчиков");
+        AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class);
+        testQuest.setName("злые зеленые кучи");
+        testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
         testQuest.setQuestPromotion(new QuestPromotion() {
             @Override
             public void promotion(Player player) {
-                player.setScore(player.getScore() + 2000900);
+                player.setScore(player.getScore() + 1000);
             }
         });
         testQuest.accept(this.questHandler);
@@ -281,7 +281,7 @@ public class Level {
                     removeEntity(xto, yto, entity);
                     insertEntity(xt, yt, entity);
                     if (entity instanceof Player) {
-                        fog.clearFog2(xt, yt, Math.min(20, ((Player) entity).getClearFogRadius()));
+                        fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
                     }
                 }
             }

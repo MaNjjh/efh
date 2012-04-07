@@ -44,8 +44,12 @@ public class QuestHandler {
         for (String key : this.quests.keySet()) {
             AbsQuest quest = this.quests.get(key);
             if (quest instanceof KillTemplate) {
-                ((KillTemplate) quest).updateKills(mob.getClass().getSimpleName());
+                boolean updated = ((KillTemplate) quest).updateKills(mob.getClass().getSimpleName());
                 checkQuest(quest);
+                if (updated && this.quests.containsKey(key)) {
+                    String message = String.format("Осталось убить '%s' монстров!", ((KillTemplate) quest).toCompleted());
+                    this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+                }
             }
         }
     }

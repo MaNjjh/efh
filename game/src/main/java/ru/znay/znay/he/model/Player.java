@@ -3,6 +3,7 @@ package ru.znay.znay.he.model;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.FurnitureItem;
 import ru.znay.znay.he.model.item.Item;
@@ -12,6 +13,7 @@ import ru.znay.znay.he.model.item.resource.Life;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
 
@@ -37,7 +39,7 @@ public class Player extends Mob {
         this.team = ETeam.PLAYER_TEAM;
         this.inputHandler = inputHandler;
         this.game = game;
-        this.bloodColor = PaletteHelper.getColor(-1, 0, 0, 505);
+        this.bloodColor = 0xcc00cc;
         this.slowPeriod = 4;
     }
 
@@ -95,21 +97,6 @@ public class Player extends Mob {
 
     @Override
     public void touchedBy(Entity entity) {
-
-        if (entity instanceof Coin) {
-            Coin coin = (Coin) entity;
-            score += coin.getCost();
-        }
-
-        if (entity instanceof Life) {
-            Life life = (Life) entity;
-            health += life.getLife();
-        }
-
-        if (entity instanceof Resource) {
-            Sound.pickup.play();
-            entity.setRemoved(true);
-        }
         if ((entity.getTeam() != this.team)) {
             entity.touchedBy(this);
         }
@@ -176,6 +163,23 @@ public class Player extends Mob {
             furniture.render(screen);
 
         }
+    }
+
+    @Override
+    public void touchItem(Resource resource) {
+        if (resource instanceof Coin) {
+            Coin coin = (Coin) resource;
+            score += coin.getCost();
+            level.add(new FlowText("+" + coin.getCost(), x, y - Tile.HALF_SIZE, Font.yellowColor));
+        }
+
+        if (resource instanceof Life) {
+            Life life = (Life) resource;
+            health += life.getLife();
+        }
+
+        Sound.pickup.play();
+        resource.setRemoved(true);
     }
 
     public boolean take() {
@@ -249,7 +253,7 @@ public class Player extends Mob {
     }
 
     public int getClearFogRadius() {
-        return clearFogRadius + score / 1000;
+        return Math.min(clearFogRadius + score / 1000, 10);
     }
 
     public void setScore(int score) {
