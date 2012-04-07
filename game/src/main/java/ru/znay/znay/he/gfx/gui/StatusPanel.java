@@ -80,6 +80,8 @@ public class StatusPanel extends Panel {
 
         BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, xOff, yOff, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, pal, 0, temp);
 
+        //BitmapHelper.drawAura(temp,0xFF00FF,0x000000);
+
         Font.drawToBitmap(text, screen, 17, 4, currentColor, temp);
 
         this.image = null;

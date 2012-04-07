@@ -106,17 +106,17 @@ public class Level {
 
         this.guiManager = new GuiManager();
 
-        this.guiManager.add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(555, 555, 555, -1)), "money");
-        this.guiManager.add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(555, 555, 555, -1)), "health");
-        this.guiManager.add(new StatusPanel(150, 220, 7, 3, 123, PaletteHelper.getColor(555, 555, 555, -1)), "speed");
+        this.guiManager.add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(540, 540, 540, -1)), "money");
+        this.guiManager.add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(500, 500, 400, -1)), "health");
+        this.guiManager.add(new StatusPanel(150, 220, 7, 3, 123, PaletteHelper.getColor(0, 543, 503, -1)), "speed");
 
         List<String> strings = new LinkedList<String>();
 
-        //strings.add("первый");
-        //strings.add("второй");
-        //strings.add("asdsadasdasdadas");
+        strings.add("первый");
+        strings.add("второй");
+        strings.add("asdsadasdasdadas");
 
-        this.guiManager.add(new Menu(30, 60, game.getInputHandler()), "menu");
+        this.guiManager.add(new Menu(50, 100, game.getInputHandler()), "menu");
 
         ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.menuCallback() {
             @Override

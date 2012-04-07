@@ -93,15 +93,15 @@ public class BitmapHelper {
     public static void drawAura(Bitmap b, int alpha, int color) {
         int w = b.getWidth();
         int h = b.getHeight();
-        for (int x = 0; x < w - 1; x++)
-            for (int y = 0; y < h - 1; y++) {
+        for (int x = 1; x < w - 1; x++)
+            for (int y = 1; y < h - 1; y++) {
                 if (b.getPixels()[x + y * w] != alpha && b.getPixels()[x + y * w] != color) {
-                    if (b.getPixels()[x + (y - 1) * w] == alpha)
-                        b.getPixels()[x + (y - 1) * w] = color;
-                    if (b.getPixels()[(x - 1) + y * w] == alpha)
-                        b.getPixels()[(x - 1) + y * w] = color;
-                    if (b.getPixels()[x + (y + 1) * w] == alpha)
-                        b.getPixels()[x + (y + 1) * w] = color;
+                    if (b.getPixels()[x + ((y < 0) ? 0 : (y - 1)) * w] == alpha)
+                        b.getPixels()[x + ((y < 0) ? 0 : (y - 1)) * w] = color;
+                    if (b.getPixels()[((x < 0) ? 0 : (x - 1)) + y * w] == alpha)
+                        b.getPixels()[((x < 0) ? 0 : (x - 1)) + y * w] = color;
+                    if (b.getPixels()[x + ((y > w * h) ? w * h : (y + 1)) * w] == alpha)
+                        b.getPixels()[x + ((y > w * h) ? w * h : (y + 1)) * w] = color;
                     if (b.getPixels()[(x + 1) + y * w] == alpha)
                         b.getPixels()[(x + 1) + y * w] = color;
                 }
