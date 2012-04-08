@@ -1,13 +1,10 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.InputHandler;
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
-import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
 
-import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,12 +16,12 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Menu extends Panel {
-    public interface menuCallback {
+    public interface MenuCallback {
         public void result(int result);
     }
 
     private List<TextPanel> panels = new LinkedList<TextPanel>();
-    private menuCallback callback = null;
+    private MenuCallback callback = null;
     private int currentCell = -1;
     private InputHandler inputHandler;
 
@@ -35,7 +32,7 @@ public class Menu extends Panel {
         visible = false;
     }
 
-    public void showMenu(List<String> strings, menuCallback callback) {
+    public void showMenu(List<String> strings, MenuCallback callback) {
         if (strings == null || callback == null || strings.size() == 0) {
             System.out.println("showMenu error - null pointer");
             return;

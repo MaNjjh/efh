@@ -20,7 +20,6 @@ import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
-import ru.znay.znay.he.model.mob.Slime;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
@@ -118,7 +117,7 @@ public class Level {
 */
         this.guiManager.add(new Menu(50, 100, game.getInputHandler()), "menu");
 
-        ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.menuCallback() {
+        ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.MenuCallback() {
             @Override
             public void result(int result) {
                 switch (result) {
