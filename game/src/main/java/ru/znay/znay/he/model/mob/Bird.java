@@ -56,16 +56,6 @@ public class Bird extends Mob {
             this.yTarget = 5 * Tile.SIZE + random.nextInt((level.getHeight() - 5) * Tile.SIZE);
         }
 
-        int rr = 10 * Tile.HALF_SIZE;
-
-        List<Entity> entities = level.getEntities(x - rr, y - rr, x + rr, y + rr, null);
-        for (Entity entity : entities) {
-            if (entity instanceof Resource) {
-                this.xTarget = entity.getX();
-                this.yTarget = entity.getY();
-            }
-        }
-
         if (level.getPlayer() != null && !level.getPlayer().isRemoved()) {
 
             int xd = level.getPlayer().getX() - x;
@@ -76,6 +66,16 @@ public class Bird extends Mob {
             if (xd * xd + yd * yd <= vr * vr) {
                 this.xTarget = level.getPlayer().getX();
                 this.yTarget = level.getPlayer().getY();
+            }
+        }
+
+        int rr = 10 * Tile.HALF_SIZE;
+
+        List<Entity> entities = level.getEntities(x - rr, y - rr, x + rr, y + rr, null);
+        for (Entity entity : entities) {
+            if (entity instanceof Resource) {
+                this.xTarget = entity.getX();
+                this.yTarget = entity.getY();
             }
         }
 

@@ -19,6 +19,6 @@ public class FlowText extends TextParticle {
     @Override
     public void tick() {
         super.tick();
-        y--;
+        y -= 2;
     }
 }
