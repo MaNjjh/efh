@@ -37,6 +37,9 @@ public class Menu extends Panel {
             System.out.println("showMenu error - null pointer");
             return;
         }
+
+        if (visible) this.callback.result(-1);
+
         this.callback = callback;
         int i = 0;
         panels.clear();
