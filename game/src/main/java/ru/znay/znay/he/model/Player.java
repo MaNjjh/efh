@@ -32,8 +32,10 @@ public class Player extends Mob {
 
     private Game game;
     private Item activeItem;
-    private int score = 1000;
+    private int score = 0;
     private int clearFogRadius = 4;
+    private long goldTime;
+    private int goldCollect;
 
     public Player(Game game, InputHandler inputHandler) {
         this.team = ETeam.PLAYER_TEAM;
@@ -170,7 +172,13 @@ public class Player extends Mob {
         if (resource instanceof Coin) {
             Coin coin = (Coin) resource;
             score += coin.getCost();
-            level.add(new FlowText("+" + coin.getCost(), x, y - Tile.HALF_SIZE, Font.yellowColor));
+            goldCollect += coin.getCost();
+            if (System.currentTimeMillis() - goldTime > 100) {
+                level.add(new FlowText("+" + goldCollect, x, y - Tile.HALF_SIZE, Font.yellowColor));
+                goldCollect = 0;
+                goldTime = System.currentTimeMillis();
+                Sound.pickup.play();
+            }
         }
 
         if (resource instanceof Life) {
@@ -178,7 +186,6 @@ public class Player extends Mob {
             health += life.getLife();
         }
 
-        Sound.pickup.play();
         resource.setRemoved(true);
     }
 
