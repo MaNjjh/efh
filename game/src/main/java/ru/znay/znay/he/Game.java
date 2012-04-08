@@ -10,6 +10,7 @@ import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.furniture.Bucket;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.npc.NPC;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -45,6 +46,7 @@ public class Game extends Graphics implements Runnable {
         this.player = new Player(this, this.inputHandler);
         this.level = new Level(player, 0, this);
         this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
+        this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
         //this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
         this.inputHandler.releaseAll();
     }
