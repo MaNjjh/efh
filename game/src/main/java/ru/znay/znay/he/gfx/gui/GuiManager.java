@@ -6,6 +6,7 @@ import ru.znay.znay.he.gfx.model.Screen;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class GuiManager {
     private List<Panel> panelList = new LinkedList<Panel>();
-    private HashMap<String, Panel> panels = new HashMap<String, Panel>();
+    private Map<String, Panel> panels = new HashMap<String, Panel>();
 
     public GuiManager() {
 

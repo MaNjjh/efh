@@ -83,6 +83,7 @@ public class StatusPanel extends Panel {
         //BitmapHelper.drawAura(temp,0xFF00FF,0x000000);
 
         Font.drawToBitmap(text, screen, 17, 4, currentColor, temp);
+        BitmapHelper.drawShadow(temp,0xFF00FF,0x000000);
 
         this.image = null;
         this.image = temp;
