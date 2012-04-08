@@ -12,11 +12,11 @@ import java.util.List;
  * Time: 18:57
  * To change this template use File | Settings | File Templates.
  */
-public class MainMenu implements Menu.MenuCallback {
+public class MainMenu extends Parent {
     private static MainMenu mainMenu = null;
-    private List<String> strings = new LinkedList<String>();
 
     private MainMenu() {
+        super();
         strings.add("Управление");
         strings.add("Отмена");
     }
@@ -34,9 +34,5 @@ public class MainMenu implements Menu.MenuCallback {
             default:
                 return;
         }
-    }
-
-    public List<String> getStrings() {
-        return strings;
     }
 }
