@@ -3,6 +3,7 @@ package ru.znay.znay.he;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
 import ru.znay.znay.he.gfx.gui.Panel;
+import ru.znay.znay.he.gfx.gui.SpeedIndicator;
 import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
@@ -96,7 +97,7 @@ public class Game extends Graphics implements Runnable {
             ((StatusPanel) panel).setText(player.getHealth());
 
         if ((panel = level.getGuiManager().get("speed")) != null)
-            ((StatusPanel) panel).setText(player.getSlowPeriod());
+            ((SpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
 
         level.getGuiManager().render(this.screen);
 

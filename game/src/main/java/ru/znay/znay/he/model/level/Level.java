@@ -4,6 +4,7 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.Menu;
+import ru.znay.znay.he.gfx.gui.SpeedIndicator;
 import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
@@ -107,7 +108,7 @@ public class Level {
 
         this.guiManager.add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
         this.guiManager.add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
-        //this.guiManager.add(new StatusPanel(150, 220, 7, 3, 123, PaletteHelper.getColor(0, 543, 503, -1)), "speed");
+        this.guiManager.add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), this.game.getScreen()), "speed");
 
         List<String> strings = new LinkedList<String>();
 
