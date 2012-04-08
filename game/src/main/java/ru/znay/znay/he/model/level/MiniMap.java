@@ -143,6 +143,7 @@ public class MiniMap extends Panel {
     }
 
     public void render(Screen screen) {
+        if (!visible) return;
         super.render(screen);
         BitmapHelper.copy(resizedMiniMap, 0, 0, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, resizedMiniMap.getWidth(), resizedMiniMap.getHeight(), screen.getViewPort());
 
