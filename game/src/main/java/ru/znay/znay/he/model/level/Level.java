@@ -216,7 +216,7 @@ public class Level {
         this.add(player);
 
         trySpawn();
-        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));
+        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this,game.getInputHandler()));
     }
 
     public void trySpawn() {
