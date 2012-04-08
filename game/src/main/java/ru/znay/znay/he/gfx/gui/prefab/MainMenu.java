@@ -15,7 +15,7 @@ import java.util.List;
 public class MainMenu extends Parent {
     private static MainMenu mainMenu = null;
 
-    private MainMenu() {
+    protected MainMenu() {
         super();
         strings.add("Управление");
         strings.add("Отмена");

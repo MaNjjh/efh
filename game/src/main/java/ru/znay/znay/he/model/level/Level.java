@@ -19,6 +19,7 @@ import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.tree.AppleTree;
 import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
+import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -49,6 +50,7 @@ public class Level {
     private final static int HOLE_TILE = 0xFF606060;
     private final static int APPLE_TREE = 0xFF00FF00;
     private final static int FIR_TREE = 0xFF00CC00;
+    private final static int TREE_STUMP = 0xFF008800;
     private final static int PLAYER = 0xFFFF0000;
 
     private Random random = new Random();
@@ -192,12 +194,22 @@ public class Level {
                         break;
                     }
                     case FIR_TREE: {
+                        int r = random.nextInt(100);
+                        if (r < 72) break;
+                        if (r < 75) {
+                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                            break;
+                        }
                         if (random.nextBoolean()) {
                             add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
                         } else {
                             add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
                         }
 
+                        break;
+                    }
+                    case TREE_STUMP: {
+                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
                         break;
                     }
                     case LAVA_TILE: {
@@ -216,7 +228,7 @@ public class Level {
         this.add(player);
 
         trySpawn();
-        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this,game.getInputHandler()));
+        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this, game.getInputHandler()));
     }
 
     public void trySpawn() {

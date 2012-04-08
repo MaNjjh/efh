@@ -9,8 +9,14 @@ import ru.znay.znay.he.gfx.gui.Menu;
  * Time: 21:15
  * To change this template use File | Settings | File Templates.
  */
-public class Flora extends Parent{
+public class Flora extends Parent {
     private static Flora flora = null;
+
+    protected Flora() {
+        super();
+        strings.add("Собрать");
+        strings.add("Отмена");
+    }
 
     public static Flora getMainMenu() {
         if (flora == null)
