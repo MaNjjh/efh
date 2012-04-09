@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class InputHandler implements KeyListener, MouseMotionListener, MouseListener {
 
+    private static InputHandler inputHandler = null;
+
     private int xMousePos;
     private int yMousePos;
 
@@ -146,6 +148,28 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         defaultCursor = game.getCursor();
     }
 
+    private InputHandler() {
+
+    }
+
+    public void init(Game game) {
+        if (inputHandler != null) return;
+        this.game = game;
+        game.addKeyListener(this);
+        game.addMouseMotionListener(this);
+        game.addMouseListener(this);
+
+        emptyCursor = Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB), new Point(0, 0), "empty");
+        defaultCursor = game.getCursor();
+    }
+
+    public static InputHandler getInstance() {
+        if (inputHandler == null)
+            inputHandler = new InputHandler();
+
+        return inputHandler;
+    }
+
     public void keyPressed(KeyEvent ke) {
         toggle(ke, true);
     }
@@ -172,7 +196,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (ke.getKeyCode() == KeyEvent.VK_E) menuUse.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_M) miniMap.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_I) inventory.toggle(pressed);
-        
+
         if (ke.getKeyCode() == KeyEvent.VK_TAB) menu.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_ALT) menu.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_ALT_GRAPH) menu.toggle(pressed);

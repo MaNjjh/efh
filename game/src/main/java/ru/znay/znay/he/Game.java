@@ -28,7 +28,7 @@ public class Game extends Graphics implements Runnable {
 
     private boolean running = false;
     private Level level;
-    private InputHandler inputHandler = new InputHandler(this);
+    private InputHandler inputHandler; //= new InputHandler(this);
     private Player player;
     private int xScroll;
     private int yScroll;
@@ -44,6 +44,10 @@ public class Game extends Graphics implements Runnable {
     }
 
     public void init() {
+        //а вот и инициализация
+        InputHandler.getInstance().init(this);
+        //добавил для демонстрации использования
+        this.inputHandler = InputHandler.getInstance();
         this.player = new Player(this, this.inputHandler);
         this.level = new Level(player, 0, this);
         this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
