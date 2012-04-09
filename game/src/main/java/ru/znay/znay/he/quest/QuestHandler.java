@@ -20,11 +20,9 @@ import java.util.Map;
  */
 public class QuestHandler {
     private Map<String, AbsQuest> quests = new HashMap<String, AbsQuest>();
-    private GuiManager guiManager;
     private Player player;
 
-    public QuestHandler(GuiManager guiManager, Player player) {
-        this.guiManager = guiManager;
+    public QuestHandler(Player player) {
         this.player = player;
     }
 
@@ -36,7 +34,7 @@ public class QuestHandler {
         if (this.quests.get(id) != null) return false;
 
         this.quests.put(id, absQuest);
-        this.guiManager.add(new TypedTextPanel(absQuest.getDescription(), 4, 4, 50));
+        GuiManager.getInstance().add(new TypedTextPanel(absQuest.getDescription(), 4, 4, 50));
         return true;
     }
 
@@ -48,7 +46,7 @@ public class QuestHandler {
                 checkQuest(quest);
                 if (updated && this.quests.containsKey(key)) {
                     String message = String.format("Осталось убить '%s' монстров!", ((KillTemplate) quest).toCompleted());
-                    this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+                    GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50));
                 }
             }
         }
@@ -58,7 +56,7 @@ public class QuestHandler {
         if (quest.isCompleted()) {
             String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
 
-            this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+            GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50));
 
             if (quest.getQuestPromotion() != null) {
                 quest.getQuestPromotion().promotion(this.player);
@@ -74,7 +72,7 @@ public class QuestHandler {
             if (quest.isCompleted()) {
                 String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
 
-                this.guiManager.add(new TypedTextPanel(message, 4, 4, 50));
+                GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50));
 
                 if (quest.getQuestPromotion() != null) {
                     quest.getQuestPromotion().promotion(this.player);

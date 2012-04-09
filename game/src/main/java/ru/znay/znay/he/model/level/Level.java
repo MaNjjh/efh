@@ -70,7 +70,6 @@ public class Level {
     private List<Entity>[] entitiesInTiles;
 
     private List<Entity> entities = new ArrayList<Entity>();
-    private GuiManager guiManager;
 
     private QuestHandler questHandler;
 
@@ -106,11 +105,10 @@ public class Level {
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
-        this.guiManager = new GuiManager();
 
-        this.guiManager.add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
-        this.guiManager.add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
-        this.guiManager.add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), this.game.getScreen()), "speed");
+        GuiManager.getInstance().add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
+        GuiManager.getInstance().add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
+        GuiManager.getInstance().add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), this.game.getScreen()), "speed");
 
         List<String> strings = new LinkedList<String>();
 
@@ -118,9 +116,9 @@ public class Level {
         strings.add("второй");
         strings.add("asdsadasdasdadas");
 */
-        this.guiManager.add(new Menu(50, 100), "menu");
+        GuiManager.getInstance().add(new Menu(50, 100), "menu");
 
-        ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.MenuCallback() {
+        ((Menu) (GuiManager.getInstance().get("menu"))).showMenu(strings, new Menu.MenuCallback() {
             @Override
             public void result(int result) {
                 switch (result) {
@@ -137,7 +135,7 @@ public class Level {
             }
         });
 
-        this.questHandler = new QuestHandler(this.guiManager, player);
+        this.questHandler = new QuestHandler(player);
 
 
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 20000 и покажется табличка
@@ -228,7 +226,7 @@ public class Level {
         this.add(player);
 
         trySpawn();
-        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));
+        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));
     }
 
     public void trySpawn() {
@@ -269,7 +267,7 @@ public class Level {
             this.questHandler.checkAllQuest();
         }*/
 
-        this.guiManager.tick();
+        GuiManager.getInstance().tick();
 
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
@@ -452,10 +450,6 @@ public class Level {
 
     public void setMonsterDensity(int monsterDensity) {
         this.monsterDensity = monsterDensity;
-    }
-
-    public GuiManager getGuiManager() {
-        return guiManager;
     }
 
     public Fog getFog() {

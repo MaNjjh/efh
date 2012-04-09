@@ -2,6 +2,7 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
+import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.Panel;
 import ru.znay.znay.he.gfx.gui.SpeedIndicator;
 import ru.znay.znay.he.gfx.gui.StatusPanel;
@@ -46,7 +47,7 @@ public class Game extends Graphics implements Runnable {
         //а вот и инициализация
         InputHandler.getInstance().init(this);
         this.player = new Player(this);
-        this.level = new Level(player, 0, this);
+        this.level = new Level(player, 1, this);
         this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
         this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
         //this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
@@ -91,16 +92,16 @@ public class Game extends Graphics implements Runnable {
         level.renderFog(this.screen, xScroll, yScroll);
 
         Panel panel;
-        if ((panel = level.getGuiManager().get("money")) != null)
+        if ((panel = GuiManager.getInstance().get("money")) != null)
             ((StatusPanel) panel).setText(player.getScore());
 
-        if ((panel = level.getGuiManager().get("health")) != null)
+        if ((panel = GuiManager.getInstance().get("health")) != null)
             ((StatusPanel) panel).setText(player.getHealth());
 
-        if ((panel = level.getGuiManager().get("speed")) != null)
+        if ((panel = GuiManager.getInstance().get("speed")) != null)
             ((SpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
 
-        level.getGuiManager().render(this.screen);
+        GuiManager.getInstance().render(this.screen);
 
         //Font.renderFrame(this.screen, "меню", 4, 4, 11, 11);
         //Font.renderPanel("фпс: " + fps + " объектов: " + this.level.getEntities().size(), this.screen, 10, 10, PaletteHelper.getColor(5, 555, 555, 555));

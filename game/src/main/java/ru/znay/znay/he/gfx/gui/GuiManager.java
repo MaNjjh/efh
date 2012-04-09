@@ -19,9 +19,11 @@ public class GuiManager {
     private List<Panel> panelList = new LinkedList<Panel>();
     private Map<String, Panel> panels = new HashMap<String, Panel>();
 
+    private static GuiManager guiManager = null;
+
     public static boolean isOpenedMenu = false;
 
-    public GuiManager() {
+    private GuiManager() {
 
         //add(new StatusPanel(30,30,3,3,123, PaletteHelper.getColor(555, 555, 555, -1)));
 
@@ -73,5 +75,12 @@ public class GuiManager {
         for (Panel panel : panelList) {
             panel.render(screen);
         }
+    }
+
+    public static GuiManager getInstance() {
+        if (guiManager == null)
+            guiManager = new GuiManager();
+
+        return guiManager;
     }
 }
