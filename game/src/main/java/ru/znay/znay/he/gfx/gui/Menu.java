@@ -40,6 +40,8 @@ public class Menu extends Panel {
 
         if (visible) this.callback.result(-1);
 
+        GuiManager.isOpenedMenu = true;
+
         this.callback = callback;
         int i = 0;
         panels.clear();
@@ -104,6 +106,7 @@ public class Menu extends Panel {
         if (!visible) return;
         callback.result(currentCell);
         visible = false;
+        GuiManager.isOpenedMenu = false;
     }
 
     @Override

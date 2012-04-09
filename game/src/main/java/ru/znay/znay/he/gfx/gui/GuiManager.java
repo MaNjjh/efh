@@ -19,6 +19,8 @@ public class GuiManager {
     private List<Panel> panelList = new LinkedList<Panel>();
     private Map<String, Panel> panels = new HashMap<String, Panel>();
 
+    public static boolean isOpenedMenu = false;
+
     public GuiManager() {
 
         //add(new StatusPanel(30,30,3,3,123, PaletteHelper.getColor(555, 555, 555, -1)));
