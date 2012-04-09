@@ -28,7 +28,6 @@ public class Game extends Graphics implements Runnable {
 
     private boolean running = false;
     private Level level;
-    private InputHandler inputHandler; //= new InputHandler(this);
     private Player player;
     private int xScroll;
     private int yScroll;
@@ -46,24 +45,22 @@ public class Game extends Graphics implements Runnable {
     public void init() {
         //а вот и инициализация
         InputHandler.getInstance().init(this);
-        //добавил для демонстрации использования
-        this.inputHandler = InputHandler.getInstance();
-        this.player = new Player(this, this.inputHandler);
+        this.player = new Player(this);
         this.level = new Level(player, 0, this);
         this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
         this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
         //this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
-        this.inputHandler.releaseAll();
+        InputHandler.getInstance().releaseAll();
     }
 
     public void tick() {
         if (!hasFocus()) {
-            this.inputHandler.releaseAll();
+            InputHandler.getInstance().releaseAll();
         } else {
-            this.inputHandler.tick();
+            InputHandler.getInstance().tick();
 
             if (player.isRemoved()) {
-                if (inputHandler.attack.down) {
+                if (InputHandler.getInstance().attack.down) {
                     init();
                 }
             }
@@ -197,9 +194,5 @@ public class Game extends Graphics implements Runnable {
 
     public int getYScroll() {
         return yScroll;
-    }
-
-    public InputHandler getInputHandler() {
-        return inputHandler;
     }
 }

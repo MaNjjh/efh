@@ -23,12 +23,10 @@ public class Menu extends Panel {
     private List<TextPanel> panels = new LinkedList<TextPanel>();
     private MenuCallback callback = null;
     private int currentCell = -1;
-    private InputHandler inputHandler;
 
-    public Menu(int x, int y, InputHandler inputHandler) {
+    public Menu(int x, int y) {
         this.x = x;
         this.y = y;
-        this.inputHandler = inputHandler;
         visible = false;
     }
 
@@ -89,15 +87,15 @@ public class Menu extends Panel {
     public void tick() {
         if (!visible) return;
 
-        if (inputHandler.menuDown.clicked) {
+        if (InputHandler.getInstance().menuDown.clicked) {
            selectNext();
         }
 
-        if (inputHandler.menuUp.clicked) {
+        if (InputHandler.getInstance().menuUp.clicked) {
             selectPrev();
         }
 
-        if (inputHandler.menuUse.clicked) {
+        if (InputHandler.getInstance().menuUse.clicked) {
             select();
         }
     }

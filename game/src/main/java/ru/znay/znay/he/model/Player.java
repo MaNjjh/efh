@@ -28,8 +28,6 @@ import java.util.List;
  */
 
 public class Player extends Mob {
-    private InputHandler inputHandler;
-
     private Game game;
     private Item activeItem;
     private int score = 0;
@@ -37,9 +35,8 @@ public class Player extends Mob {
     private long goldTime;
     private int goldCollect;
 
-    public Player(Game game, InputHandler inputHandler) {
+    public Player(Game game) {
         this.team = ETeam.PLAYER_TEAM;
-        this.inputHandler = inputHandler;
         this.game = game;
         this.bloodColor = 0xcc00cc;
         this.slowPeriod = 4;
@@ -50,6 +47,8 @@ public class Player extends Mob {
 
         int xa = 0;
         int ya = 0;
+
+        InputHandler inputHandler = InputHandler.getInstance();
 
         if (inputHandler.up.down) {
             ya--;

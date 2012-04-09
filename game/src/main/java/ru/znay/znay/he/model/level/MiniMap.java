@@ -29,15 +29,13 @@ public class MiniMap extends Panel {
     private Bitmap miniMap;
     private Bitmap resizedMiniMap;
     private int tick = 10;
-    private InputHandler inputHandler;
 
-    public MiniMap(int posX, int posY, Level level, InputHandler inputHandler) {
+    public MiniMap(int posX, int posY, Level level) {
 
         super(posX, posY, (level.getWidth() >> 1) >> 3, (level.getHeight() >> 1) >> 3, PaletteHelper.getColor(-1, 530, 0, 111));
         this.level = level;
         this.miniMap = new Bitmap(level.getWidth(), level.getHeight());
         this.resizedMiniMap = new Bitmap(level.getHeight() >> 1, level.getWidth() >> 1);
-        this.inputHandler = inputHandler;
     }
 
     public void markObject(int x, int y, int color) {
@@ -63,7 +61,7 @@ public class MiniMap extends Panel {
 
     public void tick() {
         tick++;
-        if (inputHandler.miniMap.clicked) {
+        if (InputHandler.getInstance().miniMap.clicked) {
             visible = !visible;
             changed = true;
         }

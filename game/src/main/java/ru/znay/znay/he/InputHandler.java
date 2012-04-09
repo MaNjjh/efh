@@ -153,7 +153,6 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     }
 
     public void init(Game game) {
-        if (inputHandler != null) return;
         this.game = game;
         game.addKeyListener(this);
         game.addMouseMotionListener(this);

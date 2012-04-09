@@ -118,7 +118,7 @@ public class Level {
         strings.add("второй");
         strings.add("asdsadasdasdadas");
 */
-        this.guiManager.add(new Menu(50, 100, game.getInputHandler()), "menu");
+        this.guiManager.add(new Menu(50, 100), "menu");
 
         ((Menu) (this.guiManager.get("menu"))).showMenu(strings, new Menu.MenuCallback() {
             @Override
@@ -228,7 +228,7 @@ public class Level {
         this.add(player);
 
         trySpawn();
-        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this, game.getInputHandler()));
+        guiManager.add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));
     }
 
     public void trySpawn() {
