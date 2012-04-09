@@ -194,6 +194,9 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (ke.getKeyCode() == KeyEvent.VK_F) menuDown.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_R) menuUp.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_E) menuUse.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_UP) menuUp.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_DOWN) menuDown.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_ENTER) menuUse.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_M) miniMap.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_I) inventory.toggle(pressed);
 
