@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model.builds;
+package ru.znay.znay.he.model.builds.utensils;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
