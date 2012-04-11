@@ -39,11 +39,10 @@ public abstract class Tree extends Mob {
     @Override
     public void render(Screen screen) {
 
-        int xt = (x - xr << 1) - screen.getXOffset();
+        int xt = (x - (xr << 1)) - screen.getXOffset();
         int yt = (y - (yr << 1) * 3 - yr) - screen.getYOffset();
 
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
-
     }
 
 }
