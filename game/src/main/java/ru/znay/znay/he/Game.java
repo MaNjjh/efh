@@ -44,13 +44,9 @@ public class Game extends Graphics implements Runnable {
     }
 
     public void init() {
-        //а вот и инициализация
         InputHandler.getInstance().init(this);
         this.player = new Player(this);
-        this.level = new Level(player, 1, this);
-        this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
-        this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
-        //this.level.add(new Board("Мы долго ждали тебя! Ты узнаешь много нового и забудешь много старого!", player.getX() - 20, player.getY() - 20));
+        this.loadLevel(0);
         InputHandler.getInstance().releaseAll();
     }
 
@@ -195,5 +191,11 @@ public class Game extends Graphics implements Runnable {
 
     public int getYScroll() {
         return yScroll;
+    }
+
+    public void loadLevel(int i) {
+        this.level = new Level(this.player, i, this);
+        this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
+        this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
     }
 }

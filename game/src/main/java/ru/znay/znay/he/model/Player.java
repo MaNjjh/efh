@@ -273,4 +273,18 @@ public class Player extends Mob {
     public void setActiveItem(Item activeItem) {
         this.activeItem = activeItem;
     }
+
+    public void moveXY(int x, int y) {
+        this.x = x;
+        this.y = y;
+        InputHandler.getInstance().releaseAll();
+    }
+    
+    public void moveLevel(int newLevel,int x,int y)
+    {
+        this.game.loadLevel(newLevel);
+        this.x = x;
+        this.y = y;
+        InputHandler.getInstance().releaseAll();
+    }
 }

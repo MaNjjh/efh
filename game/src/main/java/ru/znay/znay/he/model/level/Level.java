@@ -23,6 +23,7 @@ import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
+import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.promotion.QuestPromotion;
@@ -51,7 +52,8 @@ public class Level {
     private final static int APPLE_TREE = 0xFF00FF00;
     private final static int FIR_TREE = 0xFF00CC00;
     private final static int TREE_STUMP = 0xFF008800;
-    private final static int PLAYER = 0xFFFF0000;
+    private final static int PLAYER_SPAWN_1 = 0xFFFF0000;
+    private final static int PLAYER_SPAWN_2 = 0xFFFE0000;
 
     private Random random = new Random();
 
@@ -109,6 +111,11 @@ public class Level {
         GuiManager.getInstance().add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
         GuiManager.getInstance().add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
         GuiManager.getInstance().add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), this.game.getScreen()), "speed");
+
+        if (level == 0)
+            this.add(new Warp(0, player.getX()+10, player.getX()+10, 1, 50, 50, this.spriteCollector, this.player));
+        else
+            this.add(new Warp(1, player.getX()-10, player.getX()-10, 0, 110, 50, this.spriteCollector, this.player));
 
         List<String> strings = new LinkedList<String>();
 
@@ -214,7 +221,7 @@ public class Level {
                         setTile(i, j, Tile.lava, 0);
                         break;
                     }
-                    case PLAYER: {
+                    case PLAYER_SPAWN_1: {
                         player.setX((i << 4) + Tile.HALF_SIZE);
                         player.setY((j << 4) + Tile.HALF_SIZE);
                         break;
