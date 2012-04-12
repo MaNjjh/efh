@@ -31,7 +31,6 @@ public class Warp extends Entity implements Menu.MenuCallback {
     private int dstX;
     private int dstY;
     private TextPanel textPanel;
-    private List<String> strings = new LinkedList<String>();
     private Player player;
     private long tick;
 
@@ -48,9 +47,6 @@ public class Warp extends Entity implements Menu.MenuCallback {
         spriteCollector.addWrapper(new SpriteWrapper(0, 11 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 222, 333)));
 
         this.sprite = spriteCollector.mergedWrappers("warp", 2, 0, false);
-
-        strings.add("Переход");
-        strings.add("Отмена");
     }
 
     @Override
@@ -83,6 +79,10 @@ public class Warp extends Entity implements Menu.MenuCallback {
         textPanel = new TextPanel("Совершить переход" + mes, 4, 4);
 
         GuiManager.getInstance().add(textPanel,"warp_menu");
+
+        List<String> strings = new LinkedList<String>();
+        strings.add("Переход");
+        strings.add("Отмена");
 
         ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
     }

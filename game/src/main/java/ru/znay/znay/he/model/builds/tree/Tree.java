@@ -35,6 +35,10 @@ public abstract class Tree extends Mob {
         this.level.setTile(x >> 4, y >> 4, Tile.hole, 0);
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+    }
 
     @Override
     public void render(Screen screen) {
@@ -45,4 +49,8 @@ public abstract class Tree extends Mob {
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
     }
 
+    @Override
+    public void touchedBy(Entity entity) {
+        super.touchedBy(entity);
+    }
 }
