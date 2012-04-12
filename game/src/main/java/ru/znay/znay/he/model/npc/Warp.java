@@ -51,9 +51,6 @@ public class Warp extends Entity implements Menu.MenuCallback {
 
         strings.add("Переход");
         strings.add("Отмена");
-
-        System.out.println(player);
-
     }
 
     @Override
