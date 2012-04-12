@@ -54,6 +54,7 @@ public class Level {
     private final static int TREE_STUMP = 0xFF008800;
     private final static int PLAYER_SPAWN_1 = 0xFFFF0000;
     private final static int PLAYER_SPAWN_2 = 0xFFFE0000;
+    private final static int SHRUBBERY = 0xFF00AA00;
 
     private Random random = new Random();
 
@@ -140,7 +141,7 @@ public class Level {
         this.questHandler = new QuestHandler(player);
 
 
-        //Квест убить 3х слаймов.. по окончанию игроку заплотят 20000 и покажется табличка
+        //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
         AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class);
         testQuest.setName("злые зеленые кучи");
         testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");

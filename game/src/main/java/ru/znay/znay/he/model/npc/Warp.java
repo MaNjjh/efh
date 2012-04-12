@@ -47,7 +47,7 @@ public class Warp extends Entity implements Menu.MenuCallback {
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(0, 11 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 222, 333)));
 
-        this.sprite = spriteCollector.mergedWrappers("warp", 2, 0, true);
+        this.sprite = spriteCollector.mergedWrappers("warp", 2, 0, false);
 
         strings.add("Переход");
         strings.add("Отмена");
