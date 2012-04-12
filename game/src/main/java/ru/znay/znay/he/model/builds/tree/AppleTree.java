@@ -44,7 +44,7 @@ public class AppleTree extends Tree implements Menu.MenuCallback {
         if (apple) {
             spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 0 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(-1, -1, 510, -1)));
         }
-        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, true);
 
     }
 
@@ -52,6 +52,8 @@ public class AppleTree extends Tree implements Menu.MenuCallback {
     public void result(int result) {
         textPanel.close();
         tick2 = System.currentTimeMillis() + 2000;
+
+        if (result == 1) return;
 
         wrapSprite((apple = !apple));
 

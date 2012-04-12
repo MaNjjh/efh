@@ -30,17 +30,17 @@ public class Shrubbery extends Tree implements Menu.MenuCallback {
     private TextPanel textPanel;
 
     public Shrubbery(int x, int y, SpriteCollector spriteCollector) {
-        super(x, y, 4, 4);
+        super(x, y, 4, 1);
         this.spriteCollector = spriteCollector;
         wrapSprite(berry);
     }
 
     private void wrapSprite(boolean flag) {
         spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 21 : 25) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
-        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 23 : 27) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor((flag ? 100 : -1), 210, 320, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 21 : 25) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(20, 30, 40, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 23 : 27) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(10, (flag ? 5 : -1), 10, -1)));
 
-        this.sprite = spriteCollector.mergedWrappers("shrubbery_" + (type ? "0" : "1") + (flag ? "_berry" : ""), 1, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("shrubbery_" + (type ? "0" : "1") + (flag ? "_berry" : ""), 1, 0, false);
     }
 
     @Override
@@ -56,6 +56,8 @@ public class Shrubbery extends Tree implements Menu.MenuCallback {
     public void result(int result) {
         textPanel.close();
         tick2 = System.currentTimeMillis() + 2000;
+
+        if (result == 1) return;
 
         wrapSprite((berry = !berry));
 

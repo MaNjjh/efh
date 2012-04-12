@@ -16,10 +16,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.tree.AppleTree;
-import ru.znay.znay.he.model.builds.tree.FirTree;
-import ru.znay.znay.he.model.builds.tree.PineTree;
-import ru.znay.znay.he.model.builds.tree.TreeStump;
+import ru.znay.znay.he.model.builds.tree.*;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -54,7 +51,7 @@ public class Level {
     private final static int TREE_STUMP = 0xFF008800;
     private final static int PLAYER_SPAWN_1 = 0xFFFF0000;
     private final static int PLAYER_SPAWN_2 = 0xFFFE0000;
-    private final static int SHRUBBERY = 0xFF00AA00;
+    private final static int SHRUBBERY = 0xFF005500;
 
     private Random random = new Random();
 
@@ -213,6 +210,11 @@ public class Level {
                         add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
                         break;
                     }
+                    case SHRUBBERY: {
+                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        break;
+                    }
+
                     case LAVA_TILE: {
                         setTile(i, j, Tile.lava, 0);
                         break;
@@ -229,13 +231,13 @@ public class Level {
         this.add(player);
 
         if (level == 0)
-            this.add(new Warp(0, 9<<4, 115<<4, 1, 50<<4, 50<<4, this.spriteCollector, this.player));
+            this.add(new Warp(0, 9 << 4, 115 << 4, 1, 50 << 4, 50 << 4, this.spriteCollector, this.player));
         else
-            this.add(new Warp(1, 52<<4, 52<<4, 0, 7<<4, 117<<4, this.spriteCollector, this.player));
+            this.add(new Warp(1, 52 << 4, 52 << 4, 0, 7 << 4, 117 << 4, this.spriteCollector, this.player));
 
         trySpawn();
         GuiManager.getInstance().remove("minimap");
-        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this),"minimap");
+        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
     }
 
     public void trySpawn() {
