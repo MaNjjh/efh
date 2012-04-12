@@ -2,6 +2,7 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
+import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -50,44 +51,46 @@ public class Player extends Mob {
 
         InputHandler inputHandler = InputHandler.getInstance();
 
-        if (inputHandler.up.down) {
-            ya--;
-        }
-        if (inputHandler.down.down) {
-            ya++;
-        }
-        if (inputHandler.left.down) {
-            xa--;
-        }
-        if (inputHandler.right.down) {
-            xa++;
-        }
+        if (!GuiManager.isOpenedMenu) {
+            if (inputHandler.up.down) {
+                ya--;
+            }
+            if (inputHandler.down.down) {
+                ya++;
+            }
+            if (inputHandler.left.down) {
+                xa--;
+            }
+            if (inputHandler.right.down) {
+                xa++;
+            }
 
-        if (inputHandler.attack.clicked) {
-            take();
+            if (inputHandler.attack.clicked) {
+                take();
 
-            /*if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {
-                if (score >= Mushroom.cost) {
-                    if (level != null) {
-                        level.add(new Mushroom(x, y));
-                        score -= Mushroom.cost;
+                /*if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {
+                    if (score >= Mushroom.cost) {
+                        if (level != null) {
+                            level.add(new Mushroom(x, y));
+                            score -= Mushroom.cost;
+                        }
                     }
+                }*/
+            }
+
+            if (inputHandler.mouse.down && activeItem == null) {
+
+                int xDiff = inputHandler.getXMousePos() - x;
+                int yDiff = inputHandler.getYMousePos() - y;
+
+                double m = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+                double vx = xDiff / m;
+                double vy = yDiff / m;
+
+                if (tickTime % 9 == 0) {
+                    this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
                 }
-            }*/
-        }
-
-        if (inputHandler.mouse.down && activeItem == null) {
-
-            int xDiff = inputHandler.getXMousePos() - x;
-            int yDiff = inputHandler.getYMousePos() - y;
-
-            double m = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
-
-            double vx = xDiff / m;
-            double vy = yDiff / m;
-
-            if (tickTime % 9 == 0) {
-                this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
             }
         }
 
@@ -279,9 +282,8 @@ public class Player extends Mob {
         this.y = y;
         InputHandler.getInstance().releaseAll();
     }
-    
-    public void moveLevel(int newLevel,int x,int y)
-    {
+
+    public void moveLevel(int newLevel, int x, int y) {
         this.game.loadLevel(newLevel);
         this.x = x;
         this.y = y;
