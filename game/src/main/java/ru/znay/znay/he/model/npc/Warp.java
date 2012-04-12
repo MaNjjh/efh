@@ -33,6 +33,7 @@ public class Warp extends Entity implements Menu.MenuCallback {
     private TextPanel textPanel;
     private List<String> strings = new LinkedList<String>();
     private Player player;
+    private long tick;
 
     public Warp(int srcLevel, int srcX, int srcY, int dstLevel, int dstX, int dstY, SpriteCollector spriteCollector, Player player) {
         this.srcLevel = srcLevel;
@@ -50,7 +51,7 @@ public class Warp extends Entity implements Menu.MenuCallback {
 
         strings.add("Переход");
         strings.add("Отмена");
-        
+
         System.out.println(player);
 
     }
@@ -66,9 +67,9 @@ public class Warp extends Entity implements Menu.MenuCallback {
 
     @Override
     public void touchedBy(Entity entity) {
-        if (entity instanceof Player)
-        {
-            System.out.println("touch");
+        if (tick > System.currentTimeMillis()) return;
+
+        if (entity instanceof Player) {
             showMenu();
         }
     }
@@ -101,5 +102,7 @@ public class Warp extends Entity implements Menu.MenuCallback {
         textPanel.close();
         if (result == 0)
             doWarp();
+
+        tick = System.currentTimeMillis() + 2000;
     }
 }
