@@ -195,7 +195,8 @@ public class Game extends Graphics implements Runnable {
 
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
-        this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
+        //this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
         this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
+
     }
 }

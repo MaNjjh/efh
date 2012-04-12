@@ -112,11 +112,6 @@ public class Level {
         GuiManager.getInstance().add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
         GuiManager.getInstance().add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), this.game.getScreen()), "speed");
 
-        if (level == 0)
-            this.add(new Warp(0, player.getX()+10, player.getX()+10, 1, 50, 50, this.spriteCollector, this.player));
-        else
-            this.add(new Warp(1, player.getX()-10, player.getX()-10, 0, 110, 50, this.spriteCollector, this.player));
-
         List<String> strings = new LinkedList<String>();
 
         /*strings.add("первый");
@@ -231,6 +226,11 @@ public class Level {
         }
 
         this.add(player);
+
+        if (level == 0)
+            this.add(new Warp(0, 9<<4, 115<<4, 1, 50<<4, 50<<4, this.spriteCollector, this.player));
+        else
+            this.add(new Warp(1, 52<<4, 52<<4, 0, 7<<4, 117<<4, this.spriteCollector, this.player));
 
         trySpawn();
         GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));

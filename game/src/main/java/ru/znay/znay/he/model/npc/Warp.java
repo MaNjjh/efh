@@ -38,8 +38,6 @@ public class Warp extends Entity implements Menu.MenuCallback {
         this.srcLevel = srcLevel;
         this.x = srcX;
         this.y = srcY;
-        this.xr = 2;
-        this.yr = 2;
         this.dstLevel = dstLevel;
         this.dstX = dstX;
         this.dstY = dstY;
@@ -48,17 +46,20 @@ public class Warp extends Entity implements Menu.MenuCallback {
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(0, 11 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 222, 333)));
 
-        this.sprite = spriteCollector.mergedWrappers("Warp", 1, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("warp", 2, 0, true);
 
         strings.add("Переход");
         strings.add("Отмена");
+        
+        System.out.println(player);
+
     }
 
     @Override
     public void render(Screen screen) {
 
-        int xt = (x - (xr << 1)) - screen.getXOffset();
-        int yt = (y - (yr << 1) * 3 - yr) - screen.getYOffset();
+        int xt = (x - 4) - screen.getXOffset();
+        int yt = (y - 5 * 3 - yr) - screen.getYOffset();
 
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
     }
@@ -66,7 +67,10 @@ public class Warp extends Entity implements Menu.MenuCallback {
     @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Player)
+        {
+            System.out.println("touch");
             showMenu();
+        }
     }
 
     private void showMenu() {
@@ -82,11 +86,11 @@ public class Warp extends Entity implements Menu.MenuCallback {
 
         GuiManager.getInstance().add(textPanel);
 
-        ((Menu) GuiManager.getInstance().get("meun")).showMenu(strings, this);
+        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
     }
 
     private void doWarp() {
-        if (srcLevel != dstLevel)
+        if (srcLevel == dstLevel)
             player.moveXY(dstX, dstY);
         else
             player.moveLevel(dstLevel, dstX, dstY);
