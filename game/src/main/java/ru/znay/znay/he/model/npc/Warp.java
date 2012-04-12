@@ -82,7 +82,7 @@ public class Warp extends Entity implements Menu.MenuCallback {
 
         textPanel = new TextPanel("Совершить переход" + mes, 4, 4);
 
-        GuiManager.getInstance().add(textPanel);
+        GuiManager.getInstance().add(textPanel,"warp_menu");
 
         ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
     }

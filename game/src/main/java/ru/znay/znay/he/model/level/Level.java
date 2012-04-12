@@ -233,7 +233,8 @@ public class Level {
             this.add(new Warp(1, 52<<4, 52<<4, 0, 7<<4, 117<<4, this.spriteCollector, this.player));
 
         trySpawn();
-        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this));
+        GuiManager.getInstance().remove("minimap");
+        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this),"minimap");
     }
 
     public void trySpawn() {
