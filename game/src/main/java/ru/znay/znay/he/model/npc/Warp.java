@@ -1,11 +1,9 @@
 package ru.znay.znay.he.model.npc;
 
-import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.Menu;
 import ru.znay.znay.he.gfx.gui.TextPanel;
-import ru.znay.znay.he.gfx.gui.TypedTextPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -25,7 +23,7 @@ import java.util.List;
  * Time: 12:10
  * To change this template use File | Settings | File Templates.
  */
-public class Warp extends Entity implements Menu.MenuCallback {
+public class Warp extends Entity {
     private int srcLevel;
     private int dstLevel;
     private int dstX;
@@ -78,13 +76,22 @@ public class Warp extends Entity implements Menu.MenuCallback {
 
         textPanel = new TextPanel("Совершить переход" + mes, 4, 4);
 
-        GuiManager.getInstance().add(textPanel,"warp_menu");
+        GuiManager.getInstance().add(textPanel, "warp_menu");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Переход");
         strings.add("Отмена");
 
-        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
+        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, new Menu.Callback() {
+            @Override
+            public void result(int result) {
+                textPanel.close();
+                if (result == 0)
+                    doWarp();
+
+                tick = System.currentTimeMillis() + 2000;
+            }
+        });
     }
 
     private void doWarp() {
@@ -92,14 +99,5 @@ public class Warp extends Entity implements Menu.MenuCallback {
             player.moveXY(dstX, dstY);
         else
             player.moveLevel(dstLevel, dstX, dstY);
-    }
-
-    @Override
-    public void result(int result) {
-        textPanel.close();
-        if (result == 0)
-            doWarp();
-
-        tick = System.currentTimeMillis() + 2000;
     }
 }

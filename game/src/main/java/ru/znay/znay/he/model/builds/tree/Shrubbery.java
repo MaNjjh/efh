@@ -1,6 +1,5 @@
 package ru.znay.znay.he.model.builds.tree;
 
-import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.Menu;
 import ru.znay.znay.he.gfx.gui.TextPanel;
@@ -21,7 +20,7 @@ import java.util.List;
  * Time: 20:49
  * To change this template use File | Settings | File Templates.
  */
-public class Shrubbery extends Tree implements Menu.MenuCallback {
+public class Shrubbery extends Tree implements Menu.Callback {
     private boolean berry = false;
     private boolean type = random.nextBoolean();
     private long tick = System.currentTimeMillis() + 60000;

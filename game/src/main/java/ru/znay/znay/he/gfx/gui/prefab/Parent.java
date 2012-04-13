@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 21:17
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Parent implements Menu.MenuCallback {
+public abstract class Parent implements Menu.Callback {
     protected List<String> strings = new LinkedList<String>();
 
     protected Parent() {

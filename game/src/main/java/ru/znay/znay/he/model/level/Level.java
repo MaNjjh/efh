@@ -118,7 +118,7 @@ public class Level {
 */
         GuiManager.getInstance().add(new Menu(50, 100), "menu");
 
-        ((Menu) (GuiManager.getInstance().get("menu"))).showMenu(strings, new Menu.MenuCallback() {
+        ((Menu) (GuiManager.getInstance().get("menu"))).showMenu(strings, new Menu.Callback() {
             @Override
             public void result(int result) {
                 switch (result) {

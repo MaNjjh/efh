@@ -16,12 +16,12 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Menu extends Panel {
-    public interface MenuCallback {
+    public interface Callback {
         public void result(int result);
     }
 
     private List<TextPanel> panels = new LinkedList<TextPanel>();
-    private MenuCallback callback = null;
+    private Callback callback = null;
     private int currentCell = -1;
 
     public Menu(int x, int y) {
@@ -30,7 +30,7 @@ public class Menu extends Panel {
         visible = false;
     }
 
-    public void showMenu(List<String> strings, MenuCallback callback) {
+    public void showMenu(List<String> strings, Callback callback) {
         if (strings == null || callback == null || strings.size() == 0) {
             System.out.println("showMenu error - null pointer");
             return;

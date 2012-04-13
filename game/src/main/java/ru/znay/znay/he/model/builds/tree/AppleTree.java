@@ -22,7 +22,7 @@ import java.util.List;
  * Time: 17:47
  * To change this template use File | Settings | File Templates.
  */
-public class AppleTree extends Tree implements Menu.MenuCallback {
+public class AppleTree extends Tree {
 
     private boolean apple = false;
     private SpriteCollector spriteCollector;
@@ -49,23 +49,6 @@ public class AppleTree extends Tree implements Menu.MenuCallback {
     }
 
     @Override
-    public void result(int result) {
-        textPanel.close();
-        tick2 = System.currentTimeMillis() + 2000;
-
-        if (result == 1) return;
-
-        wrapSprite((apple = !apple));
-
-        tick = System.currentTimeMillis() + 120000;
-
-        //  Тут будет подбор ягод
-        //if (result == 0)
-        //
-        //
-    }
-
-    @Override
     public void touchedBy(Entity entity) {
         super.touchedBy(entity);
 
@@ -84,7 +67,24 @@ public class AppleTree extends Tree implements Menu.MenuCallback {
         strings.add("Сорвать");
         strings.add("Уйти");
 
-        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
+        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, new Menu.Callback() {
+            @Override
+            public void result(int result) {
+                textPanel.close();
+                tick2 = System.currentTimeMillis() + 2000;
+
+                if (result == 1) return;
+
+                wrapSprite((apple = !apple));
+
+                tick = System.currentTimeMillis() + 120000;
+
+                //  Тут будет подбор ягод
+                //if (result == 0)
+                //
+                //
+            }
+        });
     }
 
     @Override
