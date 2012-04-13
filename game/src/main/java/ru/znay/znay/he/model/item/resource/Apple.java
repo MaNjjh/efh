@@ -28,7 +28,7 @@ public class Apple extends Resource {
 
     public void render(Screen screen) {
 
-        int col = PaletteHelper.getColor(-1, 0, 310, 555);
+        int col = PaletteHelper.getColor(-1, 0, 510, 555);
 
         if (time < 200) {
             if (System.currentTimeMillis() / 250 % 2 == 0) {
