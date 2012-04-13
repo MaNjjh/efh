@@ -13,12 +13,8 @@ import ru.znay.znay.he.model.level.tile.Tile;
  */
 public class Apple extends Resource {
 
-    private int size = 0;
-
     public Apple(int x, int y) {
         super(x, y);
-
-        this.size = random.nextInt(5) == 0 ? 1 : 0;
 
         this.time = 600;
         this.xr = 3;
@@ -35,6 +31,6 @@ public class Apple extends Resource {
                 col = PaletteHelper.getColor(-1, -1, -1, -1);
             }
         }
-        screen.render(x - 4, y - 5 - (int) zz, size * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
+        screen.render(x - 4, y - 5 - (int) zz, 0 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
     }
 }
