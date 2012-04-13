@@ -11,7 +11,7 @@
 
     <artifactId>game</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.26</version>
+    <version>0.0.27</version>
     <name>The Game</name>
 
     <dependencies>

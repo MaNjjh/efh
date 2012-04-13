@@ -9,5 +9,6 @@ package ru.znay.znay.he.model;
  */
 public enum ETeam {
     PLAYER_TEAM,
+    NEUTRAL_TEAM,
     ENEMY_TEAM
 }
