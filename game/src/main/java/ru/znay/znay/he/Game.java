@@ -46,7 +46,7 @@ public class Game extends Graphics implements Runnable {
     public void init() {
         InputHandler.getInstance().init(this);
         this.player = new Player(this);
-        this.loadLevel(0);
+        this.loadLevel(2);
         InputHandler.getInstance().releaseAll();
     }
 
