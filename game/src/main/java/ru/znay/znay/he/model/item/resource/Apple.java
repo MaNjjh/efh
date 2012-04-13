@@ -6,21 +6,20 @@ import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * Created by IntelliJ IDEA.
- * User: ASTarasov
- * Date: 07.03.12
- * Time: 14:17
+ * User: Александр Сергеевич
+ * Date: 13.04.12
+ * Time: 8:15
  * To change this template use File | Settings | File Templates.
  */
-public class Coin extends Resource {
-    private int cost;
+public class Apple extends Resource {
+
     private int size = 0;
 
-    public Coin(int x, int y, int cost) {
+    public Apple(int x, int y) {
         super(x, y);
 
-        this.size = random.nextInt(15) == 0 ? 1 : 0;
+        this.size = random.nextInt(5) == 0 ? 1 : 0;
 
-        this.cost = cost + size * cost;
         this.time = 600;
         this.xr = 3;
         this.yr = 3;
@@ -29,7 +28,7 @@ public class Coin extends Resource {
 
     public void render(Screen screen) {
 
-        int col = PaletteHelper.getColor(-1, 0, 552, 555);
+        int col = PaletteHelper.getColor(-1, 0, 310, 555);
 
         if (time < 200) {
             if (System.currentTimeMillis() / 250 % 2 == 0) {
@@ -37,13 +36,5 @@ public class Coin extends Resource {
             }
         }
         screen.render(x - 4, y - 5 - (int) zz, size * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
     }
 }

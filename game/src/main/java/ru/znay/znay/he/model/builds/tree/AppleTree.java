@@ -10,6 +10,7 @@ import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.resource.Apple;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.LinkedList;
@@ -26,7 +27,7 @@ public class AppleTree extends Tree {
 
     private boolean apple = false;
     private SpriteCollector spriteCollector;
-    private long tick = System.currentTimeMillis() + 60000;
+    private long tick = System.currentTimeMillis() + 20000;
     private long tick2;
     private TextPanel textPanel;
 
@@ -54,8 +55,9 @@ public class AppleTree extends Tree {
 
         if (!apple) return;
 
-        if (tick2 < System.currentTimeMillis() && entity instanceof Player)
+        if (tick2 < System.currentTimeMillis() && entity instanceof Player) {
             showMenu();
+        }
     }
 
     public void showMenu() {
@@ -77,12 +79,14 @@ public class AppleTree extends Tree {
 
                 wrapSprite((apple = !apple));
 
-                tick = System.currentTimeMillis() + 120000;
+                tick = System.currentTimeMillis() + 20000;
 
                 //  Тут будет подбор ягод
-                //if (result == 0)
-                //
-                //
+                if (result == 0) {
+                    for (int i = 0; i < 100; i++) {
+                        level.add(new Apple(x, y));
+                    }
+                }
             }
         });
     }
