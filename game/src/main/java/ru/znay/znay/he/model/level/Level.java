@@ -230,6 +230,8 @@ public class Level {
 
         this.add(player);
 
+        fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
+
         if (level == 0)
             this.add(new Warp(0, 9 << 4, 115 << 4, 1, 50 << 4, 50 << 4, this.spriteCollector, this.player));
         else
@@ -238,6 +240,7 @@ public class Level {
         trySpawn();
         GuiManager.getInstance().remove("minimap");
         GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
+
     }
 
     public void trySpawn() {
@@ -389,7 +392,6 @@ public class Level {
     public void add(Entity entity) {
         if (entity instanceof Player) {
             player = (Player) entity;
-            fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
         }
         entity.setRemoved(false);
         entities.add(entity);
