@@ -68,7 +68,6 @@ public class AppleTree extends Tree implements Menu.MenuCallback {
     @Override
     public void touchedBy(Entity entity) {
         super.touchedBy(entity);
-        super.touchedBy(entity);
 
         if (!apple) return;
 
