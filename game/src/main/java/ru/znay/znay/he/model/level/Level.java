@@ -90,7 +90,12 @@ public class Level {
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
-        this.loadLevelObject(level,player);
+        this.loadLevelObject(level, player);
+
+
+        GuiManager.getInstance().remove("minimap");
+        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
+
 
         this.add(player);
 
@@ -119,9 +124,6 @@ public class Level {
             this.add(new Warp(1, 52 << 4, 52 << 4, 0, 7 << 4, 117 << 4, this.spriteCollector, this.player));
 
         trySpawn();
-        GuiManager.getInstance().remove("minimap");
-        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
-
     }
 
     public void trySpawn() {
@@ -354,8 +356,7 @@ public class Level {
         return questHandler;
     }
 
-    private void loadLevelObject(int level, Player player)
-    {
+    private void loadLevelObject(int level, Player player) {
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
 
         this.width = map.getWidth();
@@ -367,11 +368,10 @@ public class Level {
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
 
-        loadLandscape(map,player);
+        loadLandscape(map, player);
     }
 
-    private void loadLandscape(Bitmap map,Player player)
-    {
+    private void loadLandscape(Bitmap map, Player player) {
 
 
         for (int i = 0; i < this.width * height; i++) {
@@ -443,8 +443,12 @@ public class Level {
                         break;
                     }
                     case PLAYER_SPAWN_1: {
-                        player.setX((i << 4) + Tile.HALF_SIZE);
-                        player.setY((j << 4) + Tile.HALF_SIZE);
+                        if (player.getRespPoint() != null) {
+                            player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
+                        } else {
+                            player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
+                            player.setRespPoint((i << 4) + Tile.HALF_SIZE,(j << 4) + Tile.HALF_SIZE);
+                        }
                         break;
                     }
                 }

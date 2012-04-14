@@ -18,6 +18,7 @@ import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.Arrow;
 import ru.znay.znay.he.sound.Sound;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -35,6 +36,7 @@ public class Player extends Mob {
     private int clearFogRadius = 4;
     private long goldTime;
     private int goldCollect;
+    private Point respPoint = null;
 
     public Player(Game game) {
         this.team = ETeam.PLAYER_TEAM;
@@ -277,16 +279,23 @@ public class Player extends Mob {
         this.activeItem = activeItem;
     }
 
-    public void moveXY(int x, int y) {
+    public void moveToXY(int x, int y) {
         this.x = x;
         this.y = y;
         InputHandler.getInstance().releaseAll();
     }
 
     public void moveLevel(int newLevel, int x, int y) {
+        respPoint = new Point(x, y);
         this.game.loadLevel(newLevel);
-        this.x = x;
-        this.y = y;
         InputHandler.getInstance().releaseAll();
+    }
+
+    public Point getRespPoint() {
+        return respPoint;
+    }
+
+    public void setRespPoint(int x, int y) {
+        respPoint = new Point(x, y);
     }
 }
