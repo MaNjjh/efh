@@ -45,8 +45,7 @@ public class Level {
     private final static int APPLE_TREE = 0xFF00FF00;
     private final static int FIR_TREE = 0xFF00CC00;
     private final static int TREE_STUMP = 0xFF008800;
-    private final static int PLAYER_SPAWN_1 = 0xFFFF0000;
-    private final static int PLAYER_SPAWN_2 = 0xFFFE0000;
+    private final static int PLAYER_SPAWN = 0xFFFF0000;
     private final static int SHRUBBERY = 0xFF005500;
 
     private Random random = new Random();
@@ -369,6 +368,35 @@ public class Level {
         this.entitiesInTiles = new ArrayList[this.width * this.height];
 
         loadLandscape(map, player);
+        loadNPC(level, player);
+    }
+
+    private void loadNPC(int level, Player player) {
+        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.bmp");
+        for (int j = 0; j < this.height; j++) {
+            for (int i = 0; i < this.width; i++) {
+                int value = map.getPixels()[i + j * this.width];
+                if (value == 0xFFFFFFFF) continue;
+                switch (((value >> 16)&0xFF)) {
+                    case 0xFF: {
+                        if (player.getRespPoint() != null) {
+                            player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
+                            System.out.println(player.getX()+" "+player.getY());
+                        } else {
+                            player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
+                            player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
+                        }
+                        break;
+                    }
+                    case 0x10:
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (value >> 8) & 0xFF, value & 0xFF, spriteCollector, player));
+                        break;
+                    case 0x11:
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (value >> 8) & 0xFF, value & 0xFF, spriteCollector, player));
+                        break;
+                }
+            }
+        }
     }
 
     private void loadLandscape(Bitmap map, Player player) {
@@ -442,15 +470,15 @@ public class Level {
                         setTile(i, j, Tile.lava, 0);
                         break;
                     }
-                    case PLAYER_SPAWN_1: {
+                    /*case PLAYER_SPAWN: {
                         if (player.getRespPoint() != null) {
                             player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
                         } else {
                             player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
-                            player.setRespPoint((i << 4) + Tile.HALF_SIZE,(j << 4) + Tile.HALF_SIZE);
+                            player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
                         }
                         break;
-                    }
+                    }*/
                 }
             }
         }
