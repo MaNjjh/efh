@@ -63,9 +63,13 @@ public class StoneMan extends NPC {
     }
 
     public void touchedBy(Entity entity) {
-        if (stoned && stonedTalk) return;
-
         if (entity instanceof Player) {
+            if (((Player) entity).getActiveItem() != null) {
+                checkBucket(((Player) entity).getActiveItem());
+            }
+
+            if (stoned && stonedTalk) return;
+
             GuiManager.getInstance().add(new TypedTextPanel(stoned ? stonedMessage : message, 4, 4, 40), "StoneMan_touchedBy");
             if (stoned) stonedTalk = true;
         }
@@ -73,7 +77,11 @@ public class StoneMan extends NPC {
 
     @Override
     public boolean interact(Item item, Player player, int dir) {
-        if (!stoned) return false;
+        return stoned && checkBucket(item);
+
+    }
+
+    private boolean checkBucket(Item item) {
         if (item instanceof FurnitureItem) {
             if (((FurnitureItem) item).getFurniture() instanceof Bucket) {
                 Bucket bucket = (Bucket) ((FurnitureItem) item).getFurniture();
