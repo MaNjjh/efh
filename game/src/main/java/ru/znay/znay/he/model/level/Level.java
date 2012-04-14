@@ -48,6 +48,8 @@ public class Level {
     private final static int PLAYER_SPAWN = 0xFFFF0000;
     private final static int SHRUBBERY = 0xFF005500;
 
+    private int number;
+
     private Random random = new Random();
 
     private int width;
@@ -86,6 +88,7 @@ public class Level {
     @SuppressWarnings("unchecked")
     public void init(final Player player, int level, Game game) {
 
+        this.number = level;
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
@@ -94,6 +97,8 @@ public class Level {
 
         GuiManager.getInstance().remove("minimap");
         GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
+
+        if (player.isRemoved()) player.setHealth(10);
 
         this.add(player);
 
@@ -123,7 +128,7 @@ public class Level {
         else
             this.add(new Warp(1, 52 << 4, 52 << 4, 0, 7 << 4, 117 << 4, this.spriteCollector, this.player));
 
-       // trySpawn();
+        // trySpawn();
     }
 
     public void trySpawn() {
@@ -139,10 +144,10 @@ public class Level {
                 add(mob);
             }
 
-            mob = new Bird();
+            /*mob = new Bird();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }
+            }   */
 
             /*mob = new AppleTree();
             if (mob.findStartPos(this)) {
@@ -378,11 +383,10 @@ public class Level {
             for (int i = 0; i < this.width; i++) {
                 int value = map.getPixels()[i + j * this.width];
                 if (value == 0xFFFFFFFF) continue;
-                switch (((value >> 16)&0xFF)) {
+                switch (((value >> 16) & 0xFF)) {
                     case 0xFF: {
                         if (player.getRespPoint() != null) {
                             player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
-                            System.out.println(player.getX()+" "+player.getY());
                         } else {
                             player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
                             player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
@@ -390,10 +394,10 @@ public class Level {
                         break;
                     }
                     case 0x10:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (value >> 8) & 0xFF, value & 0xFF, spriteCollector, player));
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector, player));
                         break;
                     case 0x11:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (value >> 8) & 0xFF, value & 0xFF, spriteCollector, player));
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector, player));
                         break;
                 }
             }
@@ -483,5 +487,9 @@ public class Level {
                 }
             }
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

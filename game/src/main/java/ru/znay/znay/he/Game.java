@@ -50,7 +50,7 @@ public class Game extends Graphics implements Runnable {
 
         GuiManager.getInstance().initDefaultGui(this);
 
-        this.loadLevel(1);
+        this.loadLevel(0);
     }
 
     public void tick() {
@@ -60,8 +60,8 @@ public class Game extends Graphics implements Runnable {
             InputHandler.getInstance().tick();
 
             if (player.isRemoved()) {
-                if (InputHandler.getInstance().action.down) {
-                    init();
+                if (InputHandler.getInstance().action.clicked) {
+                    loadLevel(this.level);
                 }
             }
 
@@ -202,5 +202,9 @@ public class Game extends Graphics implements Runnable {
         this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
 
         InputHandler.getInstance().releaseAll();
+    }
+
+    public void loadLevel(Level level) {
+        loadLevel(level.getNumber());
     }
 }
