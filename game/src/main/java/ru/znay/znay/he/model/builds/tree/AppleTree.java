@@ -83,7 +83,7 @@ public class AppleTree extends Tree {
 
                 //  Тут будет подбор ягод
                 if (result == 0) {
-                    for (int i = 0; i < 100; i++) {
+                    for (int i = 0; i < random.nextInt(3) + 4; i++) {
                         level.add(new Apple(x, y));
                     }
                 }

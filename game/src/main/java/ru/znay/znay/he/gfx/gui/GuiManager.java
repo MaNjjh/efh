@@ -1,5 +1,6 @@
 package ru.znay.znay.he.gfx.gui;
 
+import ru.znay.znay.he.Game;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 
@@ -70,5 +71,15 @@ public class GuiManager {
             guiManager = new GuiManager();
 
         return guiManager;
+    }
+    
+    public void initDefaultGui(Game game)
+    {
+        panels.clear();
+
+        add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
+        add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
+        add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), game.getScreen()), "speed");
+        add(new ru.znay.znay.he.gfx.gui.Menu(50, 100), "menu");
     }
 }

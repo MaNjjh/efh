@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model.level;
+package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.gui.Panel;
@@ -11,6 +11,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.builds.tree.Tree;
 import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.Particle;
 import ru.znay.znay.he.model.weapon.Arrow;

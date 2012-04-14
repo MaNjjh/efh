@@ -2,10 +2,8 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.gui.Panel;
-import ru.znay.znay.he.gfx.gui.SpeedIndicator;
-import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
@@ -46,8 +44,10 @@ public class Game extends Graphics implements Runnable {
     public void init() {
         InputHandler.getInstance().init(this);
         this.player = new Player(this);
-        this.loadLevel(2);
-        InputHandler.getInstance().releaseAll();
+
+        GuiManager.getInstance().initDefaultGui(this);
+
+        this.loadLevel(0);
     }
 
     public void tick() {
@@ -197,6 +197,6 @@ public class Game extends Graphics implements Runnable {
         this.level = new Level(this.player, i, this);
         this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
         this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
-
+        InputHandler.getInstance().releaseAll();
     }
 }

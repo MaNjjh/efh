@@ -2,12 +2,8 @@ package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
-import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.Menu;
-import ru.znay.znay.he.gfx.gui.SpeedIndicator;
-import ru.znay.znay.he.gfx.gui.StatusPanel;
+import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
@@ -91,52 +87,16 @@ public class Level {
     @SuppressWarnings("unchecked")
     public void init(final Player player, int level, Game game) {
 
-        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
-
-        this.width = map.getWidth();
-        this.height = map.getHeight();
-        this.game = game;
-
-        this.tiles = new byte[this.width * this.height];
-
-        this.fog = new Fog(this.width, this.height);
-
-        this.entitiesInTiles = new ArrayList[this.width * this.height];
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
+        this.loadLevelObject(level,player);
 
-        GuiManager.getInstance().add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
-        GuiManager.getInstance().add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
-        GuiManager.getInstance().add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), this.game.getScreen()), "speed");
+        this.add(player);
 
-        List<String> strings = new LinkedList<String>();
-
-        /*strings.add("первый");
-        strings.add("второй");
-        strings.add("asdsadasdasdadas");
-*/
-        GuiManager.getInstance().add(new Menu(50, 100), "menu");
-
-        ((Menu) (GuiManager.getInstance().get("menu"))).showMenu(strings, new Menu.Callback() {
-            @Override
-            public void result(int result) {
-                switch (result) {
-                    case 0:
-                        System.out.println("первый");
-                        break;
-                    case 1:
-                        System.out.println("второй");
-                        break;
-                    case 2:
-                        System.out.println("asdsadasdasdadas");
-                        break;
-                }
-            }
-        });
+        this.game = game;
 
         this.questHandler = new QuestHandler(player);
-
 
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
         AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class);
@@ -150,85 +110,6 @@ public class Level {
         });
         testQuest.accept(this.questHandler);
         //---------------------------------------------------------------------------------
-
-        for (int i = 0; i < this.width * height; i++) {
-            this.entitiesInTiles[i] = new ArrayList<Entity>();
-        }
-
-        for (int j = 0; j < this.height; j++) {
-            for (int i = 0; i < this.width; i++) {
-                int value = map.getPixels()[i + j * this.width];
-                switch (value) {
-                    case GRASS_TILE: {
-                        setTile(i, j, Tile.grass, 0);
-                        break;
-                    }
-                    case WATER_TILE: {
-                        setTile(i, j, Tile.water, 0);
-                        break;
-                    }
-                    case DEEP_WATER_TILE: {
-                        setTile(i, j, Tile.deepWater, 0);
-                        break;
-                    }
-                    case SAND_TILE: {
-                        setTile(i, j, Tile.sand, 0);
-                        break;
-                    }
-                    case ROAD_TILE: {
-                        setTile(i, j, Tile.road, 0);
-                        break;
-                    }
-                    case SWAMP_TILE: {
-                        setTile(i, j, Tile.swamp, 0);
-                        break;
-                    }
-                    case HOLE_TILE: {
-                        setTile(i, j, Tile.hole, 0);
-                        break;
-                    }
-                    case APPLE_TREE: {
-                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
-                        break;
-                    }
-                    case FIR_TREE: {
-                        int r = random.nextInt(100);
-                        if (r < 72) break;
-                        if (r < 75) {
-                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
-                            break;
-                        }
-                        if (random.nextBoolean()) {
-                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
-                        } else {
-                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
-                        }
-
-                        break;
-                    }
-                    case TREE_STUMP: {
-                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
-                        break;
-                    }
-                    case SHRUBBERY: {
-                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
-                        break;
-                    }
-
-                    case LAVA_TILE: {
-                        setTile(i, j, Tile.lava, 0);
-                        break;
-                    }
-                    case PLAYER_SPAWN_1: {
-                        player.setX((i << 4) + Tile.HALF_SIZE);
-                        player.setY((j << 4) + Tile.HALF_SIZE);
-                        break;
-                    }
-                }
-            }
-        }
-
-        this.add(player);
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
@@ -471,5 +352,103 @@ public class Level {
 
     public QuestHandler getQuestHandler() {
         return questHandler;
+    }
+
+    private void loadLevelObject(int level, Player player)
+    {
+        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
+
+        this.width = map.getWidth();
+        this.height = map.getHeight();
+
+        this.tiles = new byte[this.width * this.height];
+
+        this.fog = new Fog(this.width, this.height);
+
+        this.entitiesInTiles = new ArrayList[this.width * this.height];
+
+        loadLandscape(map,player);
+    }
+
+    private void loadLandscape(Bitmap map,Player player)
+    {
+
+
+        for (int i = 0; i < this.width * height; i++) {
+            this.entitiesInTiles[i] = new ArrayList<Entity>();
+        }
+
+        for (int j = 0; j < this.height; j++) {
+            for (int i = 0; i < this.width; i++) {
+                int value = map.getPixels()[i + j * this.width];
+                switch (value) {
+                    case GRASS_TILE: {
+                        setTile(i, j, Tile.grass, 0);
+                        break;
+                    }
+                    case WATER_TILE: {
+                        setTile(i, j, Tile.water, 0);
+                        break;
+                    }
+                    case DEEP_WATER_TILE: {
+                        setTile(i, j, Tile.deepWater, 0);
+                        break;
+                    }
+                    case SAND_TILE: {
+                        setTile(i, j, Tile.sand, 0);
+                        break;
+                    }
+                    case ROAD_TILE: {
+                        setTile(i, j, Tile.road, 0);
+                        break;
+                    }
+                    case SWAMP_TILE: {
+                        setTile(i, j, Tile.swamp, 0);
+                        break;
+                    }
+                    case HOLE_TILE: {
+                        setTile(i, j, Tile.hole, 0);
+                        break;
+                    }
+                    case APPLE_TREE: {
+                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        break;
+                    }
+                    case FIR_TREE: {
+                        int r = random.nextInt(100);
+                        if (r < 72) break;
+                        if (r < 75) {
+                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                            break;
+                        }
+                        if (random.nextBoolean()) {
+                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        } else {
+                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        }
+
+                        break;
+                    }
+                    case TREE_STUMP: {
+                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        break;
+                    }
+                    case SHRUBBERY: {
+                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        break;
+                    }
+
+                    case LAVA_TILE: {
+                        setTile(i, j, Tile.lava, 0);
+                        break;
+                    }
+                    case PLAYER_SPAWN_1: {
+                        player.setX((i << 4) + Tile.HALF_SIZE);
+                        player.setY((j << 4) + Tile.HALF_SIZE);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
