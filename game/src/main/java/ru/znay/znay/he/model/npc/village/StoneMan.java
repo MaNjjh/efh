@@ -21,6 +21,8 @@ import ru.znay.znay.he.model.npc.NPC;
 public class StoneMan extends NPC {
 
     private boolean stoned = true;
+    private boolean stonedTalk = false;
+
     private String stonedMessage = "Помогите добрый человек. Меня обратили в статую много лет назад и никто не может мне помочь. Только вода из святого источника сможет мне помочь.";
     private String message = "Спасибо!!! Спасибо вам! придет время я вас отблагодарю.";
 
@@ -61,8 +63,11 @@ public class StoneMan extends NPC {
     }
 
     public void touchedBy(Entity entity) {
+        if (stoned && stonedTalk) return;
+
         if (entity instanceof Player) {
             GuiManager.getInstance().add(new TypedTextPanel(stoned ? stonedMessage : message, 4, 4, 40), "StoneMan_touchedBy");
+            if (stoned) stonedTalk = true;
         }
     }
 
