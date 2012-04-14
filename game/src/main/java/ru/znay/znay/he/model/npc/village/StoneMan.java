@@ -77,11 +77,11 @@ public class StoneMan extends NPC {
 
     @Override
     public boolean interact(Item item, Player player, int dir) {
-        return stoned && checkBucket(item);
-
+        return checkBucket(item);
     }
 
     private boolean checkBucket(Item item) {
+        if (!stoned) return false;
         if (item instanceof FurnitureItem) {
             if (((FurnitureItem) item).getFurniture() instanceof Bucket) {
                 Bucket bucket = (Bucket) ((FurnitureItem) item).getFurniture();
