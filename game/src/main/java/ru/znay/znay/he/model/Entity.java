@@ -2,6 +2,7 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -121,6 +122,10 @@ public class Entity {
 
     public void touchedBy(Entity entity) {
 
+    }
+
+    public boolean interact(Item item, Player player, int dir) {
+        return false;
     }
 
     public boolean canFly() {

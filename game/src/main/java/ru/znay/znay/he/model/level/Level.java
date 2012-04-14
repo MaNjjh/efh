@@ -123,11 +123,11 @@ public class Level {
         else
             this.add(new Warp(1, 52 << 4, 52 << 4, 0, 7 << 4, 117 << 4, this.spriteCollector, this.player));
 
-        trySpawn();
+       // trySpawn();
     }
 
     public void trySpawn() {
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 10; i++) {
 
             Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {

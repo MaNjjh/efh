@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.item.furniture;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.FurnitureItem;
+import ru.znay.znay.he.model.item.Item;
 
 /**
  * Created by IntelliJ IDEA.
@@ -51,7 +52,9 @@ public class Furniture extends Entity {
         }
     }
 
-    public void take(Player player) {
+    @Override
+    public boolean interact(Item item, Player player, int dir) {
         shouldTake = player;
+        return true;
     }
 }

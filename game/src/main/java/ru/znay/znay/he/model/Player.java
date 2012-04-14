@@ -197,14 +197,12 @@ public class Player extends Mob {
         boolean done = false;
 
         int yo = -2;
-
-        if (activeItem == null) {
-            int range = 12;
-            if (dir == 0 && interact(x - 8, y + 4 + yo, x + 8, y + range + yo)) done = true;
-            if (dir == 1 && interact(x - 8, y - range + yo, x + 8, y - 4 + yo)) done = true;
-            if (dir == 3 && interact(x + 4, y - 8 + yo, x + range, y + 8 + yo)) done = true;
-            if (dir == 2 && interact(x - range, y - 8 + yo, x - 4, y + 8 + yo)) done = true;
-        } else {
+        int range = 12;
+        if (dir == 0 && interact(x - 8, y + 4 + yo, x + 8, y + range + yo)) done = true;
+        if (dir == 1 && interact(x - 8, y - range + yo, x + 8, y - 4 + yo)) done = true;
+        if (dir == 3 && interact(x + 4, y - 8 + yo, x + range, y + 8 + yo)) done = true;
+        if (dir == 2 && interact(x - range, y - 8 + yo, x - 4, y + 8 + yo)) done = true;
+        if (activeItem != null) {
             int xt = x >> 4;
             int yt = (y + yo) >> 4;
             int r = 12;
@@ -229,15 +227,8 @@ public class Player extends Mob {
 
     private boolean interact(int x0, int y0, int x1, int y1) {
         List<Entity> entities = level.getEntities(x0, y0, x1, y1, null);
-        for (int i = 0; i < entities.size(); i++) {
-            Entity e = entities.get(i);
-
-            if (e instanceof Furniture) {
-                Furniture f = (Furniture) e;
-                f.take(this);
-                return true;
-            }
-
+        for (Entity entity : entities) {
+            entity.interact(activeItem, this, dir);
         }
         return false;
     }

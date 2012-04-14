@@ -41,6 +41,10 @@ public class Loony extends NPC {
             xa = (random.nextInt(3) - 1);
             ya = (random.nextInt(3) - 1);
         }
+
+        if (randomWalkTime > 0) {
+            randomWalkTime--;
+        }
     }
 
 }
