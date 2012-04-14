@@ -54,7 +54,7 @@ public class StoneMan extends NPC {
             ya = 0;
         }
 
-        int speed = (tickTime % 7) == 0 ? 0 : 1;
+        int speed = (tickTime % 3) == 0 ? 0 : 1;
         if (!move(xa * speed, ya * speed) || random.nextInt(200) == 0 && randomWalkTime == 0) {
             randomWalkTime = 50;
             xa = (random.nextInt(3) - 1);
