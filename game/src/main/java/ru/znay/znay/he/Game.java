@@ -49,7 +49,7 @@ public class Game extends Graphics implements Runnable {
 
         GuiManager.getInstance().initDefaultGui(this);
 
-        this.loadLevel(0);
+        this.loadLevel(1);
     }
 
     public void tick() {

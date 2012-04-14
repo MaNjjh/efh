@@ -59,7 +59,7 @@ public class BitmapHelper {
 
     public static void copy(Bitmap src, int dst_x, int dst_y, int src_x, int src_y, int w, int h, Bitmap dst) {
         src_x = Math.max(0, Math.min(src_x, dst.getWidth() - 1));
-        src_y = Math.max(0, Math.min(src_y, dst.getWidth() - 1));
+        src_y = Math.max(0, Math.min(src_y, dst.getHeight() - 1));
         w = Math.min(dst.getWidth() - 1, src_x + w);
         h = Math.min(dst.getHeight() - 1, src_y + h);
         dst_x = Math.min(src.getWidth() - w, dst_x - src_x);
@@ -74,7 +74,7 @@ public class BitmapHelper {
 
     public static void copy(Bitmap src, int dst_x, int dst_y, int src_x, int src_y, int w, int h, Bitmap dst, int alpha) {
         src_x = Math.max(0, Math.min(src_x, dst.getWidth() - 1));
-        src_y = Math.max(0, Math.min(src_y, dst.getWidth() - 1));
+        src_y = Math.max(0, Math.min(src_y, dst.getHeight() - 1));
         w = Math.min(dst.getWidth() - 1, src_x + w);
         h = Math.min(dst.getHeight() - 1, src_y + h);
         dst_x = Math.min(src.getWidth() - w, dst_x - src_x);

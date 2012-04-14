@@ -1,7 +1,6 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.InputHandler;
-import ru.znay.znay.he.gfx.gui.Panel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
@@ -36,7 +35,7 @@ public class MiniMap extends Panel {
         super(posX, posY, (level.getWidth() >> 1) >> 3, (level.getHeight() >> 1) >> 3, PaletteHelper.getColor(-1, 530, 0, 111));
         this.level = level;
         this.miniMap = new Bitmap(level.getWidth(), level.getHeight());
-        this.resizedMiniMap = new Bitmap(level.getHeight() >> 1, level.getWidth() >> 1);
+        this.resizedMiniMap = new Bitmap(level.getWidth() >> 1, level.getHeight() >> 1);
     }
 
     public void markObject(int x, int y, int color) {
