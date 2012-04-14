@@ -1,9 +1,6 @@
 package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
-import ru.znay.znay.he.gfx.gui.*;
-import ru.znay.znay.he.gfx.gui.Menu;
-import ru.znay.znay.he.gfx.gui.Panel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -115,14 +112,9 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     public Key down = new Key();
     public Key left = new Key();
     public Key right = new Key();
-    public Key attack = new Key();
-    public Key menu = new Key();
+    public Key action = new Key();
     public Key mouse = new Key();
-    public Key menuDown = new Key();
-    public Key menuUp = new Key();
-    public Key menuUse = new Key();
     public Key miniMap = new Key();
-    public Key inventory = new Key();
 
     public void releaseAll() {
         for (Key key : keys) {
@@ -190,26 +182,14 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (ke.getKeyCode() == KeyEvent.VK_DOWN) down.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_F) menuDown.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_R) menuUp.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_E) menuUse.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_UP) menuUp.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_DOWN) menuDown.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_ENTER) menuUse.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_M) miniMap.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_I) inventory.toggle(pressed);
 
-        if (ke.getKeyCode() == KeyEvent.VK_TAB) menu.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_ALT) menu.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_ALT_GRAPH) menu.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_SPACE) attack.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_CONTROL) attack.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_NUMPAD0) attack.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_INSERT) attack.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_ENTER) menu.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_SPACE) action.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_CONTROL) action.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_NUMPAD0) action.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_INSERT) action.toggle(pressed);
 
-        if (ke.getKeyCode() == KeyEvent.VK_X) menu.toggle(pressed);
-        if (ke.getKeyCode() == KeyEvent.VK_C) attack.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_C) action.toggle(pressed);
     }
 
     public void keyTyped(KeyEvent ke) {

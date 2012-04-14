@@ -2,15 +2,17 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.gui.*;
+import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.Panel;
+import ru.znay.znay.he.gfx.gui.SpeedIndicator;
+import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.furniture.Bucket;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.npc.NPC;
+import ru.znay.znay.he.model.npc.Loony;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -57,7 +59,7 @@ public class Game extends Graphics implements Runnable {
             InputHandler.getInstance().tick();
 
             if (player.isRemoved()) {
-                if (InputHandler.getInstance().attack.down) {
+                if (InputHandler.getInstance().action.down) {
                     init();
                 }
             }
@@ -196,7 +198,7 @@ public class Game extends Graphics implements Runnable {
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
         this.level.add(new Bucket(player.getX() - 10, player.getY() - 10));
-        this.level.add(new NPC(player.getX() - 10, player.getY() - 10));
+        this.level.add(new Loony(player.getX() - 10, player.getY() - 10));
         InputHandler.getInstance().releaseAll();
     }
 }

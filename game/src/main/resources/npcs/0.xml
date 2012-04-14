@@ -12,8 +12,14 @@
         <dy>8</dy>
         <name>Варп</name>
 
+        <messages>
+            <message>
+                Хотели бы вы переместится
+            </message>
+
+        </messages>
+        
         <action id="move">
-            <cond></cond>
             <dx>30</dx>
             <dy>30</dy>
             <level>1</level>

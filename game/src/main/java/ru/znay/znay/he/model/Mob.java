@@ -93,6 +93,7 @@ public class Mob extends Entity {
 
     @Override
     public void hurt(Mob mob, int damage, int attackDir) {
+        if (this.team == ETeam.NEUTRAL_TEAM) return;
         doHurt(damage, attackDir);
     }
 

@@ -67,7 +67,7 @@ public class Player extends Mob {
                 xa++;
             }
 
-            if (inputHandler.attack.clicked) {
+            if (inputHandler.action.clicked) {
                 take();
 
                 /*if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {

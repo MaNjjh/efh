@@ -95,13 +95,13 @@ public class Level {
         GuiManager.getInstance().remove("minimap");
         GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
 
-
         this.add(player);
 
         this.game = game;
 
         this.questHandler = new QuestHandler(player);
 
+/*
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
         AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class);
         testQuest.setName("злые зеленые кучи");
@@ -114,6 +114,7 @@ public class Level {
         });
         testQuest.accept(this.questHandler);
         //---------------------------------------------------------------------------------
+*/
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 

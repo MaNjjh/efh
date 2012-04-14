@@ -34,7 +34,7 @@ public class QuestHandler {
         if (this.quests.get(id) != null) return false;
 
         this.quests.put(id, absQuest);
-        GuiManager.getInstance().add(new TypedTextPanel(absQuest.getDescription(), 4, 4, 50),"quest_accept");
+        GuiManager.getInstance().add(new TypedTextPanel(absQuest.getDescription(), 4, 4, 50), "quest_accept");
         return true;
     }
 
@@ -46,7 +46,7 @@ public class QuestHandler {
                 checkQuest(quest);
                 if (updated && this.quests.containsKey(key)) {
                     String message = String.format("Осталось убить '%s' монстров!", ((KillTemplate) quest).toCompleted());
-                    GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50),"quest_updateKills");
+                    GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50), "quest_updateKills");
                 }
             }
         }
@@ -56,7 +56,7 @@ public class QuestHandler {
         if (quest.isCompleted()) {
             String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
 
-            GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50),"quest_checkQuest");
+            GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50), "quest_checkQuest");
 
             if (quest.getQuestPromotion() != null) {
                 quest.getQuestPromotion().promotion(this.player);
@@ -66,20 +66,10 @@ public class QuestHandler {
         }
     }
 
+    @Deprecated
     public void checkAllQuest() {
         for (String key : this.quests.keySet()) {
-            AbsQuest quest = this.quests.get(key);
-            if (quest.isCompleted()) {
-                String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
-
-                GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 50),"quest_checkAllQuest");
-
-                if (quest.getQuestPromotion() != null) {
-                    quest.getQuestPromotion().promotion(this.player);
-                }
-
-                this.quests.remove(key);
-            }
+            checkQuest(this.quests.get(key));
         }
     }
 

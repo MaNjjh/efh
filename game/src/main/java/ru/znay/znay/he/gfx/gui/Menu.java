@@ -87,15 +87,15 @@ public class Menu extends Panel {
     public void tick() {
         if (!visible) return;
 
-        if (InputHandler.getInstance().menuDown.clicked) {
+        if (InputHandler.getInstance().down.clicked) {
            selectNext();
         }
 
-        if (InputHandler.getInstance().menuUp.clicked) {
+        if (InputHandler.getInstance().up.clicked) {
             selectPrev();
         }
 
-        if (InputHandler.getInstance().menuUse.clicked) {
+        if (InputHandler.getInstance().action.clicked) {
             select();
         }
     }
