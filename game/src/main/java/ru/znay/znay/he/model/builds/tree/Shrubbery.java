@@ -26,7 +26,6 @@ public class Shrubbery extends Tree implements Menu.Callback {
     private long tick = System.currentTimeMillis() + 60000;
     private long tick2;
     private SpriteCollector spriteCollector;
-    private TextPanel textPanel;
 
     public Shrubbery(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 4, 1);
@@ -53,7 +52,8 @@ public class Shrubbery extends Tree implements Menu.Callback {
 
     @Override
     public void result(int result) {
-        textPanel.close();
+
+        GuiManager.getInstance().remove("shrubbery");
         tick2 = System.currentTimeMillis() + 2000;
 
         if (result == 1) return;
@@ -79,9 +79,7 @@ public class Shrubbery extends Tree implements Menu.Callback {
     }
 
     private void showMenu() {
-        textPanel = new TextPanel("Среди листьев вы обнаруживаете несколько подозрительных ягод", 4, 4);
-
-        GuiManager.getInstance().add(textPanel, "shrubbery");
+        GuiManager.getInstance().add(new TextPanel("Среди листьев вы обнаруживаете несколько подозрительных ягод", 4, 4), "shrubbery");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Собрать");

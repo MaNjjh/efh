@@ -475,15 +475,6 @@ public class Level {
                         setTile(i, j, Tile.lava, 0);
                         break;
                     }
-                    /*case PLAYER_SPAWN: {
-                        if (player.getRespPoint() != null) {
-                            player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
-                        } else {
-                            player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
-                            player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
-                        }
-                        break;
-                    }*/
                 }
             }
         }

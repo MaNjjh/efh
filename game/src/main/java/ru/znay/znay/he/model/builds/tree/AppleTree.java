@@ -27,7 +27,6 @@ public class AppleTree extends Tree {
 
     private boolean apple = false;
     private SpriteCollector spriteCollector;
-    private TextPanel textPanel;
 
     public AppleTree(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 16, 12);
@@ -59,9 +58,7 @@ public class AppleTree extends Tree {
 
 
     public void showMenu() {
-        textPanel = new TextPanel("На дереве вы видите несколько спелых яблок", 4, 4);
-
-        GuiManager.getInstance().add(textPanel, "appletree");
+        GuiManager.getInstance().add(new TextPanel("На дереве вы видите несколько спелых яблок", 4, 4), "appletree");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Сорвать");
@@ -70,7 +67,8 @@ public class AppleTree extends Tree {
         ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, new Menu.Callback() {
             @Override
             public void result(int result) {
-                textPanel.close();
+
+                GuiManager.getInstance().remove("appletree");
 
                 if (result == 1) return;
 

@@ -28,7 +28,6 @@ public class Warp extends Entity {
     private int dstLevel;
     private int dstX;
     private int dstY;
-    private TextPanel textPanel;
     private Player player;
     private long tick;
 
@@ -74,9 +73,7 @@ public class Warp extends Entity {
         else
             mes = " в " + Constants.getLevelName(dstLevel) + "?";
 
-        textPanel = new TextPanel("Совершить переход" + mes, 4, 4);
-
-        GuiManager.getInstance().add(textPanel, "warp_menu");
+        GuiManager.getInstance().add(new TextPanel("Совершить переход" + mes, 4, 4), "warp_menu");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Переход");
@@ -85,7 +82,7 @@ public class Warp extends Entity {
         ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, new Menu.Callback() {
             @Override
             public void result(int result) {
-                textPanel.close();
+                GuiManager.getInstance().remove("warp_menu");
                 if (result == 0)
                     doWarp();
 
