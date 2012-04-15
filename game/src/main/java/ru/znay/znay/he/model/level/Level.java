@@ -13,6 +13,7 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.tree.*;
+import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -22,6 +23,9 @@ import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.promotion.QuestPromotion;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 /**
@@ -32,6 +36,8 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 public class Level {
+
+    private List<String> messages = null;
 
     private final static int GRASS_TILE = 0xFFFFFFFF;
     private final static int WATER_TILE = 0xFF0000FF;
@@ -90,6 +96,15 @@ public class Level {
 
         this.number = level;
 
+
+        try {
+            this.loadMessages(level);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
         this.loadLevelObject(level, player);
@@ -105,6 +120,8 @@ public class Level {
         this.game = game;
 
         this.questHandler = new QuestHandler(player);
+
+        add(new Waymark(player.getX() - 15, player.getY(), spriteCollector, getMessage(0)));
 
 /*
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
@@ -122,11 +139,6 @@ public class Level {
 */
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
-
-        if (level == 0)
-            this.add(new Warp(0, 9 << 4, 115 << 4, 1, 50 << 4, 50 << 4, this.spriteCollector, this.player));
-        else
-            this.add(new Warp(1, 52 << 4, 52 << 4, 0, 7 << 4, 117 << 4, this.spriteCollector, this.player));
 
         // trySpawn();
     }
@@ -478,6 +490,25 @@ public class Level {
                 }
             }
         }
+    }
+
+    private void loadMessages(int level) throws IOException, URISyntaxException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File(Level.class.getResource("/messages/" + level + ".txt").getFile())));
+        messages = new ArrayList<String>();
+        String buff;
+        while ((buff = reader.readLine()) != null) {
+            buff = buff.substring(1);
+            int index = buff.indexOf("//");
+            System.out.println(buff);
+            messages.add((index == -1)? buff:buff.substring(0,index));
+        }
+    }
+
+    public String getMessage(int index) {
+        if (messages == null) return "null pointer";
+        if (index < 0 || index >= messages.size()) return "index out of range";
+
+        return messages.get(index);
     }
 
     public int getNumber() {
