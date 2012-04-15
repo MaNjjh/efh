@@ -27,6 +27,7 @@ public class AppleTree extends Tree {
 
     private boolean apple = false;
     private SpriteCollector spriteCollector;
+    private long time;
 
     public AppleTree(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 16, 12);
@@ -72,9 +73,9 @@ public class AppleTree extends Tree {
 
                 if (result == 1) return;
 
-                wrapSprite((apple = !apple));
+                apple = !apple;
 
-                tickTime = System.currentTimeMillis();
+                time = System.currentTimeMillis();
 
                 //  Тут будет подбор ягод
                 if (result == 0) {
@@ -106,7 +107,7 @@ public class AppleTree extends Tree {
     public void tick() {
         super.tick();
 
-        if (System.currentTimeMillis() - tickTime < 2000 || apple) return;
+        if (System.currentTimeMillis() - time < 2000 || apple) return;
         apple = !apple;
 
     }
