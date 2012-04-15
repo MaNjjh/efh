@@ -4,6 +4,7 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
@@ -96,14 +97,7 @@ public class Level {
 
         this.number = level;
 
-
-        try {
-            this.loadMessages(level);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        messages = TextFileHelper.LoadMessages(level);
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
@@ -490,17 +484,6 @@ public class Level {
                     }
                 }
             }
-        }
-    }
-
-    private void loadMessages(int level) throws IOException, URISyntaxException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File(Level.class.getResource("/messages/" + level + ".txt").getFile())));
-        messages = new ArrayList<String>();
-        String buff;
-        while ((buff = reader.readLine()) != null) {
-            buff = buff.substring(1);
-            int index = buff.indexOf("//");
-            messages.add((index == -1)? buff:buff.substring(0,index));
         }
     }
 
