@@ -26,6 +26,7 @@ public class Entity {
     protected Level level;
     protected ETeam team = ETeam.ENEMY_TEAM;
     protected Bitmap sprite;
+    protected boolean mouseMotion;
 
     public void init(Level level) {
         this.level = level;
@@ -117,6 +118,14 @@ public class Entity {
         return true;
     }
 
+    public void mouseMotion() {
+        mouseMotion = true;
+    }
+
+    public boolean canMouseSelected() {
+        return false;
+    }
+
     public void hurt(Mob mob, int damage, int attackDir) {
     }
 
@@ -137,7 +146,7 @@ public class Entity {
     }
 
     public void tick() {
-
+        mouseMotion = false;
     }
 
     public int getX() {

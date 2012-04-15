@@ -41,6 +41,7 @@ public class Mob extends Entity {
         }
 
         if (hurtTime > 0) hurtTime--;
+        super.tick();
     }
 
     @Override

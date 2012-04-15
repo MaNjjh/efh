@@ -67,7 +67,7 @@ public class Player extends Mob {
                 xa++;
             }
 
-            if (inputHandler.action.clicked) {
+            if (inputHandler.mouse.clicked) {
                 take();
 
                 /*if (level.getEntities(x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, null).size() == 1) {
@@ -78,10 +78,7 @@ public class Player extends Mob {
                         }
                     }
                 }*/
-            }
-
-            if (inputHandler.mouse.down && activeItem == null) {
-
+            } else if (inputHandler.mouse.down && activeItem == null) {
                 int xDiff = inputHandler.getXMousePos() - x;
                 int yDiff = inputHandler.getYMousePos() - y;
 

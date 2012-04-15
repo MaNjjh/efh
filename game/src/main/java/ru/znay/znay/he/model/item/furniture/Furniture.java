@@ -38,6 +38,7 @@ public class Furniture extends Entity {
         if (pushDir == 3) move(+1, 0);
         pushDir = -1;
         if (pushTime > 0) pushTime--;
+        super.tick();
     }
 
     public boolean blocks(Entity e) {

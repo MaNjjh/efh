@@ -8,8 +8,8 @@ import ru.znay.znay.he.gfx.gui.SpeedIndicator;
 import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
+import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.item.furniture.Bucket;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.npc.Loony;
@@ -33,6 +33,7 @@ public class Game extends Graphics implements Runnable {
     private Player player;
     private int xScroll;
     private int yScroll;
+    private Entity selectedEntity;
 
     public void start() {
         running = true;
@@ -67,8 +68,31 @@ public class Game extends Graphics implements Runnable {
 
             this.level.tick();
             Tile.tickCount++;
+
+            mouseTick();
         }
 
+    }
+
+    private void mouseTick() {
+        int mx = InputHandler.getInstance().getXMousePos();
+        int my = InputHandler.getInstance().getYMousePos();
+        int r = 3;
+        
+        for (Entity entity : this.level.getEntities(mx - r, my - r, mx + r, my + r, null)) {
+            entity.mouseMotion();
+        }
+        
+        if (InputHandler.getInstance().mouse.clicked) {
+            selectedEntity = null;
+
+            for (Entity entity : this.level.getEntities(mx - r, my - r, mx + r, my + r, null)) {
+                if (entity.canMouseSelected()) {
+                    selectedEntity = entity;
+                    break;
+                }
+            }
+        }
     }
 
     public void render(int fps) {
@@ -88,6 +112,11 @@ public class Game extends Graphics implements Runnable {
 
         level.renderBackground(this.screen, xScroll, yScroll);
         level.renderSprites(this.screen, xScroll, yScroll);
+
+        if (selectedEntity != null) {
+            Font.draw("selected", this.screen, selectedEntity.getX() - xScroll, selectedEntity.getY() - yScroll, PaletteHelper.getColor(-1, 111, 111, 555));
+        }
+
         level.renderFog(this.screen, xScroll, yScroll);
 
         Panel panel;

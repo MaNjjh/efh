@@ -8,8 +8,8 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
-import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.resource.Apple;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -27,17 +27,14 @@ public class AppleTree extends Tree {
 
     private boolean apple = false;
     private SpriteCollector spriteCollector;
-    private long tick = System.currentTimeMillis() + 20000;
-    private long tick2;
     private TextPanel textPanel;
 
     public AppleTree(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 16, 12);
         this.spriteCollector = spriteCollector;
-        wrapSprite(apple);
     }
 
-    private void wrapSprite(boolean flag) {
+    private void wrapSprite(boolean drawAura) {
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(20, 40, 30, -1)));
         spriteCollector.addWrapper(new SpriteWrapper(21 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(10, 10, 20, -1)));
@@ -45,20 +42,21 @@ public class AppleTree extends Tree {
         if (apple) {
             spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 0 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(310, 400, 510, -1)));
         }
-        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, true);
+        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, drawAura);
 
     }
+
 
     @Override
-    public void touchedBy(Entity entity) {
-        super.touchedBy(entity);
+    public boolean interact(Item item, Player player, int dir) {
 
-        if (!apple) return;
+        if (!apple) return false;
 
-        if (tick2 < System.currentTimeMillis() && entity instanceof Player) {
-            showMenu();
-        }
+        showMenu();
+
+        return false;
     }
+
 
     public void showMenu() {
         textPanel = new TextPanel("На дереве вы видите несколько спелых яблок", 4, 4);
@@ -73,13 +71,12 @@ public class AppleTree extends Tree {
             @Override
             public void result(int result) {
                 textPanel.close();
-                tick2 = System.currentTimeMillis() + 2000;
 
                 if (result == 1) return;
 
                 wrapSprite((apple = !apple));
 
-                tick = System.currentTimeMillis() + 20000;
+                tickTime = System.currentTimeMillis();
 
                 //  Тут будет подбор ягод
                 if (result == 0) {
@@ -94,6 +91,12 @@ public class AppleTree extends Tree {
     @Override
     public void render(Screen screen) {
 
+        wrapSprite(false);
+
+        if (mouseMotion && apple) {
+            wrapSprite(true);
+        }
+
         int xt = (x - xr * 2) - screen.getXOffset();
         int yt = (y - yr * 2 - 24) - screen.getYOffset();
 
@@ -105,8 +108,8 @@ public class AppleTree extends Tree {
     public void tick() {
         super.tick();
 
-        if (tick > System.currentTimeMillis() || apple) return;
+        if (System.currentTimeMillis() - tickTime < 2000 || apple) return;
+        apple = !apple;
 
-        wrapSprite((apple = !apple));
     }
 }

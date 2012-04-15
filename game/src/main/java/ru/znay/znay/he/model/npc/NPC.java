@@ -47,6 +47,11 @@ public class NPC extends Mob {
     }
 
     @Override
+    public boolean canMouseSelected() {
+        return true;
+    }
+
+    @Override
     public void render(Screen screen) {
 
         int xt = xtStart;

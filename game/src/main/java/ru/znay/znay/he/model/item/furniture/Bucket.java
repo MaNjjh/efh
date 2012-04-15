@@ -33,6 +33,9 @@ public class Bucket extends Furniture {
             isFull = true;
         }
         int col = PaletteHelper.getColor(-1, 111, 420, 111);
+
+
+
         if (isFull) {
             if (tickTime / 300 % 2 == 0) {
                 col = PaletteHelper.getColor(-1, 222, 222, 004);
@@ -43,6 +46,11 @@ public class Bucket extends Furniture {
 
         int col2 = PaletteHelper.getColor(-1, 333, 222, 111);
 
+
+        if (mouseMotion) {
+            col = PaletteHelper.getColor(-1, 111, 555, 111);
+            col2 = PaletteHelper.getColor(-1, 333, 555, 111);
+        }
 
         screen.render(xo, yo, 0 * Tile.HALF_SIZE, 9 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
         screen.render(xo + Tile.HALF_SIZE, yo, 1 * Tile.HALF_SIZE, 9 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
