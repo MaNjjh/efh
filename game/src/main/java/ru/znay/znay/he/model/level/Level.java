@@ -121,8 +121,6 @@ public class Level {
 
         this.questHandler = new QuestHandler(player);
 
-        add(new Waymark(player.getX() - 15, player.getY(), spriteCollector, getMessage(0)));
-
 /*
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
         AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class);
@@ -411,6 +409,9 @@ public class Level {
                     case 0x11:
                         add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector, player));
                         break;
+                    case 0x25:
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE,spriteCollector,getMessage(value&0xFF)));
+                        break;
                 }
             }
         }
@@ -499,7 +500,6 @@ public class Level {
         while ((buff = reader.readLine()) != null) {
             buff = buff.substring(1);
             int index = buff.indexOf("//");
-            System.out.println(buff);
             messages.add((index == -1)? buff:buff.substring(0,index));
         }
     }
