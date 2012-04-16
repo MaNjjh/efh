@@ -39,7 +39,7 @@ public class Player extends Mob {
     private long goldTime;
     private int goldCollect;
     private Point respPoint = null;
-    private EArrowType arrowType = EArrowType.SIMPLE;
+    private EArrowType arrowType = EArrowType.FIRE;
     private int fireDelay = 10;
 
     public Player(Game game) {
