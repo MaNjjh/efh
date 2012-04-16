@@ -146,9 +146,11 @@ public class AirWizard extends Mob {
 
     }
 
+
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
             entity.hurt(this, 3, dir);
         }
+        super.touchedBy(entity);
     }
 }
