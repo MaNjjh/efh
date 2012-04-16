@@ -27,6 +27,6 @@ public class Building extends Mob {
         int xt = x - screen.getXOffset();
         int yt = y - screen.getYOffset();
 
-        BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xF0F0F0);
+        BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFFF0F0F0);
     }
 }
