@@ -25,7 +25,7 @@ public class StoneMan extends NPC {
 
     private String stonedMessage = "Помогите добрый человек. Меня обратили в статую много лет назад и никто не может мне помочь. Только вода из святого источника сможет мне помочь.";
     private String message = "Спасибо!!! Спасибо вам! придет время я вас отблагодарю.";
-
+    private int roundTime = 0;
 
     public StoneMan(int x, int y) {
         super(x, y);
@@ -45,6 +45,15 @@ public class StoneMan extends NPC {
     public void tick() {
         super.tick();
         if (stoned) return;
+
+        if (roundTime > 0) {
+            dir = (roundTime - 45) / 4 % 4;
+            dir = (dir * 2 % 4) + (dir / 2);
+            if (roundTime < 45) {
+                dir = 0;
+            }
+            roundTime--;
+        }
 
         if (randomWalkTime > 0) {
             randomWalkTime--;
@@ -90,6 +99,7 @@ public class StoneMan extends NPC {
                     color1 = PaletteHelper.getColor(-1, 100, 030, 532);
                     color2 = PaletteHelper.getColor(-1, 100, 030, 532);
                     stoned = false;
+                    roundTime = 60 * 2;
                     return true;
                 }
             }
