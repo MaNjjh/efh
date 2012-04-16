@@ -51,7 +51,7 @@ public class PaletteHelper {
         for (int y = 0; y < src.getHeight(); y++) {
             for (int x = 0; x < src.getWidth(); x++) {
                 int cc = src.getPixels()[x + y * src.getWidth()];
-                if (cc < 255) {
+                if (cc < 255 && cc > -1) {
                     int val = colors[cc];// ^ 0x161616;
 
                     if (isGrey) {

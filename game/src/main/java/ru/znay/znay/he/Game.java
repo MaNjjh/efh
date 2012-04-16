@@ -10,6 +10,7 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.builds.building.TownHall;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.AirWizard;
@@ -228,8 +229,10 @@ public class Game extends Graphics implements Runnable {
 
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
-        this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
+        //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
+
+        this.level.add(new TownHall(player.getX(),player.getY()+50));
 
         InputHandler.getInstance().releaseAll();
     }
