@@ -12,6 +12,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.AirWizard;
 import ru.znay.znay.he.model.npc.Loony;
 import ru.znay.znay.he.model.npc.village.StoneMan;
 import ru.znay.znay.he.sound.Sound;
@@ -227,7 +228,7 @@ public class Game extends Graphics implements Runnable {
 
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
-        this.level.add(new Loony(player.getX() - 10, player.getY() - 10));
+        this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
 
         InputHandler.getInstance().releaseAll();
