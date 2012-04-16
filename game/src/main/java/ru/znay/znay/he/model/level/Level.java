@@ -366,7 +366,7 @@ public class Level {
     }
 
     private void loadLevelObject(int level, Player player) {
-        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".bmp");
+        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".png");
 
         this.width = map.getWidth();
         this.height = map.getHeight();
@@ -382,7 +382,7 @@ public class Level {
     }
 
     private void loadNPC(int level, Player player) {
-        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.bmp");
+        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.png");
         for (int j = 0; j < this.height; j++) {
             for (int i = 0; i < this.width; i++) {
                 int value = map.getPixels()[i + j * this.width];
