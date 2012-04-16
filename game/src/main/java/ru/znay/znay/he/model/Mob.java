@@ -5,7 +5,7 @@ import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.BloodParticle;
 import ru.znay.znay.he.model.particle.FlowText;
-import ru.znay.znay.he.model.weapon.Arrow;
+import ru.znay.znay.he.model.weapon.arrow.Arrow;
 import ru.znay.znay.he.sound.Sound;
 
 /**
@@ -84,8 +84,8 @@ public class Mob extends Entity {
     public void touchedBy(Entity entity) {
         if (entity instanceof Arrow) {
             Arrow arrow = (Arrow) entity;
-            if (this.team != arrow.getOwnerTeam() && !(this instanceof Arrow)) {
-                hurt(this, arrow.getDamage(), arrow.getDir());
+            if (this.team != arrow.getOwnerTeam()) {
+                hurt(this, arrow.getDamage(), dir ^ 1);
                 arrow.setRemoved(true);
                 //Sound.monsterHurt.play();
             }

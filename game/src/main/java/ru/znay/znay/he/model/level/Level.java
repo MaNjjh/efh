@@ -2,7 +2,8 @@ package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
-import ru.znay.znay.he.gfx.gui.*;
+import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.gui.MiniMap;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
@@ -13,21 +14,22 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.tree.*;
+import ru.znay.znay.he.model.builds.tree.AppleTree;
+import ru.znay.znay.he.model.builds.tree.FirTree;
+import ru.znay.znay.he.model.builds.tree.PineTree;
+import ru.znay.znay.he.model.builds.tree.Shrubbery;
+import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
-import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
-import ru.znay.znay.he.quest.promotion.QuestPromotion;
-import ru.znay.znay.he.quest.template.KillTemplate;
 
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -132,11 +134,11 @@ public class Level {
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
-        // trySpawn();
+        trySpawn();
     }
 
     public void trySpawn() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
 
             Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {
@@ -404,7 +406,7 @@ public class Level {
                         add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector, player));
                         break;
                     case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE,spriteCollector,getMessage(value&0xFF)));
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector, getMessage(value & 0xFF)));
                         break;
                 }
             }

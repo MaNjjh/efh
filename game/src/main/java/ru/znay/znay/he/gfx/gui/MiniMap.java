@@ -13,7 +13,7 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.Particle;
-import ru.znay.znay.he.model.weapon.Arrow;
+import ru.znay.znay.he.model.weapon.arrow.Arrow;
 
 import java.awt.*;
 

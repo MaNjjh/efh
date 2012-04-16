@@ -15,7 +15,8 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
-import ru.znay.znay.he.model.weapon.Arrow;
+import ru.znay.znay.he.model.weapon.Weapon;
+import ru.znay.znay.he.model.weapon.arrow.EArrowType;
 import ru.znay.znay.he.sound.Sound;
 
 import java.awt.*;
@@ -30,6 +31,7 @@ import java.util.List;
  */
 
 public class Player extends Mob {
+
     private Game game;
     private Item activeItem;
     private int score = 0;
@@ -37,12 +39,19 @@ public class Player extends Mob {
     private long goldTime;
     private int goldCollect;
     private Point respPoint = null;
+    private EArrowType arrowType = EArrowType.SIMPLE;
+    private int fireDelay = 10;
 
     public Player(Game game) {
         this.team = ETeam.PLAYER_TEAM;
         this.game = game;
         this.bloodColor = 0xcc00cc;
         this.slowPeriod = 4;
+    }
+
+    @Override
+    public void init(Level level) {
+        super.init(level);
     }
 
     @Override
@@ -87,9 +96,10 @@ public class Player extends Mob {
                 double vx = xDiff / m;
                 double vy = yDiff / m;
 
-                if (tickTime % 9 == 0) {
-                    this.level.add(new Arrow(this.team, x, y, vx, vy, random.nextInt(this.score / 1000 + 3) + 1));
+                if (tickTime % fireDelay == 0) {
+                    Weapon.fire(this.arrowType, this.team, x, y, vx, vy, score / 1000, level);
                 }
+
             }
         }
 
@@ -285,5 +295,13 @@ public class Player extends Mob {
 
     public void setRespPoint(int x, int y) {
         respPoint = new Point(x, y);
+    }
+
+    public int getFireDelay() {
+        return fireDelay;
+    }
+
+    public void setFireDelay(int fireDelay) {
+        this.fireDelay = fireDelay;
     }
 }
