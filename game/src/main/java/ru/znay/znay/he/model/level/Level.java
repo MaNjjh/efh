@@ -14,10 +14,7 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.building.Bakery;
-import ru.znay.znay.he.model.builds.building.House;
-import ru.znay.znay.he.model.builds.building.Sawmill;
-import ru.znay.znay.he.model.builds.building.TownHall;
+import ru.znay.znay.he.model.builds.building.*;
 import ru.znay.znay.he.model.builds.tree.AppleTree;
 import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
@@ -430,6 +427,9 @@ public class Level {
                                 break;
                             case 0x05:
                                 add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                                break;
+                            case 0x06:
+                                add(new Warehouse((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                                 break;
                         }
                 }
