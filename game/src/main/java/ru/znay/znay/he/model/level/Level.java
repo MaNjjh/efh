@@ -14,12 +14,17 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
+import ru.znay.znay.he.model.builds.building.Bakery;
+import ru.znay.znay.he.model.builds.building.House;
+import ru.znay.znay.he.model.builds.building.Sawmill;
+import ru.znay.znay.he.model.builds.building.TownHall;
 import ru.znay.znay.he.model.builds.tree.AppleTree;
 import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
 import ru.znay.znay.he.model.builds.tree.Shrubbery;
 import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
+import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -135,7 +140,7 @@ public class Level {
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
-        trySpawn();
+       // trySpawn();
     }
 
     public void trySpawn() {
@@ -409,6 +414,24 @@ public class Level {
                     case 0x25:
                         add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector, getMessage(value & 0xFF)));
                         break;
+                    case 0x40:
+                        switch (((value >> 8) & 0xFF)) {
+                            case 0x01:
+                                add(new TownHall((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                                break;
+                            case 0x02:
+                                add(new House((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                                break;
+                            case 0x03:
+                                add(new Sawmill((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                                break;
+                            case 0x04:
+                                add(new Bakery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                                break;
+                            case 0x05:
+                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                                break;
+                        }
                 }
             }
         }

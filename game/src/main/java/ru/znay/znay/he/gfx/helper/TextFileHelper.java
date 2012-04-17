@@ -3,6 +3,7 @@ package ru.znay.znay.he.gfx.helper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class TextFileHelper {
         InputStreamReader in = null;
         BufferedReader reader = null;
         try {
-            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"));
+            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"), Charset.defaultCharset());
             reader = new BufferedReader(in);
             List<String> messages = new ArrayList<String>();
             String buff;
