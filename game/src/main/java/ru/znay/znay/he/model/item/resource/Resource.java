@@ -1,47 +1,69 @@
 package ru.znay.znay.he.model.item.resource;
 
-import ru.znay.znay.he.model.Entity;
-import ru.znay.znay.he.model.particle.Particle;
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.level.Level;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Александр Сергеевич
- * Date: 24.03.12
- * Time: 15:49
- * To change this template use File | Settings | File Templates.
+ * ========================================
+ * ItCorp v. 1.0 class library
+ * ========================================
+ * <p/>
+ * http://www.it.ru
+ * <p/>
+ * (C) Copyright 1990-2011, by ItCorp.
+ * <p/>
+ * --------------------
+ * <Filename>.java
+ * --------------------
+ * Created on 17.04.12
+ * <p/>
+ * $Revision: $
+ * $Author: ASTarasov $
+ * $Source:
+ * $Id: $
+ * <p/>
+ * 17.04.12: Original version (WHo)
+ * 15:20: Time
  */
-public class Resource extends Particle {
+public class Resource {
 
-    public Resource(int x, int y) {
-        super(x, y);
+    public static Resource life = new Resource("Life", 0, 4, PaletteHelper.getColor(-1, 0, 500, 555));
+    public static Resource apple = new Resource("Apple", 0, 3, PaletteHelper.getColor(-1, 0, 510, 555));
+    public static Resource coin = new Resource("Coin", 0, 3, PaletteHelper.getColor(-1, 0, 552, 555));
+    public static Resource bigCoin = new Resource("B.Coin", 1, 3, PaletteHelper.getColor(-1, 0, 552, 555));
+
+    private final String name;
+    private final int xSprite;
+    private final int ySprite;
+    private final int color;
+
+    public Resource(String name, int xSprite, int ySprite, int color) {
+        if (name.length() > 6) throw new RuntimeException("Name cannot be longer than six characters!");
+        this.name = name;
+        this.xSprite = xSprite;
+        this.ySprite = ySprite;
+        this.color = color;
     }
 
-    @Override
-    public boolean canFly() {
-        return true;
+    public boolean interactOn(Tile tile, Level level, int xt, int yt, Player player, int attackDir) {
+        return false;
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-
-        if ((zz == 0) && level.getPlayer() != null) {
-            int xd = level.getPlayer().getX() - x;
-            int yd = level.getPlayer().getY() - y;
-            //int mag = 0*level.getPlayer().getScore() / 200;
-            if (xd * xd + yd * yd < /*mag * mag +*/ 20 * 20) {
-                if (xd < 0) xa = -1;
-                if (xd > 0) xa = +1;
-                if (yd < 0) ya = -1;
-                if (yd > 0) ya = +1;
-            }
-            move((int) xa, (int) ya);
-        }
-
+    public int getColor() {
+        return color;
     }
 
+    public String getName() {
+        return name;
+    }
 
-    public void touchedBy(Entity entity) {
-        entity.touchItem(this);
+    public int getxSprite() {
+        return xSprite;
+    }
+
+    public int getySprite() {
+        return ySprite;
     }
 }

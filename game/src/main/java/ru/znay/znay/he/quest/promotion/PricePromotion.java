@@ -15,7 +15,7 @@ public class PricePromotion implements QuestPromotion {
 
     @Override
     public void promotion(Player player) {
-        player.setScore(player.getScore() + price);
+
     }
 
     public int getPrice() {

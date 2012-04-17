@@ -6,6 +6,10 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Spark;
 
@@ -97,6 +101,18 @@ public class AirWizard extends Mob {
         }
     }
 
+    @Override
+    public void die() {
+        super.die();
+        int count = random.nextInt(80) + 40;
+        for (int i = 0; i < count; i++) {
+            this.level.add(new ItemEntity(new ResourceItem(Resource.coin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+        }
+        if (random.nextInt(2) == 0) {
+            this.level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+
+        }
+    }
     public void render(Screen screen) {
         int xt = 0;
         int yt = 14;
@@ -120,8 +136,8 @@ public class AirWizard extends Mob {
         int xo = x - 8;
         int yo = y - 11;
 
-        int col1 = PaletteHelper.getColor(-1, 100, 500, 555);
-        int col2 = PaletteHelper.getColor(-1, 100, 500, 532);
+        int col1 = PaletteHelper.getColor(-1, 100, 550, 555);
+        int col2 = PaletteHelper.getColor(-1, 100, 550, 532);
         if (health < 200) {
             if (tickTime / 3 % 2 == 0) {
                 col1 = PaletteHelper.getColor(-1, 500, 100, 555);

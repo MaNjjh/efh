@@ -6,9 +6,10 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.item.resource.Coin;
-import ru.znay.znay.he.model.item.resource.Life;
-import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.Inventory;
+import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
 
@@ -22,6 +23,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class Bird extends Mob {
+    private Inventory inventory = new Inventory();
     private int xt;
     private int yt;
     private double angle;
@@ -73,7 +75,7 @@ public class Bird extends Mob {
 
         List<Entity> entities = level.getEntities(x - rr, y - rr, x + rr, y + rr, null);
         for (Entity entity : entities) {
-            if (entity instanceof Resource) {
+            if (entity instanceof ItemEntity) {
                 this.xTarget = entity.getX();
                 this.yTarget = entity.getY();
             }
@@ -123,29 +125,23 @@ public class Bird extends Mob {
     @Override
     public void die() {
         super.die();
-        int count = coinCount + random.nextInt(6) + 2;
-        for (int i = 0; i < count; i++) {
-            this.level.add(new Coin(x, y, random.nextInt(5) + 1));
+
+        for (Item item : inventory.getItems()) {
+            if (item instanceof ResourceItem) {
+                ResourceItem resourceItem = (ResourceItem) item;
+                for (int i = 0; i < resourceItem.getCount(); i++) {
+                    this.level.add(new ItemEntity(new ResourceItem(resourceItem.getResource()), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+                }
+            }
         }
     }
 
-
     @Override
-    public void touchItem(Resource resource) {
-        if (this.isRemoved()) return;
-
-        if (resource instanceof Coin) {
-            coinCount++;
-            level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));
-        }
-
-        if (resource instanceof Life) {
-            Life life = (Life) resource;
-            health += life.getLife();
-        }
-
-
-        resource.setRemoved(true);
+    public void touchItem(ItemEntity itemEntity) {
+        if (isRemoved()) return;
+        itemEntity.take(this);
+        inventory.add(itemEntity.item);
+        level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));
     }
 
 

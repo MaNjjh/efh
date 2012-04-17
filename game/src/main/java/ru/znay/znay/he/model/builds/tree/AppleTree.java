@@ -10,7 +10,9 @@ import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;
-import ru.znay.znay.he.model.item.resource.Apple;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.LinkedList;
@@ -80,7 +82,7 @@ public class AppleTree extends Tree {
                 //  Тут будет подбор ягод
                 if (result == 0) {
                     for (int i = 0; i < random.nextInt(3) + 4; i++) {
-                        level.add(new Apple(x, y));
+                        level.add(new ItemEntity(new ResourceItem(Resource.apple), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
                     }
                 }
             }

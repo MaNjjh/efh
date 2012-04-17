@@ -5,8 +5,9 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.item.resource.Coin;
-import ru.znay.znay.he.model.item.resource.Life;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.List;
@@ -90,12 +91,13 @@ public class Slime extends Mob {
     @Override
     public void die() {
         super.die();
-        int count = random.nextInt(6) + 2;
+        int count = random.nextInt(8) + 4;
         for (int i = 0; i < count; i++) {
-            this.level.add(new Coin(x, y, random.nextInt(5) + 1));
+            this.level.add(new ItemEntity(new ResourceItem(Resource.coin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
         }
         if (random.nextInt(20) == 0) {
-            this.level.add(new Life(x, y, 1));
+            this.level.add(new ItemEntity(new ResourceItem(Resource.life), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+
         }
     }
 

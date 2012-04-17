@@ -9,7 +9,7 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.builds.tree.Tree;
-import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.Particle;
@@ -101,7 +101,7 @@ public class MiniMap extends Panel {
 
                     for (Entity entity : level.getEntities((i - 1) << 4, (j - 1) << 4, (i + 1) << 4, (j + 1) << 4, null)) {
 
-                        if (entity instanceof Resource || entity instanceof Arrow || entity instanceof Particle) {
+                        if (entity instanceof ItemEntity || entity instanceof Arrow || entity instanceof Particle) {
                             continue;
                         }
 

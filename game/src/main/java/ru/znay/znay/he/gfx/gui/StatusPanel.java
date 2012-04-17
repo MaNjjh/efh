@@ -41,9 +41,10 @@ public class StatusPanel extends Panel {
         this.visible = true;
     }
 
-    private void setText2(String t) {
+    public void setText2(String t) {
         text = t;
         sizeX = 2 + 1 + text.length();
+        changed = true;
     }
 
     public void setText(int t) {
@@ -59,7 +60,7 @@ public class StatusPanel extends Panel {
 
         val = t;
         setText2("" + t);
-        changed = true;
+
     }
 
     @Override

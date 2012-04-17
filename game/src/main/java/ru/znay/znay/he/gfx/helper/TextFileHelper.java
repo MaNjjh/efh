@@ -1,8 +1,7 @@
 package ru.znay.znay.he.gfx.helper;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +16,11 @@ import java.util.List;
 public class TextFileHelper {
 
     public static List<String> LoadMessages(int level) {
+        InputStreamReader in = null;
+        BufferedReader reader = null;
         try {
-            InputStreamReader in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"));
-            BufferedReader reader = new BufferedReader(in);
+            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"));
+            reader = new BufferedReader(in);
             List<String> messages = new ArrayList<String>();
             String buff;
             while ((buff = reader.readLine()) != null) {
@@ -27,11 +28,24 @@ public class TextFileHelper {
                 int index = buff.indexOf("//");
                 messages.add((index == -1) ? buff : buff.substring(0, index));
             }
-            reader.close();
-            in.close();
             return messages;
         } catch (Exception e) {
             return null;
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    //ignored
+                }
+            }
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    //ignored
+                }
+            }
         }
     }
 }

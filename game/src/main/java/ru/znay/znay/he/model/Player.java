@@ -4,20 +4,16 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
-import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.FurnitureItem;
+import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.furniture.Furniture;
-import ru.znay.znay.he.model.item.resource.Coin;
-import ru.znay.znay.he.model.item.resource.Life;
-import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
-import ru.znay.znay.he.sound.Sound;
 
 import java.awt.*;
 import java.util.List;
@@ -34,13 +30,11 @@ public class Player extends Mob {
 
     private Game game;
     private Item activeItem;
-    private int score = 0;
     private int clearFogRadius = 4;
-    private long goldTime;
-    private int goldCollect;
     private Point respPoint = null;
     private EArrowType arrowType = EArrowType.FIRE;
     private int fireDelay = 10;
+    private Inventory inventory = new Inventory();
 
     public Player(Game game) {
         this.team = ETeam.PLAYER_TEAM;
@@ -96,8 +90,8 @@ public class Player extends Mob {
                 double vx = xDiff / m;
                 double vy = yDiff / m;
 
-                if (tickTime % fireDelay == 0) {
-                    Weapon.fire(this.arrowType, this.team, x, y, vx, vy, score / 1000, level);
+                if (tickTime % fireDelay == 0) { //todo added attack bonus
+                    Weapon.fire(this.arrowType, this.team, x, y, vx, vy, 0, level);
                 }
 
             }
@@ -178,10 +172,15 @@ public class Player extends Mob {
         }
     }
 
-    @Override
-    public void touchItem(Resource resource) {
-        if (resource instanceof Coin) {
-            Coin coin = (Coin) resource;
+    public void touchItem(ItemEntity itemEntity) {
+        itemEntity.take(this);
+        inventory.add(itemEntity.item);
+    }
+
+    /*@Override
+    public void touchItem(ItemEntity itemEntity) {
+        if (itemEntity instanceof Coin) {
+            Coin coin = (Coin) itemEntity;
             score += coin.getCost();
             goldCollect += coin.getCost();
             if (System.currentTimeMillis() - goldTime > 100) {
@@ -192,13 +191,13 @@ public class Player extends Mob {
             }
         }
 
-        if (resource instanceof Life) {
-            Life life = (Life) resource;
+        if (itemEntity instanceof Life) {
+            Life life = (Life) itemEntity;
             health += life.getLife();
         }
 
-        resource.setRemoved(true);
-    }
+        itemEntity.setRemoved(true);
+    }*/
 
     public boolean take() {
         boolean done = false;
@@ -257,16 +256,9 @@ public class Player extends Mob {
         }
     }
 
-    public int getScore() {
-        return score;
-    }
 
     public int getClearFogRadius() {
-        return Math.min(clearFogRadius + score / 1000, 10);
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+        return Math.min(clearFogRadius, 10);
     }
 
     public Item getActiveItem() {
@@ -303,5 +295,9 @@ public class Player extends Mob {
 
     public void setFireDelay(int fireDelay) {
         this.fireDelay = fireDelay;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 }

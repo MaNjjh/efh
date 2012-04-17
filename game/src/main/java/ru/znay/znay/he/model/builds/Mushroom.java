@@ -5,7 +5,9 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.item.resource.Coin;
+import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
@@ -31,6 +33,8 @@ public class Mushroom extends Mob {
     }
 
     public Mushroom() {
+        this.xr = 1;
+        this.yr = 1;
         this.team = ETeam.PLAYER_TEAM;
         this.time = System.currentTimeMillis();
     }
@@ -48,20 +52,20 @@ public class Mushroom extends Mob {
 
             if (tx == 2) {
                 if (this.level != null) {
-                    for (int i = 0; i < 5; i++) {
-                        this.level.add(new Coin(x, y, random.nextInt(5) + 1));
+                    for (int i = 0; i < 50; i++) {
+                        this.level.add(new ItemEntity(new ResourceItem(Resource.coin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+                        if (random.nextInt(10) == 0) {
+                            this.level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+                        }
                     }
                 }
             }
-
 
             if (tx < 2) {
                 tx++;
             }
 
             this.time = System.currentTimeMillis();
-
-
         }
 
     }

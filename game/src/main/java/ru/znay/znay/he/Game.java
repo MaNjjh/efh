@@ -10,15 +10,10 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.building.Bakery;
-import ru.znay.znay.he.model.builds.building.House;
-import ru.znay.znay.he.model.builds.building.Sawmill;
-import ru.znay.znay.he.model.builds.building.TownHall;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.AirWizard;
-import ru.znay.znay.he.model.npc.Loony;
-import ru.znay.znay.he.model.npc.village.StoneMan;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -83,11 +78,11 @@ public class Game extends Graphics implements Runnable {
         int mx = InputHandler.getInstance().getXMousePos();
         int my = InputHandler.getInstance().getYMousePos();
         int r = 3;
-        
+
         for (Entity entity : this.level.getEntities(mx - r, my - r, mx + r, my + r, null)) {
             entity.mouseMotion();
         }
-        
+
         if (InputHandler.getInstance().mouse.clicked) {
             selectedEntity = null;
 
@@ -125,8 +120,13 @@ public class Game extends Graphics implements Runnable {
         level.renderFog(this.screen, xScroll, yScroll);
 
         Panel panel;
-        if ((panel = GuiManager.getInstance().get("money")) != null)
-            ((StatusPanel) panel).setText(player.getScore());
+        if ((panel = GuiManager.getInstance().get("money")) != null) {
+            ResourceItem coin = player.getInventory().findResource(Resource.coin);
+            ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
+            String score = String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
+
+            ((StatusPanel) panel).setText2(score);
+        }
 
         if ((panel = GuiManager.getInstance().get("health")) != null)
             ((StatusPanel) panel).setText(player.getHealth());
@@ -233,13 +233,9 @@ public class Game extends Graphics implements Runnable {
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
-        this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
+        //this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
 
         //this.level.add(new TownHall(player.getX(),player.getY()+50));
-        //this.level.add(new Sawmill(player.getX(),player.getY()+50));
-        //this.level.add(new Bakery(player.getX(),player.getY()+50));
-
-        //this.level.add(new House(player.getX(),player.getY()+100));
 
         InputHandler.getInstance().releaseAll();
     }

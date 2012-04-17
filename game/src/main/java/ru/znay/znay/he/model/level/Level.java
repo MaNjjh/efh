@@ -21,6 +21,7 @@ import ru.znay.znay.he.model.builds.tree.Shrubbery;
 import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.quest.QuestHandler;
@@ -150,10 +151,10 @@ public class Level {
                 add(mob);
             }
 
-            /*mob = new Bird();
+            mob = new Bird();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }   */
+            }
 
             /*mob = new AppleTree();
             if (mob.findStartPos(this)) {
