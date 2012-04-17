@@ -10,6 +10,9 @@ import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.builds.building.Bakery;
+import ru.znay.znay.he.model.builds.building.House;
+import ru.znay.znay.he.model.builds.building.Sawmill;
 import ru.znay.znay.he.model.builds.building.TownHall;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -232,7 +235,11 @@ public class Game extends Graphics implements Runnable {
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
 
-        this.level.add(new TownHall(player.getX(),player.getY()+50));
+        //this.level.add(new TownHall(player.getX(),player.getY()+50));
+        //this.level.add(new Sawmill(player.getX(),player.getY()+50));
+        //this.level.add(new Bakery(player.getX(),player.getY()+50));
+
+        //this.level.add(new House(player.getX(),player.getY()+100));
 
         InputHandler.getInstance().releaseAll();
     }

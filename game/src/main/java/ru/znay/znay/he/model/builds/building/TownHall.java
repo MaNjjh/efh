@@ -15,6 +15,6 @@ public class TownHall extends Building {
     public TownHall(int x, int y) {
         super(x, y, 0, 0);
 
-        this.sprite = BitmapHelper.loadBitmapFromResources("/TownHall.png");
+        this.sprite = BitmapHelper.loadBitmapFromResources("/buildings/TownHall.png");
     }
 }
