@@ -1,7 +1,6 @@
 package ru.znay.znay.he.model.builds.building;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.model.Mob;
 
 /**
  * Created by IntelliJ IDEA.

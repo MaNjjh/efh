@@ -15,11 +15,7 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.building.*;
-import ru.znay.znay.he.model.builds.tree.AppleTree;
-import ru.znay.znay.he.model.builds.tree.FirTree;
-import ru.znay.znay.he.model.builds.tree.PineTree;
-import ru.znay.znay.he.model.builds.tree.Shrubbery;
-import ru.znay.znay.he.model.builds.tree.TreeStump;
+import ru.znay.znay.he.model.builds.tree.*;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -28,11 +24,7 @@ import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.quest.QuestHandler;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -137,7 +129,7 @@ public class Level {
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
-       // trySpawn();
+        // trySpawn();
     }
 
     public void trySpawn() {
@@ -378,7 +370,7 @@ public class Level {
 
         this.tiles = new byte[this.width * this.height];
 
-        this.fog = new Fog(this.width, this.height);
+        this.fog = new Fog(this.width, this.height, level != 1);
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
 

@@ -2,6 +2,8 @@ package ru.znay.znay.he.model.builds.utensils;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.ETeam;
+import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 
 /**
@@ -17,6 +19,7 @@ public abstract class Utensils extends Mob {
         this.y = y;
         this.xr = xr;
         this.yr = yr;
+        this.team = ETeam.NEUTRAL_TEAM;
     }
 
     @Override
@@ -25,5 +28,15 @@ public abstract class Utensils extends Mob {
         int yt = (y - (yr << 1) * 3 - yr) - screen.getYOffset();
 
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
+    }
+
+    @Override
+    public void touchedBy(Entity entity) {
+
+    }
+
+    @Override
+    public boolean blocks(Entity entity) {
+        return true;
     }
 }

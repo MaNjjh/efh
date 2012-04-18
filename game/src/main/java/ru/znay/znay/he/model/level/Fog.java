@@ -17,12 +17,12 @@ public class Fog {
     private int height;
     private CircleMap circleMap;
 
-    public Fog(int width, int height) {
+    public Fog(int width, int height, boolean defaultValue) {
         this.width = width;
         this.height = height;
         fog = new boolean[width * height];
         for (int i = 0; i < width * height; i++) {
-            fog[i] = true;
+            fog[i] = defaultValue;
         }
     }
 
