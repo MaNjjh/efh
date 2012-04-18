@@ -2,10 +2,8 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.gui.*;
 import ru.znay.znay.he.gfx.gui.Panel;
-import ru.znay.znay.he.gfx.gui.SpeedIndicator;
-import ru.znay.znay.he.gfx.gui.StatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Entity;
@@ -233,9 +231,9 @@ public class Game extends Graphics implements Runnable {
 
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
-        this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
+        //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
-
+        GuiManager.getInstance().add(new Inventory(10,10),"inventory");
         InputHandler.getInstance().releaseAll();
     }
 
