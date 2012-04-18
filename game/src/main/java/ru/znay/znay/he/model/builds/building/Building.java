@@ -11,7 +11,7 @@ import ru.znay.znay.he.model.Mob;
  * Time: 19:46
  * To change this template use File | Settings | File Templates.
  */
-public class Building extends Mob {
+public abstract class Building extends Mob {
 
     public Building (int x,int y,int xr,int yr)
     {

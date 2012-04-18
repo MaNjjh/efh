@@ -117,7 +117,7 @@ public class Game extends Graphics implements Runnable {
             Font.draw("selected", this.screen, selectedEntity.getX() - xScroll, selectedEntity.getY() - yScroll, PaletteHelper.getColor(-1, 111, 111, 555));
         }
 
-        level.renderFog(this.screen, xScroll, yScroll);
+        //level.renderFog(this.screen, xScroll, yScroll);
 
         Panel panel;
         if ((panel = GuiManager.getInstance().get("money")) != null) {
@@ -234,8 +234,6 @@ public class Game extends Graphics implements Runnable {
         this.level = new Level(this.player, i, this);
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 10, player.getY() - 10));
-
-        //this.level.add(new TownHall(player.getX(),player.getY()+50));
 
         InputHandler.getInstance().releaseAll();
     }
