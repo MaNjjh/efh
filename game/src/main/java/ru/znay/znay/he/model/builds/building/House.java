@@ -9,10 +9,9 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
  * Time: 14:07
  * To change this template use File | Settings | File Templates.
  */
-public class House extends Building{
-    public House(int x, int y)
-    {
-        super(x,y,0,0);
+public class House extends Building {
+    public House(int x, int y) {
+        super(x, y, 60, 20);
 
         this.sprite = BitmapHelper.loadBitmapFromResources("/buildings/House.png");
     }

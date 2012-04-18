@@ -26,8 +26,11 @@ public abstract class Building extends Mob {
     @Override
     public void render(Screen screen) {
 
-        int xt = x - screen.getXOffset();
-        int yt = y - screen.getYOffset();
+        int xo = x;
+        int yo = y;
+
+        int xt = xo - screen.getXOffset();
+        int yt = yo - screen.getYOffset();
 
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFFF0F0F0);
     }

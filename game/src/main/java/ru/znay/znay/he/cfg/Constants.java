@@ -12,6 +12,8 @@ public class Constants {
     public static final int SCREEN_HEIGHT = 240;
     public static final int SCREEN_SCALE = 2;
 
+    public static final boolean isDebugMode = true;
+
     public static final String GAME_TITLE = "Escape from hell";
 
     public static final String SPRITES_FILE = "/sprites.png";
@@ -34,7 +36,8 @@ public class Constants {
                 return RIVER;
             case 4:
                 return SWAMP;
-            default: return "Неизвестно";
+            default:
+                return "Неизвестно";
         }
     }
 }

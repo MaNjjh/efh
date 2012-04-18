@@ -217,6 +217,18 @@ public class Level {
         Collections.sort(list, spriteSorter);
         for (Entity entity : list) {
             entity.render(screen);
+
+            if (Constants.isDebugMode) {
+                int xt = entity.getX() - screen.getXOffset();
+                int yt = entity.getY() - screen.getYOffset();
+                int xr = entity.getXr();
+                int yr = entity.getYr();
+
+                BitmapHelper.drawLine(xt - xr, yt - yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
+                BitmapHelper.drawLine(xt - xr, yt - yr, xt - xr, yt + yr, 0xff00, screen.getViewPort());
+                BitmapHelper.drawLine(xt - xr, yt + yr, xt + xr, yt + yr, 0xff00, screen.getViewPort());
+                BitmapHelper.drawLine(xt + xr, yt + yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
+            }
         }
     }
 

@@ -12,7 +12,7 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
 public class Bakery extends Building {
     public Bakery(int x,int y)
     {
-        super(x,y,0,0);
+        super(x,y,170,60);
 
         this.sprite = BitmapHelper.loadBitmapFromResources("/buildings/Bakery.png");
     }

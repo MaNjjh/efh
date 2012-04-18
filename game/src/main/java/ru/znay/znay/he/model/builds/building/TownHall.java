@@ -12,7 +12,7 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
 public class TownHall extends Building {
 
     public TownHall(int x, int y) {
-        super(x, y, 0, 0);
+        super(x, y, 50, 20);
 
         this.sprite = BitmapHelper.loadBitmapFromResources("/buildings/TownHall.png");
     }
