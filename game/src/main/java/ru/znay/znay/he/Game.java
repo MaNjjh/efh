@@ -16,6 +16,8 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.AirWizard;
+import ru.znay.znay.he.model.npc.village.StoneMan;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -241,7 +243,7 @@ public class Game extends Graphics implements Runnable {
 
         //this.level.add(new House(player.getX(), player.getY() + 50));
 
-       // GuiManager.getInstance().add(new Inventory(1,25),"inventory");
+        //GuiManager.getInstance().add(new Inventory(1,25),"inventory");
         InputHandler.getInstance().releaseAll();
     }
 

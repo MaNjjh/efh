@@ -1,7 +1,7 @@
 package ru.znay.znay.he.gfx.helper;
 
-import ru.znay.znay.he.gfx.weather.Weather;
 import ru.znay.znay.he.gfx.model.Bitmap;
+import ru.znay.znay.he.gfx.weather.Weather;
 
 /**
  * Created by IntelliJ IDEA.
@@ -53,20 +53,23 @@ public class PaletteHelper {
             for (int x = 0; x < src.getWidth(); x++) {
                 int cc = src.getPixels()[x + y * src.getWidth()];
                 if (cc < 255 && cc > -1) {
-                    int val = colors[cc];// ^ 0x161616;
-
-                    if (isGrey || weather.isRain()) {
-                        int red = ((val >> 16) & 0xff);
-                        int green = ((val >> 8) & 0xff);
-                        int blue = (val & 0xff);
-                        blue = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
-                        red = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
-                        green = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
-                        val = (red << 16) | (green << 8) | blue;
-                    }
+                    int val = colors[cc];
+                    // val = weather.isRain() ? val ^ 0x161616 : val;
 
                     if (weather.isStorm()) {
-                        val = 0xFFFFFF;
+                        val = 0xffffff;
+                    } else {
+
+                        if (isGrey || weather.isRain()) {
+                            int red = ((val >> 16) & 0xff);
+                            int green = ((val >> 8) & 0xff);
+                            int blue = (val & 0xff);
+                            blue = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
+                            red = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
+                            green = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
+                            val = (red << 16) | (green << 8) | blue;
+                        }
+
                     }
 
                     src.getPixels()[x + y * src.getWidth()] = val;

@@ -29,7 +29,7 @@ import java.util.Random;
  */
 public class WeatherManager {
     private Weather currentWeather = new Weather();
-    private int rainTime = 0;
+    private int rainTime = 11110;
     private int speed = 2;
     private Random random = new Random();
 
