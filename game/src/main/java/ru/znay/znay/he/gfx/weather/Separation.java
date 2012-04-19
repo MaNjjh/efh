@@ -47,10 +47,9 @@ public class Separation extends Entity {
 
     public void render(Screen screen) {
 
-        int xo = x;
-        int yo = y;
+        int xo = x - 8;
+        int yo = y - 5;
 
-        yo += 4;
         int waterColor = PaletteHelper.getColor(-1, -1, -1, 444);
         if (timeLife / 8 % 2 == 0) {
             waterColor = PaletteHelper.getColor(-1, 444, -1, -1);
