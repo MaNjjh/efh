@@ -35,6 +35,8 @@ public class WeatherManager {
 
     public void tick(Level level) {
 
+        if (true) return;
+
         currentWeather.setStorm(false);
 
         currentWeather.setRain(false);
