@@ -38,13 +38,11 @@ public class TextPanel extends Panel {
         init(message, PaletteHelper.getColor(5, 555, 555, 555));
     }
 
-    public TextPanel(List<String> messages,int x,int y,int w)
-    {
-        super(x,y);
+    public TextPanel(List<String> messages, int x, int y, int w) {
+        super(x, y);
         this.colorText = PaletteHelper.getColor(5, 555, 555, 555);
-        this.formatedText = messages;
-        this.sizeX = w + 2;
-        this.sizeY = this.formatedText.size() + 2;
+
+        this.setFormatedText(messages, w);
     }
 
     private void init(String message, int colorText) {
@@ -92,6 +90,14 @@ public class TextPanel extends Panel {
         formatString(text);
 
         changed = true;
+    }
+
+    public void setFormatedText(List<String> formatedText, int w) {
+        this.formatedText = formatedText;
+        this.sizeX = w + 2;
+        this.sizeY = this.formatedText.size() + 2;
+        this.changed = true;
+        this.visible = true;
     }
 
     @Override
