@@ -35,8 +35,6 @@ public class WeatherManager {
 
     public void tick(Level level) {
 
-        if (true) return;
-
         currentWeather.setStorm(false);
 
         currentWeather.setRain(false);
@@ -52,12 +50,12 @@ public class WeatherManager {
             }
         }
 
-        if (random.nextInt(10000) == 0 && rainTime <= 0) {
+        if (random.nextInt(5000) == 0 && rainTime <= 0) {
             speed = 2;
             rainTime = 5000;
         }
 
-        if (currentWeather.isRain() && rainTime < 4000 && rainTime > 100 && random.nextInt(20) == 0) {
+        if (currentWeather.isRain() && rainTime < 4000 && rainTime > 1000 && random.nextInt(20) == 0) {
 
             currentWeather.setStorm(true);
         }

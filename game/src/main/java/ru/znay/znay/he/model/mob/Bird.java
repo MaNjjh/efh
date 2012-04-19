@@ -138,7 +138,7 @@ public class Bird extends Mob {
 
     @Override
     public void touchItem(ItemEntity itemEntity) {
-        if (isRemoved()) return;
+        if (itemEntity.isRemoved() || isRemoved()) return;
         itemEntity.take(this);
         inventory.add(itemEntity.item);
         level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));

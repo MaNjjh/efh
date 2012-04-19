@@ -12,6 +12,7 @@ import ru.znay.znay.he.model.item.furniture.Furniture;
 import ru.znay.znay.he.model.item.resource.ItemEntity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
 
@@ -173,8 +174,10 @@ public class Player extends Mob {
     }
 
     public void touchItem(ItemEntity itemEntity) {
+        if (itemEntity.isRemoved()) return;
         itemEntity.take(this);
         inventory.add(itemEntity.item);
+        level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, ru.znay.znay.he.gfx.model.Font.yellowColor));
     }
 
     /*@Override

@@ -129,7 +129,7 @@ public class Level {
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
-        // trySpawn();
+         trySpawn();
     }
 
     public void trySpawn() {
