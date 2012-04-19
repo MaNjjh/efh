@@ -34,6 +34,7 @@ public class Item implements ListItem {
     public int getxSprite() {
         return 0;
     }
+
     public int getySprite() {
         return 0;
     }
@@ -65,4 +66,7 @@ public class Item implements ListItem {
         return item.getClass() == getClass();
     }
 
+    public int count() {
+        return 1;
+    }
 }

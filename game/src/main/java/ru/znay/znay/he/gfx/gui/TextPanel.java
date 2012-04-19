@@ -108,5 +108,7 @@ public class TextPanel extends Panel {
             Font.drawToBitmap(text, screen, Tile.HALF_SIZE, h * Tile.HALF_SIZE, colorText, image);
             h++;
         }
+
+        changed = false;
     }
 }

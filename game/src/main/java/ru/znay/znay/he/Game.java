@@ -243,7 +243,6 @@ public class Game extends Graphics implements Runnable {
 
         //this.level.add(new House(player.getX(), player.getY() + 50));
 
-        GuiManager.getInstance().add(new Inventory(1,5),"inventory");
         InputHandler.getInstance().releaseAll();
     }
 

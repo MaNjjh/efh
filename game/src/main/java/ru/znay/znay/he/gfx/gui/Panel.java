@@ -187,4 +187,8 @@ public class Panel {
     public int getY() {
         return y;
     }
+
+    public Bitmap getImage() {
+        return image;
+    }
 }
