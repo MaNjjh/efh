@@ -64,7 +64,7 @@ public class ItemEntity extends Particle {
 
     public void take(Entity entity) {
         if (entity instanceof Player) {
-            //Sound.pickup.play();
+            Sound.pickup.play();
         }
         item.onTake(this);
         removed = true;

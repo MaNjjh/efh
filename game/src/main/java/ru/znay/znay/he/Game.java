@@ -42,7 +42,7 @@ public class Game extends Graphics implements Runnable {
 
     public void start() {
         running = true;
-        Sound.backMusic.init();
+        Sound.backMusic.loop();
         new Thread(this).start();
     }
 
