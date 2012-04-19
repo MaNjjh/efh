@@ -1,5 +1,6 @@
 package ru.znay.znay.he.gfx.helper;
 
+import ru.znay.znay.he.gfx.weather.Weather;
 import ru.znay.znay.he.gfx.model.Bitmap;
 
 /**
@@ -46,7 +47,7 @@ public class PaletteHelper {
         return colors[indexColor];
     }
 
-    public void wrapPaletteColors(Bitmap src, boolean isGrey) {
+    public void wrapPaletteColors(Bitmap src, boolean isGrey, Weather weather) {
 
         for (int y = 0; y < src.getHeight(); y++) {
             for (int x = 0; x < src.getWidth(); x++) {
@@ -54,7 +55,7 @@ public class PaletteHelper {
                 if (cc < 255 && cc > -1) {
                     int val = colors[cc];// ^ 0x161616;
 
-                    if (isGrey) {
+                    if (isGrey || weather.isRain()) {
                         int red = ((val >> 16) & 0xff);
                         int green = ((val >> 8) & 0xff);
                         int blue = (val & 0xff);
@@ -62,6 +63,10 @@ public class PaletteHelper {
                         red = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
                         green = (int) (0.21 * red + 0.71 * green + 0.07 * blue) & 0xff;
                         val = (red << 16) | (green << 8) | blue;
+                    }
+
+                    if (weather.isStorm()) {
+                        val = 0xFFFFFF;
                     }
 
                     src.getPixels()[x + y * src.getWidth()] = val;

@@ -12,7 +12,7 @@ public class Constants {
     public static final int SCREEN_HEIGHT = 240;
     public static final int SCREEN_SCALE = 2;
 
-    public static final boolean isDebugMode = true;
+    public static final boolean isDebugMode = false;
 
     public static final String GAME_TITLE = "Escape from hell";
 

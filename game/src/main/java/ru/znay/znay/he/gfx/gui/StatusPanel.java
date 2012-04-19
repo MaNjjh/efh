@@ -60,7 +60,6 @@ public class StatusPanel extends Panel {
 
         val = t;
         setText2("" + t);
-
     }
 
     @Override

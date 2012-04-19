@@ -3,6 +3,7 @@ package ru.znay.znay.he.gfx;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.gfx.weather.Weather;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -36,8 +37,8 @@ public class Graphics extends Canvas {
         // BitmapHelper.fill(this.screen.getViewPort(), 0);
     }
 
-    public void render(boolean isGrey) {
-        PaletteHelper.getInstance().wrapPaletteColors(this.screen.getViewPort(), isGrey);
+    public void render(boolean isGrey, Weather weather) {
+        PaletteHelper.getInstance().wrapPaletteColors(this.screen.getViewPort(), isGrey, weather);
 
         if (this.bufferStrategy != null) {
             java.awt.Graphics g = bufferStrategy.getDrawGraphics();
