@@ -55,6 +55,8 @@ public class GuiInventory extends GuiPanel {
 
         visible = false;
         changed = true;
+
+
     }
 
     @Override
@@ -69,14 +71,11 @@ public class GuiInventory extends GuiPanel {
         String val = "0%";
         if (speed < 3)
             val = "30%";
-
-        if (speed < 10)
+        else if (speed < 10)
             val = "60%";
-
-        if (speed < 40)
+        else if (speed < 40)
             val = "90%";
-
-        if (speed < 60)
+        else if (speed < 60)
             val = "120%";
 
         int posX = panels[1].getX() + 12 * Tile.HALF_SIZE;
