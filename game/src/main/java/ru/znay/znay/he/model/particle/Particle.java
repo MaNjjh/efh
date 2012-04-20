@@ -1,5 +1,7 @@
 package ru.znay.znay.he.model.particle;
 
+import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 
 /**
@@ -15,10 +17,12 @@ public class Particle extends Entity {
     protected double xa, ya, za;
     protected double xx, yy, zz;
     protected int speed = 1;
+    protected int color;
 
-    public Particle(int x, int y) {
+    public Particle(int x, int y, int color) {
         this.x = x;
         this.y = y;
+        this.color = color;
         xx = x;
         yy = y;
         zz = 2;
@@ -47,5 +51,19 @@ public class Particle extends Entity {
             x = (int) xx;
             y = (int) yy;
         }
+    }
+
+    public void render(Screen screen) {
+        int xo = x - screen.getXOffset();
+        int yo = y - screen.getYOffset();
+
+        if (zz > 0)
+            BitmapHelper.drawPoint(xo, yo, 0, screen.getViewPort());
+
+        if (time > 100)
+            BitmapHelper.drawPoint(xo, yo - (int) zz + 1, 0, screen.getViewPort());
+
+
+        BitmapHelper.drawPoint(xo, yo - (int) zz, color, screen.getViewPort());
     }
 }

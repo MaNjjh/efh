@@ -13,18 +13,16 @@ import ru.znay.znay.he.gfx.model.Screen;
  */
 public class TextParticle extends Particle {
     private String msg;
-    private int col;
 
-    public TextParticle(String msg, int x, int y, int col) {
-        super(x, y);
+    public TextParticle(String msg, int x, int y, int color) {
+        super(x, y, color);
         this.msg = msg;
-        this.col = col;
     }
 
     public void render(Screen screen) {
         // Font.draw(msg, screen, x - msg.length() * 4, y, PaletteHelper.getColor(-1, 0, 0, 0));
         Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
-        Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), col);
+        Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), color);
     }
 
 }

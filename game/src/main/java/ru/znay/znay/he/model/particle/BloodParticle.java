@@ -12,11 +12,9 @@ import ru.znay.znay.he.gfx.model.Screen;
  */
 public class BloodParticle extends Particle {
 
-    private int color;
 
     public BloodParticle(int x, int y, int color) {
-        super(x, y);
-        this.color = color;
+        super(x, y, color);
 
         this.time = 100 + random.nextInt(300);
 
@@ -34,19 +32,4 @@ public class BloodParticle extends Particle {
             }
 
     }
-
-    public void render(Screen screen) {
-        int xo = x - screen.getXOffset();
-        int yo = y - screen.getYOffset();
-
-        if (zz > 0)
-            BitmapHelper.drawPoint(xo, yo, 0, screen.getViewPort());
-
-        if (time > 100)
-            BitmapHelper.drawPoint(xo, yo - (int) zz + 1, 0, screen.getViewPort());
-
-
-        BitmapHelper.drawPoint(xo, yo - (int) zz, color, screen.getViewPort());
-    }
-
 }

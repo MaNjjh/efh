@@ -20,7 +20,7 @@ public class ItemEntity extends Particle {
     public Item item;
 
     public ItemEntity(Item item, int x, int y) {
-        super(x, y);
+        super(x, y, 0);
         this.item = item;
         this.time = 600;
     }
