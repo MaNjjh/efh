@@ -16,29 +16,29 @@ import java.util.List;
  * Time: 10:45
  * To change this template use File | Settings | File Templates.
  */
-public class TextPanel extends Panel {
+public class GuiTextPanel extends GuiPanel {
 
     protected int colorText;
     protected String originalMessage;
 
     List<String> formatedText = new LinkedList<String>();
 
-    public TextPanel(String message, int posX, int posY, int colorText, int colorPanel) {
+    public GuiTextPanel(String message, int posX, int posY, int colorText, int colorPanel) {
         super(posX, posY, colorPanel);
         init(message, colorText);
     }
 
-    public TextPanel(String message, int posX, int posY, int colorText) {
+    public GuiTextPanel(String message, int posX, int posY, int colorText) {
         super(posX, posY);
         init(message, colorText);
     }
 
-    public TextPanel(String message, int posX, int posY) {
+    public GuiTextPanel(String message, int posX, int posY) {
         super(posX, posY);
         init(message, PaletteHelper.getColor(5, 555, 555, 555));
     }
 
-    public TextPanel(List<String> messages, int x, int y, int w) {
+    public GuiTextPanel(List<String> messages, int x, int y, int w) {
         super(x, y);
         this.colorText = PaletteHelper.getColor(5, 555, 555, 555);
 

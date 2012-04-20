@@ -14,7 +14,7 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 public class GuiManager {
-    private Map<String, Panel> panels = new HashMap<String, Panel>();
+    private Map<String, GuiPanel> panels = new HashMap<String, GuiPanel>();
 
     private static GuiManager guiManager = null;
 
@@ -22,13 +22,10 @@ public class GuiManager {
 
     private GuiManager() {
 
-        //add(new StatusPanel(30,30,3,3,123, PaletteHelper.getColor(555, 555, 555, -1)));
-
-        //panelList.add(new TextPanel("Мы долго ждали приветствуем тебя", 10, 10, PaletteHelper.getColor(5, 555, 555, 555)));
     }
 
-    private boolean findSamePanel(Panel findPanel) {
-        for (Panel panel : panels.values()) {
+    private boolean findSamePanel(GuiPanel findPanel) {
+        for (GuiPanel panel : panels.values()) {
             if (panel.getX() == findPanel.getX() && panel.getY() == findPanel.getY()) {
                 return true;
             }
@@ -36,19 +33,19 @@ public class GuiManager {
         return false;
     }
 
-    public void add(Panel panel, String name) {
+    public void add(GuiPanel panel, String name) {
         if (!findSamePanel(panel)) {
             panels.put(name, panel);
         }
     }
 
-    public Panel get(String name) {
+    public GuiPanel get(String name) {
         return panels.get(name);
     }
 
     public void tick() {
-        Iterator<Panel> items = panels.values().iterator();
-        Panel panel;
+        Iterator<GuiPanel> items = panels.values().iterator();
+        GuiPanel panel;
 
         for (; items.hasNext(); )
             if ((panel = items.next()).isClosed()) items.remove();
@@ -56,13 +53,13 @@ public class GuiManager {
     }
 
     public void render(Screen screen) {
-        for (Panel panel : panels.values()) {
+        for (GuiPanel panel : panels.values()) {
             panel.render(screen);
         }
     }
 
     public void remove(String name) {
-        Panel p;
+        GuiPanel p;
         if ((p = panels.get(name)) != null) p.close();
     }
 
@@ -77,10 +74,10 @@ public class GuiManager {
     {
         panels.clear();
 
-        add(new StatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
-        add(new StatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
-        add(new SpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), game.getScreen()), "speed");
-        add(new Inventory(1,5),"inventory");
-        add(new ru.znay.znay.he.gfx.gui.Menu(50, 100), "menu");
+        add(new GuiStatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
+        add(new GuiStatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
+        add(new GuiSpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), game.getScreen()), "speed");
+        add(new GuiInventory(1, 5), "inventory");
+        add(new GuiMenu(50, 100), "menu");
     }
 }

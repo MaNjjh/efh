@@ -14,7 +14,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 12:23
  * To change this template use File | Settings | File Templates.
  */
-public class Panel {
+public class GuiPanel {
     protected boolean visible;
     protected int x = 0;
     protected int y = 0;
@@ -25,23 +25,23 @@ public class Panel {
     protected boolean closed = false;
     protected int panelColor;
 
-    public Panel(int posX, int posY, int sizeX, int sizeY) {
+    public GuiPanel(int posX, int posY, int sizeX, int sizeY) {
         init(posX, posY, sizeX, sizeY, PaletteHelper.getColor(-1, 1, 5, 445));
     }
 
-    public Panel(int posX, int posY, int sizeX, int sizeY, int panelColor) {
+    public GuiPanel(int posX, int posY, int sizeX, int sizeY, int panelColor) {
         init(posX, posY, sizeX, sizeY, panelColor);
     }
 
-    public Panel(int posX, int posY) {
+    public GuiPanel(int posX, int posY) {
         init(posX, posY, 0, 0, PaletteHelper.getColor(-1, 1, 5, 445));
     }
 
-    public Panel(int posX, int posY, int panelColor) {
+    public GuiPanel(int posX, int posY, int panelColor) {
         init(posX, posY, 0, 0, panelColor);
     }
 
-    protected Panel() {
+    protected GuiPanel() {
     }
 
     private void init(int posX, int posY, int sizeX, int sizeY, int panelColor) {

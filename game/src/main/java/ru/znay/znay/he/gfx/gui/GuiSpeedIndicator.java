@@ -12,7 +12,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 15:12
  * To change this template use File | Settings | File Templates.
  */
-public class SpeedIndicator extends Panel {
+public class GuiSpeedIndicator extends GuiPanel {
     private Bitmap slow;
     private Bitmap walk;
     private Bitmap run;
@@ -20,7 +20,7 @@ public class SpeedIndicator extends Panel {
     private int color;
     private int speed;
 
-    public SpeedIndicator(int x, int y, int col, Screen screen) {
+    public GuiSpeedIndicator(int x, int y, int col, Screen screen) {
         this.x = x;
         this.y = y;
         this.color = col;

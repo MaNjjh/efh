@@ -1,8 +1,8 @@
 package ru.znay.znay.he.model.builds.tree;
 
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.Menu;
-import ru.znay.znay.he.gfx.gui.TextPanel;
+import ru.znay.znay.he.gfx.gui.GuiMenu;
+import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -61,13 +61,13 @@ public class AppleTree extends Tree {
 
 
     public void showMenu() {
-        GuiManager.getInstance().add(new TextPanel("На дереве вы видите несколько спелых яблок", 4, 4), "appletree");
+        GuiManager.getInstance().add(new GuiTextPanel("На дереве вы видите несколько спелых яблок", 4, 4), "appletree");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Сорвать");
         strings.add("Уйти");
 
-        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, new Menu.Callback() {
+        ((GuiMenu) GuiManager.getInstance().get("menu")).showMenu(strings, new GuiMenu.Callback() {
             @Override
             public void result(int result) {
 

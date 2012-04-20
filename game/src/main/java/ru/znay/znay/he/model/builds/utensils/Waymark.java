@@ -1,7 +1,7 @@
 package ru.znay.znay.he.model.builds.utensils;
 
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.TypedTextPanel;
+import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
@@ -34,7 +34,7 @@ public class Waymark extends Utensils {
         if (entity instanceof Player) {
             if (tick < System.currentTimeMillis()) {
                 tick = System.currentTimeMillis() + 1000;
-                GuiManager.getInstance().add(new TypedTextPanel(message, 4, 4, 100), "waymark");
+                GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 4, 100), "waymark");
             }
         }
 

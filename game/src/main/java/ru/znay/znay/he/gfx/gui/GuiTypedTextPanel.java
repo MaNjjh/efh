@@ -7,23 +7,23 @@ package ru.znay.znay.he.gfx.gui;
  * Time: 14:47
  * To change this template use File | Settings | File Templates.
  */
-public class TypedTextPanel extends TextPanel {
+public class GuiTypedTextPanel extends GuiTextPanel {
     private int position;
     private int period;
     private long time;
     private int timeLife;
 
-    public TypedTextPanel(String mes, int posX, int posY, int colorText, int colorPanel, int period) {
+    public GuiTypedTextPanel(String mes, int posX, int posY, int colorText, int colorPanel, int period) {
         super(mes, posX, posY, colorText, colorPanel);
         init(period);
     }
 
-    public TypedTextPanel(String mes, int posX, int posY, int colorText, int period) {
+    public GuiTypedTextPanel(String mes, int posX, int posY, int colorText, int period) {
         super(mes, posX, posY, colorText);
         init(period);
     }
 
-    public TypedTextPanel(String mes, int posX, int posY, int period) {
+    public GuiTypedTextPanel(String mes, int posX, int posY, int period) {
         super(mes, posX, posY);
         init(period);
     }

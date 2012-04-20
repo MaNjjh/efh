@@ -2,8 +2,8 @@ package ru.znay.znay.he.model.npc;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.Menu;
-import ru.znay.znay.he.gfx.gui.TextPanel;
+import ru.znay.znay.he.gfx.gui.GuiMenu;
+import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -73,13 +73,13 @@ public class Warp extends Entity {
         else
             mes = " в " + Constants.getLevelName(dstLevel) + "?";
 
-        GuiManager.getInstance().add(new TextPanel("Совершить переход" + mes, 4, 4), "warp_menu");
+        GuiManager.getInstance().add(new GuiTextPanel("Совершить переход" + mes, 4, 4), "warp_menu");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Переход");
         strings.add("Отмена");
 
-        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, new Menu.Callback() {
+        ((GuiMenu) GuiManager.getInstance().get("menu")).showMenu(strings, new GuiMenu.Callback() {
             @Override
             public void result(int result) {
                 GuiManager.getInstance().remove("warp_menu");

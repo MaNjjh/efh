@@ -3,7 +3,7 @@ package ru.znay.znay.he.model.level;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.MiniMap;
+import ru.znay.znay.he.gfx.gui.GuiMiniMap;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
@@ -102,7 +102,7 @@ public class Level {
 
 
         GuiManager.getInstance().remove("minimap");
-        GuiManager.getInstance().add(new MiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
+        GuiManager.getInstance().add(new GuiMiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
 
         if (player.isRemoved()) player.setHealth(10);
 

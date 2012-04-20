@@ -15,16 +15,16 @@ import java.util.List;
  * Time: 22:58
  * To change this template use File | Settings | File Templates.
  */
-public class Menu extends Panel {
+public class GuiMenu extends GuiPanel {
     public interface Callback {
         public void result(int result);
     }
 
-    private List<TextPanel> panels = new LinkedList<TextPanel>();
+    private List<GuiTextPanel> panels = new LinkedList<GuiTextPanel>();
     private Callback callback = null;
     private int currentCell = -1;
 
-    public Menu(int x, int y) {
+    public GuiMenu(int x, int y) {
         this.x = x;
         this.y = y;
         visible = false;
@@ -44,7 +44,7 @@ public class Menu extends Panel {
         int i = 0;
         panels.clear();
         for (String s : strings)
-            panels.add(new TextPanel(s, x, y + (i * (Tile.HALF_SIZE * 3)), PaletteHelper.getColor(-1, -1, -1, 555), (i++ == 0) ? PaletteHelper.getColor(-1, 1, 30, 445) : PaletteHelper.getColor(-1, 1, 5, 445)));
+            panels.add(new GuiTextPanel(s, x, y + (i * (Tile.HALF_SIZE * 3)), PaletteHelper.getColor(-1, -1, -1, 555), (i++ == 0) ? PaletteHelper.getColor(-1, 1, 30, 445) : PaletteHelper.getColor(-1, 1, 5, 445)));
         currentCell = 0;
         changed = true;
         visible = true;
@@ -110,7 +110,7 @@ public class Menu extends Panel {
     @Override
     public void render(Screen screen) {
         if (!visible) return;
-        for (TextPanel panel : panels)
+        for (GuiTextPanel panel : panels)
             panel.render(screen);
     }
 }

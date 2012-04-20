@@ -1,9 +1,7 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.InputHandler;
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
-import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.Item;
@@ -20,13 +18,13 @@ import java.util.List;
  * Time: 21:28
  * To change this template use File | Settings | File Templates.
  */
-public class Inventory extends Panel {
+public class GuiInventory extends GuiPanel {
     private int str = 0;
     private int sta = 0;
     private int def = 0;
     private int speed = 0;
 
-    Panel[] panels = new Panel[7];
+    GuiPanel[] panels = new GuiPanel[7];
 
     private Item weapon = null;
     private Item armor = null;
@@ -34,7 +32,7 @@ public class Inventory extends Panel {
     private ResourceItem apple = null;
     private ResourceItem berry = null;
 
-    public Inventory(int x, int y) {
+    public GuiInventory(int x, int y) {
         this.x = x;
         this.y = y;
 
@@ -47,13 +45,13 @@ public class Inventory extends Panel {
 
         int x1 = x - 1;
 
-        panels[0] = new Panel(x1, y, 14, 15);//main inventory
-        panels[1] = new TextPanel(messages, x - 1, y + 135, 15);//stat panel
-        panels[2] = new Panel(x1 + Tile.HALF_SIZE, y + Tile.HALF_SIZE, 5, 6, PaletteHelper.getColor(-1, 1, 111, 445));//weapon
-        panels[3] = new Panel(x1 + 8 * Tile.HALF_SIZE, y + Tile.HALF_SIZE, 5, 6, PaletteHelper.getColor(-1, 1, 111, 445));//armor
-        panels[4] = new Panel(x1 + 8 * Tile.HALF_SIZE, y + 9 * Tile.HALF_SIZE, 5, 5, PaletteHelper.getColor(-1, 1, 111, 445));//boots
-        panels[5] = new Panel(x1 + Tile.HALF_SIZE, y + 9 * Tile.HALF_SIZE, 1, 1, PaletteHelper.getColor(-1, 1, 111, 445));//apple
-        panels[6] = new Panel(x1 + Tile.HALF_SIZE, y + 12 * Tile.HALF_SIZE, 1, 1, PaletteHelper.getColor(-1, 1, 111, 445));//berry
+        panels[0] = new GuiPanel(x1, y, 14, 15);//main inventory
+        panels[1] = new GuiTextPanel(messages, x - 1, y + 135, 15);//stat panel
+        panels[2] = new GuiPanel(x1 + Tile.HALF_SIZE, y + Tile.HALF_SIZE, 5, 6, PaletteHelper.getColor(-1, 1, 111, 445));//weapon
+        panels[3] = new GuiPanel(x1 + 8 * Tile.HALF_SIZE, y + Tile.HALF_SIZE, 5, 6, PaletteHelper.getColor(-1, 1, 111, 445));//armor
+        panels[4] = new GuiPanel(x1 + 8 * Tile.HALF_SIZE, y + 9 * Tile.HALF_SIZE, 5, 5, PaletteHelper.getColor(-1, 1, 111, 445));//boots
+        panels[5] = new GuiPanel(x1 + Tile.HALF_SIZE, y + 9 * Tile.HALF_SIZE, 1, 1, PaletteHelper.getColor(-1, 1, 111, 445));//apple
+        panels[6] = new GuiPanel(x1 + Tile.HALF_SIZE, y + 12 * Tile.HALF_SIZE, 1, 1, PaletteHelper.getColor(-1, 1, 111, 445));//berry
 
         visible = false;
         changed = true;
@@ -65,7 +63,7 @@ public class Inventory extends Panel {
             return;
         }
 
-        for (Panel panel : panels)
+        for (GuiPanel panel : panels)
             panel.render(screen);
 
         String val = "0%";

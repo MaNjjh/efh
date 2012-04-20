@@ -2,12 +2,11 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.gui.Inventory;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.Panel;
-import ru.znay.znay.he.gfx.gui.SpeedIndicator;
-import ru.znay.znay.he.gfx.gui.StatusPanel;
+import ru.znay.znay.he.gfx.gui.GuiPanel;
+import ru.znay.znay.he.gfx.gui.GuiSpeedIndicator;
+import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.Entity;
@@ -16,8 +15,6 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.AirWizard;
-import ru.znay.znay.he.model.npc.village.StoneMan;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -125,20 +122,20 @@ public class Game extends Graphics implements Runnable {
 
         level.renderFog(this.screen, xScroll, yScroll);
 
-        Panel panel;
+        GuiPanel panel;
         if ((panel = GuiManager.getInstance().get("money")) != null) {
             ResourceItem coin = player.getInventory().findResource(Resource.coin);
             ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
             String score = String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
 
-            ((StatusPanel) panel).setText2(score);
+            ((GuiStatusPanel) panel).setText2(score);
         }
 
         if ((panel = GuiManager.getInstance().get("health")) != null)
-            ((StatusPanel) panel).setText(player.getHealth());
+            ((GuiStatusPanel) panel).setText(player.getHealth());
 
         if ((panel = GuiManager.getInstance().get("speed")) != null)
-            ((SpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
+            ((GuiSpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
 
         GuiManager.getInstance().render(this.screen);
 

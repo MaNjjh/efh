@@ -1,8 +1,8 @@
 package ru.znay.znay.he.model.builds.tree;
 
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.Menu;
-import ru.znay.znay.he.gfx.gui.TextPanel;
+import ru.znay.znay.he.gfx.gui.GuiMenu;
+import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
@@ -20,7 +20,7 @@ import java.util.List;
  * Time: 20:49
  * To change this template use File | Settings | File Templates.
  */
-public class Shrubbery extends Tree implements Menu.Callback {
+public class Shrubbery extends Tree implements GuiMenu.Callback {
     private boolean berry = false;
     private boolean type = random.nextBoolean();
     private long tick = System.currentTimeMillis() + 60000;
@@ -79,12 +79,12 @@ public class Shrubbery extends Tree implements Menu.Callback {
     }
 
     private void showMenu() {
-        GuiManager.getInstance().add(new TextPanel("Среди листьев вы обнаруживаете несколько подозрительных ягод", 4, 4), "shrubbery");
+        GuiManager.getInstance().add(new GuiTextPanel("Среди листьев вы обнаруживаете несколько подозрительных ягод", 4, 4), "shrubbery");
 
         List<String> strings = new LinkedList<String>();
         strings.add("Собрать");
         strings.add("Уйти");
 
-        ((Menu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
+        ((GuiMenu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
     }
 }

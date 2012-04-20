@@ -21,13 +21,13 @@ import java.awt.*;
  * Time: 14:06
  * To change this template use File | Settings | File Templates.
  */
-public class MiniMap extends Panel {
+public class GuiMiniMap extends GuiPanel {
     private Level level;
     private Bitmap miniMap;
     private Bitmap resizedMiniMap;
     private int tick = 10;
 
-    public MiniMap(int posX, int posY, Level level) {
+    public GuiMiniMap(int posX, int posY, Level level) {
 
         super(posX, posY, (level.getWidth() >> 1) >> 3, (level.getHeight() >> 1) >> 3, PaletteHelper.getColor(-1, 530, 0, 111));
         this.level = level;

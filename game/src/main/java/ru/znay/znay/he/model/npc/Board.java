@@ -1,7 +1,7 @@
 package ru.znay.znay.he.model.npc;
 
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.TypedTextPanel;
+import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
@@ -27,7 +27,7 @@ public class Board extends Entity {
 
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            GuiManager.getInstance().add(new TypedTextPanel(this.message, 4, 4, 100),"board_touchedBy");
+            GuiManager.getInstance().add(new GuiTypedTextPanel(this.message, 4, 4, 100),"board_touchedBy");
         }
     }
 

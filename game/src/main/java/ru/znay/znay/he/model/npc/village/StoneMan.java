@@ -1,7 +1,7 @@
 package ru.znay.znay.he.model.npc.village;
 
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.TypedTextPanel;
+import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
@@ -79,7 +79,7 @@ public class StoneMan extends NPC {
 
             if (stoned && stonedTalk) return;
 
-            GuiManager.getInstance().add(new TypedTextPanel(stoned ? stonedMessage : message, 4, 4, 40), "StoneMan_touchedBy");
+            GuiManager.getInstance().add(new GuiTypedTextPanel(stoned ? stonedMessage : message, 4, 4, 40), "StoneMan_touchedBy");
             if (stoned) stonedTalk = true;
         }
     }

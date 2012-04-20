@@ -14,7 +14,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 14:39
  * To change this template use File | Settings | File Templates.
  */
-public class StatusPanel extends Panel {
+public class GuiStatusPanel extends GuiPanel {
     private final int negativeColor = PaletteHelper.getColor(-1, -1, -1, 500);
     private final int positiveColor = PaletteHelper.getColor(-1, -1, -1, 50);
     private final int neutralColor = PaletteHelper.getColor(-1, -1, -1, 555);
@@ -27,7 +27,7 @@ public class StatusPanel extends Panel {
     private int currentColor = neutralColor;
     private long time;
 
-    public StatusPanel(int x, int y, int xOff, int yOff, int val, int col) {
+    public GuiStatusPanel(int x, int y, int xOff, int yOff, int val, int col) {
         this.x = x;
         this.y = y;
 
