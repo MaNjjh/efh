@@ -79,6 +79,7 @@ public class Level {
     private byte[] tiles;
 
     private Fog fog;
+    private NewFog newFog;
     private int monsterDensity = 4;
     private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
@@ -140,7 +141,7 @@ public class Level {
         //---------------------------------------------------------------------------------
 */
 
-        fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
+        //fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
         //Не включать!Работают люди!
         //trySpawn();
@@ -208,7 +209,8 @@ public class Level {
                     removeEntity(xto, yto, entity);
                     insertEntity(xt, yt, entity);
                     if (entity instanceof Player) {
-                        fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
+                        //fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
+                        newFog.tick((Player)entity);
                     }
                 }
             }
@@ -290,7 +292,7 @@ public class Level {
     }
 
     public void renderFog(Screen screen, int xScroll, int yScroll) {
-        int xo = xScroll >> 4;
+       /* int xo = xScroll >> 4;
         int yo = yScroll >> 4;
         int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
         int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
@@ -300,7 +302,9 @@ public class Level {
                 //fog.render(screen, x - 1, y - 1);
                 fog.render(screen, x, y);
             }
-        }
+        }      */
+        screen.setOffset(xScroll, yScroll);
+        newFog.render(screen);
         screen.setOffset(0, 0);
     }
 
@@ -396,7 +400,8 @@ public class Level {
 
         this.tiles = new byte[this.width * this.height];
 
-        this.fog = new Fog(this.width, this.height, level != 1);
+        //this.fog = new Fog(this.width, this.height, level != 1);
+        this.newFog = new NewFog(this,4);
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
 

@@ -22,7 +22,7 @@ public class GuiInventory extends GuiPanel {
     private int str = 0;
     private int sta = 0;
     private int def = 0;
-    private int speed = 0;
+    private int speed = 55;
 
     GuiPanel[] panels = new GuiPanel[7];
 
@@ -78,7 +78,7 @@ public class GuiInventory extends GuiPanel {
         else if (speed < 60)
             val = "120%";
 
-        int posX = panels[1].getX() + 12 * Tile.HALF_SIZE;
+        int posX = panels[1].getX() + 12 * Tile.HALF_SIZE + ((speed < 60) ? Tile.HALF_SIZE : 0);
         int posY = panels[1].getY() + 4 * Tile.HALF_SIZE;
 
         Font.drawToBitmap(val, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());

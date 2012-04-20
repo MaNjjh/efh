@@ -39,7 +39,7 @@ public class Game extends Graphics implements Runnable {
 
     public void start() {
         running = true;
-        //Sound.backMusic.loop();
+        Sound.backMusic.loop();
         new Thread(this).start();
     }
 
@@ -126,7 +126,7 @@ public class Game extends Graphics implements Runnable {
         if ((panel = GuiManager.getInstance().get("money")) != null) {
             ResourceItem coin = player.getInventory().findResource(Resource.coin);
             ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
-            String score = String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
+            String score = "" + ( (coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount()<<1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
 
             ((GuiStatusPanel) panel).setText2(score);
         }
