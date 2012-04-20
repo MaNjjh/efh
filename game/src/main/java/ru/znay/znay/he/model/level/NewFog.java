@@ -23,22 +23,22 @@ public class NewFog {
     public NewFog(Level level, int coefficient) {
 
         this.c = (coefficient < 1) ? 1 : coefficient;
-        this.w = level.getWidth();
-        this.h = level.getHeight();
+        this.w = level.getWidth() * 2;
+        this.h = level.getHeight() * 2;
 
         fog = new boolean[w * h];
 
         for (int i = 0; i < fog.length; i++)
             fog[i] = true;
 
-        black = new Bitmap(Tile.HALF_SIZE<<1, Tile.HALF_SIZE<<1);
+        black = new Bitmap(Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1);
 
         BitmapHelper.fill(black, 0x000000);
     }
 
     public void render(Screen screen) {
-        int localXOffset = screen.getXOffset()>>4 ;
-        int localYOffset = screen.getYOffset()>>4 ;
+        int localXOffset = screen.getXOffset() >> 4;
+        int localYOffset = screen.getYOffset() >> 4;
 
         int xOff;
         int yOff;
@@ -49,7 +49,7 @@ public class NewFog {
             for (int y = 0; y < dstH; y++) {
                 xOff = x + localXOffset;
                 yOff = y + localYOffset;
-                if (fog[xOff + yOff * xOff]) {
+                if (fog[xOff + yOff * w]) {
                     BitmapHelper.drawNormal(black, x << 4, y << 4, screen.getViewPort(), 0xFFFFFF);
                 }
             }
@@ -58,8 +58,8 @@ public class NewFog {
 
     public void tick(Player player) {
         int r = player.getClearFogRadius();
-        int x1 = player.getX() >> 4;
-        int y1 = player.getY() >> 4;
+        int px = player.getX() >> 4;
+        int py = player.getY() >> 4;
 
         int x = 0;
         int y = r;
@@ -67,19 +67,20 @@ public class NewFog {
         int error;
 
         while (y >= 0) {
-            //System.out.println((x1 + x) + " " +(y1 + y));
-            fog[x1 + x + (x1 + x) * (y1 + y)] = false;
-            fog[x1 + x + (x1 + x) * (y1 - y)] = false;
-            fog[x1 - x + (x1 - x) * (y1 + y)] = false;
-            fog[x1 - x + (x1 - x) * (y1 - y)] = false;
+            //System.out.println((px + x) + " " +(py + y));
+            openFog(px + x,py + y);
+            openFog(px + x,py - y);
+            openFog(px - x,py + y);
+            openFog(px - x,py - y);
+
             error = 2 * (delta + y) - 1;
-            if(delta < 0 && error <= 0) {
+            if (delta < 0 && error <= 0) {
                 ++x;
                 delta += 2 * x + 1;
                 continue;
             }
             error = 2 * (delta - x) - 1;
-            if(delta > 0 && error > 0) {
+            if (delta > 0 && error > 0) {
                 --y;
                 delta += 1 - 2 * y;
                 continue;
@@ -90,4 +91,12 @@ public class NewFog {
         }
     }
 
+    private void openFog(int x, int y) {
+        if (x >= 0 && y >= 0 && x < w && y < h)
+            fog[x + y * w] = false;
+    }
+
+    public boolean getFog(int x, int y) {
+        return x < 0 || y < 0 || x >= this.w || y >= this.h || fog[x + y * this.w];
+    }
 }

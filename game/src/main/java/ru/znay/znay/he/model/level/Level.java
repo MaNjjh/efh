@@ -384,8 +384,9 @@ public class Level {
         this.monsterDensity = monsterDensity;
     }
 
-    public Fog getFog() {
-        return fog;
+    public NewFog /*Fog*/ getFog() {
+        //return fog;
+        return newFog;
     }
 
     public QuestHandler getQuestHandler() {
