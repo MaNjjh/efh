@@ -1,11 +1,13 @@
 package ru.znay.znay.he.gfx.gui;
 
+import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.LinkedList;
@@ -24,13 +26,13 @@ public class Inventory extends Panel {
     private int def = 0;
     private int speed = 0;
 
-    private TextPanel statPanel;
+    Panel[] panels = new Panel[7];
 
     private Item weapon = null;
     private Item armor = null;
     private Item boots = null;
-    private Item apple = null;
-    private Item berry = null;
+    private ResourceItem apple = null;
+    private ResourceItem berry = null;
 
     public Inventory(int x, int y) {
         this.x = x;
@@ -43,14 +45,16 @@ public class Inventory extends Panel {
         messages.add("Защита");
         messages.add("Скорость");
 
-        str = 99;
-        sta = 5;
-        def = 33;
-        speed = 10;
+        int x1 = x - 1;
 
-        statPanel = new TextPanel(messages, x-1, y + 143, 15);
+        panels[0] = new Panel(x1, y, 14, 15);//main inventory
+        panels[1] = new TextPanel(messages, x - 1, y + 135, 15);//stat panel
+        panels[2] = new Panel(x1 + Tile.HALF_SIZE, y + Tile.HALF_SIZE, 5, 6, PaletteHelper.getColor(-1, 1, 111, 445));//weapon
+        panels[3] = new Panel(x1 + 8 * Tile.HALF_SIZE, y + Tile.HALF_SIZE, 5, 6, PaletteHelper.getColor(-1, 1, 111, 445));//armor
+        panels[4] = new Panel(x1 + 8 * Tile.HALF_SIZE, y + 9 * Tile.HALF_SIZE, 5, 5, PaletteHelper.getColor(-1, 1, 111, 445));//boots
+        panels[5] = new Panel(x1 + Tile.HALF_SIZE, y + 9 * Tile.HALF_SIZE, 1, 1, PaletteHelper.getColor(-1, 1, 111, 445));//apple
+        panels[6] = new Panel(x1 + Tile.HALF_SIZE, y + 12 * Tile.HALF_SIZE, 1, 1, PaletteHelper.getColor(-1, 1, 111, 445));//berry
 
-        this.image = BitmapHelper.loadBitmapFromResources("/testinventory.png");
         visible = false;
         changed = true;
     }
@@ -61,7 +65,8 @@ public class Inventory extends Panel {
             return;
         }
 
-        BitmapHelper.copy(this.image, 0, 0, x, y, this.image.getWidth(), this.image.getHeight(), screen.getViewPort(), 0xFFFF00FF);
+        for (Panel panel : panels)
+            panel.render(screen);
 
         String val = "0%";
         if (speed < 3)
@@ -76,27 +81,26 @@ public class Inventory extends Panel {
         if (speed < 60)
             val = "120%";
 
-        int posX = 12 * Tile.HALF_SIZE;
-        int posY = 4 * Tile.HALF_SIZE;
+        int posX = panels[1].getX() + 12 * Tile.HALF_SIZE;
+        int posY = panels[1].getY() + 4 * Tile.HALF_SIZE;
 
-        Font.drawToBitmap(val, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), statPanel.getImage());
+        Font.drawToBitmap(val, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
 
-        posX = 14 * Tile.HALF_SIZE + ((str < 10) ? Tile.HALF_SIZE : 0);
-        posY = Tile.HALF_SIZE;
+        posX = panels[1].getX() + 14 * Tile.HALF_SIZE + ((str < 10) ? Tile.HALF_SIZE : 0);
+        posY = panels[1].getY() + Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + str, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), statPanel.getImage());
+        Font.drawToBitmap("" + str, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
 
-        posX = 14 * Tile.HALF_SIZE + ((sta < 10) ? Tile.HALF_SIZE : 0);
+        posX = panels[1].getX() + 14 * Tile.HALF_SIZE + ((sta < 10) ? Tile.HALF_SIZE : 0);
         posY += Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + sta, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), statPanel.getImage());
+        Font.drawToBitmap("" + sta, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
 
-        posX = 14 * Tile.HALF_SIZE + ((def < 10) ? Tile.HALF_SIZE : 0);
+        posX = panels[1].getX() + 14 * Tile.HALF_SIZE + ((def < 10) ? Tile.HALF_SIZE : 0);
         posY += Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + def, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), statPanel.getImage());
+        Font.drawToBitmap("" + def, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
 
-        statPanel.render(screen);
 
         if (weapon != null)
             weapon.renderInventory(screen, x + 3, y + 3);
@@ -107,21 +111,27 @@ public class Inventory extends Panel {
         if (boots != null)
             boots.renderInventory(screen, x + 8, y + 25);
 
-        if (apple != null)
+        if (apple != null) {
             apple.renderInventory(screen, x + 3, y + 28);
+            posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
+            posY = y + 10 * Tile.HALF_SIZE;
 
-        if (berry != null)
+            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+        }
+
+        if (berry != null) {
             berry.renderInventory(screen, x + 3, y + 32);
+            posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
+            posY = y + 13 * Tile.HALF_SIZE;
 
-        posX =x+ 5 * Tile.HALF_SIZE + ((apple.count() < 10) ? Tile.HALF_SIZE : 0);
-        posY =y+28;
+            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+        }
+    }
 
-        Font.drawToBitmap(""+apple.count(), screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555),screen.getViewPort());
-
-        posX =x+ 5 * Tile.HALF_SIZE + ((berry.count() < 10) ? Tile.HALF_SIZE : 0);
-        posY =y+32;
-
-        Font.drawToBitmap(""+apple.count(), screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555),screen.getViewPort());
+    @Override
+    public void tick() {
+        if (InputHandler.getInstance().inventory.clicked)
+            visible = !visible;
     }
 
     public void setStr(int str) {
@@ -146,5 +156,25 @@ public class Inventory extends Panel {
         if (this.speed == speed) return;
         this.speed = speed;
         changed = true;
+    }
+
+    public void setWeapon(Item weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setArmor(Item armor) {
+        this.armor = armor;
+    }
+
+    public void setBoots(Item boots) {
+        this.boots = boots;
+    }
+
+    public void setApple(ResourceItem apple) {
+        this.apple = apple;
+    }
+
+    public void setBerry(ResourceItem berry) {
+        this.berry = berry;
     }
 }

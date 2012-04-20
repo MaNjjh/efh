@@ -65,8 +65,4 @@ public class Item implements ListItem {
     public boolean matches(Item item) {
         return item.getClass() == getClass();
     }
-
-    public int count() {
-        return 1;
-    }
 }

@@ -115,6 +115,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     public Key action = new Key();
     public Key mouse = new Key();
     public Key miniMap = new Key();
+    public Key inventory = new Key();
 
     public void releaseAll() {
         for (Key key : keys) {
@@ -183,6 +184,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         if (ke.getKeyCode() == KeyEvent.VK_LEFT) left.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_RIGHT) right.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_M) miniMap.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_I) inventory.toggle(pressed);
 
         if (ke.getKeyCode() == KeyEvent.VK_SPACE) action.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_CONTROL) action.toggle(pressed);
