@@ -14,8 +14,16 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.building.*;
-import ru.znay.znay.he.model.builds.tree.*;
+import ru.znay.znay.he.model.builds.building.Bakery;
+import ru.znay.znay.he.model.builds.building.House;
+import ru.znay.znay.he.model.builds.building.Sawmill;
+import ru.znay.znay.he.model.builds.building.TownHall;
+import ru.znay.znay.he.model.builds.building.Warehouse;
+import ru.znay.znay.he.model.builds.tree.AppleTree;
+import ru.znay.znay.he.model.builds.tree.FirTree;
+import ru.znay.znay.he.model.builds.tree.PineTree;
+import ru.znay.znay.he.model.builds.tree.Shrubbery;
+import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -24,7 +32,11 @@ import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.quest.QuestHandler;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,6 +56,7 @@ public class Level {
     private final static int LAVA_TILE = 0xFFFF7F00;
     private final static int ROAD_TILE = 0xFF6B6B6B;
     private final static int SWAMP_TILE = 0xFF90FF00;
+    private final static int ROCK_TILE = 0xFFF79090;
 
     private final static int HOLE_TILE = 0xFF606060;
     private final static int APPLE_TREE = 0xFF00FF00;
@@ -129,8 +142,8 @@ public class Level {
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
-         //Не включать!Работают люди!
-         //trySpawn();
+        //Не включать!Работают люди!
+        //trySpawn();
     }
 
     public void trySpawn() {
@@ -399,6 +412,7 @@ public class Level {
                 if (value == 0xFFFFFFFF) continue;
                 switch (((value >> 16) & 0xFF)) {
                     case 0xFF: {
+                        System.out.println("_________________________" + i);
                         if (player.getRespPoint() != null) {
                             player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
                         } else {
@@ -479,6 +493,10 @@ public class Level {
                     }
                     case HOLE_TILE: {
                         setTile(i, j, Tile.hole, 0);
+                        break;
+                    }
+                    case ROCK_TILE: {
+                        setTile(i, j, Tile.rock, 0);
                         break;
                     }
                     case APPLE_TREE: {

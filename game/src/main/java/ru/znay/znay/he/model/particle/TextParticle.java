@@ -11,12 +11,16 @@ import ru.znay.znay.he.gfx.model.Screen;
  * Time: 19:23
  * To change this template use File | Settings | File Templates.
  */
-public class TextParticle extends Particle {
+public class TextParticle extends SmashParticle {
     private String msg;
 
     public TextParticle(String msg, int x, int y, int color) {
         super(x, y, color);
         this.msg = msg;
+    }
+
+    public void tick() {
+        super.tick();
     }
 
     public void render(Screen screen) {

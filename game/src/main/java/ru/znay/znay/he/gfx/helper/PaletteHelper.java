@@ -60,7 +60,7 @@ public class PaletteHelper {
                         val = 0xffffff;
                     } else {
 
-                        if (isGrey || weather.isRain()) {
+                        if (isGrey) {
                             int red = ((val >> 16) & 0xff);
                             int green = ((val >> 8) & 0xff);
                             int blue = (val & 0xff);

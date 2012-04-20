@@ -1,8 +1,5 @@
 package ru.znay.znay.he.model.particle;
 
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.model.Screen;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Александр Сергеевич
@@ -10,7 +7,7 @@ import ru.znay.znay.he.gfx.model.Screen;
  * Time: 15:15
  * To change this template use File | Settings | File Templates.
  */
-public class BloodParticle extends Particle {
+public class BloodParticle extends SmashParticle {
 
 
     public BloodParticle(int x, int y, int color) {
@@ -22,6 +19,7 @@ public class BloodParticle extends Particle {
 
     public void tick() {
         super.tick();
+
         if (time < 100)
             if (time % 10 == 0) {
                 int rr = (this.color >> 16) & 0xff;

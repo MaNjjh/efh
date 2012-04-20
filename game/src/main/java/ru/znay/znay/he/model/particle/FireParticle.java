@@ -26,17 +26,16 @@ public class FireParticle extends Particle {
 
     public FireParticle(int x, int y) {
         super(x, y, 0xFF7F00);
-        this.time = 60 * 2;
-        this.speed = 1;
-        this.zz = 0;
+        this.time = 1160 * 2;
+        this.speed = 2;
     }
 
     public void tick() {
         super.tick();
         double xxa = speed;
-        double yya = speed;//Math.sin(x);
+        double yya = Math.sin(x * random.nextInt(10));
 
-        double betta = Math.atan2(-1, -1);
+        double betta = Math.toRadians(270);
 
         xa = xxa * Math.cos(betta) - yya * Math.sin(betta);
         ya = yya * Math.cos(betta) + xxa * Math.sin(betta);

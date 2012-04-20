@@ -7,6 +7,7 @@ import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.Particle;
+import ru.znay.znay.he.model.particle.SmashParticle;
 import ru.znay.znay.he.sound.Sound;
 
 /**
@@ -16,7 +17,7 @@ import ru.znay.znay.he.sound.Sound;
  * Time: 15:49
  * To change this template use File | Settings | File Templates.
  */
-public class ItemEntity extends Particle {
+public class ItemEntity extends SmashParticle {
     public Item item;
 
     public ItemEntity(Item item, int x, int y) {

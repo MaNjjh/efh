@@ -37,20 +37,6 @@ public class Particle extends Entity {
         if (time < 0) {
             removed = true;
         }
-        if (zz != 0) {
-            xx += xa;
-            yy += ya;
-            zz += za;
-            if (zz < 0) {
-                zz = 0;
-                za *= -0.5;
-                xa *= 0.6;
-                ya *= 0.6;
-            }
-            za -= 0.15;
-            x = (int) xx;
-            y = (int) yy;
-        }
     }
 
     public void render(Screen screen) {
@@ -65,5 +51,77 @@ public class Particle extends Entity {
 
 
         BitmapHelper.drawPoint(xo, yo - (int) zz, color, screen.getViewPort());
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public double getXa() {
+        return xa;
+    }
+
+    public void setXa(double xa) {
+        this.xa = xa;
+    }
+
+    public double getYa() {
+        return ya;
+    }
+
+    public void setYa(double ya) {
+        this.ya = ya;
+    }
+
+    public double getZa() {
+        return za;
+    }
+
+    public void setZa(double za) {
+        this.za = za;
+    }
+
+    public double getXx() {
+        return xx;
+    }
+
+    public void setXx(double xx) {
+        this.xx = xx;
+    }
+
+    public double getYy() {
+        return yy;
+    }
+
+    public void setYy(double yy) {
+        this.yy = yy;
+    }
+
+    public double getZz() {
+        return zz;
+    }
+
+    public void setZz(double zz) {
+        this.zz = zz;
     }
 }

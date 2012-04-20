@@ -4,6 +4,7 @@ import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.BloodParticle;
+import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.arrow.Arrow;
 import ru.znay.znay.he.sound.Sound;
@@ -111,7 +112,6 @@ public class Mob extends Entity {
         for (int i = 0; i < damage; i++) {
             level.add(new BloodParticle(x, y, bloodColor));
         }
-
 
         health -= damage;
         if (attackDir == 0) yKnockback = +DEFAULT_KNOCKBACK;

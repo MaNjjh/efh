@@ -45,11 +45,6 @@ public class Player extends Mob {
     }
 
     @Override
-    public void init(Level level) {
-        super.init(level);
-    }
-
-    @Override
     public void tick() {
 
         int xa = 0;
