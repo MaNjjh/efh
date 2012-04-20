@@ -20,7 +20,7 @@ public class RockTile extends Tile {
 
     public void render(Screen screen, Level level, int x, int y) {
         int col = PaletteHelper.getColor(444, 444, 333, 333);
-        int transitionColor = PaletteHelper.getColor(111, 122, 555, grassMainColor);
+        int transitionColor = PaletteHelper.getColor(111, 444, 555, grassMainColor);
 
         boolean u = level.getTile(x, y - 1) != this;
         boolean d = level.getTile(x, y + 1) != this;
