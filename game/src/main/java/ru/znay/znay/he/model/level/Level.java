@@ -412,7 +412,6 @@ public class Level {
                 if (value == 0xFFFFFFFF) continue;
                 switch (((value >> 16) & 0xFF)) {
                     case 0xFF: {
-                        System.out.println("_________________________" + i);
                         if (player.getRespPoint() != null) {
                             player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
                         } else {
