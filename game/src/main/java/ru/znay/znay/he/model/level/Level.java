@@ -123,6 +123,8 @@ public class Level {
 
         this.add(player);
 
+        newFog.tick(player);
+
         this.questHandler = new QuestHandler(player);
 
 /*

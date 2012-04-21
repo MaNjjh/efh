@@ -42,7 +42,6 @@ public class NewFog {
 
         for (int i = 0; i < ww * hh; i++)
             testFog[i] = true;
-
     }
 
     public void render(Screen screen) {
@@ -78,44 +77,46 @@ public class NewFog {
         int r = player.getClearFogRadius() * Tile.SIZE;
         int px = player.getX();
         int py = player.getY();
-        while (r > (r >> 1)) {
-            int x = 0;
-            int y = r;
-            int delta = (2 - (r << 1));
-            int error;
+        int x = 0;
+        int y = r;
+        int delta = (2 - (r << 1));
+        int error;
 
-            while (y >= 0) {
-                //System.out.println((px + x) + " " +(py + y));
-                openFog2(px + x, py + y, px - x);
-                //openFog2(px + x, py - y);
-                openFog2(px + x, py - y, px - x);
-                //openFog2(px - x, py - y);
+        while (y >= 0) {
+            //System.out.println((px + x) + " " +(py + y));
+            openFog2(px + x, py + y, px - x);
+            //openFog2(px + x, py - y);
+            openFog2(px + x, py - y, px - x);
+            //openFog2(px - x, py - y);
 
-                error = 2 * (delta + y) - 1;
-                if (delta < 0 && error <= 0) {
-                    ++x;
-                    delta += 2 * x + 1;
-                    continue;
-                }
-                error = 2 * (delta - x) - 1;
-                if (delta > 0 && error > 0) {
-                    --y;
-                    delta += 1 - 2 * y;
-                    continue;
-                }
+            error = 2 * (delta + y) - 1;
+            if (delta < 0 && error <= 0) {
                 ++x;
-                delta += 2 * (x - y);
-                --y;
+                delta += 2 * x + 1;
+                continue;
             }
-            r--;
+            error = 2 * (delta - x) - 1;
+            if (delta > 0 && error > 0) {
+                --y;
+                delta += 1 - 2 * y;
+                continue;
+            }
+            ++x;
+            delta += 2 * (x - y);
+            --y;
         }
         return true;
     }
 
     public void openFog2(int x, int y, int x2) {
-        if (x >= 0 && y >= 0 && x < ww && y < hh && x2 >= 0 && x2 < ww)
-            for (int i = x; i >= x2; i--)
-                testFog[i + y * ww] = false;
+        if (x < 0) x = 0;
+        if (x >= ww) x = ww - 1;
+        if (y < 0) y = 0;
+        if (y >= hh) y = hh - 1;
+        if (x2 < 0) x2 = 0;
+        if (x2 >= ww) x2 = ww - 1;
+        for (int i = x; i >= x2; i--)
+            testFog[i + y * ww] = false;
     }
 
     public void tick(Player player) {
@@ -162,6 +163,6 @@ public class NewFog {
     }
 
     public boolean getFog(int x, int y) {
-        return x < 0 || y < 0 || x >= this.ww || y >= this.hh || testFog[x << 4 + (y << 4) * this.ww];
+        return x < 0 || y < 0 || x >= this.ww || y >= this.hh || testFog[(x << 4) + (y << 4) * this.ww];
     }
 }

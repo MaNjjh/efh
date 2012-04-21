@@ -4,7 +4,9 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,7 +29,7 @@ public class GuiManager {
     private boolean findSamePanel(GuiPanel findPanel) {
         for (GuiPanel panel : panels.values()) {
             if (panel.getX() == findPanel.getX() && panel.getY() == findPanel.getY()) {
-                System.out.print("duplicate panel found "+findPanel.toString());
+                System.out.print("duplicate panel found " + findPanel.toString());
                 return false;
             }
         }
@@ -49,7 +51,8 @@ public class GuiManager {
         GuiPanel panel;
 
         for (; items.hasNext(); )
-            if ((panel = items.next()).isClosed()) items.remove();
+            if ((panel = items.next()).isClosed())
+                items.remove();
             else panel.tick();
     }
 
