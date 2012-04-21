@@ -51,7 +51,7 @@ public class NewFog {
         for (int x = localXOffset; x <= localXOffset + dstW; x++)
             for (int y = localYOffset; y <= localYOffset + dstH; y++) {
                 if (fog[x + y * w]) {
-                    BitmapHelper.drawNormal(black, (x << 4) - screen.getXOffset(), (y << 4) - screen.getYOffset(), screen.getViewPort(), 0xFFFFFF);
+                    BitmapHelper.drawNormal(black, (x << 4) - screen.getXOffset() - Tile.HALF_SIZE, (y << 4) - screen.getYOffset()- Tile.HALF_SIZE, screen.getViewPort(), 0xFFFFFF);
                 }
             }
 
