@@ -1,7 +1,5 @@
 package ru.znay.znay.he.model.level;
 
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Player;
@@ -19,14 +17,14 @@ public class NewFog {
     private int h;
     private int w;
     private Bitmap black;
-    private boolean[] test;
-    int ww = Tile.SIZE * w;
-    int hh = Tile.SIZE * h;
+    private boolean[] testFog;
+    int ww;
+    int hh;
 
     public NewFog(Level level, Screen screen) {
 
-        this.w = level.getWidth();
-        this.h = level.getHeight();
+        //this.w = level.getWidth();
+        //this.h = level.getHeight();
 
         //fog = new boolean[w * h];
 
@@ -37,13 +35,13 @@ public class NewFog {
         //BitmapHelper.fill(black, 0xFFFFFF);
         //BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, 4 * Tile.HALF_SIZE, 7 * Tile.HALF_SIZE, 20, 20, PaletteHelper.getColor(0, -1, -1, -1), 0, black);
 
-        ww = Tile.SIZE * w;
-        hh = Tile.SIZE * h;
+        ww = Tile.SIZE * level.getWidth();
+        hh = Tile.SIZE * level.getHeight();
         //fuck memory economy
-        test = new boolean[ww * hh];
+        testFog = new boolean[ww * hh];
 
         for (int i = 0; i < ww * hh; i++)
-            test[i] = true;
+            testFog[i] = true;
 
     }
 
@@ -68,7 +66,7 @@ public class NewFog {
 
         for (int x = localXOffset; x < localXOffset + dstW; x++)
             for (int y = localYOffset; y < localYOffset + dstH; y++) {
-                if (test[x + y * ww]) {
+                if (testFog[x + y * ww]) {
                     int tx = x - localXOffset;
                     int ty = y - localYOffset;
                     screen.getViewPort().getPixels()[tx + dstW * ty] = 0x00000000;
@@ -88,10 +86,10 @@ public class NewFog {
 
             while (y >= 0) {
                 //System.out.println((px + x) + " " +(py + y));
-                openFog2(px + x, py + y);
-                openFog2(px + x, py - y);
-                openFog2(px - x, py + y);
-                openFog2(px - x, py - y);
+                openFog2(px + x, py + y, px - x);
+                //openFog2(px + x, py - y);
+                openFog2(px + x, py - y, px - x);
+                //openFog2(px - x, py - y);
 
                 error = 2 * (delta + y) - 1;
                 if (delta < 0 && error <= 0) {
@@ -114,9 +112,10 @@ public class NewFog {
         return true;
     }
 
-    public void openFog2(int x, int y) {
-        if (x >= 0 && y >= 0 && x < ww && y < hh)
-            test[x + y * ww] = false;
+    public void openFog2(int x, int y, int x2) {
+        if (x >= 0 && y >= 0 && x < ww && y < hh && x2 >= 0 && x2 < ww)
+            for (int i = x; i >= x2; i--)
+                testFog[i + y * ww] = false;
     }
 
     public void tick(Player player) {
@@ -163,6 +162,6 @@ public class NewFog {
     }
 
     public boolean getFog(int x, int y) {
-        return x < 0 || y < 0 || x >= this.ww || y >= this.hh || test[x << 4 + (y << 4) * this.ww];
+        return x < 0 || y < 0 || x >= this.ww || y >= this.hh || testFog[x << 4 + (y << 4) * this.ww];
     }
 }
