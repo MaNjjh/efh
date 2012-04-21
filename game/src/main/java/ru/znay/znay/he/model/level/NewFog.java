@@ -40,16 +40,12 @@ public class NewFog {
         int localXOffset = screen.getXOffset() >> 4;
         int localYOffset = screen.getYOffset() >> 4;
 
-        int xOff;
-        int yOff;
         int dstW = screen.getViewPort().getWidth() >> 4;
         int dstH = screen.getViewPort().getHeight() >> 4;
 
         for (int x = 0; x < dstW; x++)
             for (int y = 0; y < dstH; y++) {
-                xOff = x + localXOffset;
-                yOff = y + localYOffset;
-                if (fog[xOff + yOff * w]) {
+                if (fog[x + localXOffset + (y + localYOffset) * w]) {
                     BitmapHelper.drawNormal(black, x << 4, y << 4, screen.getViewPort(), 0xFFFFFF);
                 }
             }
@@ -68,10 +64,10 @@ public class NewFog {
 
         while (y >= 0) {
             //System.out.println((px + x) + " " +(py + y));
-            openFog(px + x,py + y);
-            openFog(px + x,py - y);
-            openFog(px - x,py + y);
-            openFog(px - x,py - y);
+            openFog(px + x, py + y);
+            openFog(px + x, py - y);
+            openFog(px - x, py + y);
+            openFog(px - x, py - y);
 
             error = 2 * (delta + y) - 1;
             if (delta < 0 && error <= 0) {

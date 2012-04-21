@@ -64,10 +64,10 @@ public class ResourceItem extends Item {
 
     public void renderInventory(Screen screen, int x, int y) {
         screen.render(x, y, resource.getxSprite() * Tile.HALF_SIZE, resource.getySprite() * Tile.HALF_SIZE, resource.getColor(), 0);
-        Font.draw(resource.getName(), screen, x + 32, y, PaletteHelper.getColor(-1, 555, 555, 555));
+        /*Font.draw(resource.getName(), screen, x + 32, y, PaletteHelper.getColor(-1, 555, 555, 555));
         int cc = count;
         if (cc > 999) cc = 999;
-        Font.draw("" + cc, screen, x + 8, y, PaletteHelper.getColor(-1, 444, 444, 444));
+        Font.draw("" + cc, screen, x + 8, y, PaletteHelper.getColor(-1, 444, 444, 444)); */
     }
 
     public String getName() {

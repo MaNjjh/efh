@@ -109,7 +109,7 @@ public class GuiInventory extends GuiPanel {
             boots.renderInventory(screen, x + 8, y + 25);
 
         if (apple != null) {
-            apple.renderInventory(screen, x + 3, y + 28);
+            apple.renderInventory(screen, x + 10, y + 77);
             posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
             posY = y + 10 * Tile.HALF_SIZE;
 
