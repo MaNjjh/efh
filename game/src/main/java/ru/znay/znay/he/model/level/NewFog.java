@@ -1,6 +1,7 @@
 package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Player;
@@ -20,28 +21,32 @@ public class NewFog {
     private int c;
     private Bitmap black;
 
-    public NewFog(Level level, int coefficient) {
+    public NewFog(Level level, int coefficient, Screen screen) {
 
         this.c = (coefficient < 1) ? 1 : coefficient;
-        this.w = level.getWidth() * 2;
-        this.h = level.getHeight() * 2;
+        this.w = level.getWidth();
+        this.h = level.getHeight();
 
         fog = new boolean[w * h];
 
         for (int i = 0; i < fog.length; i++)
             fog[i] = true;
 
-        black = new Bitmap(Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1);
+        black = new Bitmap(Tile.HALF_SIZE * 4, Tile.HALF_SIZE * 4);
 
-        BitmapHelper.fill(black, 0x000000);
+        BitmapHelper.fill(black, 0xFFFFFF);
+
+        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, 4 * Tile.HALF_SIZE, 7 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(0, -1, -1, -1), 0, black);
+
+        //BitmapHelper.fill(black, 0x000000);
     }
 
     public void render(Screen screen) {
         int localXOffset = screen.getXOffset() >> 4;
         int localYOffset = screen.getYOffset() >> 4;
 
-        int dstW = (screen.getViewPort().getWidth() + Tile.HALF_SIZE - 1) >> 4;
-        int dstH = (screen.getViewPort().getHeight() + Tile.HALF_SIZE - 1) >> 4;
+        int dstW = (screen.getViewPort().getWidth()/* + Tile.HALF_SIZE - 1*/) >> 4;
+        int dstH = (screen.getViewPort().getHeight()/* + Tile.HALF_SIZE - 1*/) >> 4;
 
         for (int x = localXOffset; x <= localXOffset + dstW; x++)
             for (int y = localYOffset; y <= localYOffset + dstH; y++) {
