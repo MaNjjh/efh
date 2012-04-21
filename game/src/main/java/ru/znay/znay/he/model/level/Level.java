@@ -401,7 +401,7 @@ public class Level {
         this.tiles = new byte[this.width * this.height];
 
         //this.fog = new Fog(this.width, this.height, level != 1);
-        this.newFog = new NewFog(this, 4, this.game.getScreen());
+        this.newFog = new NewFog(this, this.game.getScreen());
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
 

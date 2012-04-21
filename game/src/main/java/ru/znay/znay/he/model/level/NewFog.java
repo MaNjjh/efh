@@ -18,28 +18,24 @@ public class NewFog {
     private boolean[] fog;
     private int h;
     private int w;
-    private int c;
     private Bitmap black;
     private boolean[] test;
     int ww = Tile.SIZE * w;
     int hh = Tile.SIZE * h;
 
-    public NewFog(Level level, int coefficient, Screen screen) {
+    public NewFog(Level level, Screen screen) {
 
-        this.c = (coefficient < 1) ? 1 : coefficient;
         this.w = level.getWidth();
         this.h = level.getHeight();
 
-        fog = new boolean[w * h];
+        //fog = new boolean[w * h];
 
-        for (int i = 0; i < fog.length; i++)
-            fog[i] = true;
+        //for (int i = 0; i < fog.length; i++)
+        //    fog[i] = true;
 
-        black = new Bitmap(Tile.HALF_SIZE * 4, Tile.HALF_SIZE * 4);
-
-        //black1 = new Bitmap(Tile.SIZE * w, Tile.SIZE * h);
-
-        //BitmapHelper.fill(black1, 0xFFFFFF);
+        //black = new Bitmap(Tile.HALF_SIZE * 4, Tile.HALF_SIZE * 4);
+        //BitmapHelper.fill(black, 0xFFFFFF);
+        //BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, 4 * Tile.HALF_SIZE, 7 * Tile.HALF_SIZE, 20, 20, PaletteHelper.getColor(0, -1, -1, -1), 0, black);
 
         ww = Tile.SIZE * w;
         hh = Tile.SIZE * h;
@@ -49,12 +45,6 @@ public class NewFog {
         for (int i = 0; i < ww * hh; i++)
             test[i] = true;
 
-
-        BitmapHelper.fill(black, 0xFFFFFF);
-
-        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, 4 * Tile.HALF_SIZE, 7 * Tile.HALF_SIZE, 20, 20, PaletteHelper.getColor(0, -1, -1, -1), 0, black);
-
-        //BitmapHelper.fill(black, 0x000000);
     }
 
     public void render(Screen screen) {
@@ -173,6 +163,6 @@ public class NewFog {
     }
 
     public boolean getFog(int x, int y) {
-        return x < 0 || y < 0 || x >= this.w || y >= this.h || fog[x + y * this.w];
+        return x < 0 || y < 0 || x >= this.ww || y >= this.hh || test[x << 4 + (y << 4) * this.ww];
     }
 }
