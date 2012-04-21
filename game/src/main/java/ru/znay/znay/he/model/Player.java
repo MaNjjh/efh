@@ -2,6 +2,7 @@ package ru.znay.znay.he.model;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
+import ru.znay.znay.he.gfx.gui.GuiInventory;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -10,6 +11,8 @@ import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.furniture.Furniture;
 import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
@@ -171,8 +174,22 @@ public class Player extends Mob {
     public void touchItem(ItemEntity itemEntity) {
         if (itemEntity.isRemoved()) return;
         itemEntity.take(this);
-        inventory.add(itemEntity.item);
+        inventory.add(itemEntity.getItem());
         level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, ru.znay.znay.he.gfx.model.Font.yellowColor));
+        GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
+        if (guiInventory != null) {
+            if (itemEntity.getItem() instanceof ResourceItem) {
+                ResourceItem resourceItem = (ResourceItem) itemEntity.getItem();
+                if (resourceItem.getResource() == Resource.apple) {
+
+                    ResourceItem apples = inventory.findResource(Resource.apple);
+                    if (apples != null) {
+
+                        guiInventory.setApple(apples);
+                    }
+                }
+            }
+        }
     }
 
     /*@Override

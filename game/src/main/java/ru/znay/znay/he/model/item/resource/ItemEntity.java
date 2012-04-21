@@ -18,7 +18,7 @@ import ru.znay.znay.he.sound.Sound;
  * To change this template use File | Settings | File Templates.
  */
 public class ItemEntity extends SmashParticle {
-    public Item item;
+    private Item item;
 
     public ItemEntity(Item item, int x, int y) {
         super(x, y, 0);
@@ -69,5 +69,9 @@ public class ItemEntity extends SmashParticle {
         }
         item.onTake(this);
         removed = true;
+    }
+
+    public Item getItem() {
+        return item;
     }
 }
