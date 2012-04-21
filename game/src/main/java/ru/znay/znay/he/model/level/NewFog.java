@@ -76,12 +76,12 @@ public class NewFog {
         int dstW = screen.getViewPort().getWidth();
         int dstH = screen.getViewPort().getHeight();
 
-        for (int x = localXOffset; x < localXOffset+dstW; x++)
-            for (int y = localYOffset; y < localYOffset+dstH; y++) {
+        for (int x = localXOffset; x < localXOffset + dstW; x++)
+            for (int y = localYOffset; y < localYOffset + dstH; y++) {
                 if (test[x + y * ww]) {
                     int tx = x - localXOffset;
                     int ty = y - localYOffset;
-                    screen.getViewPort().getPixels()[tx + dstW * ty] = 0x55000000;
+                    screen.getViewPort().getPixels()[tx + dstW * ty] = 0x00000000;
                 }
             }
     }
@@ -90,40 +90,40 @@ public class NewFog {
         int r = player.getClearFogRadius() * Tile.SIZE;
         int px = player.getX();
         int py = player.getY();
-        while (r > (r>>1))
-        {
-        int x = 0;
-        int y = r;
-        int delta = (2 - (r << 1));
-        int error;
+        while (r > (r >> 1)) {
+            int x = 0;
+            int y = r;
+            int delta = (2 - (r << 1));
+            int error;
 
-        while (y >= 0) {
-            //System.out.println((px + x) + " " +(py + y));
-            openFog2(px + x, py + y);
-            openFog2(px + x, py - y);
-            openFog2(px - x, py + y);
-            openFog2(px - x, py - y);
+            while (y >= 0) {
+                //System.out.println((px + x) + " " +(py + y));
+                openFog2(px + x, py + y);
+                openFog2(px + x, py - y);
+                openFog2(px - x, py + y);
+                openFog2(px - x, py - y);
 
-            error = 2 * (delta + y) - 1;
-            if (delta < 0 && error <= 0) {
+                error = 2 * (delta + y) - 1;
+                if (delta < 0 && error <= 0) {
+                    ++x;
+                    delta += 2 * x + 1;
+                    continue;
+                }
+                error = 2 * (delta - x) - 1;
+                if (delta > 0 && error > 0) {
+                    --y;
+                    delta += 1 - 2 * y;
+                    continue;
+                }
                 ++x;
-                delta += 2 * x + 1;
-                continue;
-            }
-            error = 2 * (delta - x) - 1;
-            if (delta > 0 && error > 0) {
+                delta += 2 * (x - y);
                 --y;
-                delta += 1 - 2 * y;
-                continue;
             }
-            ++x;
-            delta += 2 * (x - y);
-            --y;
+            r--;
         }
-       r--;
-    }
         return true;
     }
+
     public void openFog2(int x, int y) {
         if (x >= 0 && y >= 0 && x < ww && y < hh)
             test[x + y * ww] = false;
