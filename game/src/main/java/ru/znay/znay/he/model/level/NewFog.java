@@ -40,13 +40,13 @@ public class NewFog {
         int localXOffset = screen.getXOffset() >> 4;
         int localYOffset = screen.getYOffset() >> 4;
 
-        int dstW = screen.getViewPort().getWidth() >> 4;
-        int dstH = screen.getViewPort().getHeight() >> 4;
+        int dstW = (screen.getViewPort().getWidth() + Tile.HALF_SIZE - 1) >> 4;
+        int dstH = (screen.getViewPort().getHeight() + Tile.HALF_SIZE - 1) >> 4;
 
-        for (int x = 0; x < dstW; x++)
-            for (int y = 0; y < dstH; y++) {
-                if (fog[x + localXOffset + (y + localYOffset) * w]) {
-                    BitmapHelper.drawNormal(black, x << 4, y << 4, screen.getViewPort(), 0xFFFFFF);
+        for (int x = localXOffset; x <= localXOffset + dstW; x++)
+            for (int y = localYOffset; y <= localYOffset + dstH; y++) {
+                if (fog[x + y * w]) {
+                    BitmapHelper.drawNormal(black, (x << 4) - screen.getXOffset(), (y << 4) - screen.getYOffset(), screen.getViewPort(), 0xFFFFFF);
                 }
             }
 
