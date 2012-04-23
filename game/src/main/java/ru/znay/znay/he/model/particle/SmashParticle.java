@@ -26,6 +26,7 @@ public class SmashParticle extends Particle {
     public SmashParticle(int x, int y, int color) {
         super(x, y, color);
     }
+
     public void tick() {
         super.tick();
         if (zz != 0) {

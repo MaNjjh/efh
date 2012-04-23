@@ -3,7 +3,6 @@ package ru.znay.znay.he.model.weapon.arrow;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
-import ru.znay.znay.he.model.particle.ParticleSystem;
 
 /**
  * ========================================
@@ -28,7 +27,6 @@ import ru.znay.znay.he.model.particle.ParticleSystem;
  * 16:31: Time
  */
 public class FireArrow extends Arrow {
-    private static ParticleSystem particleSystem = new ParticleSystem(1000, 0.03, -0.01, 40);
 
     public FireArrow(ETeam ownerTeam, int x, int y, double vx, double vy, int damageBonus) {
         super(ownerTeam, x, y, vx, vy, damageBonus * 3 + 3);
@@ -39,14 +37,13 @@ public class FireArrow extends Arrow {
     @Override
     public void tick() {
         super.tick();
-        particleSystem.createExplosion(x, y, 0.5, -0.6, 4);
-        particleSystem.tick();
+        level.getFireParticles().createExplosion(x, y, 0.5, -0.6, 4);
+
     }
 
     @Override
     public void render(Screen screen) {
         super.render(screen);
-        particleSystem.render(screen);
     }
 
 }

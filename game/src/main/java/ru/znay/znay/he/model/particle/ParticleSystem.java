@@ -50,13 +50,13 @@ public class ParticleSystem extends Entity {
     };
 
 
-    public ParticleSystem(int count, double wind, double gravity, int delay) {
+    public ParticleSystem(Class<? extends Particle> clazz, int count, double wind, double gravity, int delay) throws IllegalAccessException, InstantiationException {
         this.wind = wind;
         this.gravity = gravity;
         this.delay = delay;
         initSinCos();
         for (int i = 0; i < count; i++) {
-            Particle particle = new FireParticle();
+            Particle particle = clazz.newInstance();
             particle.setRemoved(true);
             this.particles.add(particle);
         }

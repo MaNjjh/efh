@@ -30,6 +30,8 @@ import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
+import ru.znay.znay.he.model.particle.FireParticle;
+import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.quest.QuestHandler;
 
 import java.util.ArrayList;
@@ -66,6 +68,12 @@ public class Level {
     private final static int SHRUBBERY = 0xFF005500;
 
     private int number;
+
+    public ParticleSystem getFireParticles() {
+        return fireParticles;
+    }
+
+    private ParticleSystem fireParticles;
 
     private Random random = new Random();
 
@@ -127,6 +135,12 @@ public class Level {
             newFog.tick(player); */
 
         this.questHandler = new QuestHandler(player);
+
+        try {
+            fireParticles = new ParticleSystem(FireParticle.class, 1000, 0.03, -0.01, 40);
+        } catch (Exception e) {
+            //ignore
+        }
 
 /*
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
@@ -217,6 +231,7 @@ public class Level {
                 }
             }
         }
+        this.fireParticles.tick();
         tickTime++;
     }
 
@@ -288,6 +303,7 @@ public class Level {
             }
             rowSprites.clear();
         }
+        this.fireParticles.render(screen);
         screen.setOffset(0, 0);
 
 
