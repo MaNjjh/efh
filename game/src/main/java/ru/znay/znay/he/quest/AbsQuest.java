@@ -18,6 +18,7 @@ public abstract class AbsQuest implements QuestStatus {
     private String description;
     private NPC ownerQuest;
     private int goal;
+    protected NextQuest nextQuest = null;
 
     private QuestPromotion questPromotion;
 
@@ -52,6 +53,11 @@ public abstract class AbsQuest implements QuestStatus {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public boolean hasNextPart() {
+        return (nextQuest != null);
     }
 
     public QuestPromotion getQuestPromotion() {

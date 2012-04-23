@@ -26,13 +26,18 @@ import ru.znay.znay.he.model.builds.tree.Shrubbery;
 import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
-import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
+import ru.znay.znay.he.quest.AbsQuest;
+import ru.znay.znay.he.quest.NextQuest;
 import ru.znay.znay.he.quest.QuestHandler;
+import ru.znay.znay.he.quest.promotion.QuestPromotion;
+import ru.znay.znay.he.quest.template.KillTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,13 +72,14 @@ public class Level {
     private final static int PLAYER_SPAWN = 0xFFFF0000;
     private final static int SHRUBBERY = 0xFF005500;
 
-    private int number;
-
     public ParticleSystem getFireParticles() {
         return fireParticles;
     }
 
     private ParticleSystem fireParticles;
+
+
+    private int number;
 
     private Random random = new Random();
 
@@ -136,31 +142,46 @@ public class Level {
 
         this.questHandler = new QuestHandler(player);
 
-        try {
-            fireParticles = new ParticleSystem(FireParticle.class, 1000, 0.03, -0.01, 40);
-        } catch (Exception e) {
-            //ignore
-        }
 
-/*
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
-        AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class);
+        NextQuest nextQuest = new NextQuest() {
+            @Override
+            public void initNextQuest(QuestHandler questHandler) {
+                AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class, this);
+                testQuest.setName("злые зеленые кучи");
+                testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
+                testQuest.setQuestPromotion(new QuestPromotion() {
+                    @Override
+                    public void promotion(Player player) {
+                        ResourceItem coin = player.getInventory().findResource(Resource.coin);
+                        if (coin != null) {
+                            coin.addCount(1000);
+                        }
+                    }
+                });
+                testQuest.accept(questHandler);
+            }
+        };
+        AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class, nextQuest);
         testQuest.setName("злые зеленые кучи");
         testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
         testQuest.setQuestPromotion(new QuestPromotion() {
             @Override
             public void promotion(Player player) {
-                player.setScore(player.getScore() + 1000);
+                ResourceItem coin = player.getInventory().findResource(Resource.coin);
+                if (coin != null) {
+                    coin.addCount(1000);
+                }
             }
         });
         testQuest.accept(this.questHandler);
         //---------------------------------------------------------------------------------
-*/
+
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
         //Не включать!Работают люди!
-        //trySpawn();
+        trySpawn();
     }
 
     public void trySpawn() {
@@ -171,7 +192,7 @@ public class Level {
                 add(mob);
             }
 
-            mob = new Mushroom();
+            /*mob = new Mushroom();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
@@ -231,7 +252,6 @@ public class Level {
                 }
             }
         }
-        this.fireParticles.tick();
         tickTime++;
     }
 
@@ -303,7 +323,6 @@ public class Level {
             }
             rowSprites.clear();
         }
-        this.fireParticles.render(screen);
         screen.setOffset(0, 0);
 
 

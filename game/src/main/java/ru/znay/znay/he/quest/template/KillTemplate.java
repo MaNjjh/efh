@@ -2,6 +2,7 @@ package ru.znay.znay.he.quest.template;
 
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.quest.AbsQuest;
+import ru.znay.znay.he.quest.NextQuest;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,9 +18,10 @@ public class KillTemplate extends AbsQuest {
     private String mobName;
 
 
-    public KillTemplate(int needToKill, Class<? extends Mob> clazz) {
+    public KillTemplate(int needToKill, Class<? extends Mob> clazz, NextQuest nextQuest) {
         this.needToKill = needToKill;
         this.mobName = clazz.getSimpleName().toLowerCase();
+        this.nextQuest = nextQuest;
     }
 
     public KillTemplate(String mobName, int needToKill) {

@@ -62,6 +62,9 @@ public class QuestHandler {
                 quest.getQuestPromotion().promotion(this.player);
             }
 
+            if (quest.hasNextPart()) {
+                quest.nextQuest.initNextQuest(this);
+            }
             this.quests.remove(quest.getId());
         }
     }
