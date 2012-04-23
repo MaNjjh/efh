@@ -28,7 +28,7 @@ import ru.znay.znay.he.model.particle.ParticleSystem;
  * 16:31: Time
  */
 public class FireArrow extends Arrow {
-    private ParticleSystem particleSystem= new ParticleSystem(1000, 0.03, -0.01, 40);
+    private static ParticleSystem particleSystem = new ParticleSystem(1000, 0.03, -0.01, 40);
 
     public FireArrow(ETeam ownerTeam, int x, int y, double vx, double vy, int damageBonus) {
         super(ownerTeam, x, y, vx, vy, damageBonus * 3 + 3);
@@ -39,7 +39,7 @@ public class FireArrow extends Arrow {
     @Override
     public void tick() {
         super.tick();
-        particleSystem.createExplosion(x, y, 0.5, -0.6, 20);
+        particleSystem.createExplosion(x, y, 0.5, -0.6, 4);
         particleSystem.tick();
     }
 
