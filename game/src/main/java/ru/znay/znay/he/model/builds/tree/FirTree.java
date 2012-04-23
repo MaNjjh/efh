@@ -1,11 +1,8 @@
 package ru.znay.znay.he.model.builds.tree;
 
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
-import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
-import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**

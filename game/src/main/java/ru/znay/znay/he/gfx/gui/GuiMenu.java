@@ -88,7 +88,7 @@ public class GuiMenu extends GuiPanel {
         if (!visible) return;
 
         if (InputHandler.getInstance().down.clicked) {
-           selectNext();
+            selectNext();
         }
 
         if (InputHandler.getInstance().up.clicked) {

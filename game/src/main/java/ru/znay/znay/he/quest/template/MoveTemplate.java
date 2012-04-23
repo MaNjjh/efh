@@ -16,8 +16,7 @@ public class MoveTemplate extends AbsQuest {
 
     }
 
-    public MoveTemplate(NextQuest nextQuest)
-    {
+    public MoveTemplate(NextQuest nextQuest) {
         this.nextQuest = nextQuest;
     }
 

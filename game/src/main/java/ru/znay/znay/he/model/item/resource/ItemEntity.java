@@ -6,7 +6,6 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.particle.Particle;
 import ru.znay.znay.he.model.particle.SmashParticle;
 import ru.znay.znay.he.sound.Sound;
 

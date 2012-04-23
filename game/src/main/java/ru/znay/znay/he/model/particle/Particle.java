@@ -57,7 +57,7 @@ public class Particle extends Entity {
             BitmapHelper.drawPoint(xo, yo, 0, screen.getViewPort());
 
         //if (time > 100)
-            BitmapHelper.drawPoint(xo, yo - (int) zz + 1, 0, screen.getViewPort());
+        BitmapHelper.drawPoint(xo, yo - (int) zz + 1, 0, screen.getViewPort());
 
 
         BitmapHelper.drawPoint(xo, yo - (int) zz, color, screen.getViewPort());

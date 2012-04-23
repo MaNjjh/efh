@@ -20,9 +20,9 @@ public class TreeStump extends Tree {
         super(x, y, 4, 1);
 
         spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(((type)?21:25) * Tile.HALF_SIZE, Tile.HALF_SIZE<<1, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
-        spriteCollector.addWrapper(new SpriteWrapper(((type)?23:27) * Tile.HALF_SIZE, Tile.HALF_SIZE<<1, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 21 : 25) * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 23 : 27) * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
 
-        this.sprite = spriteCollector.mergedWrappers("tree_stump_"+(type?"0":"1"), 1, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("tree_stump_" + (type ? "0" : "1"), 1, random.nextInt(2), true);
     }
 }

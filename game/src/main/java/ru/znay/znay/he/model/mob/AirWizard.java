@@ -6,7 +6,6 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.resource.ItemEntity;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
@@ -113,6 +112,7 @@ public class AirWizard extends Mob {
 
         }
     }
+
     public void render(Screen screen) {
         int xt = 0;
         int yt = 14;

@@ -94,7 +94,7 @@ public class Warp extends Entity {
     private void doWarp() {
         if (srcLevel == dstLevel)
             player.moveToXY(dstX, dstY);
-        else{
+        else {
             player.moveLevel(dstLevel, dstX, dstY);
         }
 

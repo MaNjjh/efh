@@ -10,9 +10,8 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
  * To change this template use File | Settings | File Templates.
  */
 public class Bakery extends Building {
-    public Bakery(int x,int y)
-    {
-        super(x,y,170,60);
+    public Bakery(int x, int y) {
+        super(x, y, 170, 60);
 
         this.sprite = BitmapHelper.loadBitmapFromResources("/buildings/Bakery.png");
     }

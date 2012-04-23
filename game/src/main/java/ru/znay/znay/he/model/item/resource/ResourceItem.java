@@ -1,7 +1,5 @@
 package ru.znay.znay.he.model.item.resource;
 
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
-import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;

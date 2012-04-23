@@ -2,22 +2,19 @@ package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.Graphics;
-import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.GuiPanel;
 import ru.znay.znay.he.gfx.gui.GuiSpeedIndicator;
 import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
+import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.AirWizard;
-import ru.znay.znay.he.model.npc.village.StoneMan;
-import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -128,7 +125,7 @@ public class Game extends Graphics implements Runnable {
         if ((panel = GuiManager.getInstance().get("money")) != null) {
             ResourceItem coin = player.getInventory().findResource(Resource.coin);
             ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
-            String score = "" + ( (coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount()<<1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
+            String score = "" + ((coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount() << 1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
 
             ((GuiStatusPanel) panel).setText2(score);
         }

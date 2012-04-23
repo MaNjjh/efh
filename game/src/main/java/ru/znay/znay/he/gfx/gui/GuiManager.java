@@ -4,9 +4,7 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,7 +48,7 @@ public class GuiManager {
     public void add(GuiPanel panel, String name) {
         if (!findSamePanel(name)) {
             panels.put(name, panel);
-        } else System.out.println(" " + name);
+        } else System.out.println("duplicate " + name);
     }
 
     public GuiPanel get(String name) {
@@ -94,8 +92,9 @@ public class GuiManager {
     }
 
     public static GuiManager getInstance() {
-        if (guiManager == null)
+        if (guiManager == null) {
             guiManager = new GuiManager();
+        }
 
         return guiManager;
     }

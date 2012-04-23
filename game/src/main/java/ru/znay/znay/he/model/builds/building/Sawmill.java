@@ -10,9 +10,8 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
  * To change this template use File | Settings | File Templates.
  */
 public class Sawmill extends Building {
-    public Sawmill(int x,int y)
-    {
-       super(x,y,0,0);
+    public Sawmill(int x, int y) {
+        super(x, y, 0, 0);
 
         this.sprite = BitmapHelper.loadBitmapFromResources("/buildings/Sawmill.png");
     }

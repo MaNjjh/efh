@@ -23,7 +23,7 @@ public class NewFog {
     int ww;
     int hh;
     Random rnd = new Random();
-    private byte[] helper; 
+    private byte[] helper;
 
     public NewFog(Level level, Screen screen) {
 
@@ -49,13 +49,12 @@ public class NewFog {
         helper[8] = -128;
 
 
-        
         ww = Tile.SIZE * level.getWidth();
         hh = Tile.SIZE * level.getHeight();
         //fuck memory economy
         testFog = new boolean[ww * hh];
 
-        System.out.println(ww*hh);
+        System.out.println(ww * hh);
 
         for (int i = 0; i < ww * hh; i++)
             testFog[i] = true;

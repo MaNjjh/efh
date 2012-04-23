@@ -13,25 +13,16 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.building.Bakery;
-import ru.znay.znay.he.model.builds.building.House;
-import ru.znay.znay.he.model.builds.building.Sawmill;
-import ru.znay.znay.he.model.builds.building.TownHall;
-import ru.znay.znay.he.model.builds.building.Warehouse;
-import ru.znay.znay.he.model.builds.tree.AppleTree;
-import ru.znay.znay.he.model.builds.tree.FirTree;
-import ru.znay.znay.he.model.builds.tree.PineTree;
-import ru.znay.znay.he.model.builds.tree.Shrubbery;
-import ru.znay.znay.he.model.builds.tree.TreeStump;
+import ru.znay.znay.he.model.builds.building.*;
+import ru.znay.znay.he.model.builds.tree.*;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
+import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.NextQuest;
@@ -39,11 +30,7 @@ import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.promotion.QuestPromotion;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -142,6 +129,12 @@ public class Level {
 
         this.questHandler = new QuestHandler(player);
 
+
+        try {
+            fireParticles = new ParticleSystem(FireParticle.class, 1000, 0.03, -0.01, 40);
+        } catch (Exception e) {
+            //ignore
+        }
 
         //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
         NextQuest nextQuest = new NextQuest() {
@@ -252,6 +245,7 @@ public class Level {
                 }
             }
         }
+        this.fireParticles.tick();
         tickTime++;
     }
 
@@ -323,9 +317,8 @@ public class Level {
             }
             rowSprites.clear();
         }
+        this.fireParticles.render(screen);
         screen.setOffset(0, 0);
-
-
     }
 
     public void renderFog(Screen screen, int xScroll, int yScroll) {

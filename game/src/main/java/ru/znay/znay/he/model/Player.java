@@ -16,7 +16,6 @@ import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
-import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
 

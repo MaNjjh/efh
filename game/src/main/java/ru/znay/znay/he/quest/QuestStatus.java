@@ -9,5 +9,6 @@ package ru.znay.znay.he.quest;
  */
 public interface QuestStatus {
     boolean isCompleted();
+
     boolean hasNextPart();
 }

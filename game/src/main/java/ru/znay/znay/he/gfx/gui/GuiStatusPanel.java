@@ -83,7 +83,7 @@ public class GuiStatusPanel extends GuiPanel {
         //BitmapHelper.drawAura(temp,0xFF00FF,0x000000);
 
         Font.drawToBitmap(text, screen, 17, 4, currentColor, temp);
-        BitmapHelper.drawShadow(temp,0xFF00FF,0x555555);
+        BitmapHelper.drawShadow(temp, 0xFF00FF, 0x555555);
 
         this.image = null;
         this.image = temp;

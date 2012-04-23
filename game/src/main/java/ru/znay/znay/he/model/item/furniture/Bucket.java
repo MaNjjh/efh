@@ -35,7 +35,6 @@ public class Bucket extends Furniture {
         int col = PaletteHelper.getColor(-1, 111, 420, 111);
 
 
-
         if (isFull) {
             if (tickTime / 300 % 2 == 0) {
                 col = PaletteHelper.getColor(-1, 222, 222, 004);
