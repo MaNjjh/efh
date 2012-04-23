@@ -79,7 +79,7 @@ public class Level {
     private byte[] tiles;
 
     private Fog fog;
-    private NewFog newFog;
+    private NewFog newFog = null;
     private int monsterDensity = 4;
     private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
@@ -123,7 +123,8 @@ public class Level {
 
         this.add(player);
 
-        newFog.tick(player);
+        /*if (newFog != null)
+            newFog.tick(player); */
 
         this.questHandler = new QuestHandler(player);
 
@@ -142,7 +143,7 @@ public class Level {
         //---------------------------------------------------------------------------------
 */
 
-        //fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
+        fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
         //Не включать!Работают люди!
         //trySpawn();
@@ -209,9 +210,9 @@ public class Level {
                 if (xto != xt || yto != yt) {
                     removeEntity(xto, yto, entity);
                     insertEntity(xt, yt, entity);
-                    if (entity instanceof Player) {
-                        //fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
-                        newFog.tick((Player) entity);
+                    if (entity instanceof Player /*&& newFog != null*/) {
+                        fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
+                        //newFog.tick((Player) entity);
                     }
                 }
             }
@@ -293,19 +294,20 @@ public class Level {
     }
 
     public void renderFog(Screen screen, int xScroll, int yScroll) {
-        /* int xo = xScroll >> 4;
-  int yo = yScroll >> 4;
-  int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
-  int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
-  screen.setOffset(xScroll, yScroll);
-  for (int y = yo; y <= h + yo; y++) {
-      for (int x = xo; x <= w + xo; x++) {
-          //fog.render(screen, x - 1, y - 1);
-          fog.render(screen, x, y);
-      }
-  }      */
+        int xo = xScroll >> 4;
+        int yo = yScroll >> 4;
+        int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
+        int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
         screen.setOffset(xScroll, yScroll);
-        newFog.render(screen);
+        for (int y = yo; y <= h + yo; y++) {
+            for (int x = xo; x <= w + xo; x++) {
+                //fog.render(screen, x - 1, y - 1);
+                fog.render(screen, x, y);
+            }
+        }
+        /* if (newFog == null) return;
+        screen.setOffset(xScroll, yScroll);
+        newFog.render(screen);*/
         screen.setOffset(0, 0);
     }
 
@@ -385,9 +387,9 @@ public class Level {
         this.monsterDensity = monsterDensity;
     }
 
-    public NewFog /*Fog*/ getFog() {
-        //return fog;
-        return newFog;
+    public /*NewFog*/ Fog getFog() {
+        return fog;
+        //return newFog;
     }
 
     public QuestHandler getQuestHandler() {
@@ -402,8 +404,10 @@ public class Level {
 
         this.tiles = new byte[this.width * this.height];
 
-        //this.fog = new Fog(this.width, this.height, level != 1);
-        this.newFog = new NewFog(this, this.game.getScreen());
+        this.fog = new Fog(this.width, this.height, level != 1);
+
+        //if (level != 1)
+        //    this.newFog = new NewFog(this, this.game.getScreen());
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
 

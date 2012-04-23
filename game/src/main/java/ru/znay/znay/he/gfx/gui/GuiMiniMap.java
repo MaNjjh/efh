@@ -66,7 +66,7 @@ public class GuiMiniMap extends GuiPanel {
         tick = 0;
         for (int j = 0; j < level.getHeight(); j++) {
             for (int i = 0; i < level.getWidth(); i++) {
-                if (level.getFog().getFog(i, j)) {
+                if (level.getFog() != null && level.getFog().getFog(i, j)) {
                 //if (!true) {
                     this.miniMap.getPixels()[i + j * this.miniMap.getWidth()] = 0;
                 } else {

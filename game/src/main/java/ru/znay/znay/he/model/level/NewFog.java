@@ -5,6 +5,8 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.level.tile.Tile;
 
+import java.util.Random;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Денис Сергеевич
@@ -20,6 +22,8 @@ public class NewFog {
     private boolean[] testFog;
     int ww;
     int hh;
+    Random rnd = new Random();
+    private byte[] helper; 
 
     public NewFog(Level level, Screen screen) {
 
@@ -34,11 +38,24 @@ public class NewFog {
         //black = new Bitmap(Tile.HALF_SIZE * 4, Tile.HALF_SIZE * 4);
         //BitmapHelper.fill(black, 0xFFFFFF);
         //BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, 4 * Tile.HALF_SIZE, 7 * Tile.HALF_SIZE, 20, 20, PaletteHelper.getColor(0, -1, -1, -1), 0, black);
+        helper = new byte[9];
+        helper[1] = 1;
+        helper[2] = 2;
+        helper[3] = 4;
+        helper[4] = 8;
+        helper[5] = 16;
+        helper[6] = 32;
+        helper[7] = 64;
+        helper[8] = -128;
 
+
+        
         ww = Tile.SIZE * level.getWidth();
         hh = Tile.SIZE * level.getHeight();
         //fuck memory economy
         testFog = new boolean[ww * hh];
+
+        System.out.println(ww*hh);
 
         for (int i = 0; i < ww * hh; i++)
             testFog[i] = true;
@@ -74,7 +91,7 @@ public class NewFog {
     }
 
     public boolean tick(Player player, int qq) {
-        int r = player.getClearFogRadius() * Tile.SIZE;
+        int r = (player.getClearFogRadius() * Tile.SIZE);// +rnd.nextInt(14)-7;
         int px = player.getX();
         int py = player.getY();
         int x = 0;
