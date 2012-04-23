@@ -24,7 +24,6 @@ public class GuiManager {
 
     }
 
-    @Deprecated
     private boolean findSamePanel(GuiPanel findPanel) {
         for (GuiPanel panel : panels.values()) {
             if (panel.getX() == findPanel.getX() && panel.getY() == findPanel.getY()) {
@@ -46,7 +45,7 @@ public class GuiManager {
     }
 
     public void add(GuiPanel panel, String name) {
-        if (!findSamePanel(name)) {
+        if (!findSamePanel(panel)) {
             panels.put(name, panel);
         } else System.out.println("duplicate " + name);
     }

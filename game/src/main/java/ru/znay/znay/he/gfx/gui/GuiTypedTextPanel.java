@@ -39,6 +39,8 @@ public class GuiTypedTextPanel extends GuiTextPanel {
 
     @Override
     public void tick() {
+        if (closed || !visible) return;
+
         if (System.currentTimeMillis() - this.time > this.period) {
 
             this.position = Math.min(originalMessage.length(), this.position + 1);
@@ -51,6 +53,6 @@ public class GuiTypedTextPanel extends GuiTextPanel {
         if (this.position == originalMessage.length()) {
             timeLife--;
         }
-        if (timeLife <= 0) closed = true;
+        if (timeLife <= 0) close();
     }
 }
