@@ -29,7 +29,7 @@ public class GuiManager {
     private boolean findSamePanel(GuiPanel findPanel) {
         for (GuiPanel panel : panels.values()) {
             if (panel.getX() == findPanel.getX() && panel.getY() == findPanel.getY()) {
-                System.out.print("duplicate panel found " + findPanel.toString());
+                System.out.println("duplicate panel found " + findPanel.toString());
                 return false;
             }
         }
@@ -39,7 +39,7 @@ public class GuiManager {
     public void add(GuiPanel panel, String name) {
         if (!findSamePanel(panel)) {
             panels.put(name, panel);
-        } else System.out.println(" "+name);
+        } else System.out.println(" " + name);
     }
 
     public GuiPanel get(String name) {
@@ -47,13 +47,28 @@ public class GuiManager {
     }
 
     public void tick() {
-        Iterator<GuiPanel> items = panels.values().iterator();
+        /*Iterator<GuiPanel> items = panels.values().iterator();
         GuiPanel panel;
 
         for (; items.hasNext(); )
             if ((panel = items.next()).isClosed())
                 items.remove();
-            else panel.tick();
+            else panel.tick();*/
+        List<String> strings = new LinkedList<String>();
+
+        Set<String> keys = panels.keySet();
+        for (String key : keys) {
+            GuiPanel panel = panels.get(key);
+            if (panel.closed)
+                strings.add(key);
+            else
+                panel.tick();
+        }
+
+        for (String s : strings) {
+            System.out.println("remove " + s);
+            panels.remove(s);
+        }
     }
 
     public void render(Screen screen) {
@@ -73,9 +88,8 @@ public class GuiManager {
 
         return guiManager;
     }
-    
-    public void initDefaultGui(Game game)
-    {
+
+    public void initDefaultGui(Game game) {
         panels.clear();
 
         add(new GuiStatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
