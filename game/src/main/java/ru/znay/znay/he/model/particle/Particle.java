@@ -32,6 +32,16 @@ public class Particle extends Entity {
         time = 60;
     }
 
+    public void initParticle(int x, int y, double xa, double ya) {
+        this.x = x;
+        this.y = y;
+        this.xa = xa;
+        this.ya = ya;
+    }
+
+    public Particle() {
+    }
+
     public void tick() {
         time--;
         if (time < 0) {
@@ -46,7 +56,7 @@ public class Particle extends Entity {
         if (zz > 0)
             BitmapHelper.drawPoint(xo, yo, 0, screen.getViewPort());
 
-        if (time > 100)
+        //if (time > 100)
             BitmapHelper.drawPoint(xo, yo - (int) zz + 1, 0, screen.getViewPort());
 
 
@@ -75,6 +85,11 @@ public class Particle extends Entity {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public void addXaYa(double xa, double ya) {
+        this.xa += xa;
+        this.ya += ya;
     }
 
     public double getXa() {

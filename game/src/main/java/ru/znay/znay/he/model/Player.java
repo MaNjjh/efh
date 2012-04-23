@@ -16,6 +16,7 @@ import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
+import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
 
@@ -37,7 +38,7 @@ public class Player extends Mob {
     private int clearFogRadius = 4;
     private Point respPoint = null;
     private EArrowType arrowType = EArrowType.FIRE;
-    private int fireDelay = 10;
+    private int fireDelay = 20;
     private Inventory inventory = new Inventory();
 
     public Player(Game game) {

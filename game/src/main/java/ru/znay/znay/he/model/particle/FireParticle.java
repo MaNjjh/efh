@@ -24,25 +24,23 @@ package ru.znay.znay.he.model.particle;
  */
 public class FireParticle extends Particle {
 
-    public FireParticle(int x, int y) {
-        super(x, y, 0xFF7F00);
-        this.time = 1160 * 2;
-        this.speed = 2;
+    @Override
+    public void initParticle(int x, int y, double xa, double ya) {
+        super.initParticle(x, y, xa, ya);
+        this.time = random.nextInt(4) + 2;
     }
 
     public void tick() {
         super.tick();
-        double xxa = speed;
-        double yya = Math.sin(x * random.nextInt(10));
 
-        double betta = Math.toRadians(270);
-
-        xa = xxa * Math.cos(betta) - yya * Math.sin(betta);
-        ya = yya * Math.cos(betta) + xxa * Math.sin(betta);
+        if (time < 2) {
+            color = 0xff0000;
+        } else {
+            color = 0xff7f00;
+        }
 
         x += xa;
         y += ya;
-
     }
 
 }
