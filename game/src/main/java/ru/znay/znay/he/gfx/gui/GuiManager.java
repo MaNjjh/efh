@@ -26,6 +26,7 @@ public class GuiManager {
 
     }
 
+    @Deprecated
     private boolean findSamePanel(GuiPanel findPanel) {
         for (GuiPanel panel : panels.values()) {
             if (panel.getX() == findPanel.getX() && panel.getY() == findPanel.getY()) {
@@ -36,8 +37,18 @@ public class GuiManager {
         return false;
     }
 
+    private boolean findSamePanel(String name) {
+        Set<String> keys = panels.keySet();
+        for (String key : keys) {
+            if (name.equalsIgnoreCase(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void add(GuiPanel panel, String name) {
-        if (!findSamePanel(panel)) {
+        if (!findSamePanel(name)) {
             panels.put(name, panel);
         } else System.out.println(" " + name);
     }
