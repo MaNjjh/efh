@@ -29,7 +29,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  */
 public class Resource {
 
-    public static Resource life = new Resource("Life", 0, 4, PaletteHelper.getColor(-1, 0, 500, 555));
+    public static Resource life = new Resource("Life", 1, 4, PaletteHelper.getColor(-1, 0, 500, 555));
     public static Resource apple = new Resource("Apple", 0, 3, PaletteHelper.getColor(-1, 0, 510, 555));
     public static Resource coin = new Resource("Coin", 0, 3, PaletteHelper.getColor(-1, 0, 552, 555));
     public static Resource bigCoin = new Resource("B.Coin", 1, 3, PaletteHelper.getColor(-1, 0, 552, 555));

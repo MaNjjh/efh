@@ -9,8 +9,8 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.FurnitureItem;
 import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.furniture.Furniture;
-import ru.znay.znay.he.model.item.resource.ItemEntity;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
@@ -37,7 +37,7 @@ public class Player extends Mob {
     private int clearFogRadius = 4;
     private Point respPoint = null;
     private EArrowType arrowType = EArrowType.FIRE;
-    private int fireDelay = 20;
+    private int fireDelay = 10;
     private Inventory inventory = new Inventory();
 
     public Player(Game game) {

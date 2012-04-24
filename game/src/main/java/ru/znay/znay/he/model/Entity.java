@@ -3,7 +3,7 @@ package ru.znay.znay.he.model;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.Item;
-import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 

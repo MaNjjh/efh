@@ -5,7 +5,7 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;

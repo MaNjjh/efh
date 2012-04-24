@@ -10,7 +10,7 @@ import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;
-import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;

@@ -1,5 +1,7 @@
 package ru.znay.znay.he.model;
 
+import ru.znay.znay.he.gfx.gui.GuiInventory;
+import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -179,6 +181,12 @@ public class Mob extends Entity {
     }
 
     public void setSlowPeriod(int slowPeriod) {
+        if (this instanceof Player) {
+            GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
+            if (guiInventory != null) {
+                guiInventory.setSpeed(slowPeriod);
+            }
+        }
         this.slowPeriod = slowPeriod;
     }
 

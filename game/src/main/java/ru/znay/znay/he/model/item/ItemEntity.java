@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model.item.resource;
+package ru.znay.znay.he.model.item;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;

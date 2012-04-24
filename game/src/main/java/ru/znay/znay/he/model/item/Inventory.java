@@ -1,5 +1,7 @@
 package ru.znay.znay.he.model.item;
 
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 
@@ -44,9 +46,39 @@ public class Inventory {
             } else {
                 has.addCount(toTake.getCount());
             }
+        } else if (item instanceof EquipmentItem) {
+            EquipmentItem toTake = (EquipmentItem) item;
+            EquipmentItem has = findEquipment(toTake.getEquipment());
+            if (has == null) {
+                items.add(slot, toTake);
+            } else {
+                slot = items.indexOf(has);
+                items.remove(has);
+                items.add(slot, toTake);
+            }
         } else {
             items.add(slot, item);
         }
+    }
+
+    public EquipmentItem findEquipment(Equipment equipment) {
+        for (Item item : items) {
+            if (item instanceof EquipmentItem) {
+                EquipmentItem has = (EquipmentItem) item;
+                if (has.getEquipment() == equipment) return has;
+            }
+        }
+        return null;
+    }
+
+    public EquipmentItem findEquipmentByType(Equipment.EQUIP_TYPE equipType) {
+        for (Item item : items) {
+            if (item instanceof EquipmentItem) {
+                EquipmentItem has = (EquipmentItem) item;
+                if (has.getEquipType() == equipType) return has;
+            }
+        }
+        return null;
     }
 
     public ResourceItem findResource(Resource resource) {
@@ -68,7 +100,7 @@ public class Inventory {
     public boolean removeResource(Resource r, int count) {
         ResourceItem ri = findResource(r);
         if (ri == null) return false;
-        if (ri.getColor() < count) return false;
+        if (ri.getCount() < count) return false;
         ri.addCount(-count);
         if (ri.getCount() <= 0) items.remove(ri);
         return true;

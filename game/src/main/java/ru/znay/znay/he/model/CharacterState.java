@@ -28,8 +28,18 @@ public class CharacterState {
     private int speed = 0;
     private int defense = 0;
     private int regeneration = 0;
+    private int attackDelay = 0;
 
     public CharacterState(int defense, int endurance, int force, int regeneration, int speed) {
+        this.defense = defense;
+        this.endurance = endurance;
+        this.force = force;
+        this.regeneration = regeneration;
+        this.speed = speed;
+    }
+
+    public CharacterState(int defense, int endurance, int force, int regeneration, int speed, int attackDelay) {
+        this.attackDelay = attackDelay;
         this.defense = defense;
         this.endurance = endurance;
         this.force = force;
@@ -40,6 +50,7 @@ public class CharacterState {
     public CharacterState() {
     }
 
+
     public CharacterState mergeStates(CharacterState characterState) {
         CharacterState result = new CharacterState();
         result.setDefense(characterState.getDefense() + this.defense);
@@ -47,6 +58,7 @@ public class CharacterState {
         result.setForce(characterState.getForce() + this.force);
         result.setRegeneration(characterState.getRegeneration() + this.regeneration);
         result.setSpeed(characterState.getSpeed() + this.speed);
+        result.setAttackDelay(characterState.getAttackDelay() + this.attackDelay);
         return result;
     }
 
@@ -88,5 +100,13 @@ public class CharacterState {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public int getAttackDelay() {
+        return attackDelay;
+    }
+
+    public void setAttackDelay(int attackDelay) {
+        this.attackDelay = attackDelay;
     }
 }

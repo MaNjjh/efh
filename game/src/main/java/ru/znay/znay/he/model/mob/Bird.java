@@ -8,7 +8,7 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
-import ru.znay.znay.he.model.item.resource.ItemEntity;
+import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
