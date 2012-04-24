@@ -3,7 +3,6 @@ package ru.znay.znay.he.model.level;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.GuiMiniMap;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
@@ -149,7 +148,7 @@ public class Level {
         NextQuest nextQuest = new NextQuest() {
             @Override
             public void initNextQuest(QuestHandler questHandler) {
-                AbsQuest testQuest = new KillTemplate(1, SlimeFactory.class, null);
+                AbsQuest testQuest = new KillTemplate(1, SlimeFactory.class, this);
                 testQuest.setName("злые зеленые кучи");
                 testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
                 testQuest.setQuestPromotion(new QuestPromotion() {

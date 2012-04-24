@@ -33,7 +33,7 @@ public class Resource {
     public static Resource apple = new Resource("Apple", 0, 3, PaletteHelper.getColor(-1, 0, 510, 555));
     public static Resource coin = new Resource("Coin", 0, 3, PaletteHelper.getColor(-1, 0, 552, 555));
     public static Resource bigCoin = new Resource("B.Coin", 1, 3, PaletteHelper.getColor(-1, 0, 552, 555));
-    public static Resource berry = new Resource("Berry",0,3,PaletteHelper.getColor(-1, 0, 510, 555));
+    public static Resource berry = new Resource("Berry", 0, 3, PaletteHelper.getColor(-1, 0, 510, 555));
 
     private final String name;
     private final int xSprite;

@@ -1,7 +1,5 @@
 package ru.znay.znay.he.gfx.gui;
 
-import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
@@ -46,15 +44,15 @@ public class GuiSpeedIndicator extends GuiPanel {
         this.slow = spriteCollector.mergedWrappers("speed_slow", 1, 0, 0x01444444);
 
         spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(xOff+16, yOff, Tile.SIZE, Tile.SIZE, color));
+        spriteCollector.addWrapper(new SpriteWrapper(xOff + 16, yOff, Tile.SIZE, Tile.SIZE, color));
         this.walk = spriteCollector.mergedWrappers("speed_walk", 1, 0, 0x01444444);
 
         spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(xOff+32, yOff, Tile.SIZE, Tile.SIZE, color));
+        spriteCollector.addWrapper(new SpriteWrapper(xOff + 32, yOff, Tile.SIZE, Tile.SIZE, color));
         this.run = spriteCollector.mergedWrappers("speed_run", 1, 0, 0x01444444);
 
         spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(xOff+48, yOff, Tile.SIZE, Tile.SIZE, color));
+        spriteCollector.addWrapper(new SpriteWrapper(xOff + 48, yOff, Tile.SIZE, Tile.SIZE, color));
         this.sprint = spriteCollector.mergedWrappers("speed_sprint", 1, 0, 0x01444444);
     }
 

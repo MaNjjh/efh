@@ -1,6 +1,5 @@
 package ru.znay.znay.he.gfx.gui;
 
-import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -8,7 +7,9 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -23,6 +24,11 @@ public class GuiManager {
     private ConcurrentMap<String, GuiPanel> panels = new ConcurrentHashMap<String, GuiPanel>();
 
     private static GuiManager guiManager = null;
+
+    protected static final int PANEL_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
+    protected static final int FONT_COLOR = PaletteHelper.getColor(-1, -1, -1, 555);
+    protected static final int MENU_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
+    protected static final int MENU_COLOR_SEL = PaletteHelper.getColor(-1, 1, 141, 445);
 
     public static boolean isOpenedMenu = false;
 

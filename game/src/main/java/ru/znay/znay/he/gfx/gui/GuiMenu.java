@@ -1,7 +1,6 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.InputHandler;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -44,7 +43,7 @@ public class GuiMenu extends GuiPanel {
         int i = 0;
         panels.clear();
         for (String s : strings)
-            panels.add(new GuiTextPanel(s, x, y + (i * (Tile.HALF_SIZE * 3)), PaletteHelper.getColor(-1, -1, -1, 555), (i++ == 0) ? PaletteHelper.getColor(-1, 1, 30, 445) : PaletteHelper.getColor(-1, 1, 5, 445)));
+            panels.add(new GuiTextPanel(s, x, y + (i * (Tile.HALF_SIZE * 3)), GuiManager.FONT_COLOR, (i++ == 0) ? GuiManager.MENU_COLOR_SEL : GuiManager.MENU_COLOR));
         currentCell = 0;
         changed = true;
         visible = true;
@@ -59,9 +58,9 @@ public class GuiMenu extends GuiPanel {
         if (currentCell >= panels.size())
             currentCell = 0;
 
-        panels.get(lastCell).setPanelColor(PaletteHelper.getColor(-1, 1, 5, 445));
+        panels.get(lastCell).setPanelColor(GuiManager.MENU_COLOR);
 
-        panels.get(currentCell).setPanelColor(PaletteHelper.getColor(-1, 1, 30, 445));
+        panels.get(currentCell).setPanelColor(GuiManager.MENU_COLOR_SEL);
 
         changed = true;
     }
@@ -76,9 +75,9 @@ public class GuiMenu extends GuiPanel {
         if (currentCell < 0)
             currentCell = panels.size() - 1;
 
-        panels.get(lastCell).setPanelColor(PaletteHelper.getColor(-1, 1, 5, 445));
+        panels.get(lastCell).setPanelColor(GuiManager.MENU_COLOR);
 
-        panels.get(currentCell).setPanelColor(PaletteHelper.getColor(-1, 1, 30, 445));
+        panels.get(currentCell).setPanelColor(GuiManager.MENU_COLOR_SEL);
 
         changed = true;
     }

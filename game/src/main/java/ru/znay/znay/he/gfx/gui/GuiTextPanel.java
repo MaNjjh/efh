@@ -1,7 +1,6 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.cfg.Constants;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -35,12 +34,12 @@ public class GuiTextPanel extends GuiPanel {
 
     public GuiTextPanel(String message, int posX, int posY) {
         super(posX, posY);
-        init(message, PaletteHelper.getColor(5, 555, 555, 555));
+        init(message, GuiManager.FONT_COLOR/* PaletteHelper.getColor(5, 555, 555, 555)*/);
     }
 
     public GuiTextPanel(List<String> messages, int x, int y, int w) {
         super(x, y);
-        this.colorText = PaletteHelper.getColor(5, 555, 555, 555);
+        this.colorText = GuiManager.FONT_COLOR/* PaletteHelper.getColor(5, 555, 555, 555)*/;
 
         this.setFormatedText(messages, w);
     }

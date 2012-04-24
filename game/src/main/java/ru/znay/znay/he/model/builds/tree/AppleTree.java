@@ -44,7 +44,7 @@ public class AppleTree extends Tree {
         if (apple) {
             spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 0 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(310, 400, 510, -1)));
         }
-        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, (drawAura)?0x01000000:0 );
+        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, (drawAura) ? 0x01000000 : 0);
 
     }
 

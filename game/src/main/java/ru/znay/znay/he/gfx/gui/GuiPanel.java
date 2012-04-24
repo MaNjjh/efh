@@ -2,7 +2,6 @@ package ru.znay.znay.he.gfx.gui;
 
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -26,7 +25,7 @@ public class GuiPanel {
     protected int panelColor;
 
     public GuiPanel(int posX, int posY, int sizeX, int sizeY) {
-        init(posX, posY, sizeX, sizeY, PaletteHelper.getColor(-1, 1, 5, 445));
+        init(posX, posY, sizeX, sizeY, GuiManager.PANEL_COLOR/* PaletteHelper.getColor(-1, 1, 5, 445)*/);
     }
 
     public GuiPanel(int posX, int posY, int sizeX, int sizeY, int panelColor) {
@@ -34,7 +33,7 @@ public class GuiPanel {
     }
 
     public GuiPanel(int posX, int posY) {
-        init(posX, posY, 0, 0, PaletteHelper.getColor(-1, 1, 5, 445));
+        init(posX, posY, 0, 0, GuiManager.PANEL_COLOR/* PaletteHelper.getColor(-1, 1, 5, 445)*/);
     }
 
     public GuiPanel(int posX, int posY, int panelColor) {

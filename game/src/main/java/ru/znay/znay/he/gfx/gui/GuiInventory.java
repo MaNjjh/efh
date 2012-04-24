@@ -81,22 +81,22 @@ public class GuiInventory extends GuiPanel {
         int posX = panels[1].getX() + 12 * Tile.HALF_SIZE + ((speed < 60) ? Tile.HALF_SIZE : 0);
         int posY = panels[1].getY() + 4 * Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + speed + "%", screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+        Font.drawToBitmap("" + speed + "%", screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
 
         posX = panels[1].getX() + 14 * Tile.HALF_SIZE + ((str < 10) ? Tile.HALF_SIZE : 0);
         posY = panels[1].getY() + Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + str, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+        Font.drawToBitmap("" + str, screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
 
         posX = panels[1].getX() + 14 * Tile.HALF_SIZE + ((sta < 10) ? Tile.HALF_SIZE : 0);
         posY += Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + sta, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+        Font.drawToBitmap("" + sta, screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
 
         posX = panels[1].getX() + 14 * Tile.HALF_SIZE + ((def < 10) ? Tile.HALF_SIZE : 0);
         posY += Tile.HALF_SIZE;
 
-        Font.drawToBitmap("" + def, screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+        Font.drawToBitmap("" + def, screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
 
 
         if (weapon != null)
@@ -113,7 +113,7 @@ public class GuiInventory extends GuiPanel {
             posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
             posY = y + 10 * Tile.HALF_SIZE;
 
-            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
         }
 
         if (berry != null) {
@@ -121,7 +121,7 @@ public class GuiInventory extends GuiPanel {
             posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
             posY = y + 13 * Tile.HALF_SIZE;
 
-            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, PaletteHelper.getColor(5, 555, 555, 555), screen.getViewPort());
+            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
         }
     }
 
