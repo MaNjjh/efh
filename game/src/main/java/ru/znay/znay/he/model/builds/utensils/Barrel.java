@@ -19,6 +19,6 @@ public class Barrel extends Utensils {
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(8 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(30, 20, 40, -1)));
 
-        this.sprite = spriteCollector.mergedWrappers("barrel", 1, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("barrel", 1, random.nextInt(2), 0x01000000);
     }
 }

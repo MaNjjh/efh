@@ -50,8 +50,6 @@ public class Game extends Graphics implements Runnable {
         InputHandler.getInstance().init(this);
         this.player = new Player(this);
 
-        GuiManager.getInstance().initDefaultGui(this);
-
         this.loadLevel(0);
     }
 
@@ -232,8 +230,13 @@ public class Game extends Graphics implements Runnable {
         return yScroll;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public void loadLevel(int i) {
         this.level = new Level(this.player, i, this);
+        //GuiManager.getInstance().initDefaultGui(this);
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
@@ -245,4 +248,6 @@ public class Game extends Graphics implements Runnable {
     public void loadLevel(Level level) {
         loadLevel(level.getNumber());
     }
+
+
 }

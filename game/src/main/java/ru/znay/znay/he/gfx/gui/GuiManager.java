@@ -1,10 +1,16 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.Game;
+import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.level.Level;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,7 +20,7 @@ import java.util.*;
  * To change this template use File | Settings | File Templates.
  */
 public class GuiManager {
-    private Map<String, GuiPanel> panels = new HashMap<String, GuiPanel>();
+    private ConcurrentMap<String, GuiPanel> panels = new ConcurrentHashMap<String, GuiPanel>();
 
     private static GuiManager guiManager = null;
 
@@ -27,7 +33,7 @@ public class GuiManager {
     private boolean findSamePanel(GuiPanel findPanel) {
         for (GuiPanel panel : panels.values()) {
             if (panel.getX() == findPanel.getX() && panel.getY() == findPanel.getY()) {
-                System.out.println("duplicate panel found " + findPanel.toString());
+                System.out.println("duplicate " + findPanel.toString());
                 return false;
             }
         }
@@ -98,13 +104,23 @@ public class GuiManager {
         return guiManager;
     }
 
-    public void initDefaultGui(Game game) {
+    public void initDefaultGui(Level level) {
         panels.clear();
 
         add(new GuiStatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
         add(new GuiStatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
-        add(new GuiSpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), game.getScreen()), "speed");
-        add(new GuiInventory(1, 5), "inventory");
+        add(new GuiSpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), level.getSpriteCollector()), "speed");
+        GuiInventory inventory = new GuiInventory(1, 5);
+        add(inventory, "inventory");
         add(new GuiMenu(50, 100), "menu");
+
+        GuiManager.getInstance().add(new GuiMiniMap(Constants.SCREEN_WIDTH - (level.getWidth() + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, level), "minimap");
+
+        inventory.setApple(level.getPlayer().getInventory().findResource(Resource.apple));
+        inventory.setBerry(level.getPlayer().getInventory().findResource(Resource.berry));
+        //todo сделать первичное добавление снаряжения
+
+        //todo сделать добавление статов
+
     }
 }

@@ -128,10 +128,6 @@ public class Level {
 
         this.loadLevelObject(level, player);
 
-
-        GuiManager.getInstance().remove("minimap");
-        GuiManager.getInstance().add(new GuiMiniMap(Constants.SCREEN_WIDTH - (this.width + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, this), "minimap");
-
         if (player.isRemoved()) player.setHealth(10);
 
         this.add(player);
@@ -141,6 +137,7 @@ public class Level {
 
         this.questHandler = new QuestHandler(player);
 
+        GuiManager.getInstance().initDefaultGui(this);
 
         try {
             fireParticles = new ParticleSystem(FireParticle.class, 2000, 0.03, -0.01, 40);
@@ -595,5 +592,9 @@ public class Level {
 
     public int getNumber() {
         return number;
+    }
+
+    public SpriteCollector getSpriteCollector() {
+        return spriteCollector;
     }
 }

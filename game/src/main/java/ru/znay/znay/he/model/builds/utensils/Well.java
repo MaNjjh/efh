@@ -20,6 +20,6 @@ public class Well extends Utensils {
         spriteCollector.addWrapper(new SpriteWrapper(0, Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(111, 222, 333, -1)));
         spriteCollector.addWrapper(new SpriteWrapper(2 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(2, 3, 4, -1)));
 
-        this.sprite = spriteCollector.mergedWrappers("well", 1, 0, false);
+        this.sprite = spriteCollector.mergedWrappers("well", 1, 0, 0);
     }
 }

@@ -25,7 +25,7 @@ public class Waymark extends Utensils {
         this.message = message;
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(10 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(320, 421, 430, -1)));
-        this.sprite = spriteCollector.mergedWrappers("waymark", 1, 0, true);
+        this.sprite = spriteCollector.mergedWrappers("waymark", 1, 0, 0x01000000);
     }
 
     @Override

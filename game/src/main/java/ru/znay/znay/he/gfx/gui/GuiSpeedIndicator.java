@@ -1,8 +1,11 @@
 package ru.znay.znay.he.gfx.gui;
 
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.gfx.sprite.SpriteCollector;
+import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
@@ -20,16 +23,16 @@ public class GuiSpeedIndicator extends GuiPanel {
     private int color;
     private int speed;
 
-    public GuiSpeedIndicator(int x, int y, int col, Screen screen) {
+    public GuiSpeedIndicator(int x, int y, int col, SpriteCollector spriteCollector) {
         this.x = x;
         this.y = y;
         this.color = col;
-        drawIcons(9, 3, screen);
+        drawIcons(9, 3, spriteCollector);
         visible = true;
 
     }
 
-    private void drawIcons(int xOff, int yOff, Screen screen) {
+    private void drawIcons(int xOff, int yOff, SpriteCollector spriteCollector) {
         slow = new Bitmap(16, 18);
         walk = new Bitmap(16, 18);
         run = new Bitmap(16, 18);
@@ -38,21 +41,21 @@ public class GuiSpeedIndicator extends GuiPanel {
         xOff = xOff * Tile.HALF_SIZE;
         yOff = yOff * Tile.HALF_SIZE;
 
-        BitmapHelper.fill(slow, 0xFF00FF);
-        BitmapHelper.fill(walk, 0xFF00FF);
-        BitmapHelper.fill(run, 0xFF00FF);
-        BitmapHelper.fill(sprint, 0xFF00FF);
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(xOff, yOff, Tile.SIZE, Tile.SIZE, color));
+        this.slow = spriteCollector.mergedWrappers("speed_slow", 1, 0, 0x01444444);
 
-        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, xOff, yOff, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, color, 0, slow);
-        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, xOff + 16, yOff, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, color, 0, walk);
-        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, xOff + 32, yOff, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, color, 0, run);
-        BitmapHelper.scaleDraw(screen.getSprites(), 1, 0, 0, xOff + 48, yOff, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, color, 0, sprint);
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(xOff+16, yOff, Tile.SIZE, Tile.SIZE, color));
+        this.walk = spriteCollector.mergedWrappers("speed_walk", 1, 0, 0x01444444);
 
-        BitmapHelper.drawAura(slow, 0xFF00FF, 0x444444);
-        BitmapHelper.drawAura(walk, 0xFF00FF, 0x444444);
-        BitmapHelper.drawAura(run, 0xFF00FF, 0x444444);
-        BitmapHelper.drawAura(sprint, 0xFF00FF, 0x444444);
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(xOff+32, yOff, Tile.SIZE, Tile.SIZE, color));
+        this.run = spriteCollector.mergedWrappers("speed_run", 1, 0, 0x01444444);
 
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(xOff+48, yOff, Tile.SIZE, Tile.SIZE, color));
+        this.sprint = spriteCollector.mergedWrappers("speed_sprint", 1, 0, 0x01444444);
     }
 
     public void changeSpeed(int val) {

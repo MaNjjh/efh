@@ -24,8 +24,8 @@ import java.util.Random;
  */
 public class Tile {
     public static final int MAX_TILES = 256;
-    public static final int SIZE = 16;
     public static final int HALF_SIZE = 8;
+    public static final int SIZE = HALF_SIZE << 1;
 
     public int lavaMainColor = 500;
     public int grassMainColor = 141;

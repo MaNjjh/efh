@@ -36,8 +36,8 @@ public class SpriteCollector {
         this.spriteWrappers.add(spriteWrapper);
     }
 
-    public Bitmap mergedWrappers(String name, int scale, int bits, boolean drawAura) {
-        name += "_" + scale + "_" + bits + "_" + drawAura;
+    public Bitmap mergedWrappers(String name, int scale, int bits, int auraColor) {
+        name += "_" + scale + "_" + bits + "_" + (auraColor >> 24);
 
         Bitmap result = this.sprites.get(name);
         if (result != null) {
@@ -56,8 +56,8 @@ public class SpriteCollector {
             BitmapHelper.scaleDraw(this.source, scale, 0, 0, spriteWrapper.getXo(), spriteWrapper.getYo(), spriteWrapper.getWidth(), spriteWrapper.getHeight(), spriteWrapper.getColors(), bits, result);
         }
 
-        if (drawAura) {
-            BitmapHelper.drawAura(result, 0xFF00FF, 0);
+        if ((auraColor >> 24) == 1) {
+            BitmapHelper.drawAura(result, 0xFF00FF, auraColor & 0xFFFFFF);
         }
 
         this.sprites.put(name, result);

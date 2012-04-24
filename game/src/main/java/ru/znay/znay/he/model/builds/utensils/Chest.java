@@ -21,6 +21,6 @@ public class Chest extends Utensils {
         spriteCollector.addWrapper(new SpriteWrapper(4 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(10, 20, 10, -1)));
         spriteCollector.addWrapper(new SpriteWrapper(6 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
 
-        this.sprite = spriteCollector.mergedWrappers("chest", 1, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("chest", 1, random.nextInt(2), 0x01000000);
     }
 }

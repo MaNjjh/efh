@@ -22,6 +22,6 @@ public class PineTree extends Tree {
         spriteCollector.addWrapper(new SpriteWrapper(21 * Tile.HALF_SIZE, 16 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(10, 20, 10, -1)));
         spriteCollector.addWrapper(new SpriteWrapper(25 * Tile.HALF_SIZE, 16 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(100, 210, 320, -1)));
 
-        this.sprite = spriteCollector.mergedWrappers("tree_pine", 1, random.nextInt(2), true);
+        this.sprite = spriteCollector.mergedWrappers("tree_pine", 1, random.nextInt(2), 0x01000000);
     }
 }
