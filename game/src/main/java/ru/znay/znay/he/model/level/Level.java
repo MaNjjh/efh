@@ -13,8 +13,16 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.building.*;
-import ru.znay.znay.he.model.builds.tree.*;
+import ru.znay.znay.he.model.builds.building.Bakery;
+import ru.znay.znay.he.model.builds.building.House;
+import ru.znay.znay.he.model.builds.building.Sawmill;
+import ru.znay.znay.he.model.builds.building.TownHall;
+import ru.znay.znay.he.model.builds.building.Warehouse;
+import ru.znay.znay.he.model.builds.tree.AppleTree;
+import ru.znay.znay.he.model.builds.tree.FirTree;
+import ru.znay.znay.he.model.builds.tree.PineTree;
+import ru.znay.znay.he.model.builds.tree.Shrubbery;
+import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.item.resource.Resource;
@@ -30,7 +38,11 @@ import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.promotion.QuestPromotion;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -131,7 +143,7 @@ public class Level {
 
 
         try {
-            fireParticles = new ParticleSystem(FireParticle.class, 1000, 0.03, -0.01, 40);
+            fireParticles = new ParticleSystem(FireParticle.class, 2000, 0.03, -0.01, 40);
         } catch (Exception e) {
             //ignore
         }
@@ -140,7 +152,7 @@ public class Level {
         NextQuest nextQuest = new NextQuest() {
             @Override
             public void initNextQuest(QuestHandler questHandler) {
-                AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class, this);
+                AbsQuest testQuest = new KillTemplate(1, SlimeFactory.class, null);
                 testQuest.setName("злые зеленые кучи");
                 testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
                 testQuest.setQuestPromotion(new QuestPromotion() {
@@ -155,7 +167,7 @@ public class Level {
                 testQuest.accept(questHandler);
             }
         };
-        AbsQuest testQuest = new KillTemplate(3, SlimeFactory.class, nextQuest);
+        AbsQuest testQuest = new KillTemplate(1, SlimeFactory.class, nextQuest);
         testQuest.setName("злые зеленые кучи");
         testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
         testQuest.setQuestPromotion(new QuestPromotion() {
