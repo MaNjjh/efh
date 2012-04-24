@@ -1,0 +1,16 @@
+ID,type,nameID,descriptionID,nextID,target_count,target1_type,target1_param1,target1_param2,...,targetN_type,targetN_param1,targetN_param2,reward_count,reward1_type,reward1_param,reward1_count,...,rewardN_type,rewardN_param,rewardN_count
+
+ID -цифра, уникальный идентификатор, не 0. записывается первый остальные игнорируются
+type - цифра, тип квеста
+nameID- цифра, название квеста, берется из масива сообщений
+descriptionID- цифра, описание квеста, берется из масива сообщений
+nextID- цифра, ID следующего квеста, если его нет то 0
+target_count- цифра, кол-во целей квеста, > 0
+target1..n_type- цифра, тип цели квеста(монстр, место и тд)
+target1..n_param1- цифра\строка для передачи параметров для цели
+target1..n_param2- цифра\строка для передачи параметров для цели
+reward_count- цифра,кол-во наград за выполение квеста, >= 0, если 0 то награды нету
+reward1..n_type- цифра, тип награды
+reward1..n_param- цифра\строка для передачи параметров для награды
+reward1..n_count- цифра, кол-во награды, >0
+в конце строки обязательно должен быть переход на новую \r\n
