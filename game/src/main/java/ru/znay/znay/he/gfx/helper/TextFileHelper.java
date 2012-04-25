@@ -106,6 +106,7 @@ public class TextFileHelper {
 
         for (String str : strings) {
             if (str.isEmpty()) continue;
+            //str = ","+str;
             AbsQuest temp = ParseQuest(str.split(","), level);
             if (temp == null) continue;
 
@@ -123,57 +124,58 @@ public class TextFileHelper {
 
         AbsQuest quest = new AbsQuest();
         quest.setId(str[0]);
-        quest.setName(level.getMessage(Integer.getInteger(str[2])));
-        quest.setDescription(level.getMessage(Integer.getInteger(str[3])));
 
-        int count = Integer.getInteger(str[4]);
+        quest.setName(level.getMessage(Integer.decode(str[2])));
+        quest.setDescription(level.getMessage(Integer.decode(str[3])));
+
+        int count = Integer.decode(str[5]);
         MergedTemplate templates = new MergedTemplate();
+        quest.setMergedTemplate(templates);
 
-        for (int i = 5; i < count; i += 3) {
+        for (int i = 0; i < count; i += 1) {
             if (str[i].equals("1")) {
-                KillTemplate2 temp = new KillTemplate2(Integer.getInteger(str[i + 1]), str[i + 2]);
-                temp.setParent(quest);
+                KillTemplate2 temp = new KillTemplate2(Integer.decode(str[i + 6 + 1]), str[i + 6 + 2]);
                 templates.add(temp);
+                temp.setParent(quest);
             }
 
             if (str[i].equals("2")) {
                 MoveTemplate2 temp = new MoveTemplate2();
-                temp.setParent(quest);
                 templates.add(temp);
+                temp.setParent(quest);
             }
         }
 
-        quest.setMergedTemplate(templates);
         quest.calcQuestType();
 
-        int pos = count * 3 + 5;
+        int pos = count * 3 + 6;
 
-        count = Integer.getInteger(str[pos]);
+        count = Integer.decode(str[pos]);
 
         MergedPromotion mergedPromotion = new MergedPromotion();
 
         for (int i = pos; i < count; i += 3) {
-            if (str[i].equals("1"))
-            {
+            if (str[i].equals("1")) {
                 LifePromotion promotion = new LifePromotion();
-                promotion.setLife(Integer.getInteger(str[i+2]));
+                promotion.setLife(Integer.decode(str[i + 2]));
                 mergedPromotion.add(promotion);
             }
-            if (str[i].equals("2")){
+            if (str[i].equals("2")) {
                 PricePromotion promotion = new PricePromotion();
-                promotion.setPrice(Integer.getInteger(str[i+2]));
+                promotion.setPrice(Integer.decode(str[i + 2]));
                 mergedPromotion.add(promotion);
             }
 
-            if (str[i].equals("4")){
+            if (str[i].equals("4")) {
                 ItemPromotion promotion = new ItemPromotion();
-                promotion.setItemName(str[i+1]);
-                promotion.setCount(Integer.getInteger(str[i+2]));
+                promotion.setItemName(str[i + 1]);
+                promotion.setCount(Integer.decode(str[i + 2]));
             }
         }
 
         quest.setQuestPromotion(mergedPromotion);
 
-        return null;
+        System.out.println("quest "+quest.getName());
+        return quest;
     }
 }

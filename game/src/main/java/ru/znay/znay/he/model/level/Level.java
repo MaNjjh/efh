@@ -148,6 +148,12 @@ public class Level {
             //ignore
         }
 
+
+        List<AbsQuest> list = TextFileHelper.ParseQuest(TextFileHelper.LoadTextDB("0.txt"),this);
+
+        for(AbsQuest quest:list)
+                quest.accept(questHandler);
+
        /* NextQuest nextQuest = new NextQuest() {
             @Override
             public void initNextQuest(QuestHandler questHandler) {

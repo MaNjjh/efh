@@ -74,6 +74,7 @@ public /*abstract*/ class AbsQuest implements QuestStatus {
     }
 
     public boolean isType(int type) {
+        System.out.println(this.type);
         return ((this.type & type) == type);
     }
 

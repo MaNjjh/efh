@@ -16,7 +16,6 @@ public class KillTemplate2 extends DefaultTemplate {
 
     public KillTemplate2(int needToKill, String mobName) {
         super(TemplateType.KILL);
-
         init(needToKill, 0, mobName);
     }
 
