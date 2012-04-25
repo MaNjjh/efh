@@ -151,8 +151,17 @@ public class Level {
 
         List<AbsQuest> list = TextFileHelper.ParseQuest(TextFileHelper.LoadTextDB("0.txt"),this);
 
-        for(AbsQuest quest:list)
-                quest.accept(questHandler);
+        for(AbsQuest quest:list) {
+            quest.accept(questHandler);
+            if (quest.getNextQuestID() > 0)
+                for (AbsQuest nquest:list)
+                if (quest.getNextQuestID() ==Integer.decode(nquest.getId()))
+                {
+                    quest.setNextQuest(nquest);
+
+                }
+                    
+        }
 
        /* NextQuest nextQuest = new NextQuest() {
             @Override
