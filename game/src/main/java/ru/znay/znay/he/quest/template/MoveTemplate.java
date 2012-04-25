@@ -11,6 +11,7 @@ import ru.znay.znay.he.quest.NextQuest;
  * To change this template use File | Settings | File Templates.
  */
 public class MoveTemplate extends AbsQuest {
+    private boolean complete = false;
 
     public MoveTemplate() {
 
@@ -22,7 +23,11 @@ public class MoveTemplate extends AbsQuest {
 
     @Override
     public boolean isCompleted() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return complete;
+    }
+
+    public void Complete() {
+        this.complete = true;
     }
 
 }

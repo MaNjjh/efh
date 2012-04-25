@@ -148,7 +148,7 @@ public class Level {
             //ignore
         }
 
-        NextQuest nextQuest = new NextQuest() {
+       /* NextQuest nextQuest = new NextQuest() {
             @Override
             public void initNextQuest(QuestHandler questHandler) {
                 AbsQuest testQuest = new KillTemplate(2, SlimeFactory.class, null);
@@ -180,7 +180,7 @@ public class Level {
                 add(new ItemEntity(new EquipmentItem(Equipment.strongBow), player.getX() - 30, player.getY()));
             }
         });
-        testQuest.accept(this.questHandler);
+        testQuest.accept(this.questHandler);  */
         //---------------------------------------------------------------------------------
 
 

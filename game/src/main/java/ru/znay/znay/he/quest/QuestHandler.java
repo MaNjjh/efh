@@ -6,7 +6,7 @@ import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.quest.promotion.PricePromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
-import ru.znay.znay.he.quest.template.KillTemplate;
+import ru.znay.znay.he.quest.template.TemplateType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,14 +41,18 @@ public class QuestHandler {
     public void updateKills(Mob mob) {
         for (String key : this.quests.keySet()) {
             AbsQuest quest = this.quests.get(key);
-            if (quest instanceof KillTemplate) {
+            if (quest.isType(TemplateType.KILL)) {
+                quest.getMergedTemplate().incKills(mob.getClass().getSimpleName());
+                checkQuest(quest);
+            }
+            /*if (quest instanceof KillTemplate) {
                 boolean updated = ((KillTemplate) quest).updateKills(mob.getClass().getSimpleName());
                 checkQuest(quest);
                 if (updated && this.quests.containsKey(key)) {
                     String message = String.format("Осталось убить '%s' монстров!", ((KillTemplate) quest).toCompleted());
                     GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 4, 50), "quest_updateKills");
                 }
-            }
+            } */
         }
     }
 
