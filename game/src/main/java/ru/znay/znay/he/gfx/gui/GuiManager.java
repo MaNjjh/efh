@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -21,6 +22,8 @@ import java.util.concurrent.ConcurrentMap;
  * To change this template use File | Settings | File Templates.
  */
 public class GuiManager {
+
+    private ConcurrentLinkedQueue<GuiPanel> queuePanels = new ConcurrentLinkedQueue<GuiPanel>();
     private ConcurrentMap<String, GuiPanel> panels = new ConcurrentHashMap<String, GuiPanel>();
 
     private static GuiManager guiManager = null;
@@ -54,6 +57,10 @@ public class GuiManager {
             }
         }
         return false;
+    }
+
+    public void addToQueue(GuiPanel panel) {
+        this.queuePanels.add(panel);
     }
 
     public void add(GuiPanel panel, String name) {

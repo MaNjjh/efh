@@ -30,8 +30,8 @@ public class Mob extends Entity {
     protected Mob target = null;
     protected int bloodColor = 0xcc1100;
     protected int slowPeriod = 50;
-    protected CharacterState defaultState = new CharacterState(0, 0, 1, 0, 1);
-    protected CharacterState currentState = defaultState.mergeStates(new CharacterState());
+    protected CharacterState defaultState = new CharacterState();
+    protected CharacterState currentState = new CharacterState();
 
     @Override
     public void tick() {

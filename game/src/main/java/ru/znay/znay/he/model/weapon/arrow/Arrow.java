@@ -42,7 +42,7 @@ public class Arrow extends Entity {
         this.x = x;
         this.y = y;
         this.timeLife = 35;
-        this.damage = (random.nextInt(3) + 1) + damageBonus;
+        this.damage = /*(random.nextInt(3) + 1) + */damageBonus;
         this.betta = Math.atan2(vy, vx);
         this.color = PaletteHelper.getColor(-1, 333, 111, 222);
         this.speed = 4;

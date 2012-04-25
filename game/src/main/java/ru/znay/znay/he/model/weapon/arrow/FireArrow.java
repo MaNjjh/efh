@@ -29,7 +29,7 @@ import ru.znay.znay.he.model.ETeam;
 public class FireArrow extends Arrow {
 
     public FireArrow(ETeam ownerTeam, int x, int y, double vx, double vy, int damageBonus) {
-        super(ownerTeam, x, y, vx, vy, damageBonus * 3 + 3);
+        super(ownerTeam, x, y, vx, vy, damageBonus);
         this.color = PaletteHelper.getColor(-1, 300, 500, 200);
         this.speed = 5;
     }

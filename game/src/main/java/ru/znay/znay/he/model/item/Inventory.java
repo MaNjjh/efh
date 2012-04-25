@@ -48,7 +48,7 @@ public class Inventory {
             }
         } else if (item instanceof EquipmentItem) {
             EquipmentItem toTake = (EquipmentItem) item;
-            EquipmentItem has = findEquipment(toTake.getEquipment());
+            EquipmentItem has = findEquipmentByType(toTake.getEquipType());
             if (has == null) {
                 items.add(slot, toTake);
             } else {

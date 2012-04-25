@@ -12,8 +12,16 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.building.*;
-import ru.znay.znay.he.model.builds.tree.*;
+import ru.znay.znay.he.model.builds.building.Bakery;
+import ru.znay.znay.he.model.builds.building.House;
+import ru.znay.znay.he.model.builds.building.Sawmill;
+import ru.znay.znay.he.model.builds.building.TownHall;
+import ru.znay.znay.he.model.builds.building.Warehouse;
+import ru.znay.znay.he.model.builds.tree.AppleTree;
+import ru.znay.znay.he.model.builds.tree.FirTree;
+import ru.znay.znay.he.model.builds.tree.PineTree;
+import ru.znay.znay.he.model.builds.tree.Shrubbery;
+import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.item.ItemEntity;
@@ -22,6 +30,7 @@ import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.Slime;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.model.particle.FireParticle;
@@ -32,7 +41,11 @@ import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.promotion.QuestPromotion;
 import ru.znay.znay.he.quest.template.KillTemplate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -135,36 +148,36 @@ public class Level {
             //ignore
         }
 
-        //Квест убить 3х слаймов.. по окончанию игроку заплотят 1000 и покажется табличка
         NextQuest nextQuest = new NextQuest() {
             @Override
             public void initNextQuest(QuestHandler questHandler) {
-                AbsQuest testQuest = new KillTemplate(1, SlimeFactory.class, null);
+                AbsQuest testQuest = new KillTemplate(2, SlimeFactory.class, null);
                 testQuest.setName("злые зеленые кучи");
-                testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
+                testQuest.setDescription("Вам надо найти и убить '2' зеленые кучи");
                 testQuest.setQuestPromotion(new QuestPromotion() {
                     @Override
                     public void promotion(Player player) {
-                        ResourceItem coin = player.getInventory().findResource(Resource.coin);
-                        if (coin != null) {
-                            coin.addCount(1000);
+                        for (int i = 0; i < 100; i++) {
+                            add(new ItemEntity(new ResourceItem(Resource.bigCoin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
                         }
+                        add(new ItemEntity(new EquipmentItem(Equipment.rareBow), player.getX() - 30, player.getY()));
                     }
                 });
                 testQuest.accept(questHandler);
             }
         };
-        AbsQuest testQuest = new KillTemplate(1, SlimeFactory.class, nextQuest);
-        testQuest.setName("злые зеленые кучи");
-        testQuest.setDescription("злые зеленые кучи уже всех достали. пора бы их пришить.. Итак вы отправляетесь в путь. Вам надо найти и убить 3 зеленые кучи");
+        AbsQuest testQuest = new KillTemplate(3, Slime.class, nextQuest);
+        testQuest.setName("наглые попрыгунчики");
+        testQuest.setDescription("Вам надо убить '3' наглых попрыгунчика");
         testQuest.setQuestPromotion(new QuestPromotion() {
             @Override
             public void promotion(Player player) {
-                ResourceItem coin = player.getInventory().findResource(Resource.coin);
-                if (coin != null) {
-                    coin.addCount(1000);
+
+                for (int i = 0; i < 200; i++) {
+                    add(new ItemEntity(new ResourceItem(Resource.coin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
                 }
-                add(new ItemEntity(new EquipmentItem(Equipment.simpleBow), player.getX() - 30, player.getY()));
+
+                add(new ItemEntity(new EquipmentItem(Equipment.strongBow), player.getX() - 30, player.getY()));
             }
         });
         testQuest.accept(this.questHandler);

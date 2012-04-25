@@ -10,6 +10,8 @@ import ru.znay.znay.he.model.item.FurnitureItem;
 import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.furniture.Furniture;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
@@ -34,10 +36,13 @@ public class Player extends Mob {
 
     private Game game;
     private Item activeItem;
-    private int clearFogRadius = 4;
+    private int clearFogRadius = 5;
     private Point respPoint = null;
-    private EArrowType arrowType = EArrowType.FIRE;
+    private EArrowType arrowType = EArrowType.SIMPLE;
     private int fireDelay = 10;
+    private EquipmentItem weapon;
+    private EquipmentItem shoes;
+    private EquipmentItem armor;
     private Inventory inventory = new Inventory();
 
     public Player(Game game) {
@@ -45,6 +50,8 @@ public class Player extends Mob {
         this.game = game;
         this.bloodColor = 0xcc00cc;
         this.slowPeriod = 4;
+        this.inventory.add(new EquipmentItem(Equipment.simpleBow));
+        updateEquip();
     }
 
     @Override
@@ -80,7 +87,7 @@ public class Player extends Mob {
                         }
                     }
                 }*/
-            } else if (inputHandler.mouse.down && activeItem == null) {
+            } else if (inputHandler.mouse.down && activeItem == null && weapon != null) {
                 int xDiff = inputHandler.getXMousePos() - x;
                 int yDiff = inputHandler.getYMousePos() - y;
 
@@ -89,8 +96,8 @@ public class Player extends Mob {
                 double vx = xDiff / m;
                 double vy = yDiff / m;
 
-                if (tickTime % fireDelay == 0) { //todo added attack bonus
-                    Weapon.fire(this.arrowType, this.team, x, y, vx, vy, 0, level);
+                if (tickTime % currentState.getAttackDelay() == 0) {
+                    Weapon.fire(this.arrowType, this.team, x, y, vx, vy, currentState.getForce(), level);
                 }
 
             }
@@ -129,7 +136,6 @@ public class Player extends Mob {
             }
             xt += 4 + ((walkDist >> 3) & 1) * 2;
         }
-
 
         int xo = x - 8;
         int yo = y - 11;
@@ -171,11 +177,35 @@ public class Player extends Mob {
         }
     }
 
+    public void updateEquip() {
+        currentState = defaultState.mergeStates(new CharacterState());
+        weapon = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.WEAPON);
+        if (weapon != null) {
+            System.out.println("found weapon " + weapon.getEquipment().getName());
+            currentState = currentState.mergeStates(weapon.getBonusState());
+        }
+        shoes = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.SHOES);
+        if (shoes != null) {
+            System.out.println("found shoes " + shoes.getEquipment().getName());
+            currentState = currentState.mergeStates(shoes.getBonusState());
+        }
+        armor = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.ARMOR);
+        if (armor != null) {
+            System.out.println("found armor " + armor.getEquipment().getName());
+            currentState = currentState.mergeStates(armor.getBonusState());
+        }
+    }
+
     public void touchItem(ItemEntity itemEntity) {
         if (itemEntity.isRemoved()) return;
         itemEntity.take(this);
         inventory.add(itemEntity.getItem());
         level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, ru.znay.znay.he.gfx.model.Font.yellowColor));
+
+        if (itemEntity.getItem() instanceof EquipmentItem) {
+            updateEquip();
+        }
+
         GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
         if (guiInventory != null) {
             if (itemEntity.getItem() instanceof ResourceItem) {

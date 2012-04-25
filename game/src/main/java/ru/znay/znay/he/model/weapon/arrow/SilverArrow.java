@@ -27,7 +27,7 @@ import ru.znay.znay.he.model.ETeam;
  */
 public class SilverArrow extends Arrow {
     public SilverArrow(ETeam ownerTeam, int x, int y, double vx, double vy, int damageBonus) {
-        super(ownerTeam, x, y, vx, vy, damageBonus * 2 + 2);
+        super(ownerTeam, x, y, vx, vy, damageBonus);
         this.color = PaletteHelper.getColor(-1, 111, 222, 222);
     }
 }

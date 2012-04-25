@@ -11,10 +11,14 @@ import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +42,7 @@ public class Game extends Graphics implements Runnable {
 
     public void start() {
         running = true;
-        //Sound.backMusic.loop();
+        Sound.backMusic.init();
         new Thread(this).start();
     }
 
@@ -241,7 +245,6 @@ public class Game extends Graphics implements Runnable {
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
         //this.level.add(new House(player.getX(), player.getY() + 50));
-
         InputHandler.getInstance().releaseAll();
     }
 

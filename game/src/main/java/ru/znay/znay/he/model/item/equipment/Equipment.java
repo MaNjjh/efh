@@ -18,9 +18,9 @@ public class Equipment {
         ARMOR,
     }
 
-    public static final Equipment simpleBow = new Equipment("Bow", 0, 12, PaletteHelper.getColor(-1, 222, 0, 555), new CharacterState(0, 0, 8, 0, 0, 30), EQUIP_TYPE.WEAPON);
-    public static final Equipment strongBow = new Equipment("S.Bow", 1, 12, PaletteHelper.getColor(-1, 500, 0, 555), new CharacterState(0, 0, 12, 0, 0, 30), EQUIP_TYPE.WEAPON);
-    public static final Equipment rareBow = new Equipment("R.Bow", 2, 12, PaletteHelper.getColor(-1, 0, 0, 555), new CharacterState(0, 0, 10, 0, 0, 15), EQUIP_TYPE.WEAPON);
+    public static final Equipment simpleBow = new Equipment("Bow", 0, 12, PaletteHelper.getColor(-1, 100, 2220, 555), new CharacterState(0, 0, 8, 0, 0, 30), EQUIP_TYPE.WEAPON);
+    public static final Equipment strongBow = new Equipment("S.Bow", 1, 12, PaletteHelper.getColor(-1, 100, 500, 555), new CharacterState(0, 0, 12, 0, 0, 30), EQUIP_TYPE.WEAPON);
+    public static final Equipment rareBow = new Equipment("R.Bow", 2, 12, PaletteHelper.getColor(-1, 100, 0, 555), new CharacterState(0, 0, 10, 0, 0, 15), EQUIP_TYPE.WEAPON);
 
     private final EQUIP_TYPE equipType;
     private final CharacterState bonusState;
