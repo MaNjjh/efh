@@ -6,9 +6,11 @@ import ru.znay.znay.he.quest.promotion.ItemPromotion;
 import ru.znay.znay.he.quest.promotion.LifePromotion;
 import ru.znay.znay.he.quest.promotion.MergedPromotion;
 import ru.znay.znay.he.quest.promotion.PricePromotion;
+import ru.znay.znay.he.quest.promotion.PromotionType;
 import ru.znay.znay.he.quest.template.KillTemplate2;
 import ru.znay.znay.he.quest.template.MergedTemplate;
 import ru.znay.znay.he.quest.template.MoveTemplate2;
+import ru.znay.znay.he.quest.template.TemplateType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -133,13 +135,14 @@ public class TextFileHelper {
         quest.setMergedTemplate(templates);
 
         for (int i = 0; i < count; i += 1) {
-            if (str[i].equals("1")) {
+            int type = Integer.decode(str[i]);
+            if (type == TemplateType.KILL) {
                 KillTemplate2 temp = new KillTemplate2(Integer.decode(str[i + 6 + 1]), str[i + 6 + 2]);
                 templates.add(temp);
                 temp.setParent(quest);
             }
 
-            if (str[i].equals("2")) {
+            if (type == TemplateType.MOVE) {
                 MoveTemplate2 temp = new MoveTemplate2();
                 templates.add(temp);
                 temp.setParent(quest);
@@ -155,18 +158,19 @@ public class TextFileHelper {
         MergedPromotion mergedPromotion = new MergedPromotion();
 
         for (int i = pos; i < count; i += 3) {
-            if (str[i].equals("1")) {
+            int type = Integer.decode(str[i]);
+            if (type == PromotionType.LIFE) {
                 LifePromotion promotion = new LifePromotion();
                 promotion.setLife(Integer.decode(str[i + 2]));
                 mergedPromotion.add(promotion);
             }
-            if (str[i].equals("2")) {
+            if (type == PromotionType.GOLD) {
                 PricePromotion promotion = new PricePromotion();
                 promotion.setPrice(Integer.decode(str[i + 2]));
                 mergedPromotion.add(promotion);
             }
 
-            if (str[i].equals("4")) {
+            if (type == PromotionType.ITEM) {
                 ItemPromotion promotion = new ItemPromotion();
                 promotion.setItemName(str[i + 1]);
                 promotion.setCount(Integer.decode(str[i + 2]));
