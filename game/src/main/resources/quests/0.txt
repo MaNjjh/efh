@@ -1,1 +1,2 @@
-,1,type,2,3,0,1,1,2,SlimeFactory,1,1,0,20
+,1,type,2,3,2,1,1,1,SlimeFactory,1,1,0,20
+,2,type,2,3,0,1,1,1,SlimeFactory,1,1,0,20

@@ -21,7 +21,7 @@ public class KillTemplate extends AbsQuest {
     public KillTemplate(int needToKill, Class<? extends Mob> clazz, NextQuest nextQuest) {
         this.needToKill = needToKill;
         this.mobName = clazz.getSimpleName().toLowerCase();
-        this.nextQuest = nextQuest;
+       // this.nextQuest = nextQuest;
     }
 
     public KillTemplate(String mobName, int needToKill) {

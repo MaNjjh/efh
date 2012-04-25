@@ -176,7 +176,7 @@ public class TextFileHelper {
         quest.setQuestPromotion(mergedPromotion);
 
 
-        quest.setNextQuestID(Integer.decode(str[3]));
+        quest.setNextQuestID(Integer.decode(str[4]));
 
         return quest;
     }

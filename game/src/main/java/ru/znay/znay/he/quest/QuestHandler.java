@@ -28,7 +28,6 @@ public class QuestHandler {
 
     public boolean accept(AbsQuest absQuest) {
         if (absQuest == null) return false;
-
         String id = absQuest.getId();
 
         if (this.quests.get(id) != null) return false;
@@ -67,7 +66,7 @@ public class QuestHandler {
             }
 
             if (quest.hasNextPart()) {
-                quest.nextQuest.initNextQuest(this);
+                quest.nextQuest.accept(this);//  .initNextQuest(this);
             }
             this.quests.remove(quest.getId());
         }

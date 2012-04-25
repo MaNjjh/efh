@@ -24,22 +24,13 @@ import ru.znay.znay.he.model.builds.tree.Shrubbery;
 import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
-import ru.znay.znay.he.model.item.ItemEntity;
-import ru.znay.znay.he.model.item.equipment.Equipment;
-import ru.znay.znay.he.model.item.equipment.EquipmentItem;
-import ru.znay.znay.he.model.item.resource.Resource;
-import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.Slime;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.quest.AbsQuest;
-import ru.znay.znay.he.quest.NextQuest;
 import ru.znay.znay.he.quest.QuestHandler;
-import ru.znay.znay.he.quest.promotion.QuestPromotion;
-import ru.znay.znay.he.quest.template.KillTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,53 +140,52 @@ public class Level {
         }
 
 
-        List<AbsQuest> list = TextFileHelper.ParseQuest(TextFileHelper.LoadTextDB("0.txt"),this);
+        List<AbsQuest> list = TextFileHelper.ParseQuest(TextFileHelper.LoadTextDB("0.txt"), this);
 
-        for(AbsQuest quest:list) {
-            quest.accept(questHandler);
+        for (AbsQuest quest : list) {
+            //quest.accept(questHandler);
+            if (quest.getId().equals("1")) quest.accept(questHandler);
             if (quest.getNextQuestID() > 0)
-                for (AbsQuest nquest:list)
-                if (quest.getNextQuestID() ==Integer.decode(nquest.getId()))
-                {
-                    quest.setNextQuest(nquest);
-
+                for (AbsQuest nquest : list) {
+                    if (quest.getNextQuestID() == Integer.decode(nquest.getId())) {
+                        quest.setNextQuest(nquest);
+                    }
                 }
-                    
         }
 
-       /* NextQuest nextQuest = new NextQuest() {
-            @Override
-            public void initNextQuest(QuestHandler questHandler) {
-                AbsQuest testQuest = new KillTemplate(2, SlimeFactory.class, null);
-                testQuest.setName("злые зеленые кучи");
-                testQuest.setDescription("Вам надо найти и убить '2' зеленые кучи");
-                testQuest.setQuestPromotion(new QuestPromotion() {
-                    @Override
-                    public void promotion(Player player) {
-                        for (int i = 0; i < 100; i++) {
-                            add(new ItemEntity(new ResourceItem(Resource.bigCoin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
-                        }
-                        add(new ItemEntity(new EquipmentItem(Equipment.rareBow), player.getX() - 30, player.getY()));
-                    }
-                });
-                testQuest.accept(questHandler);
-            }
-        };
-        AbsQuest testQuest = new KillTemplate(3, Slime.class, nextQuest);
-        testQuest.setName("наглые попрыгунчики");
-        testQuest.setDescription("Вам надо убить '3' наглых попрыгунчика");
-        testQuest.setQuestPromotion(new QuestPromotion() {
-            @Override
-            public void promotion(Player player) {
+        /* NextQuest nextQuest = new NextQuest() {
+          @Override
+          public void initNextQuest(QuestHandler questHandler) {
+              AbsQuest testQuest = new KillTemplate(2, SlimeFactory.class, null);
+              testQuest.setName("злые зеленые кучи");
+              testQuest.setDescription("Вам надо найти и убить '2' зеленые кучи");
+              testQuest.setQuestPromotion(new QuestPromotion() {
+                  @Override
+                  public void promotion(Player player) {
+                      for (int i = 0; i < 100; i++) {
+                          add(new ItemEntity(new ResourceItem(Resource.bigCoin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
+                      }
+                      add(new ItemEntity(new EquipmentItem(Equipment.rareBow), player.getX() - 30, player.getY()));
+                  }
+              });
+              testQuest.accept(questHandler);
+          }
+      };
+      AbsQuest testQuest = new KillTemplate(3, Slime.class, nextQuest);
+      testQuest.setName("наглые попрыгунчики");
+      testQuest.setDescription("Вам надо убить '3' наглых попрыгунчика");
+      testQuest.setQuestPromotion(new QuestPromotion() {
+          @Override
+          public void promotion(Player player) {
 
-                for (int i = 0; i < 200; i++) {
-                    add(new ItemEntity(new ResourceItem(Resource.coin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
-                }
+              for (int i = 0; i < 200; i++) {
+                  add(new ItemEntity(new ResourceItem(Resource.coin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
+              }
 
-                add(new ItemEntity(new EquipmentItem(Equipment.strongBow), player.getX() - 30, player.getY()));
-            }
-        });
-        testQuest.accept(this.questHandler);  */
+              add(new ItemEntity(new EquipmentItem(Equipment.strongBow), player.getX() - 30, player.getY()));
+          }
+      });
+      testQuest.accept(this.questHandler);  */
         //---------------------------------------------------------------------------------
 
 

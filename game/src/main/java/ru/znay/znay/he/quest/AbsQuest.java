@@ -13,7 +13,7 @@ import java.util.UUID;
  * Time: 19:46
  * To change this template use File | Settings | File Templates.
  */
-public /*abstract*/ class AbsQuest implements QuestStatus,NextQuest {
+public /*abstract*/ class AbsQuest implements QuestStatus, NextQuest {
     private String id = null;
     private String name;
     private String description;
@@ -29,7 +29,6 @@ public /*abstract*/ class AbsQuest implements QuestStatus,NextQuest {
 
     public boolean accept(QuestHandler questHandler) {
         if (id == null) id = UUID.randomUUID().toString();
-
         return questHandler.accept(this);
     }
 
@@ -119,7 +118,8 @@ public /*abstract*/ class AbsQuest implements QuestStatus,NextQuest {
 
     @Override
     public void initNextQuest(QuestHandler questHandler) {
-       if (nextQuest != null)
-           nextQuest.accept(questHandler);
+        //if (nextQuest == null) System.out.println(1);
+        //if (questHandler == null) System.out.println(2);
+        this.nextQuest.accept(questHandler);
     }
 }
