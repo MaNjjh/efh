@@ -20,7 +20,7 @@ public class TemplateFactory {
 
     }
 
-    public AbsQuest createPromotion(String name) {
+    public DefaultTemplate createPromotion(String name) {
 
         if (name.isEmpty()) return null;
 
@@ -33,7 +33,7 @@ public class TemplateFactory {
         String className = TemplateFactory.class.getPackage().getName() + "." + result + "Template";
 
         try {
-            return (AbsQuest) Class.forName(className).newInstance();
+            return (DefaultTemplate) Class.forName(className).newInstance();
         } catch (InstantiationException e) {
             return null;
         } catch (IllegalAccessException e) {

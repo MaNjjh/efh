@@ -26,7 +26,7 @@ public class NpcTrigger extends Entity {
     @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            quest.Complete();
+            quest.complete();
         }
     }
 }
