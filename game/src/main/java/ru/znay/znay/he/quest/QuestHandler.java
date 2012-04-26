@@ -4,7 +4,7 @@ import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.quest.promotion.PricePromotion;
+import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
 import ru.znay.znay.he.quest.template.TemplateType;
 
@@ -80,8 +80,8 @@ public class QuestHandler {
     }
 
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        PricePromotion promotion = (PricePromotion) PromotionFactory.getInstance().createPromotion("Price");
-        promotion.setPrice(10);
-        System.out.println(promotion.getPrice());
+        GoldPromotion promotion = (GoldPromotion) PromotionFactory.getInstance().createPromotion("Price");
+        promotion.setGold(10);
+        System.out.println(promotion.getGold());
     }
 }

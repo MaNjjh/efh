@@ -1,17 +1,5 @@
 package ru.znay.znay.he.gfx.helper;
 
-import ru.znay.znay.he.model.level.Level;
-import ru.znay.znay.he.quest.AbsQuest;
-import ru.znay.znay.he.quest.promotion.ItemPromotion;
-import ru.znay.znay.he.quest.promotion.LifePromotion;
-import ru.znay.znay.he.quest.promotion.MergedPromotion;
-import ru.znay.znay.he.quest.promotion.PricePromotion;
-import ru.znay.znay.he.quest.promotion.PromotionType;
-import ru.znay.znay.he.quest.template.KillTemplate2;
-import ru.znay.znay.he.quest.template.MergedTemplate;
-import ru.znay.znay.he.quest.template.MoveTemplate2;
-import ru.znay.znay.he.quest.template.TemplateType;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

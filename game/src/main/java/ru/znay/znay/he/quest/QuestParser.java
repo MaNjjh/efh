@@ -4,7 +4,7 @@ import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.quest.promotion.ItemPromotion;
 import ru.znay.znay.he.quest.promotion.LifePromotion;
 import ru.znay.znay.he.quest.promotion.MergedPromotion;
-import ru.znay.znay.he.quest.promotion.PricePromotion;
+import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionType;
 import ru.znay.znay.he.quest.template.KillTemplate2;
 import ru.znay.znay.he.quest.template.MergedTemplate;
@@ -60,12 +60,15 @@ public class QuestParser {
         MergedTemplate templates = new MergedTemplate();
         quest.setMergedTemplate(templates);
 
-        for (int i = 0; i < count; i += 1) {
+        int templateOffset = 6;
+
+        for (int i = templateOffset; i <= templateOffset*count; i+=3) {
             int type = Integer.decode(str[i]);
             if (type == TemplateType.KILL) {
-                KillTemplate2 temp = new KillTemplate2(Integer.decode(str[i + 6 + 1]), str[i + 6 + 2]);
+                KillTemplate2 temp = new KillTemplate2(Integer.decode(str[i + 1]), str[i + 2]);
                 templates.add(temp);
                 temp.setParent(quest);
+                continue;
             }
 
             if (type == TemplateType.MOVE) {
@@ -77,23 +80,27 @@ public class QuestParser {
 
         quest.calcQuestType();
 
-        int pos = count * 3 + 6;
+        int promotionOffset = count * 3 + templateOffset;
 
-        count = Integer.decode(str[pos]);
+        count = Integer.decode(str[promotionOffset]);
+
+        promotionOffset++;
 
         MergedPromotion mergedPromotion = new MergedPromotion();
 
-        for (int i = pos; i < count; i += 3) {
+        for (int i = promotionOffset; i < ((promotionOffset)+count*3); i+=3) {
             int type = Integer.decode(str[i]);
             if (type == PromotionType.LIFE) {
                 LifePromotion promotion = new LifePromotion();
                 promotion.setLife(Integer.decode(str[i + 2]));
                 mergedPromotion.add(promotion);
+                continue;
             }
             if (type == PromotionType.GOLD) {
-                PricePromotion promotion = new PricePromotion();
-                promotion.setPrice(Integer.decode(str[i + 2]));
+                GoldPromotion promotion = new GoldPromotion();
+                promotion.setGold(Integer.decode(str[i + 2]));
                 mergedPromotion.add(promotion);
+                continue;
             }
 
             if (type == PromotionType.ITEM) {
