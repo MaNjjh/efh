@@ -31,6 +31,7 @@ import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
+import ru.znay.znay.he.quest.QuestManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,6 +97,8 @@ public class Level {
     private QuestHandler questHandler;
 
     private SpriteCollector spriteCollector;
+    
+    private QuestManager questManager;
 
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
@@ -139,19 +142,8 @@ public class Level {
             //ignore
         }
 
-
-        List<AbsQuest> list = TextFileHelper.ParseQuest(TextFileHelper.LoadTextDB("0.txt"), this);
-
-        for (AbsQuest quest : list) {
-            //quest.accept(questHandler);
-            if (quest.getId().equals("1")) quest.accept(questHandler);
-            if (quest.getNextQuestID() > 0)
-                for (AbsQuest nquest : list) {
-                    if (quest.getNextQuestID() == Integer.decode(nquest.getId())) {
-                        quest.setNextQuest(nquest);
-                    }
-                }
-        }
+        
+        questManager = new QuestManager(this);
 
         /* NextQuest nextQuest = new NextQuest() {
           @Override
