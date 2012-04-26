@@ -44,14 +44,6 @@ public class QuestHandler {
                 quest.getMergedTemplate().incKills(mob.getClass().getSimpleName());
                 checkQuest(quest);
             }
-            /*if (quest instanceof KillTemplate) {
-                boolean updated = ((KillTemplate) quest).updateKills(mob.getClass().getSimpleName());
-                checkQuest(quest);
-                if (updated && this.quests.containsKey(key)) {
-                    String message = String.format("Осталось убить '%s' монстров!", ((KillTemplate) quest).toCompleted());
-                    GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 4, 50), "quest_updateKills");
-                }
-            } */
         }
     }
 
@@ -66,7 +58,7 @@ public class QuestHandler {
             }
 
             if (quest.hasNextPart()) {
-                quest.nextQuest.accept(this);//  .initNextQuest(this);
+                quest.nextQuest.accept(this);
             }
             this.quests.remove(quest.getId());
         }

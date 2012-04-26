@@ -145,42 +145,6 @@ public class Level {
         
         questManager = new QuestManager(this);
 
-        /* NextQuest nextQuest = new NextQuest() {
-          @Override
-          public void initNextQuest(QuestHandler questHandler) {
-              AbsQuest testQuest = new KillTemplate(2, SlimeFactory.class, null);
-              testQuest.setName("злые зеленые кучи");
-              testQuest.setDescription("Вам надо найти и убить '2' зеленые кучи");
-              testQuest.setQuestPromotion(new QuestPromotion() {
-                  @Override
-                  public void promotion(Player player) {
-                      for (int i = 0; i < 100; i++) {
-                          add(new ItemEntity(new ResourceItem(Resource.bigCoin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
-                      }
-                      add(new ItemEntity(new EquipmentItem(Equipment.rareBow), player.getX() - 30, player.getY()));
-                  }
-              });
-              testQuest.accept(questHandler);
-          }
-      };
-      AbsQuest testQuest = new KillTemplate(3, Slime.class, nextQuest);
-      testQuest.setName("наглые попрыгунчики");
-      testQuest.setDescription("Вам надо убить '3' наглых попрыгунчика");
-      testQuest.setQuestPromotion(new QuestPromotion() {
-          @Override
-          public void promotion(Player player) {
-
-              for (int i = 0; i < 200; i++) {
-                  add(new ItemEntity(new ResourceItem(Resource.coin), player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
-              }
-
-              add(new ItemEntity(new EquipmentItem(Equipment.strongBow), player.getX() - 30, player.getY()));
-          }
-      });
-      testQuest.accept(this.questHandler);  */
-        //---------------------------------------------------------------------------------
-
-
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
         //Не включать!Работают люди!

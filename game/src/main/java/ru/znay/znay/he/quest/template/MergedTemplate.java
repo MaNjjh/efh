@@ -28,8 +28,8 @@ public class MergedTemplate {
     public void incKills(String name)
     {
         for(DefaultTemplate quest:list)
-            if(quest instanceof KillTemplate2)
-                ((KillTemplate2)quest).incKill(name);
+            if(quest instanceof KillTemplate)
+                ((KillTemplate)quest).incKill(name);
     }
     
     public int calcQuestType()

@@ -1,64 +1,47 @@
 package ru.znay.znay.he.quest.template;
 
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.quest.AbsQuest;
-import ru.znay.znay.he.quest.NextQuest;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Александр Сергеевич
- * Date: 03.04.12
- * Time: 20:09
+ * User: Денис Сергеевич
+ * Date: 25.04.12
+ * Time: 15:26
  * To change this template use File | Settings | File Templates.
  */
-
-public class KillTemplate extends AbsQuest {
+public class KillTemplate extends DefaultTemplate {
     private int needToKill;
-    private int killed;
+    private int currentKills = 0;
     private String mobName;
 
-
-    public KillTemplate(int needToKill, Class<? extends Mob> clazz, NextQuest nextQuest) {
-        this.needToKill = needToKill;
-        this.mobName = clazz.getSimpleName().toLowerCase();
-       // this.nextQuest = nextQuest;
+    public KillTemplate(int needToKill, String mobName) {
+        super(TemplateType.KILL);
+        init(needToKill, 0, mobName);
     }
 
-    public KillTemplate(String mobName, int needToKill) {
+    public KillTemplate(int needToKill, int currentKills, String mobName) {
+        super(TemplateType.KILL);
+
+        init(needToKill, currentKills, mobName);
+    }
+
+    private void init(int needToKill, int currentKills, String mobName) {
+        this.needToKill = needToKill;
+        this.currentKills = currentKills;
         this.mobName = mobName;
-        this.needToKill = needToKill;
+        this.checkStatus();
     }
 
-    public int toCompleted() {
-        return needToKill - killed;
+    private void checkStatus() {
+        if (needToKill <= currentKills)
+            this.complete();
     }
 
-    public boolean updateKills(String mobName) {
-        if (mobName.toLowerCase().equals(this.mobName)) {
-            killed++;
-            return true;
+    public void incKill(String name) {
+        if (complete) return;
+        if (this.mobName.equalsIgnoreCase(name)) {
+            currentKills++;
+            checkStatus();
         }
-        return false;
-    }
-
-    @Override
-    public boolean isCompleted() {
-        return needToKill <= killed;
-    }
-
-    public int getNeedToKill() {
-        return needToKill;
-    }
-
-    public void setNeedToKill(int needToKill) {
-        this.needToKill = needToKill;
-    }
-
-    public int getKilled() {
-        return killed;
-    }
-
-    public void setKilled(int killed) {
-        this.killed = killed;
     }
 }

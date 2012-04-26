@@ -6,9 +6,9 @@ import ru.znay.znay.he.quest.promotion.LifePromotion;
 import ru.znay.znay.he.quest.promotion.MergedPromotion;
 import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionType;
-import ru.znay.znay.he.quest.template.KillTemplate2;
+import ru.znay.znay.he.quest.template.KillTemplate;
 import ru.znay.znay.he.quest.template.MergedTemplate;
-import ru.znay.znay.he.quest.template.MoveTemplate2;
+import ru.znay.znay.he.quest.template.MoveTemplate;
 import ru.znay.znay.he.quest.template.TemplateType;
 
 import java.util.LinkedList;
@@ -25,12 +25,12 @@ public class QuestParser {
     
     public List<AbsQuest> parseQuests(List<String> strings, Level level)
     {
+        List<AbsQuest> list = new LinkedList<AbsQuest>();
+
         if (strings == null || strings.isEmpty()) {
             System.out.println("ParseQuest - list is null or empty");
-            return null;
+            return list;
         }
-
-        List<AbsQuest> list = new LinkedList<AbsQuest>();
 
         for (String str : strings) {
             if (str.isEmpty()) continue;
@@ -65,14 +65,14 @@ public class QuestParser {
         for (int i = templateOffset; i <= templateOffset*count; i+=3) {
             int type = Integer.decode(str[i]);
             if (type == TemplateType.KILL) {
-                KillTemplate2 temp = new KillTemplate2(Integer.decode(str[i + 1]), str[i + 2]);
+                KillTemplate temp = new KillTemplate(Integer.decode(str[i + 1]), str[i + 2]);
                 templates.add(temp);
                 temp.setParent(quest);
                 continue;
             }
 
             if (type == TemplateType.MOVE) {
-                MoveTemplate2 temp = new MoveTemplate2();
+                MoveTemplate temp = new MoveTemplate();
                 templates.add(temp);
                 temp.setParent(quest);
             }
