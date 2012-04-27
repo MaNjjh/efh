@@ -62,7 +62,12 @@ public class SnakeNeck extends SnakePart {
     public void render(Screen screen) {
         int xd = x - 8;
         int yd = y - 9;
+
+        int col = PaletteHelper.getColor(-1, 040, 051, 150);
+        if (hurtTime > 0)
+            col = PaletteHelper.getColor(-1, 555, 555, 555);
+
         screen.render(2, xd + 1, yd + 1, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 0, 0), 0);
-        screen.render(2, xd, yd, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, PaletteHelper.getColor(-1, 040, 051, 150), 0);
+        screen.render(2, xd, yd, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, col, 0);
     }
 }
