@@ -2,6 +2,7 @@ package ru.znay.znay.he.model.mob.boss.snake;
 
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.List;
 
@@ -51,6 +52,11 @@ public class SnakePart extends Mob {
         if (health < 100) {
             this.level.getFireParticles().createExplosion(x, y, 0.5, -1.0, (100 - health) / 30);
         }
+
+        if (health < 10) {
+            this.level.setTile(x >> 4, y >> 4, Tile.lava, 0);
+        }
+
     }
 
     private void doHurt(Entity entity) {
