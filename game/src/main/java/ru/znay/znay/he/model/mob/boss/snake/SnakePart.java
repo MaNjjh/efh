@@ -50,6 +50,9 @@ public class SnakePart extends Mob {
             System.out.println(1);
             entity.hurt(this, 2, dir);
         }
+        if (health < 100) {
+            this.level.getFireParticles().createExplosion(x, y, 0.5, -1.0, (100 - health) / 30);
+        }
     }
 
     public void touchedBy(Entity entity) {
