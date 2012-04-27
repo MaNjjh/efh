@@ -32,6 +32,7 @@ import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.QuestManager;
+import ru.znay.znay.he.sound.Sound;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,6 +150,8 @@ public class Level {
 
         //Не включать!Работают люди!
         trySpawn();
+
+        Sound.startGame.play();
     }
 
     public void trySpawn() {

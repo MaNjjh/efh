@@ -7,6 +7,7 @@ import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
 import ru.znay.znay.he.quest.template.TemplateType;
+import ru.znay.znay.he.sound.Sound;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class QuestHandler {
         if (quest.isCompleted()) {
             String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
 
-            GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 4, 50), "quest_checkQuest");
+            GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 40, 50), "quest_checkQuest");
 
             if (quest.getQuestPromotion() != null) {
                 quest.getQuestPromotion().promotion(this.player);
@@ -60,6 +61,9 @@ public class QuestHandler {
             if (quest.hasNextPart()) {
                 quest.nextQuest.accept(this);
             }
+
+            Sound.questBegin.play();
+
             this.quests.remove(quest.getId());
         }
     }

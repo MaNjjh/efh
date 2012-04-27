@@ -62,7 +62,9 @@ public class Arrow extends Entity {
         }
 
         timeLife--;
-        if (timeLife < 0) removed = true;
+        if (timeLife < 0) {
+            removed = true;
+        }
     }
 
     @Override

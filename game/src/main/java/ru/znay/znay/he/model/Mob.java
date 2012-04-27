@@ -91,6 +91,7 @@ public class Mob extends Entity {
             if (this.team != arrow.getOwnerTeam()) {
                 hurt(this, arrow.getDamage(), dir ^ 1);
                 arrow.setRemoved(true);
+                Sound.hit.play();
                 //Sound.monsterHurt.play();
             }
         }
