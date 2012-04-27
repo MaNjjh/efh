@@ -35,7 +35,7 @@ public class Snake extends SnakePart {
         this.y = y;
         this.xr = 6;
         this.yr = 6;
-        //this.health = 2000;
+        this.health = 100;
     }
 
     public void setMovement(double xa, double ya, double rotate) {

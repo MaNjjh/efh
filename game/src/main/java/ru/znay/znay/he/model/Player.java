@@ -38,7 +38,7 @@ public class Player extends Mob {
     private Item activeItem;
     private int clearFogRadius = 5;
     private Point respPoint = null;
-    private EArrowType arrowType = EArrowType.SIMPLE;
+    private EArrowType arrowType = EArrowType.FIRE;
     private int fireDelay = 10;
     private EquipmentItem weapon;
     private EquipmentItem shoes;
