@@ -149,10 +149,6 @@ public class Mob extends Entity {
         return true;
     }
 
-    protected void die() {
-        removed = true;
-    }
-
     public long getTickTime() {
         return tickTime;
     }

@@ -1,5 +1,7 @@
 package ru.znay.znay.he.sound;
 
+import ru.znay.znay.he.cfg.Constants;
+
 import java.applet.Applet;
 import java.applet.AudioClip;
 
@@ -27,6 +29,7 @@ public class Sound {
     }
 
     public void play() {
+        if (!Constants.soundOn) return;
         try {
             new Thread() {
                 public void run() {
@@ -39,6 +42,7 @@ public class Sound {
     }
 
     public void loop() {
+        if (!Constants.soundOn) return;
         try {
             new Thread() {
                 public void run() {

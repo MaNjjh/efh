@@ -40,6 +40,10 @@ public class Entity {
 
     }
 
+    protected void die() {
+        removed = true;
+    }
+
     public boolean move(int xa, int ya) {
         if (xa != 0 || ya != 0) {
             boolean stopped = true;
