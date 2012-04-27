@@ -249,8 +249,8 @@ public class Game extends Graphics implements Runnable {
 
         SnakePart prev = new Snake(xx, yy);
         this.level.add(prev);
-        for (int a = 0; a < 10; a++) {
-            prev = new SnakeNeck(xx + a * 10 + 10, yy, prev);
+        for (int a = 0; a < 16; a++) {
+            prev = new SnakeNeck(xx, yy, prev);
             this.level.add(prev);
         }
 
