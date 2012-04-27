@@ -5,7 +5,7 @@ import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.AirWizard;
+import ru.znay.znay.he.model.mob.boss.AirWizard;
 
 import java.util.List;
 

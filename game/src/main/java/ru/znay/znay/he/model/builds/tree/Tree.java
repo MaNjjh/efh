@@ -30,7 +30,7 @@ public abstract class Tree extends Mob {
     }
 
     @Override
-    protected void die() {
+    public void die() {
         super.die();
         this.level.setTile(x >> 4, y >> 4, Tile.hole, 0);
     }

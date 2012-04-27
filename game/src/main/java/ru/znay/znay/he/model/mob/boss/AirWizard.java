@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model.mob;
+package ru.znay.znay.he.model.mob.boss;
 
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;

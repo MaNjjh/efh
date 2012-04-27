@@ -40,7 +40,7 @@ public class Entity {
 
     }
 
-    protected void die() {
+    public void die() {
         removed = true;
     }
 

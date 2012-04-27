@@ -29,7 +29,6 @@ import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
-import ru.znay.znay.he.quest.AbsQuest;
 import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.quest.QuestManager;
 import ru.znay.znay.he.sound.Sound;
@@ -98,7 +97,7 @@ public class Level {
     private QuestHandler questHandler;
 
     private SpriteCollector spriteCollector;
-    
+
     private QuestManager questManager;
 
 
@@ -143,7 +142,7 @@ public class Level {
             //ignore
         }
 
-        
+
         questManager = new QuestManager(this);
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
@@ -254,6 +253,24 @@ public class Level {
                 BitmapHelper.drawLine(xt + xr, yt + yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
             }
         }
+
+        /*if (Constants.isDebugMode) {
+            for (int i = 0; i < width << 1; i++) {
+                for (int j = 0; j < height << 1; j++) {
+                    for (Entity entity : getEntities((i << 3)-8, (j << 3)-8, (i << 3)+8, (j << 3)+8, null)) {
+                        int xt = entity.getX() - screen.getXOffset();
+                        int yt = entity.getY() - screen.getYOffset();
+                        int xr = entity.getXr();
+                        int yr = entity.getYr();
+
+                        BitmapHelper.drawLine(xt - xr, yt - yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
+                        BitmapHelper.drawLine(xt - xr, yt - yr, xt - xr, yt + yr, 0xff00, screen.getViewPort());
+                        BitmapHelper.drawLine(xt - xr, yt + yr, xt + xr, yt + yr, 0xff00, screen.getViewPort());
+                        BitmapHelper.drawLine(xt + xr, yt + yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
+                    }
+                }
+            }
+        }*/
     }
 
 
@@ -414,8 +431,6 @@ public class Level {
         //if (level != 1)
         //    this.newFog = new NewFog(this, this.game.getScreen());
 
-        this.entitiesInTiles = new ArrayList[this.width * this.height];
-
         loadLandscape(map, player);
         loadNPC(level, player);
     }
@@ -471,9 +486,10 @@ public class Level {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void loadLandscape(Bitmap map, Player player) {
 
-
+        this.entitiesInTiles = new ArrayList[this.width * this.height];
         for (int i = 0; i < this.width * height; i++) {
             this.entitiesInTiles[i] = new ArrayList<Entity>();
         }

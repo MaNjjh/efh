@@ -11,14 +11,13 @@ import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.item.ItemEntity;
-import ru.znay.znay.he.model.item.equipment.Equipment;
-import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.sound.Sound;
+import ru.znay.znay.he.model.mob.boss.snake.Snake;
+import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
+import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -244,12 +243,21 @@ public class Game extends Graphics implements Runnable {
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
         //this.level.add(new House(player.getX(), player.getY() + 50));
+
+        int xx = player.getX() - 30;
+        int yy = player.getY() - 50;
+
+        SnakePart prev = new Snake(xx, yy);
+        this.level.add(prev);
+        for (int a = 0; a < 10; a++) {
+            prev = new SnakeNeck(xx + a * 10 + 10, yy, prev);
+            this.level.add(prev);
+        }
+
         InputHandler.getInstance().releaseAll();
     }
 
     public void loadLevel(Level level) {
         loadLevel(level.getNumber());
     }
-
-
 }
