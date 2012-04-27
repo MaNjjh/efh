@@ -1,6 +1,5 @@
 package ru.znay.znay.he.model.mob.boss.snake;
 
-import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 
@@ -45,20 +44,22 @@ public class SnakePart extends Mob {
             y = (int) ya;
         }
         time++;
-        List<Entity> entities = level.getEntities(x, y, x, y, ETeam.PLAYER_TEAM);
+        List<Entity> entities = level.getEntities(x, y, x, y, null);
         for (Entity entity : entities) {
-            System.out.println(1);
-            entity.hurt(this, 2, dir);
+            doHurt(entity);
         }
         if (health < 100) {
             this.level.getFireParticles().createExplosion(x, y, 0.5, -1.0, (100 - health) / 30);
         }
     }
 
+    private void doHurt(Entity entity) {
+        if (entity instanceof SnakePart) return;
+        entity.hurt(this, 2, dir);
+    }
+
     public void touchedBy(Entity entity) {
-        if (entity.getTeam() != this.team) {
-            entity.hurt(this, 2, dir);
-        }
+        doHurt(entity);
         super.touchedBy(entity);
     }
 
