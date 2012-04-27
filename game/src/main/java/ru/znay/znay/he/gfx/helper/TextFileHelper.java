@@ -21,7 +21,7 @@ public class TextFileHelper {
         InputStreamReader in = null;
         BufferedReader reader = null;
         try {
-            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"), Charset.defaultCharset());
+            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"), Charset.forName("UTF-8"));
             reader = new BufferedReader(in);
             List<String> messages = new ArrayList<String>();
             String buff;
@@ -57,7 +57,7 @@ public class TextFileHelper {
         BufferedReader reader = null;
 
         try {
-            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/quests/" + fileName), Charset.defaultCharset());
+            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/quests/" + fileName), Charset.forName("UTF-8"));
             reader = new BufferedReader(in);
             String buff;
             while ((buff = reader.readLine()) != null) {
