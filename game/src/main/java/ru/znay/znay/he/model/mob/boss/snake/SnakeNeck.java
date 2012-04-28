@@ -2,6 +2,7 @@ package ru.znay.znay.he.model.mob.boss.snake;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.CharacterState;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
@@ -38,6 +39,7 @@ public class SnakeNeck extends SnakePart {
         this.yr = 6;
         this.child = child;
         this.health = 100;
+        currentState = new CharacterState(0, 100, 0, 0, 0);
     }
 
     public void tick() {

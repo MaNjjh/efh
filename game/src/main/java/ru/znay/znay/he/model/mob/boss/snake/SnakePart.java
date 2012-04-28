@@ -36,6 +36,9 @@ public class SnakePart extends Mob {
     public void setMovement(double xa, double ya, double rotate) {
     }
 
+    public boolean canRegenerate() {
+        return true;
+    }
 
     public void tick() {
         super.tick();
