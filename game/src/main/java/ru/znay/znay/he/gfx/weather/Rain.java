@@ -5,6 +5,7 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
  * ========================================
@@ -57,6 +58,11 @@ public class Rain extends Entity {
         if (timeLife < 0) {
             removed = true;
             level.add(new Separation(x, y));
+            int xx = x >> 4;
+            int yy = y >> 4;
+            if (level.getTile(xx, yy) == Tile.lava || level.getTile(xx, yy) == Tile.hole) {
+                level.setTile(xx, yy, Tile.water, 0);
+            }
             return;
         }
 

@@ -36,6 +36,7 @@ public class SnakePart extends Mob {
     public void setMovement(double xa, double ya, double rotate) {
     }
 
+
     public void tick() {
         super.tick();
         if (xa > 0.00001) {
@@ -67,6 +68,14 @@ public class SnakePart extends Mob {
     public void touchedBy(Entity entity) {
         doHurt(entity);
         super.touchedBy(entity);
+    }
+
+    @Override
+    public void hurt(Mob mob, int damage, int attackDir) {
+        if (health < 50) {
+            time = 0;
+        }
+        super.hurt(mob, damage, attackDir);
     }
 
     @Override
