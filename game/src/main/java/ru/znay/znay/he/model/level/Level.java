@@ -128,7 +128,7 @@ public class Level {
 
         this.loadLevelObject(level, player);
 
-        if (player.isRemoved()) player.setHealth(10);
+        if (player.isRemoved()) player.setHealth(1);
 
         this.add(player);
 
@@ -485,7 +485,7 @@ public class Level {
                                 break;
                         }
                     case 0x55:
-                        add(new NpcTrigger((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, value & 0xFF, questHandler));
+                        add(new NpcTrigger((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, value & 0xFF));
                         break;
                 }
             }
