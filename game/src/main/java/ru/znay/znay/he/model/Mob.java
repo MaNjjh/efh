@@ -30,8 +30,9 @@ public class Mob extends Entity {
     protected Mob target = null;
     protected int bloodColor = 0xcc1100;
     protected int slowPeriod = 50;
-    protected CharacterState defaultState = new CharacterState();
-    protected CharacterState currentState = new CharacterState();
+
+    protected CharacterState defaultState = new CharacterState(0, 10, 0, 0, 0);
+    protected CharacterState currentState = new CharacterState(0, 10, 0, 0, 0);
 
     @Override
     public void tick() {
@@ -42,6 +43,11 @@ public class Mob extends Entity {
 
         if (health <= 0) {
             die();
+        }
+
+        if (canRegenerate() && health < currentState.getEndurance() && tickTime % (60 * 7) == 0) {
+            health = Math.min(currentState.getEndurance(), health + currentState.getEndurance() / 10);
+            level.add(new FlowText("+1", x, y, Font.greenColor));
         }
 
         if (hurtTime > 0) hurtTime--;
@@ -81,7 +87,10 @@ public class Mob extends Entity {
         }
 
         return super.move(xa, ya);
+    }
 
+    public boolean canRegenerate() {
+        return false;
     }
 
     @Override
@@ -192,6 +201,6 @@ public class Mob extends Entity {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        this.health = Math.min(currentState.getEndurance(), health);
     }
 }

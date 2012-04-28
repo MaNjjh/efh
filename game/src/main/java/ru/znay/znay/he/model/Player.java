@@ -5,6 +5,7 @@ import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.gui.GuiInventory;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.item.FurnitureItem;
 import ru.znay.znay.he.model.item.Inventory;
@@ -111,6 +112,11 @@ public class Player extends Mob {
     }
 
     @Override
+    public boolean canRegenerate() {
+        return true;
+    }
+
+    @Override
     public void touchedBy(Entity entity) {
         if ((entity.getTeam() != this.team)) {
             entity.touchedBy(this);
@@ -202,24 +208,32 @@ public class Player extends Mob {
         if (itemEntity.isRemoved()) return;
         itemEntity.take(this);
         inventory.add(itemEntity.getItem());
-        level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, ru.znay.znay.he.gfx.model.Font.yellowColor));
+        level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));
 
         if (itemEntity.getItem() instanceof EquipmentItem) {
             updateEquip();
         }
 
-        GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
-        if (guiInventory != null) {
-            if (itemEntity.getItem() instanceof ResourceItem) {
-                ResourceItem resourceItem = (ResourceItem) itemEntity.getItem();
-                if (resourceItem.getResource() == Resource.apple) {
+        if (itemEntity.getItem() instanceof ResourceItem) {
+
+            ResourceItem resourceItem = (ResourceItem) itemEntity.getItem();
+            if (resourceItem.getResource() == Resource.apple) {
+                GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
+                if (guiInventory != null) {
 
                     ResourceItem apples = inventory.findResource(Resource.apple);
                     if (apples != null) {
 
                         guiInventory.setApple(apples);
+
                     }
                 }
+            } else if (resourceItem.getResource() == Resource.life) {
+                CharacterState lifeState = new CharacterState(0, resourceItem.getCount(), 0, 0, 0);
+
+                this.defaultState = this.defaultState.mergeStates(lifeState);
+                this.currentState = this.currentState.mergeStates(lifeState);
+
             }
         }
     }
