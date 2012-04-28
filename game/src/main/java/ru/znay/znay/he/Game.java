@@ -21,6 +21,7 @@ import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.charset.Charset;
 
 /**
  * Created by IntelliJ IDEA.
@@ -241,8 +242,6 @@ public class Game extends Graphics implements Runnable {
         //GuiManager.getInstance().initDefaultGui(this);
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
-
-        //this.level.add(new House(player.getX(), player.getY() + 50));
 
         int xx = player.getX() - 30;
         int yy = player.getY() - 50;

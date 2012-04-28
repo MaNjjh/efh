@@ -26,6 +26,7 @@ import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.SlimeFactory;
+import ru.znay.znay.he.model.npc.NpcTrigger;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
@@ -123,18 +124,22 @@ public class Level {
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
+        this.questHandler = new QuestHandler();
+
         this.loadLevelObject(level, player);
 
         if (player.isRemoved()) player.setHealth(10);
 
         this.add(player);
 
+        GuiManager.getInstance().initDefaultGui(this);
+
+        questHandler.setPlayer(this.player);
+
+        questManager = new QuestManager(this);
+
         /*if (newFog != null)
             newFog.tick(player); */
-
-        this.questHandler = new QuestHandler(player);
-
-        GuiManager.getInstance().initDefaultGui(this);
 
         try {
             fireParticles = new ParticleSystem(FireParticle.class, 2000, 0.03, -0.01, 40);
@@ -142,8 +147,6 @@ public class Level {
             //ignore
         }
 
-
-        questManager = new QuestManager(this);
 
         fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
 
@@ -481,6 +484,9 @@ public class Level {
                                 add(new Warehouse((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                                 break;
                         }
+                    case 0x55:
+                        add(new NpcTrigger((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, value & 0xFF, questHandler));
+                        break;
                 }
             }
         }

@@ -4,6 +4,7 @@ import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.npc.NpcTrigger;
 import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
 import ru.znay.znay.he.quest.template.TemplateType;
@@ -27,6 +28,10 @@ public class QuestHandler {
         this.player = player;
     }
 
+    public QuestHandler() {
+
+    }
+
     public boolean accept(AbsQuest absQuest) {
         if (absQuest == null) return false;
         String id = absQuest.getId();
@@ -37,6 +42,17 @@ public class QuestHandler {
         GuiManager.getInstance().add(new GuiTypedTextPanel(absQuest.getDescription(), 4, 4, 50), "quest_accept");
         return true;
     }
+
+    public void onTrigger(NpcTrigger npcTrigger) {
+        for (String key : quests.keySet()) {
+            AbsQuest quest = quests.get(key);
+            if (quest.isType(TemplateType.MOVE)) {
+                quest.getMergedTemplate().triggerQuest(npcTrigger);
+                checkQuest(quest);
+            }
+        }
+    }
+
 
     public void updateKills(Mob mob) {
         for (String key : this.quests.keySet()) {
@@ -79,5 +95,9 @@ public class QuestHandler {
         GoldPromotion promotion = (GoldPromotion) PromotionFactory.getInstance().createPromotion("Price");
         promotion.setGold(10);
         System.out.println(promotion.getGold());
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

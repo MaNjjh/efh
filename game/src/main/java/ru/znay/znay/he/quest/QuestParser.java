@@ -73,6 +73,7 @@ public class QuestParser {
 
             if (type == TemplateType.MOVE) {
                 MoveTemplate temp = new MoveTemplate();
+                temp.setNpcID(Integer.decode(str[i+1]));
                 templates.add(temp);
                 temp.setParent(quest);
             }

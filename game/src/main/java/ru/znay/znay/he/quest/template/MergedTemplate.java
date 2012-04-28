@@ -1,5 +1,7 @@
 package ru.znay.znay.he.quest.template;
 
+import ru.znay.znay.he.model.npc.NpcTrigger;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,26 +20,33 @@ public class MergedTemplate {
     }
 
     public boolean isCompleted() {
-        for(DefaultTemplate quest:list)
-            if(!quest.isComplete()){
+        for (DefaultTemplate quest : list)
+            if (!quest.isComplete()) {
                 return false;
             }
         return true;
     }
-    
-    public void incKills(String name)
-    {
-        for(DefaultTemplate quest:list)
-            if(quest instanceof KillTemplate)
-                ((KillTemplate)quest).incKill(name);
+
+    public void incKills(String name) {
+        for (DefaultTemplate quest : list)
+            if (quest instanceof KillTemplate)
+                ((KillTemplate) quest).incKill(name);
     }
-    
-    public int calcQuestType()
-    {
+
+    public int calcQuestType() {
         int result = 0;
-        for(DefaultTemplate quest:list)
-           result |= quest.getType();
+        for (DefaultTemplate quest : list)
+            result |= quest.getType();
 
         return result;
+    }
+
+    public void triggerQuest(NpcTrigger npcTrigger)
+    {
+        for (DefaultTemplate template: list){
+            if (template.getType() == TemplateType.MOVE && ((MoveTemplate)template).getNpcID() == npcTrigger.getId()){
+                template.complete();
+            }
+        }
     }
 }
