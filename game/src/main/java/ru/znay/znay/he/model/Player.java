@@ -53,8 +53,6 @@ public class Player extends Mob {
         this.slowPeriod = 4;
         this.inventory.add(new EquipmentItem(Equipment.simpleBow));
         updateEquip();
-        //this.defaultState = new CharacterState(0, 10, 0, 0, )
-
     }
 
     @Override

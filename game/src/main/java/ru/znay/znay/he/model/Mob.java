@@ -46,8 +46,9 @@ public class Mob extends Entity {
         }
 
         if (canRegenerate() && health < currentState.getEndurance() && tickTime % (60 * 7) == 0) {
+            int oldHealth = health;
             health = Math.min(currentState.getEndurance(), health + currentState.getEndurance() / 10);
-            level.add(new FlowText("+1", x, y, Font.greenColor));
+            level.add(new FlowText("+" + (health - oldHealth), x, y, Font.greenColor));
         }
 
         if (hurtTime > 0) hurtTime--;
