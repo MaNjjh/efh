@@ -50,9 +50,8 @@ public class Player extends Mob {
         this.team = ETeam.PLAYER_TEAM;
         this.game = game;
         this.bloodColor = 0xcc00cc;
-        this.slowPeriod = 4;
         this.inventory.add(new EquipmentItem(Equipment.simpleBow));
-        updateEquip();
+        this.updateEquip();
     }
 
     @Override
@@ -199,6 +198,30 @@ public class Player extends Mob {
         if (armor != null) {
             System.out.println("found armor " + armor.getEquipment().getName());
             currentState = currentState.mergeStates(armor.getBonusState());
+        }
+    }
+
+    @Override
+    public void updateState() {
+        GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
+        if (guiInventory != null) {
+
+            int speed = 0;
+            int slowPeriod = currentState.getSlowPeriod();
+            if (slowPeriod < 3) {
+                speed = 30;
+            } else if (slowPeriod < 10) {
+                speed = 60;
+            } else if (slowPeriod < 40) {
+                speed = 90;
+            } else if (slowPeriod < 60) {
+                speed = 120;
+            }
+
+            guiInventory.setSpeed(speed);
+            guiInventory.setDef(currentState.getDefense());
+            guiInventory.setSta(currentState.getEndurance());
+            guiInventory.setStr(currentState.getForce());
         }
     }
 

@@ -25,26 +25,26 @@ package ru.znay.znay.he.model;
 public class CharacterState {
     private int force = 0;
     private int endurance = 0;
-    private int speed = 0;
+    private int slowPeriod = 0;
     private int defense = 0;
     private int regeneration = 0;
     private int attackDelay = 0;
 
-    public CharacterState(int defense, int endurance, int force, int regeneration, int speed) {
+    public CharacterState(int defense, int endurance, int force, int regeneration, int slowPeriod) {
         this.defense = defense;
         this.endurance = endurance;
         this.force = force;
         this.regeneration = regeneration;
-        this.speed = speed;
+        this.slowPeriod = slowPeriod;
     }
 
-    public CharacterState(int defense, int endurance, int force, int regeneration, int speed, int attackDelay) {
+    public CharacterState(int defense, int endurance, int force, int regeneration, int slowPeriod, int attackDelay) {
         this.attackDelay = attackDelay;
         this.defense = defense;
         this.endurance = endurance;
         this.force = force;
         this.regeneration = regeneration;
-        this.speed = speed;
+        this.slowPeriod = slowPeriod;
     }
 
     public CharacterState() {
@@ -57,9 +57,15 @@ public class CharacterState {
         result.setEndurance(characterState.getEndurance() + this.endurance);
         result.setForce(characterState.getForce() + this.force);
         result.setRegeneration(characterState.getRegeneration() + this.regeneration);
-        result.setSpeed(characterState.getSpeed() + this.speed);
+        result.setSlowPeriod(characterState.getSlowPeriod() + this.slowPeriod);
         result.setAttackDelay(characterState.getAttackDelay() + this.attackDelay);
         return result;
+    }
+
+    public boolean match(CharacterState characterState) {
+        return characterState.getAttackDelay() == attackDelay && characterState.getDefense() == defense &&
+                characterState.getEndurance() == endurance && characterState.getForce() == force &&
+                characterState.getRegeneration() == regeneration && characterState.getSlowPeriod() == slowPeriod;
     }
 
     public int getDefense() {
@@ -94,12 +100,12 @@ public class CharacterState {
         this.regeneration = regeneration;
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getSlowPeriod() {
+        return slowPeriod;
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void setSlowPeriod(int slowPeriod) {
+        this.slowPeriod = slowPeriod;
     }
 
     public int getAttackDelay() {

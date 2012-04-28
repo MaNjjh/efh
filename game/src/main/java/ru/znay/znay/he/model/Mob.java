@@ -1,7 +1,5 @@
 package ru.znay.znay.he.model;
 
-import ru.znay.znay.he.gfx.gui.GuiInventory;
-import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -29,10 +27,10 @@ public class Mob extends Entity {
     protected int viewRadius = 4;
     protected Mob target = null;
     protected int bloodColor = 0xcc1100;
-    protected int slowPeriod = 50;
 
-    protected CharacterState defaultState = new CharacterState(0, 10, 0, 0, 0);
-    protected CharacterState currentState = new CharacterState(0, 10, 0, 0, 0);
+    protected CharacterState defaultState = new CharacterState(0, 10, 0, 0, 50);
+    protected CharacterState currentState = new CharacterState(0, 10, 0, 0, 50);
+    protected CharacterState compareState = new CharacterState(0, 10, 0, 0, 50);
 
     @Override
     public void tick() {
@@ -51,8 +49,17 @@ public class Mob extends Entity {
             level.add(new FlowText("+" + (health - oldHealth), x, y, Font.greenColor));
         }
 
+        if (!compareState.match(currentState)) {
+            updateState();
+            compareState = currentState.mergeStates(new CharacterState());
+        }
+
         if (hurtTime > 0) hurtTime--;
         super.tick();
+    }
+
+    public void updateState() {
+
     }
 
     @Override
@@ -83,7 +90,7 @@ public class Mob extends Entity {
             if (ya > 0) dir = 0;
         }
 
-        if (tickTime % slowPeriod == 0) {
+        if (tickTime % currentState.getSlowPeriod() == 0) {
             return true;
         }
 
@@ -188,17 +195,11 @@ public class Mob extends Entity {
     }
 
     public void setSlowPeriod(int slowPeriod) {
-        if (this instanceof Player) {
-            GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
-            if (guiInventory != null) {
-                guiInventory.setSpeed(slowPeriod);
-            }
-        }
-        this.slowPeriod = slowPeriod;
+        this.currentState.setSlowPeriod(slowPeriod);
     }
 
     public int getSlowPeriod() {
-        return slowPeriod;
+        return this.currentState.getSlowPeriod();
     }
 
     public void setHealth(int health) {
