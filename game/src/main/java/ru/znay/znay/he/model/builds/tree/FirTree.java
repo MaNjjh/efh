@@ -1,6 +1,7 @@
 package ru.znay.znay.he.model.builds.tree;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -13,14 +14,14 @@ import ru.znay.znay.he.model.level.tile.Tile;
  */
 public class FirTree extends Tree {
 
-    public FirTree(int x, int y) {
+    public FirTree(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 8, 8);
 
-        level.getSpriteCollector().resetWrappers();
-        level.getSpriteCollector().addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(30, 20, 40, -1)));
-        level.getSpriteCollector().addWrapper(new SpriteWrapper(21 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(10, 20, 10, -1)));
-        level.getSpriteCollector().addWrapper(new SpriteWrapper(25 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(100, 210, 320, -1)));
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(30, 20, 40, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(21 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(10, 20, 10, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(25 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 8 * Tile.HALF_SIZE, PaletteHelper.getColor(100, 210, 320, -1)));
 
-        this.sprite = level.getSpriteCollector().mergedWrappers("tree_fir", 1, random.nextInt(2), 0x01000000);
+        this.sprite = spriteCollector.mergedWrappers("tree_fir", 1, random.nextInt(2), 0x01000000);
     }
 }

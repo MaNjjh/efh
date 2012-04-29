@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.builds.utensils;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
+import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
@@ -19,12 +20,12 @@ public class Waymark extends Utensils {
     private long tick;
     private String message;
 
-    public Waymark(int x, int y, String message) {
+    public Waymark(int x, int y, String message, SpriteCollector spriteCollector) {
         super(x, y, 4, 1);
         this.message = message;
-        level.getSpriteCollector().resetWrappers();
-        level.getSpriteCollector().addWrapper(new SpriteWrapper(10 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(320, 421, 430, -1)));
-        this.sprite = level.getSpriteCollector().mergedWrappers("waymark", 1, 0, 0x01000000);
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(10 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(320, 421, 430, -1)));
+        this.sprite = spriteCollector.mergedWrappers("waymark", 1, 0, 0x01000000);
     }
 
     @Override

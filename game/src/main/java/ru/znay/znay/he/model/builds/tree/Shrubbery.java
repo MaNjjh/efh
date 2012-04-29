@@ -27,17 +27,18 @@ public class Shrubbery extends Tree implements GuiMenu.Callback {
     private long tick2;
     private SpriteCollector spriteCollector;
 
-    public Shrubbery(int x, int y) {
+    public Shrubbery(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 4, 1);
+        this.spriteCollector = spriteCollector;
         wrapSprite(berry);
     }
 
     private void wrapSprite(boolean flag) {
-        level.getSpriteCollector().resetWrappers();
-        level.getSpriteCollector().addWrapper(new SpriteWrapper(((type) ? 21 : 25) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(20, 30, 40, -1)));
-        level.getSpriteCollector().addWrapper(new SpriteWrapper(((type) ? 23 : 27) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(10, (flag ? 5 : -1), 10, -1)));
+        spriteCollector.resetWrappers();
+        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 21 : 25) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(20, 30, 40, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(((type) ? 23 : 27) * Tile.HALF_SIZE, 0, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(10, (flag ? 5 : -1), 10, -1)));
 
-        this.sprite = level.getSpriteCollector().mergedWrappers("shrubbery_" + (type ? "0" : "1") + (flag ? "_berry" : ""), 1, 0, 0);
+        this.sprite = spriteCollector.mergedWrappers("shrubbery_" + (type ? "0" : "1") + (flag ? "_berry" : ""), 1, 0, 0);
     }
 
     @Override

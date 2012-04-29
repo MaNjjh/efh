@@ -456,13 +456,13 @@ public class Level {
                         break;
                     }
                     case 0x10:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE));
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector));
                         break;
                     case 0x11:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE));
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector));
                         break;
                     case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, getMessage(value & 0xFF)));
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, getMessage(value & 0xFF), spriteCollector));
                         break;
                     case 0x40:
                         switch (((value >> 8) & 0xFF)) {
@@ -545,23 +545,23 @@ public class Level {
                         int r = random.nextInt(100);
                         if (r < 72) break;
                         if (r < 75) {
-                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
                             break;
                         }
                         if (random.nextBoolean()) {
-                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
                         } else {
-                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
                         }
 
                         break;
                     }
                     case TREE_STUMP: {
-                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
                         break;
                     }
                     case SHRUBBERY: {
-                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
                         break;
                     }
 
