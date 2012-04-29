@@ -20,7 +20,7 @@ public class TemplateFactory {
 
     }
 
-    public DefaultTemplate createPromotion(String name) {
+    public DefaultTemplate createTemplate(String name, String param1, String param2) {
 
         if (name.isEmpty()) return null;
 
@@ -33,7 +33,10 @@ public class TemplateFactory {
         String className = TemplateFactory.class.getPackage().getName() + "." + result + "Template";
 
         try {
-            return (DefaultTemplate) Class.forName(className).newInstance();
+            DefaultTemplate template = (DefaultTemplate) Class.forName(className).newInstance();
+            template.setParam1(param1);
+            template.setParam2(param2);
+            return template;
         } catch (InstantiationException e) {
             return null;
         } catch (IllegalAccessException e) {

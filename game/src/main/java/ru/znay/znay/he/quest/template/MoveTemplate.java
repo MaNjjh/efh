@@ -21,4 +21,14 @@ public class MoveTemplate extends DefaultTemplate {
     public void setNpcID(int npcID) {
         this.npcID = npcID;
     }
+
+    @Override
+    public void setParam1(String param) {
+        this.npcID = Integer.decode(param);
+    }
+
+    @Override
+    public void setParam2(String param) {
+
+    }
 }

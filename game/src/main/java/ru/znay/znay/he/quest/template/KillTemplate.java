@@ -1,7 +1,5 @@
 package ru.znay.znay.he.quest.template;
 
-import ru.znay.znay.he.model.Mob;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Денис Сергеевич
@@ -23,6 +21,20 @@ public class KillTemplate extends DefaultTemplate {
         super(TemplateType.KILL);
 
         init(needToKill, currentKills, mobName);
+    }
+
+    public KillTemplate() {
+        super(TemplateType.KILL);
+    }
+
+    @Override
+    public void setParam1(String param) {
+         this.needToKill = Integer.decode(param);
+    }
+
+    @Override
+    public void setParam2(String param) {
+        mobName = param;
     }
 
     private void init(int needToKill, int currentKills, String mobName) {

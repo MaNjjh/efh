@@ -1,15 +1,13 @@
 package ru.znay.znay.he.quest;
 
 import ru.znay.znay.he.model.level.Level;
+import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.ItemPromotion;
 import ru.znay.znay.he.quest.promotion.LifePromotion;
 import ru.znay.znay.he.quest.promotion.MergedPromotion;
-import ru.znay.znay.he.quest.promotion.GoldPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionType;
-import ru.znay.znay.he.quest.template.KillTemplate;
 import ru.znay.znay.he.quest.template.MergedTemplate;
-import ru.znay.znay.he.quest.template.MoveTemplate;
-import ru.znay.znay.he.quest.template.TemplateType;
+import ru.znay.znay.he.quest.template.TemplateFactory;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,9 +20,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class QuestParser {
-    
-    public List<AbsQuest> parseQuests(List<String> strings, Level level)
-    {
+
+    public List<AbsQuest> parseQuests(List<String> strings, Level level) {
         List<AbsQuest> list = new LinkedList<AbsQuest>();
 
         if (strings == null || strings.isEmpty()) {
@@ -62,21 +59,8 @@ public class QuestParser {
 
         int templateOffset = 6;
 
-        for (int i = templateOffset; i <= templateOffset*count; i+=3) {
-            int type = Integer.decode(str[i]);
-            if (type == TemplateType.KILL) {
-                KillTemplate temp = new KillTemplate(Integer.decode(str[i + 1]), str[i + 2]);
-                templates.add(temp);
-                temp.setParent(quest);
-                continue;
-            }
-
-            if (type == TemplateType.MOVE) {
-                MoveTemplate temp = new MoveTemplate();
-                temp.setNpcID(Integer.decode(str[i+1]));
-                templates.add(temp);
-                temp.setParent(quest);
-            }
+        for (int i = templateOffset; i <= templateOffset * count; i += 3) {
+            templates.add(TemplateFactory.getInstance().createTemplate(str[i], str[i + 1], str[i + 2]));
         }
 
         quest.calcQuestType();
@@ -89,7 +73,7 @@ public class QuestParser {
 
         MergedPromotion mergedPromotion = new MergedPromotion();
 
-        for (int i = promotionOffset; i < ((promotionOffset)+count*3); i+=3) {
+        for (int i = promotionOffset; i < ((promotionOffset) + count * 3); i += 3) {
             int type = Integer.decode(str[i]);
             if (type == PromotionType.LIFE) {
                 LifePromotion promotion = new LifePromotion();
