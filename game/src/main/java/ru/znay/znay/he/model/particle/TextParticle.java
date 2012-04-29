@@ -12,11 +12,11 @@ import ru.znay.znay.he.gfx.model.Screen;
  * To change this template use File | Settings | File Templates.
  */
 public class TextParticle extends SmashParticle {
-    private String msg;
+    protected String message;
 
-    public TextParticle(String msg, int x, int y, int color) {
+    public TextParticle(String message, int x, int y, int color) {
         super(x, y, color);
-        this.msg = msg;
+        this.message = message;
     }
 
     public void tick() {
@@ -24,9 +24,9 @@ public class TextParticle extends SmashParticle {
     }
 
     public void render(Screen screen) {
-        // Font.draw(msg, screen, x - msg.length() * 4, y, PaletteHelper.getColor(-1, 0, 0, 0));
-        Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
-        Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), color);
+        // Font.draw(message, screen, x - message.length() * 4, y, PaletteHelper.getColor(-1, 0, 0, 0));
+        Font.draw(message, screen, x - message.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
+        Font.draw(message, screen, x - message.length() * 4, y - (int) (zz), color);
     }
 
 }

@@ -10,10 +10,10 @@ package ru.znay.znay.he.model.particle;
 public class FlowText extends TextParticle {
 
 
-    public FlowText(String msg, int x, int y, int col) {
-        super(msg, x, y, col);
+    public FlowText(String message, int x, int y, int col) {
+        super(message, x, y, col);
         zz = 0;
-        time = 30;
+        time = 35;
     }
 
     @Override

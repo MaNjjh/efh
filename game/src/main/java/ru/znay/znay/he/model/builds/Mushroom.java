@@ -81,7 +81,7 @@ public class Mushroom extends Mob {
 
         screen.render(x - 4, y - 5, tx * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
 
-        /*Font.draw(msg, screen, x - msg.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
-        Font.draw(msg, screen, x - msg.length() * 4, y - (int) (zz), col);*/
+        /*Font.draw(message, screen, x - message.length() * 4 + 1, y - (int) (zz) + 1, PaletteHelper.getColor(-1, 0, 0, 0));
+        Font.draw(message, screen, x - message.length() * 4, y - (int) (zz), col);*/
     }
 }

@@ -18,7 +18,7 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.particle.FlowText;
+import ru.znay.znay.he.model.particle.FlowTextIcon;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
 
@@ -45,6 +45,8 @@ public class Player extends Mob {
     private EquipmentItem shoes;
     private EquipmentItem armor;
     private Inventory inventory = new Inventory();
+    private Inventory averagedPickups = new Inventory();
+    private long collectTime;
 
     public Player(Game game) {
         this.team = ETeam.PLAYER_TEAM;
@@ -108,6 +110,11 @@ public class Player extends Mob {
         }
 
         move(xa, ya);
+
+        if (System.currentTimeMillis() - collectTime > 300) {
+            updateAveragedNotify();
+            collectTime = System.currentTimeMillis();
+        }
 
         super.tick();
     }
@@ -182,7 +189,6 @@ public class Player extends Mob {
             furniture.x = x;
             furniture.y = yo;
             furniture.render(screen);
-
         }
     }
 
@@ -229,61 +235,48 @@ public class Player extends Mob {
         }
     }
 
+    private void updateAveragedNotify() {
+        if (averagedPickups.getItems().size() == 0) return;
+        Item item = averagedPickups.getItems().get(0);
+        if (item != null) {
+            int count = item instanceof ResourceItem ? ((ResourceItem) item).getCount() : 1;
+            level.add(new FlowTextIcon("+" + count, x - Tile.HALF_SIZE, y - Tile.HALF_SIZE, Font.yellowColor, item.getxSprite(), item.getySprite(), item.getColor()));
+            averagedPickups.getItems().remove(item);
+        }
+    }
+
     public void touchItem(ItemEntity itemEntity) {
         if (itemEntity.isRemoved()) return;
+
         itemEntity.take(this);
         inventory.add(itemEntity.getItem());
-        level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));
+        averagedPickups.add(itemEntity.getItem());
 
         if (itemEntity.getItem() instanceof EquipmentItem) {
             updateEquip();
         }
 
         if (itemEntity.getItem() instanceof ResourceItem) {
-
             ResourceItem resourceItem = (ResourceItem) itemEntity.getItem();
+
             if (resourceItem.getResource() == Resource.apple) {
                 GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
                 if (guiInventory != null) {
 
                     ResourceItem apples = inventory.findResource(Resource.apple);
                     if (apples != null) {
-
                         guiInventory.setApple(apples);
-
                     }
                 }
+
             } else if (resourceItem.getResource() == Resource.life) {
                 CharacterState lifeState = new CharacterState(0, resourceItem.getCount(), 0, 0, 0);
 
                 this.defaultState = this.defaultState.mergeStates(lifeState);
                 this.currentState = this.currentState.mergeStates(lifeState);
-
             }
         }
     }
-
-    /*@Override
-    public void touchItem(ItemEntity itemEntity) {
-        if (itemEntity instanceof Coin) {
-            Coin coin = (Coin) itemEntity;
-            score += coin.getCost();
-            goldCollect += coin.getCost();
-            if (System.currentTimeMillis() - goldTime > 100) {
-                level.add(new FlowText("+" + goldCollect, x, y - Tile.HALF_SIZE, Font.yellowColor));
-                goldCollect = 0;
-                goldTime = System.currentTimeMillis();
-                Sound.pickup.play();
-            }
-        }
-
-        if (itemEntity instanceof Life) {
-            Life life = (Life) itemEntity;
-            health += life.getLife();
-        }
-
-        itemEntity.setRemoved(true);
-    }*/
 
     public boolean take() {
         boolean done = false;
