@@ -50,8 +50,12 @@ public class Player extends Mob {
         this.team = ETeam.PLAYER_TEAM;
         this.game = game;
         this.bloodColor = 0xcc00cc;
-        this.inventory.add(new EquipmentItem(Equipment.simpleBow));
-        this.updateEquip();
+    }
+
+    @Override
+    public void init(Level level) {
+        super.init(level);
+        touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), x, y));
     }
 
     @Override
