@@ -6,7 +6,6 @@ import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;
@@ -28,23 +27,22 @@ import java.util.List;
 public class AppleTree extends Tree {
 
     private boolean apple = false;
-    private SpriteCollector spriteCollector;
     private long time;
 
-    public AppleTree(int x, int y, SpriteCollector spriteCollector) {
+    public AppleTree(int x, int y) {
         super(x, y, 16, 12);
-        this.spriteCollector = spriteCollector;
     }
 
     private void wrapSprite(boolean drawAura) {
-        spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(20, 40, 30, -1)));
-        spriteCollector.addWrapper(new SpriteWrapper(21 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(10, 10, 20, -1)));
-        spriteCollector.addWrapper(new SpriteWrapper(25 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(100, 210, 320, -1)));
+
+        level.getSpriteCollector().resetWrappers();
+        level.getSpriteCollector().addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(20, 40, 30, -1)));
+        level.getSpriteCollector().addWrapper(new SpriteWrapper(21 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(10, 10, 20, -1)));
+        level.getSpriteCollector().addWrapper(new SpriteWrapper(25 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(100, 210, 320, -1)));
         if (apple) {
-            spriteCollector.addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 0 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(310, 400, 510, -1)));
+            level.getSpriteCollector().addWrapper(new SpriteWrapper(17 * Tile.HALF_SIZE, 0 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, 4 * Tile.HALF_SIZE, PaletteHelper.getColor(310, 400, 510, -1)));
         }
-        this.sprite = spriteCollector.mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, (drawAura) ? 0x01000000 : 0);
+        this.sprite = level.getSpriteCollector().mergedWrappers("tree" + (apple ? "_apple" : ""), 2, 0, (drawAura) ? 0x01000000 : 0);
 
     }
 

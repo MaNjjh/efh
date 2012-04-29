@@ -119,6 +119,7 @@ public class Level {
 
         this.number = level;
         this.game = game;
+        this.player = player;
 
         messages = TextFileHelper.LoadMessages(level);
 
@@ -434,11 +435,11 @@ public class Level {
         //if (level != 1)
         //    this.newFog = new NewFog(this, this.game.getScreen());
 
-        loadLandscape(map, player);
-        loadNPC(level, player);
+        loadLandscape(map);
+        loadNPC(level);
     }
 
-    private void loadNPC(int level, Player player) {
+    private void loadNPC(int level) {
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.png");
         for (int j = 0; j < this.height; j++) {
             for (int i = 0; i < this.width; i++) {
@@ -446,22 +447,22 @@ public class Level {
                 if (value == 0xFFFFFFFF) continue;
                 switch (((value >> 16) & 0xFF)) {
                     case 0xFF: {
-                        if (player.getRespPoint() != null) {
-                            player.moveToXY(player.getRespPoint().x, player.getRespPoint().y);
+                        if (this.player.getRespPoint() != null) {
+                            this.player.moveToXY(this.player.getRespPoint().x, this.player.getRespPoint().y);
                         } else {
-                            player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
-                            player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
+                            this.player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
+                            this.player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
                         }
                         break;
                     }
                     case 0x10:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector, player));
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE));
                         break;
                     case 0x11:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector, player));
+                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE));
                         break;
                     case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector, getMessage(value & 0xFF)));
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, getMessage(value & 0xFF)));
                         break;
                     case 0x40:
                         switch (((value >> 8) & 0xFF)) {
@@ -478,7 +479,7 @@ public class Level {
                                 add(new Bakery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                                 break;
                             case 0x05:
-                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                                 break;
                             case 0x06:
                                 add(new Warehouse((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
@@ -493,7 +494,7 @@ public class Level {
     }
 
     @SuppressWarnings("unchecked")
-    private void loadLandscape(Bitmap map, Player player) {
+    private void loadLandscape(Bitmap map) {
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
         for (int i = 0; i < this.width * height; i++) {
@@ -537,30 +538,30 @@ public class Level {
                         break;
                     }
                     case APPLE_TREE: {
-                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                         break;
                     }
                     case FIR_TREE: {
                         int r = random.nextInt(100);
                         if (r < 72) break;
                         if (r < 75) {
-                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                             break;
                         }
                         if (random.nextBoolean()) {
-                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                         } else {
-                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                         }
 
                         break;
                     }
                     case TREE_STUMP: {
-                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                         break;
                     }
                     case SHRUBBERY: {
-                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.spriteCollector));
+                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                         break;
                     }
 

@@ -2,8 +2,6 @@ package ru.znay.znay.he.quest;
 
 import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.model.level.Level;
-import ru.znay.znay.he.model.npc.NpcTrigger;
-import ru.znay.znay.he.quest.template.TemplateType;
 
 import java.util.List;
 
@@ -35,8 +33,8 @@ public class QuestManager {
 
 
     public AbsQuest getQuestById(int id) {
-        for (AbsQuest quest:quests){
-            if (Integer.decode(quest.getId()) == id){
+        for (AbsQuest quest : quests) {
+            if (Integer.decode(quest.getId()) == id) {
                 return quest;
             }
         }
@@ -44,8 +42,8 @@ public class QuestManager {
     }
 
     public AbsQuest getQuestByName(String name) {
-        for (AbsQuest quest:quests){
-            if (quest.getName().equalsIgnoreCase(name)){
+        for (AbsQuest quest : quests) {
+            if (quest.getName().equalsIgnoreCase(name)) {
                 return quest;
             }
         }

@@ -41,10 +41,9 @@ public class MergedTemplate {
         return result;
     }
 
-    public void triggerQuest(NpcTrigger npcTrigger)
-    {
-        for (DefaultTemplate template: list){
-            if (template.getType() == TemplateType.MOVE && ((MoveTemplate)template).getNpcID() == npcTrigger.getId()){
+    public void triggerQuest(NpcTrigger npcTrigger) {
+        for (DefaultTemplate template : list) {
+            if (template.getType() == TemplateType.MOVE && ((MoveTemplate) template).getNpcID() == npcTrigger.getId()) {
                 template.complete();
             }
         }

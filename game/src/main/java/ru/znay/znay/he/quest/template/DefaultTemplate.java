@@ -41,7 +41,7 @@ public abstract class DefaultTemplate {
         this.parent = parent;
         parent.isCompleted();
     }
-    
+
     public abstract void setParam1(String param);
 
     public abstract void setParam2(String param);

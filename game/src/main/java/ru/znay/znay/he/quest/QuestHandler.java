@@ -39,7 +39,7 @@ public class QuestHandler {
         if (this.quests.get(id) != null) return false;
 
         this.quests.put(id, absQuest);
-        GuiManager.getInstance().add(new GuiTypedTextPanel(absQuest.getDescription(), 4, 4, 50), "quest_accept");
+        GuiManager.getInstance().add(new GuiTypedTextPanel(absQuest.getDescription(), 4, 4, 100), "quest_accept");
         return true;
     }
 

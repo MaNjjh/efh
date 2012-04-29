@@ -29,7 +29,7 @@ public class KillTemplate extends DefaultTemplate {
 
     @Override
     public void setParam1(String param) {
-         this.needToKill = Integer.decode(param);
+        this.needToKill = Integer.decode(param);
     }
 
     @Override

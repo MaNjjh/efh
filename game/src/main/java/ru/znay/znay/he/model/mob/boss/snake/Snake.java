@@ -61,7 +61,7 @@ public class Snake extends SnakePart {
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 
-        screen.render(2,xd + 1, yd + 1, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 0, 0), 2);
-        screen.render(2,xd, yd, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, col, 2);
+        screen.render(2, xd + 1, yd + 1, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 0, 0), 2);
+        screen.render(2, xd, yd, 2 * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, col, 2);
     }
 }

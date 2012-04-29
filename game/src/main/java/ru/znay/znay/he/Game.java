@@ -15,14 +15,12 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.boss.AirWizard;
 import ru.znay.znay.he.model.mob.boss.snake.Snake;
 import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.charset.Charset;
 
 /**
  * Created by IntelliJ IDEA.

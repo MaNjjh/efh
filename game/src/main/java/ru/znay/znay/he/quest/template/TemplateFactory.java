@@ -1,7 +1,5 @@
 package ru.znay.znay.he.quest.template;
 
-import ru.znay.znay.he.quest.AbsQuest;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Александр Сергеевич

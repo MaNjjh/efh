@@ -12,7 +12,7 @@ import ru.znay.znay.he.model.Player;
 public class ItemPromotion implements QuestPromotion {
     private String itemName;
     private int count;
-    
+
     @Override
     public void promotion(Player player) {
         //todo добавитьв выдачу итема игроку

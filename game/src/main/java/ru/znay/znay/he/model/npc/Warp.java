@@ -7,7 +7,6 @@ import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
@@ -28,22 +27,20 @@ public class Warp extends Entity {
     private int dstLevel;
     private int dstX;
     private int dstY;
-    private Player player;
     private long tick;
 
-    public Warp(int srcLevel, int srcX, int srcY, int dstLevel, int dstX, int dstY, SpriteCollector spriteCollector, Player player) {
+    public Warp(int srcLevel, int srcX, int srcY, int dstLevel, int dstX, int dstY) {
         this.srcLevel = srcLevel;
         this.x = srcX;
         this.y = srcY;
         this.dstLevel = dstLevel;
         this.dstX = dstX;
         this.dstY = dstY;
-        this.player = player;
 
-        spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(0, 11 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 222, 333)));
+        level.getSpriteCollector().resetWrappers();
+        level.getSpriteCollector().addWrapper(new SpriteWrapper(0, 11 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 222, 333)));
 
-        this.sprite = spriteCollector.mergedWrappers("warp", 2, 0, 0);
+        this.sprite = level.getSpriteCollector().mergedWrappers("warp", 2, 0, 0);
     }
 
     @Override
@@ -93,9 +90,9 @@ public class Warp extends Entity {
 
     private void doWarp() {
         if (srcLevel == dstLevel)
-            player.moveToXY(dstX, dstY);
+            level.getPlayer().moveToXY(dstX, dstY);
         else {
-            player.moveLevel(dstLevel, dstX, dstY);
+            level.getPlayer().moveLevel(dstLevel, dstX, dstY);
         }
 
     }
