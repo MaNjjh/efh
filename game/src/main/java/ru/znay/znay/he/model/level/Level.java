@@ -87,6 +87,8 @@ public class Level {
 
     private byte[] tiles;
 
+    private static Fog[] fogs = new Fog[7];
+
     private Fog fog;
     //private NewFog newFog = null;
     private int monsterDensity = 4;
@@ -430,7 +432,10 @@ public class Level {
 
         this.tiles = new byte[this.width * this.height];
 
-        this.fog = new Fog(this.width, this.height, level != 1);
+        if (fogs[level] == null) {
+            fogs[level] = new Fog(this.width, this.height, level != 1);
+        }
+        this.fog = fogs[level];
 
         //if (level != 1)
         //    this.newFog = new NewFog(this, this.game.getScreen());
