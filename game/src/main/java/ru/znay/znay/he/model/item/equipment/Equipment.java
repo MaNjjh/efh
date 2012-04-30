@@ -58,7 +58,7 @@ public class Equipment {
         equips.put(name, this);
     }
 
-    public Equipment getEquipmentByName(String name) {
+    public static Equipment getEquipmentByName(String name) {
         return equips.get(name);
     }
 
