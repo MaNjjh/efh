@@ -26,7 +26,15 @@ public class Slime extends Mob {
     public Slime(int x, int y) {
         this.x = x;
         this.y = y;
-        this.viewRadius = 6;
+        init();
+    }
+
+    public Slime() {
+        init();
+    }
+
+    private void init() {
+        viewRadius = 6;
     }
 
     @Override
@@ -114,7 +122,7 @@ public class Slime extends Mob {
             xt += 1;
             yo -= 4;
         }
-        int col = PaletteHelper.getColor(-1, 10, 252, 555);
+        int col = PaletteHelper.getColor(-1, 10, 242, 555);
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 
