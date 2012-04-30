@@ -479,7 +479,7 @@ public class Level {
                                 add(new Bakery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
                                 break;
                             case 0x05:
-                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
                                 break;
                             case 0x06:
                                 add(new Warehouse((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
