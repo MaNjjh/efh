@@ -1,7 +1,7 @@
 1,type,2,3,2,1,Kill,1,SlimeFactory,3,Life,0,20,Gold,0,1258,Spawn,Bird,1
 2,type,2,3,3,1,Kill,1,SlimeFactory,1,Life,0,20
-3,type,4,5,4,1,Move,1,null,0
-4,type,6,7,5,1,Move,2,null,2,Item,bow,1,Spawn,SlimeFactory,1
-5,type,8,9,6,1,Kill,1,SlimeFactory,0
-6,type,10,11,7,1,Move,4,null,0
-7,type,12,13,0,1,Move,3,null,0
+3,hide,4,5,4,1,Move,1,null,1,Mark,21:105,1
+4,hide,6,7,5,1,Move,2,null,3,Item,bow,1,Spawn,SlimeFactory,1,Mark,0:0,0
+5,hide,8,9,6,1,Kill,1,SlimeFactory,1,Mark,5:74,1
+6,hide,10,11,7,1,Move,4,null,1,Mark,0:0,0
+7,hide,12,13,0,1,Move,3,null,0
