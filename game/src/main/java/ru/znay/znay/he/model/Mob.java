@@ -45,7 +45,7 @@ public class Mob extends Entity {
 
         if (canRegenerate() && health < currentState.getEndurance() && tickTime % (60 * 7) == 0) {
             int oldHealth = health;
-            health = Math.min(currentState.getEndurance(), health + currentState.getEndurance() / 10);
+            health = Math.min(currentState.getEndurance(), health + currentState.getRegeneration() + currentState.getEndurance() / 10);
             level.add(new FlowText("+" + (health - oldHealth), x, y, Font.greenColor));
         }
 
@@ -128,11 +128,13 @@ public class Mob extends Entity {
             // level.add(new TextParticle(damage + "", x, y, bloodColor));
         }
 
-        level.add(new FlowText("-" + damage, x, y - Tile.HALF_SIZE, Font.redColor));
-
         for (int i = 0; i < damage; i++) {
             level.add(new BloodParticle(x, y, bloodColor));
         }
+
+        damage = Math.max(0, damage - currentState.getDefense());
+
+        level.add(new FlowText("-" + damage, x, y - Tile.HALF_SIZE, Font.redColor));
 
         health -= damage;
         if (attackDir == 0) yKnockback = +DEFAULT_KNOCKBACK;

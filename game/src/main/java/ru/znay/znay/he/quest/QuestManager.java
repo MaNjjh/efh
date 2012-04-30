@@ -16,7 +16,7 @@ public class QuestManager {
     List<AbsQuest> quests;
 
     public QuestManager(Level level) {
-        quests = (new QuestParser()).parseQuests(TextFileHelper.LoadTextDB(level.getNumber() + ".txt"), level);
+        quests = new QuestParser().parseQuests(TextFileHelper.LoadTextDB(level.getNumber() + ".txt"), level);
 
         for (AbsQuest quest : quests) {
             //quest.accept(questHandler);
