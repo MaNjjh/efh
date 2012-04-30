@@ -55,7 +55,7 @@ public class Equipment {
         this.name = name;
         this.xSprite = xSprite;
         this.ySprite = ySprite;
-        equips.put(name, this);
+        equips.put(name.toLowerCase(), this);
     }
 
     public static Equipment getEquipmentByName(String name) {

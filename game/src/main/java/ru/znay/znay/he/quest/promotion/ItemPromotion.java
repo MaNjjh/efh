@@ -1,6 +1,9 @@
 package ru.znay.znay.he.quest.promotion;
 
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +18,7 @@ public class ItemPromotion implements QuestPromotion {
 
     @Override
     public void promotion(Player player) {
-        //todo добавитьв выдачу итема игроку
+        player.touchItem(new ItemEntity(new EquipmentItem(Equipment.getEquipmentByName(itemName.toLowerCase())), 0, 0));
     }
 
     public String getItemName() {

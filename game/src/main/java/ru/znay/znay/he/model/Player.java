@@ -57,9 +57,11 @@ public class Player extends Mob {
     @Override
     public void init(Level level) {
         super.init(level);
+        /*
         touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), x, y));
         touchItem(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x, y));
         touchItem(new ItemEntity(new EquipmentItem(Equipment.strongShoes), x, y));
+        */
     }
 
     @Override

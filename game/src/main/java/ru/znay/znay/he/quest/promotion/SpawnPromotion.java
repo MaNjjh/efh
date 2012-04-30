@@ -12,17 +12,17 @@ import ru.znay.znay.he.model.mob.MobFactory;
  * Time: 18:51
  * To change this template use File | Settings | File Templates.
  */
-public class SpawnPromotion implements QuestPromotion{
+public class SpawnPromotion implements QuestPromotion {
     private String mobName;
     private int count;
-    
+
 
     @Override
     public void promotion(Player player) {
         System.out.println(1);
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < count; i++) {
             System.out.println(2);
-            Mob mob  = MobFactory.getInstance().createMob(mobName,false);
+            Mob mob = MobFactory.getInstance().createMob(mobName, false);
             mob.setX(player.getX() - 20);
             mob.setY(player.getY() - 20);
             player.getLevel().add(mob);

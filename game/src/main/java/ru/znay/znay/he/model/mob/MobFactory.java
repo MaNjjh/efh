@@ -19,21 +19,20 @@ public class MobFactory {
     private MobFactory() {
 
     }
-    
-    public Mob createMob(String name, boolean boss)
-    {
+
+    public Mob createMob(String name, boolean boss) {
         if (name.isEmpty()) return null;
 
-        final StringBuilder result = new StringBuilder(name.length());
+        //final StringBuilder result = new StringBuilder(name.length());
 
-        name = name.toLowerCase();
+        //name = name.toLowerCase();
 
-        result.append(Character.toUpperCase(name.charAt(0))).append(name.substring(1));
+        //result.append(Character.toUpperCase(name.charAt(0))).append(name.substring(1));
 
-        String className = MobFactory.class.getPackage().getName() +(boss?".boss.":"") +"." + result;
+        String className = MobFactory.class.getPackage().getName() + (boss ? ".boss." : "") + "." + name;
 
         try {
-            return (Mob)Class.forName(className).newInstance();
+            return (Mob) Class.forName(className).newInstance();
         } catch (InstantiationException e) {
             return null;
         } catch (IllegalAccessException e) {

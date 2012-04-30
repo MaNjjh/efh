@@ -1,12 +1,8 @@
 package ru.znay.znay.he.quest;
 
 import ru.znay.znay.he.model.level.Level;
-import ru.znay.znay.he.quest.promotion.GoldPromotion;
-import ru.znay.znay.he.quest.promotion.ItemPromotion;
-import ru.znay.znay.he.quest.promotion.LifePromotion;
 import ru.znay.znay.he.quest.promotion.MergedPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
-import ru.znay.znay.he.quest.promotion.PromotionType;
 import ru.znay.znay.he.quest.template.MergedTemplate;
 import ru.znay.znay.he.quest.template.TemplateFactory;
 
@@ -75,7 +71,7 @@ public class QuestParser {
         MergedPromotion mergedPromotion = new MergedPromotion();
 
         for (int i = promotionOffset; i < ((promotionOffset) + count * 3); i += 3) {
-            mergedPromotion.add(PromotionFactory.getInstance().createPromotion(str[i],str[i+1],str[i+2]));
+            mergedPromotion.add(PromotionFactory.getInstance().createPromotion(str[i], str[i + 1], str[i + 2]));
         }
 
         quest.setQuestPromotion(mergedPromotion);

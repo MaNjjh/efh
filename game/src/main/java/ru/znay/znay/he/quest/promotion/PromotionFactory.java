@@ -31,10 +31,10 @@ public class PromotionFactory {
         String className = QuestPromotion.class.getPackage().getName() + "." + result + "Promotion";
 
         try {
-            QuestPromotion promotion = (QuestPromotion)Class.forName(className).newInstance();
+            QuestPromotion promotion = (QuestPromotion) Class.forName(className).newInstance();
             promotion.setParam(param);
             promotion.setCount(count);
-            return  promotion;
+            return promotion;
         } catch (InstantiationException e) {
             return null;
         } catch (IllegalAccessException e) {

@@ -5,8 +5,6 @@ import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.npc.NpcTrigger;
-import ru.znay.znay.he.quest.promotion.GoldPromotion;
-import ru.znay.znay.he.quest.promotion.PromotionFactory;
 import ru.znay.znay.he.quest.template.TemplateType;
 import ru.znay.znay.he.sound.Sound;
 
@@ -91,11 +89,11 @@ public class QuestHandler {
         }
     }
 
-   /* public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        GoldPromotion promotion = (GoldPromotion) PromotionFactory.getInstance().createPromotion("Price");
-        promotion.setGold(10);
-        System.out.println(promotion.getGold());
-    }  */
+    /* public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+      GoldPromotion promotion = (GoldPromotion) PromotionFactory.getInstance().createPromotion("Price");
+      promotion.setGold(10);
+      System.out.println(promotion.getGold());
+  }  */
 
     public void setPlayer(Player player) {
         this.player = player;

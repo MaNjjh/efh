@@ -26,6 +26,7 @@ public class GuiMiniMap extends GuiPanel {
     private Bitmap miniMap;
     private Bitmap resizedMiniMap;
     private int tick = 10;
+    private Mark mark;
 
     public GuiMiniMap(int posX, int posY, Level level) {
 
@@ -33,6 +34,7 @@ public class GuiMiniMap extends GuiPanel {
         this.level = level;
         this.miniMap = new Bitmap(level.getWidth(), level.getHeight());
         this.resizedMiniMap = new Bitmap(level.getWidth() >> 1, level.getHeight() >> 1);
+        this.mark = new Mark(this.resizedMiniMap);
     }
 
     public void markObject(int x, int y, int color) {
@@ -62,6 +64,9 @@ public class GuiMiniMap extends GuiPanel {
             visible = !visible;
             changed = true;
         }
+
+        mark.tick();
+
         if (tick < 45 || !visible) return;
         tick = 0;
         for (int j = 0; j < level.getHeight(); j++) {
@@ -141,7 +146,63 @@ public class GuiMiniMap extends GuiPanel {
     public void render(Screen screen) {
         if (!visible) return;
         super.render(screen);
+
+        mark.render();
+
         BitmapHelper.copy(resizedMiniMap, 0, 0, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, resizedMiniMap.getWidth(), resizedMiniMap.getHeight(), screen.getViewPort());
 
+    }
+
+    private class Mark extends GuiPanel {
+        private long tick = 0;
+        private final int interval = 1000;
+        private Bitmap parent;
+
+        public Mark(Bitmap parent) {
+            this.parent = parent;
+            System.out.println(parent.getHeight() + " " + parent.getHeight());
+            image = new Bitmap(3, 3);
+            BitmapHelper.fill(image, 0xFF00FF);
+            image.getPixels()[1] = 0xFF0000;
+            image.getPixels()[3] = 0xFF0000;
+            image.getPixels()[4] = 0xFF0000;
+            image.getPixels()[5] = 0xFF0000;
+            image.getPixels()[7] = 0xFF0000;
+            visible = false;
+            changed = false;
+        }
+
+        public void put(int x, int y) {
+            this.x = Math.max(x - 1, 0);
+            this.y = Math.max(y - 1, 0);
+            visible = true;
+            changed = true;
+        }
+
+        public void render() {
+            if (!visible) return;
+            BitmapHelper.copy(image, 0, 0, x, y, 3, 3, parent, 0xFF00FF);
+        }
+
+        public void tick() {
+            if (changed && tick < System.currentTimeMillis()) {
+                visible = !visible;
+                tick = System.currentTimeMillis() + interval;
+            }
+        }
+
+        @Override
+        public void hide() {
+            this.visible = false;
+            this.changed = false;
+        }
+    }
+
+    public void showMark(int x, int y) {
+        mark.put((x >> 4) >> 1, (y >> 4) >> 1);
+    }
+
+    public void hideMark() {
+        mark.hide();
     }
 }
