@@ -88,7 +88,7 @@ public class Level {
     private byte[] tiles;
 
     private Fog fog;
-    private NewFog newFog = null;
+    //private NewFog newFog = null;
     private int monsterDensity = 4;
     private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
@@ -576,7 +576,7 @@ public class Level {
 
     public String getMessage(int index) {
         if (messages == null) return "null pointer";
-        if (index < 0 || index >= messages.size()) return "index out of range";
+        if (index < 0 || index >= messages.size()) return "пустое сообщение";
 
         return messages.get(index);
     }

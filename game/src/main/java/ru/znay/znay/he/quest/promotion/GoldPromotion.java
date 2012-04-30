@@ -24,7 +24,13 @@ public class GoldPromotion implements QuestPromotion {
         return gold;
     }
 
-    public void setGold(int gold) {
-        this.gold = gold;
+    @Override
+    public void setParam(String param) {
+
+    }
+
+    @Override
+    public void setCount(String count) {
+        this.gold = Integer.decode(count);
     }
 }

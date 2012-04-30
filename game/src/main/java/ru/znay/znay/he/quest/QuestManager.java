@@ -20,7 +20,7 @@ public class QuestManager {
 
         for (AbsQuest quest : quests) {
             //quest.accept(questHandler);
-            if (quest.getId().equals("3")) quest.accept(level.getQuestHandler());
+            if (quest.getId().equals("1")) quest.accept(level.getQuestHandler());
             if (quest.getNextQuestID() > 0) {
                 for (AbsQuest nquest : quests) {
                     if (quest.getNextQuestID() == Integer.decode(nquest.getId())) {

@@ -5,34 +5,24 @@ import ru.znay.znay.he.model.Player;
 /**
  * Created by IntelliJ IDEA.
  * User: Денис Сергеевич
- * Date: 25.04.12
- * Time: 20:56
+ * Date: 29.04.12
+ * Time: 18:51
  * To change this template use File | Settings | File Templates.
  */
-public class ItemPromotion implements QuestPromotion {
-    private String itemName;
-    private int count;
+public class SpawnPromotion implements QuestPromotion{
+
 
     @Override
     public void promotion(Player player) {
-        //todo добавитьв выдачу итема игроку
-    }
 
-    public String getItemName() {
-        return itemName;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     @Override
     public void setParam(String param) {
-        this.itemName = param;
+
     }
 
     @Override
     public void setCount(String count) {
-        this.count = Integer.decode(count);
     }
 }

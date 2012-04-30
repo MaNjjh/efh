@@ -25,4 +25,14 @@ public class MergedPromotion implements QuestPromotion {
             questPromotion.promotion(player);
         }
     }
+
+    @Deprecated
+    @Override
+    public void setParam(String param) {
+    }
+
+    @Deprecated
+    @Override
+    public void setCount(String count) {
+    }
 }

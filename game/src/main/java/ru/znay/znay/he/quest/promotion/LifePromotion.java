@@ -22,7 +22,12 @@ public class LifePromotion implements QuestPromotion {
         return life;
     }
 
-    public void setLife(int life) {
-        this.life = life;
+    @Override
+    public void setParam(String param) {
+    }
+
+    @Override
+    public void setCount(String count) {
+        this.life = Integer.decode(count);
     }
 }

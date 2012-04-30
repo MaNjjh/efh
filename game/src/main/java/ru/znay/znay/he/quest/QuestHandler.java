@@ -91,11 +91,11 @@ public class QuestHandler {
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+   /* public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         GoldPromotion promotion = (GoldPromotion) PromotionFactory.getInstance().createPromotion("Price");
         promotion.setGold(10);
         System.out.println(promotion.getGold());
-    }
+    }  */
 
     public void setPlayer(Player player) {
         this.player = player;

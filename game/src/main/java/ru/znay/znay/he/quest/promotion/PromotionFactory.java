@@ -18,7 +18,7 @@ public class PromotionFactory {
 
     }
 
-    public QuestPromotion createPromotion(String name) {
+    public QuestPromotion createPromotion(String name, String param, String count) {
 
         if (name.isEmpty()) return null;
 
@@ -31,7 +31,10 @@ public class PromotionFactory {
         String className = QuestPromotion.class.getPackage().getName() + "." + result + "Promotion";
 
         try {
-            return (QuestPromotion) Class.forName(className).newInstance();
+            QuestPromotion promotion = (QuestPromotion)Class.forName(className).newInstance();
+            promotion.setParam(param);
+            promotion.setCount(count);
+            return  promotion;
         } catch (InstantiationException e) {
             return null;
         } catch (IllegalAccessException e) {

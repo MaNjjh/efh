@@ -11,4 +11,6 @@ import ru.znay.znay.he.model.Player;
  */
 public interface QuestPromotion {
     void promotion(Player player);
+    void setParam(String param);
+    void setCount(String count);
 }
