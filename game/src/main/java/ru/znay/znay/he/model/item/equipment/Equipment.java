@@ -3,6 +3,9 @@ package ru.znay.znay.he.model.item.equipment;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.CharacterState;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Александр Сергеевич
@@ -17,6 +20,8 @@ public class Equipment {
         SHOES,
         ARMOR,
     }
+
+    public static final Map<String, Equipment> equips = new HashMap<String, Equipment>();
 
     public static final Equipment simpleBow = new Equipment("Bow", 0, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(0, 0, 8, 0, 0, 30), EQUIP_TYPE.WEAPON);
     public static final Equipment strongBow = new Equipment("S.Bow", 1, 12, PaletteHelper.getColor(-1, 100, 500, 555), new CharacterState(0, 0, 12, 0, 0, 30), EQUIP_TYPE.WEAPON);
@@ -50,6 +55,11 @@ public class Equipment {
         this.name = name;
         this.xSprite = xSprite;
         this.ySprite = ySprite;
+        equips.put(name, this);
+    }
+
+    public Equipment getEquipmentByName(String name) {
+        return equips.get(name);
     }
 
     public CharacterState getBonusState() {
