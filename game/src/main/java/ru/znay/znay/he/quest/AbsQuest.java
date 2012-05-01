@@ -3,6 +3,7 @@ package ru.znay.znay.he.quest;
 import ru.znay.znay.he.model.npc.NPC;
 import ru.znay.znay.he.quest.promotion.QuestPromotion;
 import ru.znay.znay.he.quest.template.MergedTemplate;
+import ru.znay.znay.he.quest.template.TemplateType;
 
 import java.util.UUID;
 
@@ -88,7 +89,10 @@ public class AbsQuest implements QuestStatus, NextQuest {
 
     public void calcQuestType() {
         if (mergedTemplate != null) {
+            int showComplete = this.type & TemplateType.SHOW_COMPLETE;
+            this.type = 0;
             this.type = mergedTemplate.calcQuestType();
+            this.type |= showComplete;
         }
     }
 
@@ -119,5 +123,9 @@ public class AbsQuest implements QuestStatus, NextQuest {
     @Override
     public void initNextQuest(QuestHandler questHandler) {
         this.nextQuest.accept(questHandler);
+    }
+
+    public void setType(int type){
+        this.type = type;
     }
 }

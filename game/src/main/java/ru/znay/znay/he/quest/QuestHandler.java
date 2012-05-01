@@ -64,10 +64,11 @@ public class QuestHandler {
 
     private void checkQuest(AbsQuest quest) {
         if (quest.isCompleted()) {
-            String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
 
-            GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 40, 50), "quest_checkQuest");
-
+            if (quest.isType(TemplateType.SHOW_COMPLETE)) {
+                String message = String.format("Квест '%s' закончен! Поздравляем!", quest.getName());
+                GuiManager.getInstance().add(new GuiTypedTextPanel(message, 4, 40, 50), "quest_checkQuest");
+            }
             if (quest.getQuestPromotion() != null) {
                 quest.getQuestPromotion().promotion(this.player);
             }

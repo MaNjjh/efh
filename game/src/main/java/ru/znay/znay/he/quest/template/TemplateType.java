@@ -8,8 +8,9 @@ package ru.znay.znay.he.quest.template;
  * To change this template use File | Settings | File Templates.
  */
 public class TemplateType {
-    public static final int KILL = 1;
-    public static final int MOVE = 2;
-    public static final int COLLECT = 4;
+    public static final int SHOW_COMPLETE = 1;
+    public static final int KILL = 2;
+    public static final int MOVE = 4;
+    public static final int COLLECT = 8;
     public static final int ALL = 32;
 }

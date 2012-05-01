@@ -5,6 +5,7 @@ import ru.znay.znay.he.quest.promotion.MergedPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
 import ru.znay.znay.he.quest.template.MergedTemplate;
 import ru.znay.znay.he.quest.template.TemplateFactory;
+import ru.znay.znay.he.quest.template.TemplateType;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -47,6 +48,8 @@ public class QuestParser {
         AbsQuest quest = new AbsQuest();
         quest.setId(str[0]);
 
+
+        quest.setType(str[1].equalsIgnoreCase("hide")?0: TemplateType.SHOW_COMPLETE);
         quest.setName(level.getMessage(Integer.decode(str[2])));
         quest.setDescription(level.getMessage(Integer.decode(str[3])));
 
