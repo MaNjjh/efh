@@ -28,9 +28,20 @@ public class MergedTemplate {
     }
 
     public void incKills(String name) {
-        for (DefaultTemplate quest : list)
-            if (quest instanceof KillTemplate)
+        for (DefaultTemplate quest : list) {
+            if (quest instanceof KillTemplate) {
                 ((KillTemplate) quest).incKill(name);
+            }
+        }
+    }
+
+    public void incItems(String name) {
+        for (DefaultTemplate quest : list) {
+            if (quest instanceof CollectTemplate) {
+                ((CollectTemplate) quest).incCount(name);
+            }
+        }
+
     }
 
     public int calcQuestType() {

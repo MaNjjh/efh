@@ -62,6 +62,16 @@ public class QuestHandler {
         }
     }
 
+    public void updateItems(String itemName){
+        for (String key: this.quests.keySet()){
+            AbsQuest quest = this.quests.get(key);
+            if (quest.isType(TemplateType.COLLECT)){
+                quest.getMergedTemplate().incItems(itemName);
+                checkQuest(quest);
+            }
+        }
+    }
+
     private void checkQuest(AbsQuest quest) {
         if (quest.isCompleted()) {
 

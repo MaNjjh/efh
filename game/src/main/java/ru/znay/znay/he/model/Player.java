@@ -252,6 +252,8 @@ public class Player extends Mob {
     public void touchItem(ItemEntity itemEntity) {
         if (itemEntity.isRemoved()) return;
 
+        level.getQuestHandler().updateItems(itemEntity.getItem().getName());
+
         itemEntity.take(this);
         inventory.add(itemEntity.getItem());
         averagedPickups.add(itemEntity.getItem());
