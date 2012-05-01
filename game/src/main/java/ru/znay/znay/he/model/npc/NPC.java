@@ -2,6 +2,7 @@ package ru.znay.znay.he.model.npc;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.CharacterState;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
@@ -29,7 +30,7 @@ public class NPC extends Mob {
         this.y = y;
         this.xStart = x;
         this.yStart = y;
-        this.team = ETeam.NEUTRAL_TEAM;
+        this.team = ETeam.PLAYER_TEAM;
         this.color1 = PaletteHelper.getColor(-1, 100, 232, 532);
         this.color2 = PaletteHelper.getColor(-1, 100, 232, 532);
         this.xtStart = 0;
@@ -43,6 +44,14 @@ public class NPC extends Mob {
 
     @Override
     public boolean canSwim() {
+        return true;
+    }
+
+    public boolean canRegenerate() {
+        return true;
+    }
+
+    public boolean canAttack() {
         return true;
     }
 
@@ -88,16 +97,19 @@ public class NPC extends Mob {
         }
 
 
+        int col1 = color1;
+        int col2 = color2;
+
         if (hurtTime > 0) {
-            color1 = PaletteHelper.getColor(-1, 555, 555, 555);
-            color2 = PaletteHelper.getColor(-1, 555, 555, 555);
+            col1 = PaletteHelper.getColor(-1, 555, 555, 555);
+            col2 = PaletteHelper.getColor(-1, 555, 555, 555);
         }
 
-        screen.render(xo + Tile.HALF_SIZE * flip1, yo + 0, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, color1, flip1);
-        screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip1, yo + 0, (xt + 1) * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, color1, flip1);
+        screen.render(xo + Tile.HALF_SIZE * flip1, yo + 0, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
+        screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip1, yo + 0, (xt + 1) * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
         if (!isSwimming()) {
-            screen.render(xo + Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, xt * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, color2, flip2);
-            screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, (xt + 1) * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, color2, flip2);
+            screen.render(xo + Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, xt * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
+            screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, (xt + 1) * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
         }
     }
 

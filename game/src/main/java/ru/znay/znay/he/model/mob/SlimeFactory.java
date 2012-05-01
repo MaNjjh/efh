@@ -2,6 +2,7 @@ package ru.znay.znay.he.model.mob;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
@@ -28,6 +29,7 @@ public class SlimeFactory extends Mob {
         this.yr = 4;
         this.health = 50;
         this.spawnTime = MIN_SPAWN_TIME + random.nextInt(MIN_SPAWN_TIME);
+        this.team = ETeam.ENEMY_TEAM;
     }
 
     @Override

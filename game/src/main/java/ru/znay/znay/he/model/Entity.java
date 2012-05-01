@@ -24,7 +24,7 @@ public class Entity {
     protected int yr = 4;
     protected boolean removed = false;
     protected Level level;
-    protected ETeam team = ETeam.ENEMY_TEAM;
+    protected ETeam team = ETeam.NEUTRAL_TEAM;
     protected Bitmap sprite;
     protected boolean mouseMotion;
 

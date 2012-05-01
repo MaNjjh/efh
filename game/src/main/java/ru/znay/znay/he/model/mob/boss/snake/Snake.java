@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.mob.boss.snake;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.CharacterState;
+import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.equipment.Equipment;
 import ru.znay.znay.he.model.item.equipment.EquipmentItem;
@@ -38,6 +39,7 @@ public class Snake extends SnakePart {
         this.yr = 6;
         this.health = 100;
         currentState = new CharacterState(0, 100, 0, 0, 0);
+        this.team = ETeam.ENEMY_TEAM;
     }
 
     public void setMovement(double xa, double ya, double rotate) {

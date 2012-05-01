@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.mob;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
@@ -43,6 +44,7 @@ public class Bird extends Mob {
         this.xTarget = 0;
         this.yTarget = 0;
         this.angleInc = 10;
+        this.team = ETeam.ENEMY_TEAM;
     }
 
     @Override

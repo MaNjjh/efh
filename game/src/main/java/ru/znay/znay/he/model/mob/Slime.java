@@ -26,15 +26,8 @@ public class Slime extends Mob {
     public Slime(int x, int y) {
         this.x = x;
         this.y = y;
-        init();
-    }
-
-    public Slime() {
-        init();
-    }
-
-    private void init() {
-        viewRadius = 6;
+        this.viewRadius = 6;
+        this.team = ETeam.ENEMY_TEAM;
     }
 
     @Override

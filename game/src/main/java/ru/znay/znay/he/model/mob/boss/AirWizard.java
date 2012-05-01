@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.mob.boss;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
@@ -24,6 +25,7 @@ public class AirWizard extends Mob {
         this.x = x;
         this.y = y;
         health = maxHealth = 2000;
+        this.team = ETeam.ENEMY_TEAM;
     }
 
     public void tick() {

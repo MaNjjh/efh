@@ -15,9 +15,7 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.boss.snake.Snake;
-import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
-import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
+import ru.znay.znay.he.model.npc.Guardian;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -241,11 +239,11 @@ public class Game extends Graphics implements Runnable {
 
         this.level = new Level(this.player, i, this);
         //GuiManager.getInstance().initDefaultGui(this);
+        this.level.add(new Guardian(player.getX() - 10, player.getY() - 10));
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
-/*
-        int xx = player.getX() - 30;
+/*        int xx = player.getX() - 30;
         int yy = player.getY() - 50;
 
         SnakePart prev = new Snake(xx, yy);
@@ -253,8 +251,7 @@ public class Game extends Graphics implements Runnable {
         for (int a = 0; a < 16; a++) {
             prev = new SnakeNeck(xx, yy, prev);
             this.level.add(prev);
-        }
-*/
+        }*/
 
         InputHandler.getInstance().releaseAll();
     }
