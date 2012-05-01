@@ -126,9 +126,9 @@ public class Game extends Graphics implements Runnable {
         if ((panel = GuiManager.getInstance().get("money")) != null) {
             ResourceItem coin = player.getInventory().findResource(Resource.coin);
             ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
-            String score = "" + ((coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount() << 1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
+            int score = ((coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount() << 1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
 
-            ((GuiStatusPanel) panel).setText2(score);
+            ((GuiStatusPanel) panel).setText(score);
         }
 
         if ((panel = GuiManager.getInstance().get("health")) != null)
@@ -244,6 +244,7 @@ public class Game extends Graphics implements Runnable {
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
+/*
         int xx = player.getX() - 30;
         int yy = player.getY() - 50;
 
@@ -253,6 +254,7 @@ public class Game extends Graphics implements Runnable {
             prev = new SnakeNeck(xx, yy, prev);
             this.level.add(prev);
         }
+*/
 
         InputHandler.getInstance().releaseAll();
     }
