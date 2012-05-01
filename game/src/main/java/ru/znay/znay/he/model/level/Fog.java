@@ -47,13 +47,15 @@ public class Fog {
 
         int w = radius << 1;
         int h = radius << 1;
-        int xOffs = xCenter - radius;
-        int yOffs = yCenter - radius;
+        int xOffs = Math.max(0, xCenter - radius);
+        int yOffs = Math.max(0, yCenter - radius);
 
         for (int j = 0; j < h; j++) {
             for (int i = 0; i < w; i++) {
                 try {
+                    if (i + xOffs >= this.width || j + yOffs >= this.height) continue;
                     fog[i + xOffs + (j + yOffs) * this.width] = !getCircleMap(radius).getCircle()[i + j * w] && fog[i + xOffs + (j + yOffs) * this.width];
+
                 } catch (Exception e) {
                     //ignore
                 }
