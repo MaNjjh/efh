@@ -10,6 +10,8 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,6 +38,7 @@ import java.util.List;
  */
 public class Container extends Utensils {
     protected Inventory inventory = new Inventory();
+    protected boolean removeAfterUse = true;
 
     public Container(int x, int y, int xr, int yr) {
         super(x, y, xr, yr);
@@ -62,8 +65,8 @@ public class Container extends Utensils {
         }
     }
 
-    public boolean removeAfterUsed() {
-        return true;
+    public void setRemoveAfterUse(boolean remove) {
+        this.removeAfterUse = remove;
     }
 
     @Override
@@ -82,7 +85,7 @@ public class Container extends Utensils {
         }
 
         inventory.getItems().clear();
-        if (removeAfterUsed()) {
+        if (removeAfterUse) {
             die();
         }
         return true;
