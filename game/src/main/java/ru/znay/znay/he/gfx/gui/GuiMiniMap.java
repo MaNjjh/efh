@@ -160,7 +160,6 @@ public class GuiMiniMap extends GuiPanel {
 
         public Mark(Bitmap parent) {
             this.parent = parent;
-            System.out.println(parent.getHeight() + " " + parent.getHeight());
             image = new Bitmap(3, 3);
             BitmapHelper.fill(image, 0xFF00FF);
             image.getPixels()[1] = 0xFF0000;

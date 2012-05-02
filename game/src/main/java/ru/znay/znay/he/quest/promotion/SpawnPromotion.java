@@ -19,9 +19,7 @@ public class SpawnPromotion implements QuestPromotion {
 
     @Override
     public void promotion(Player player) {
-        System.out.println(1);
         for (int i = 0; i < count; i++) {
-            System.out.println(2);
             Mob mob = MobFactory.getInstance().createMob(mobName, false);
             mob.setX(player.getX() - 20);
             mob.setY(player.getY() - 20);

@@ -1,5 +1,6 @@
 package ru.znay.znay.he.model.builds.utensils;
 
+import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
@@ -36,17 +37,12 @@ import java.util.List;
  * 02.05.12: Original version (WHo)
  * 15:10: Time
  */
-public class Container extends Utensils {
+public abstract class Container extends Utensils {
     protected Inventory inventory = new Inventory();
     protected boolean removeAfterUse = true;
 
     public Container(int x, int y, int xr, int yr) {
         super(x, y, xr, yr);
-        List<String> testList = new ArrayList<String>();
-        testList.add("r.bow");
-        testList.add("coin");
-        testList.add("b.coin");
-        setItems(testList);
     }
 
     public void setItems(List<String> items) {
@@ -90,4 +86,6 @@ public class Container extends Utensils {
         }
         return true;
     }
+
+    public abstract void wrapSprite(SpriteCollector spriteCollector);
 }

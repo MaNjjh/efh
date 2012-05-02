@@ -54,7 +54,7 @@ public class NewFog {
         //fuck memory economy
         testFog = new boolean[ww * hh];
 
-        System.out.println(ww * hh);
+        //System.out.println(ww * hh);
 
         for (int i = 0; i < ww * hh; i++)
             testFog[i] = true;

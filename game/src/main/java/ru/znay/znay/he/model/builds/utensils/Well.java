@@ -15,7 +15,15 @@ import ru.znay.znay.he.model.level.tile.Tile;
 public class Well extends Container {
     public Well(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 4, 1);
+        wrapSprite(spriteCollector);
+    }
 
+    public Well() {
+        super(0, 0, 4, 1);
+    }
+
+    @Override
+    public void wrapSprite(SpriteCollector spriteCollector) {
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(0, Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(111, 222, 333, -1)));
         spriteCollector.addWrapper(new SpriteWrapper(2 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(2, 3, 4, -1)));

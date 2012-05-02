@@ -16,9 +16,18 @@ public class Barrel extends Container {
     public Barrel(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 4, 1);
 
+        wrapSprite(spriteCollector);
+    }
+
+    @Override
+    public void wrapSprite(SpriteCollector spriteCollector) {
         spriteCollector.resetWrappers();
         spriteCollector.addWrapper(new SpriteWrapper(8 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(30, 20, 40, -1)));
 
         this.sprite = spriteCollector.mergedWrappers("barrel", 1, random.nextInt(2), 0x01000000);
+    }
+
+    public Barrel() {
+        super(0, 0, 4, 1);
     }
 }

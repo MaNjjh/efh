@@ -240,8 +240,8 @@ public class Game extends Graphics implements Runnable {
 
         this.level = new Level(this.player, i, this);
         //GuiManager.getInstance().initDefaultGui(this);
-        this.level.add(new Guardian(player.getX() - 10, player.getY() - 10));
-        this.level.add(new Chest(player.getX() - 10, player.getY() - 10, level.getSpriteCollector()));
+        //this.level.add(new Guardian(player.getX() - 10, player.getY() - 10));
+        //this.level.add(new Chest(player.getX() - 10, player.getY() - 10, level.getSpriteCollector()));
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
