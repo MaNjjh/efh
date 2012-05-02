@@ -18,6 +18,7 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.particle.FlowTextIcon;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
@@ -52,11 +53,13 @@ public class Player extends Mob {
         this.team = ETeam.PLAYER_TEAM;
         this.game = game;
         this.bloodColor = 0xcc00cc;
+
     }
 
     @Override
     public void init(Level level) {
         super.init(level);
+        touchItem(new ItemEntity(new ResourceItem(Resource.apple, 10), x, y));
         /*
         touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), x, y));
         touchItem(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x, y));
@@ -84,6 +87,20 @@ public class Player extends Mob {
             }
             if (inputHandler.right.down) {
                 xa++;
+            }
+
+            if (inputHandler.berryUse.clicked) {
+                if (health < currentState.getEndurance() && inventory.removeResource(Resource.berry, 1)) {
+                    health = Math.min(currentState.getEndurance(), health + 1);
+                    level.add(new FlowText("+1", x, y, Font.greenColor));
+                }
+            }
+
+            if (inputHandler.appleUse.clicked) {
+                if (health < currentState.getEndurance() && inventory.removeResource(Resource.apple, 1)) {
+                    health = Math.min(currentState.getEndurance(), health + 1);
+                    level.add(new FlowText("+1", x, y, Font.greenColor));
+                }
             }
 
             if (inputHandler.mouse.clicked || inputHandler.action.clicked) {
