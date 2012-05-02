@@ -11,6 +11,7 @@ import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.builds.utensils.Chest;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
@@ -240,6 +241,7 @@ public class Game extends Graphics implements Runnable {
         this.level = new Level(this.player, i, this);
         //GuiManager.getInstance().initDefaultGui(this);
         this.level.add(new Guardian(player.getX() - 10, player.getY() - 10));
+        this.level.add(new Chest(player.getX() - 10, player.getY() - 10, level.getSpriteCollector()));
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
@@ -252,6 +254,7 @@ public class Game extends Graphics implements Runnable {
             prev = new SnakeNeck(xx, yy, prev);
             this.level.add(prev);
         }*/
+
 
         InputHandler.getInstance().releaseAll();
     }

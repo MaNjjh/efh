@@ -12,7 +12,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 19:13
  * To change this template use File | Settings | File Templates.
  */
-public class Chest extends Utensils {
+public class Chest extends Container {
     public Chest(int x, int y, SpriteCollector spriteCollector) {
         super(x, y, 4, 1);
 

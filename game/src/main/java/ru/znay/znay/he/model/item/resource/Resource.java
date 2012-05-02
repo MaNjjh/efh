@@ -51,10 +51,10 @@ public class Resource {
         this.xSprite = xSprite;
         this.ySprite = ySprite;
         this.color = color;
-        resources.put(name, this);
+        resources.put(name.toLowerCase(), this);
     }
 
-    public static Resource getEquipmentByName(String name) {
+    public static Resource getResourceByName(String name) {
         return resources.get(name);
     }
 
