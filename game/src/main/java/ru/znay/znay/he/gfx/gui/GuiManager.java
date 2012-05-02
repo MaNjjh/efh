@@ -28,10 +28,10 @@ public class GuiManager {
 
     private static GuiManager guiManager = null;
 
-    protected static final int PANEL_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
-    protected static final int FONT_COLOR = PaletteHelper.getColor(-1, -1, -1, 555);
-    protected static final int MENU_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
-    protected static final int MENU_COLOR_SEL = PaletteHelper.getColor(-1, 1, 141, 445);
+    public static final int PANEL_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
+    public static final int FONT_COLOR = PaletteHelper.getColor(-1, -1, -1, 555);
+    public static final int MENU_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
+    public static final int MENU_COLOR_SEL = PaletteHelper.getColor(-1, 1, 141, 445);
 
     public static boolean isOpenedMenu = false;
 
@@ -129,7 +129,7 @@ public class GuiManager {
         add(new GuiStatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
         add(new GuiStatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
         add(new GuiSpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), level.getSpriteCollector()), "speed");
-        GuiInventory inventory = new GuiInventory(1, 5);
+        GuiInventory inventory = new GuiInventory(1, 5, level.getPlayer());
         add(inventory, "inventory");
         add(new GuiMenu(50, 100), "menu");
 

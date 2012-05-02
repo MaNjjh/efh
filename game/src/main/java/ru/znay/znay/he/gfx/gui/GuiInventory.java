@@ -4,7 +4,12 @@ import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
+import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
+import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
@@ -32,9 +37,12 @@ public class GuiInventory extends GuiPanel {
     private ResourceItem apple = null;
     private ResourceItem berry = null;
 
-    public GuiInventory(int x, int y) {
+    private Player player = null;
+
+    public GuiInventory(int x, int y, Player player) {
         this.x = x;
         this.y = y;
+        this.player = player;
 
         List<String> messages = new LinkedList<String>();
 
@@ -69,17 +77,7 @@ public class GuiInventory extends GuiPanel {
             panel.render(screen);
         }
 
-        /*String val = "0%";
-        if (speed < 3)
-            val = "30%";
-        else if (speed < 10)
-            val = "60%";
-        else if (speed < 40)
-            val = "90%";
-        else if (speed < 60)
-            val = "120%"; */
-
-        int posX = panels[1].getX() + 12 * Tile.HALF_SIZE + ((speed < 60) ? Tile.HALF_SIZE : 0);
+        int posX = panels[1].getX() + 12 * Tile.HALF_SIZE + ((speed < 100) ? Tile.HALF_SIZE : 0);
         int posY = panels[1].getY() + 4 * Tile.HALF_SIZE;
 
         Font.drawToBitmap("" + speed + "%", screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
@@ -99,33 +97,32 @@ public class GuiInventory extends GuiPanel {
 
         Font.drawToBitmap("" + def, screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
 
+        Inventory inventory = player.getInventory();
 
-        if (weapon != null) {
-            weapon.renderInventory(screen, x + 3, y + 3);
+        EquipmentItem item;
+
+        if ((item = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.WEAPON)) != null) {
+            item.renderInventory(screen, x + 3, y + 3);
         }
 
-        if (armor != null) {
-            armor.renderInventory(screen, x + 8, y + 3);
+        if ((item = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.ARMOR)) != null) {
+            item.renderInventory(screen, x + 8, y + 3);
         }
 
-        if (boots != null) {
-            boots.renderInventory(screen, x + 8, y + 25);
+        if ((item = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.SHOES)) != null) {
+            item.renderInventory(screen, x + 8, y + 25);
         }
 
-        if (apple != null) {
-            apple.renderInventory(screen, x + 10, y + 77);
-            posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
-            posY = y + 10 * Tile.HALF_SIZE;
+        ResourceItem resourceItem;
 
-            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
+        if ((resourceItem = inventory.findResource(Resource.getResourceByName("apple"))) != null) {
+            resourceItem.renderInventory(screen, x + 10, y + 77, x + 4 * Tile.HALF_SIZE, y + 10 * Tile.HALF_SIZE);
+            //Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
         }
 
-        if (berry != null) {
-            berry.renderInventory(screen, x + 10, y + 87);
-            posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
-            posY = y + 13 * Tile.HALF_SIZE;
-
-            Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
+        if ((resourceItem = inventory.findResource(Resource.getResourceByName("berry"))) != null) {
+            resourceItem.renderInventory(screen, x + 10, y + 87, x + 4 * Tile.HALF_SIZE, y + 13 * Tile.HALF_SIZE);
+            //Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
         }
     }
 

@@ -1,5 +1,7 @@
 package ru.znay.znay.he.model.item.resource;
 
+import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Item;
@@ -61,12 +63,13 @@ public class ResourceItem extends Item {
         screen.render(x, y, resource.getxSprite() * Tile.HALF_SIZE, resource.getySprite() * Tile.HALF_SIZE, resource.getColor(), 0);
     }
 
-    public void renderInventory(Screen screen, int x, int y) {
+    public void renderInventory(Screen screen, int x, int y, int textX, int textY) {
         screen.render(x, y, resource.getxSprite() * Tile.HALF_SIZE, resource.getySprite() * Tile.HALF_SIZE, resource.getColor(), 0);
         /*Font.draw(resource.getName(), screen, x + 32, y, PaletteHelper.getColor(-1, 555, 555, 555));
         int cc = count;
         if (cc > 999) cc = 999;
         Font.draw("" + cc, screen, x + 8, y, PaletteHelper.getColor(-1, 444, 444, 444)); */
+        Font.draw("" + count, screen, (count > 10 ? Tile.HALF_SIZE : 0) + textX, textY, GuiManager.FONT_COLOR);
     }
 
     public String getName() {
