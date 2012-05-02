@@ -8,6 +8,10 @@ import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.item.Item;
+import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.resource.Resource;
+import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 import java.util.LinkedList;
@@ -62,29 +66,25 @@ public class Shrubbery extends Tree implements GuiMenu.Callback {
 
         tick = System.currentTimeMillis() + 120000;
 
-        //  Тут будет подбор ягод
-        //if (result == 0)
-        //
-        //
     }
 
     @Override
     public void touchedBy(Entity entity) {
         super.touchedBy(entity);
-
-        if (!berry) return;
-
-        if (tick2 < System.currentTimeMillis() && entity instanceof Player)
-            showMenu();
     }
 
-    private void showMenu() {
-        GuiManager.getInstance().add(new GuiTextPanel("Среди листьев вы обнаруживаете несколько подозрительных ягод", 4, 4), "shrubbery");
+    @Override
+    public boolean interact(Item item, Player player, int dir) {
+        if (!berry) return false;
 
-        List<String> strings = new LinkedList<String>();
-        strings.add("Собрать");
-        strings.add("Уйти");
+        wrapSprite((berry = !berry));
 
-        ((GuiMenu) GuiManager.getInstance().get("menu")).showMenu(strings, this);
+        tick = System.currentTimeMillis() + 120000;
+
+        for (int i = 0; i < random.nextInt(3) + 4; i++) {
+            level.getPlayer().touchedBy(new ItemEntity(new ResourceItem(Resource.berry), 0, 0));
+        }
+
+        return false;
     }
 }

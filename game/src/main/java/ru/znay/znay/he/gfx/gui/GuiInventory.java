@@ -120,7 +120,7 @@ public class GuiInventory extends GuiPanel {
         }
 
         if ((resourceItem = inventory.findResource(Resource.getResourceByName("berry"))) != null) {
-            resourceItem.renderInventory(screen, x + 10, y + 87, x + 4 * Tile.HALF_SIZE, y + 13 * Tile.HALF_SIZE);
+            resourceItem.renderInventory(screen, x + 10, y + 103, x + 4 * Tile.HALF_SIZE, y + 13 * Tile.HALF_SIZE);
         }
     }
 

@@ -1,8 +1,5 @@
 package ru.znay.znay.he.model.builds.tree;
 
-import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.GuiMenu;
-import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -14,9 +11,6 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Денис Сергеевич
@@ -27,7 +21,7 @@ import java.util.List;
 public class AppleTree extends Tree {
 
     private boolean apple = false;
-    private long time;
+    private long time = System.currentTimeMillis() + 60000;
 
     public AppleTree(int x, int y) {
         super(x, y, 16, 12);
@@ -49,66 +43,46 @@ public class AppleTree extends Tree {
 
     @Override
     public boolean interact(Item item, Player player, int dir) {
+        if (!apple) {
+            return false;
+        }
 
-        if (!apple) return false;
 
-        showMenu();
+        time = System.currentTimeMillis() + 120000;
+
+        apple = false;
+
+        wrapSprite(true);
+
+        for (int i = 0; i < random.nextInt(3) + 4; i++) {
+            level.add(new ItemEntity(new ResourceItem(Resource.apple), x + random.nextInt(31) - 15, y + random.nextInt(31)));
+        }
 
         return false;
     }
 
-
-    public void showMenu() {
-        GuiManager.getInstance().add(new GuiTextPanel("На дереве вы видите несколько спелых яблок", 4, 4), "appletree");
-
-        List<String> strings = new LinkedList<String>();
-        strings.add("Сорвать");
-        strings.add("Уйти");
-
-        ((GuiMenu) GuiManager.getInstance().get("menu")).showMenu(strings, new GuiMenu.Callback() {
-            @Override
-            public void result(int result) {
-
-                GuiManager.getInstance().remove("appletree");
-
-                if (result == 1) return;
-
-                apple = !apple;
-
-                time = System.currentTimeMillis();
-
-                //  Тут будет подбор ягод
-                if (result == 0) {
-                    for (int i = 0; i < random.nextInt(3) + 4; i++) {
-                        level.add(new ItemEntity(new ResourceItem(Resource.apple), x + random.nextInt(31) - 15, y + random.nextInt(31)));
-                    }
-                }
-            }
-        });
-    }
 
     @Override
     public void render(Screen screen) {
 
         wrapSprite(false);
 
-        if (mouseMotion && apple) {
+        /*if (mouseMotion && apple) {
             wrapSprite(true);
-        }
+        }*/
 
         int xt = (x - xr * 2) - screen.getXOffset();
         int yt = (y - yr * 2 - 24) - screen.getYOffset();
 
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
-
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (System.currentTimeMillis() - time < 2000 || apple) return;
-        apple = !apple;
-
+        if (time > System.currentTimeMillis() || apple) return;
+        apple = true;
+        wrapSprite(true);
     }
 }
