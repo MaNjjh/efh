@@ -3,5 +3,5 @@
 3,true,6,7,4,1,Collect,bow,1,1,Spawn,SlimeFactory,1
 4,true,8,9,5,1,Kill,1,SlimeFactory,1,Mark,5:74,1
 5,true,10,11,6,1,Move,4,null,1,Mark,0:0,0
-6,true,12,13,7,1,Collect,Apple,3,0
-7,false,14,15,0,1,Move,3,null,0
+6,false,12,13,7,1,Collect,Apple,3,0
+7,true,14,15,0,1,Move,3,null,0

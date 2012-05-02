@@ -49,6 +49,7 @@ public class QuestParser {
         quest.setId(str[0]);
 
         quest.setType(str[1].equalsIgnoreCase("true")?0: TemplateType.SHOW_COMPLETE);
+
         quest.setName(level.getMessage(Integer.decode(str[2])));
         quest.setDescription(level.getMessage(Integer.decode(str[3])));
 
