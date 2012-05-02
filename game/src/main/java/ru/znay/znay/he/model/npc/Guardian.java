@@ -80,7 +80,7 @@ public class Guardian extends NPC {
 
                 double m = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 
-                if (m < 30) target = null;
+                if (m > 30) target = null;
 
                 double vx = xDiff / m;
                 double vy = yDiff / m;
