@@ -29,24 +29,28 @@ public class Guardian extends NPC {
         if (level.getPlayer() != null && randomWalkTime == 0) {
             int xd = level.getPlayer().getX() - x;
             int yd = level.getPlayer().getY() - y;
-            if (xd * xd + yd * yd < 32 * 32) {
+            /*if (xd * xd + yd * yd < 32 * 32) {
                 xa = 0;
                 ya = 0;
                 if (xd < 0) xa = +1;
                 if (xd > 0) xa = -1;
                 if (yd < 0) ya = +1;
                 if (yd > 0) ya = -1;
-            } else if (xd * xd + yd * yd > 80 * 80) {
+            } else */if (xd * xd + yd * yd > 80 * 80) {
                 xa = 0;
                 ya = 0;
                 if (xd < 0) xa = -1;
                 if (xd > 0) xa = +1;
                 if (yd < 0) ya = -1;
                 if (yd > 0) ya = +1;
+            } else if (xd * xd + yd * yd < 30 * 30) {
+                xa = 0;
+                ya = 0;
             }
         }
 
         int speed = (tickTime % 4) == 0 ? 0 : 1;
+
         if (!move(xa * speed, ya * speed) || random.nextInt(100) == 0) {
             randomWalkTime = 30;
             xa = (random.nextInt(3) - 1);
@@ -70,10 +74,13 @@ public class Guardian extends NPC {
                     }
                 }
             } else {
+
                 int xDiff = target.getX() - x;
                 int yDiff = target.getY() - y;
 
                 double m = Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+
+                if (m < 30) target = null;
 
                 double vx = xDiff / m;
                 double vy = yDiff / m;

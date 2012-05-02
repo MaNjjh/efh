@@ -26,6 +26,9 @@ import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.SlimeFactory;
+import ru.znay.znay.he.model.mob.boss.snake.Snake;
+import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
+import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 import ru.znay.znay.he.model.npc.NpcTrigger;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.model.particle.FireParticle;
@@ -450,6 +453,18 @@ public class Level {
             for (int i = 0; i < this.width; i++) {
                 int value = map.getPixels()[i + j * this.width];
                 if (value == 0xFFFFFFFF) continue;
+                if (value == 0xFF20FFFF) {
+                    int xx = (i << 4) + Tile.HALF_SIZE;
+                    int yy = (j << 4) + Tile.HALF_SIZE;
+
+                    SnakePart prev = new Snake(xx, yy);
+                    this.add(prev);
+                    for (int a = 0; a < 16; a++) {
+                        prev = new SnakeNeck(xx, yy, prev);
+                        this.add(prev);
+                    }
+                    continue;
+                }
                 switch (((value >> 16) & 0xFF)) {
                     case 0xFF: {
                         if (this.player.getRespPoint() != null) {
