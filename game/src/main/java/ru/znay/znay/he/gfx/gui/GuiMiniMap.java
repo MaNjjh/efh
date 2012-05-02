@@ -144,13 +144,15 @@ public class GuiMiniMap extends GuiPanel {
     }
 
     public void render(Screen screen) {
-        if (!visible) return;
+        if (!visible) {
+            return;
+        }
+
         super.render(screen);
 
         mark.render();
 
         BitmapHelper.copy(resizedMiniMap, 0, 0, x + Tile.HALF_SIZE, y + Tile.HALF_SIZE, resizedMiniMap.getWidth(), resizedMiniMap.getHeight(), screen.getViewPort());
-
     }
 
     private class Mark extends GuiPanel {
@@ -179,7 +181,9 @@ public class GuiMiniMap extends GuiPanel {
         }
 
         public void render() {
-            if (!visible) return;
+            if (!visible) {
+                return;
+            }
             BitmapHelper.copy(image, 0, 0, x, y, 3, 3, parent, 0xFF00FF);
         }
 

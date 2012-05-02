@@ -65,8 +65,9 @@ public class GuiInventory extends GuiPanel {
             return;
         }
 
-        for (GuiPanel panel : panels)
+        for (GuiPanel panel : panels) {
             panel.render(screen);
+        }
 
         /*String val = "0%";
         if (speed < 3)
@@ -99,14 +100,17 @@ public class GuiInventory extends GuiPanel {
         Font.drawToBitmap("" + def, screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
 
 
-        if (weapon != null)
+        if (weapon != null) {
             weapon.renderInventory(screen, x + 3, y + 3);
+        }
 
-        if (armor != null)
+        if (armor != null) {
             armor.renderInventory(screen, x + 8, y + 3);
+        }
 
-        if (boots != null)
+        if (boots != null) {
             boots.renderInventory(screen, x + 8, y + 25);
+        }
 
         if (apple != null) {
             apple.renderInventory(screen, x + 10, y + 77);
@@ -117,7 +121,7 @@ public class GuiInventory extends GuiPanel {
         }
 
         if (berry != null) {
-            berry.renderInventory(screen, x + 3, y + 32);
+            berry.renderInventory(screen, x + 10, y + 87);
             posX = x + 4 * Tile.HALF_SIZE + ((11 < 10) ? Tile.HALF_SIZE : 0);
             posY = y + 13 * Tile.HALF_SIZE;
 
@@ -127,8 +131,9 @@ public class GuiInventory extends GuiPanel {
 
     @Override
     public void tick() {
-        if (InputHandler.getInstance().inventory.clicked)
+        if (InputHandler.getInstance().inventory.clicked) {
             visible = !visible;
+        }
     }
 
     public void setStr(int str) {

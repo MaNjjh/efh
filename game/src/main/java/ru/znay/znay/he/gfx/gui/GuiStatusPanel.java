@@ -48,7 +48,9 @@ public class GuiStatusPanel extends GuiPanel {
     }
 
     public void setText(int t) {
-        if (t == val) return;
+        if (t == val) {
+            return;
+        }
 
         time = System.currentTimeMillis() + 1000;
 
@@ -64,10 +66,13 @@ public class GuiStatusPanel extends GuiPanel {
 
     @Override
     public void tick() {
-        if (currentColor == neutralColor) return;
+        if (currentColor == neutralColor) {
+            return;
+        }
 
-        if (System.currentTimeMillis() > time)
+        if (System.currentTimeMillis() > time) {
             currentColor = neutralColor;
+        }
 
         changed = true;
     }

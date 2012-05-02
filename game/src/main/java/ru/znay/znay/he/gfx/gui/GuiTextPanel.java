@@ -54,11 +54,13 @@ public class GuiTextPanel extends GuiPanel {
     }
 
     protected void formatString(String message) {
-        if (this.formatedText.size() > 0)
+        if (this.formatedText.size() > 0) {
             this.formatedText.clear();
+        }
 
-        if (message.isEmpty())
+        if (message.isEmpty()) {
             message = "TEXT";
+        }
 
         final int maxLen = (Constants.SCREEN_WIDTH / Tile.HALF_SIZE) / 2 + 5;
         String temp;

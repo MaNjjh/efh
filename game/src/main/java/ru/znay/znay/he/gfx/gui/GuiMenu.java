@@ -35,15 +35,18 @@ public class GuiMenu extends GuiPanel {
             return;
         }
 
-        if (visible) this.callback.result(-1);
+        if (visible) {
+            this.callback.result(-1);
+        }
 
         GuiManager.isOpenedMenu = true;
 
         this.callback = callback;
         int i = 0;
         panels.clear();
-        for (String s : strings)
+        for (String s : strings) {
             panels.add(new GuiTextPanel(s, x, y + (i * (Tile.HALF_SIZE * 3)), GuiManager.FONT_COLOR, (i++ == 0) ? GuiManager.MENU_COLOR_SEL : GuiManager.MENU_COLOR));
+        }
         currentCell = 0;
         changed = true;
         visible = true;
@@ -55,8 +58,9 @@ public class GuiMenu extends GuiPanel {
         int lastCell = currentCell;
         currentCell++;
 
-        if (currentCell >= panels.size())
+        if (currentCell >= panels.size()) {
             currentCell = 0;
+        }
 
         panels.get(lastCell).setPanelColor(GuiManager.MENU_COLOR);
 

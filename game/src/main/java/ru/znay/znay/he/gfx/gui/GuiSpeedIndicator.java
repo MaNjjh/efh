@@ -57,8 +57,12 @@ public class GuiSpeedIndicator extends GuiPanel {
     }
 
     public void changeSpeed(int val) {
-        if (speed == val) return;
-        else speed = val;
+        if (speed == val) {
+            return;
+        }
+        else {
+            speed = val;
+        }
 
         changed = true;
     }

@@ -66,7 +66,9 @@ public class GuiManager {
     public void add(GuiPanel panel, String name) {
         if (!findSamePanel(panel)) {
             panels.put(name, panel);
-        } else System.out.println("duplicate " + name);
+        } else {
+            System.out.println("duplicate " + name);
+        }
     }
 
     public GuiPanel get(String name) {
@@ -86,10 +88,12 @@ public class GuiManager {
         Set<String> keys = panels.keySet();
         for (String key : keys) {
             GuiPanel panel = panels.get(key);
-            if (panel.closed)
+            if (panel.closed) {
                 strings.add(key);
-            else
+            }
+            else {
                 panel.tick();
+            }
         }
 
         for (String s : strings) {
@@ -106,7 +110,9 @@ public class GuiManager {
 
     public void remove(String name) {
         GuiPanel p;
-        if ((p = panels.get(name)) != null) p.close();
+        if ((p = panels.get(name)) != null) {
+            p.close();
+        }
     }
 
     public static GuiManager getInstance() {
