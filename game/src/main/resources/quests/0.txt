@@ -1,7 +1,7 @@
-1,hide,2,3,2,1,Move,1,null,1,Mark,21:105,1
-2,hide,4,5,3,1,Move,2,null,2,Mark,0:0,0,Container,Chest:24:101:true,bow
-3,hide,6,7,4,1,Collect,bow,1,1,Spawn,SlimeFactory,1
-4,hide,8,9,5,1,Kill,1,SlimeFactory,1,Mark,5:74,1
-5,hide,10,11,6,1,Move,4,null,1,Mark,0:0,0
-6,hide,12,13,7,1,Collect,Apple,3,0
-7,hide,14,15,0,1,Move,3,null,0
+1,true,2,3,2,1,Move,1,null,1,Mark,21:105,1
+2,true,4,5,3,1,Move,2,null,2,Mark,0:0,0,Container,Chest:24:101:true,bow
+3,true,6,7,4,1,Collect,bow,1,1,Spawn,SlimeFactory,1
+4,true,8,9,5,1,Kill,1,SlimeFactory,1,Mark,5:74,1
+5,true,10,11,6,1,Move,4,null,1,Mark,0:0,0
+6,true,12,13,7,1,Collect,Apple,3,0
+7,false,14,15,0,1,Move,3,null,0
