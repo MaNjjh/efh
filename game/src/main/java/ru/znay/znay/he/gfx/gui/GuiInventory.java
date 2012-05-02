@@ -102,27 +102,25 @@ public class GuiInventory extends GuiPanel {
         EquipmentItem item;
 
         if ((item = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.WEAPON)) != null) {
-            item.renderInventory(screen, x + 3, y + 3);
+            item.renderInventory(screen, x + Tile.SIZE, y + Tile.SIZE);
         }
 
         if ((item = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.ARMOR)) != null) {
-            item.renderInventory(screen, x + 8, y + 3);
+            item.renderInventory(screen, x + 5 * Tile.SIZE, y + Tile.SIZE);
         }
 
         if ((item = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.SHOES)) != null) {
-            item.renderInventory(screen, x + 8, y + 25);
+            item.renderInventory(screen, x + 5 * Tile.SIZE, y + 77);
         }
 
         ResourceItem resourceItem;
 
         if ((resourceItem = inventory.findResource(Resource.getResourceByName("apple"))) != null) {
             resourceItem.renderInventory(screen, x + 10, y + 77, x + 4 * Tile.HALF_SIZE, y + 10 * Tile.HALF_SIZE);
-            //Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
         }
 
         if ((resourceItem = inventory.findResource(Resource.getResourceByName("berry"))) != null) {
             resourceItem.renderInventory(screen, x + 10, y + 87, x + 4 * Tile.HALF_SIZE, y + 13 * Tile.HALF_SIZE);
-            //Font.drawToBitmap("" + apple.getCount(), screen, posX, posY, GuiManager.FONT_COLOR, screen.getViewPort());
         }
     }
 
