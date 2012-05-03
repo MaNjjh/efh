@@ -90,15 +90,15 @@ public class GuiMenu extends GuiPanel {
     public void tick() {
         if (!visible) return;
 
-        if (InputHandler.getInstance().down.clicked) {
+        if (InputHandler.getInstance(null).down.clicked) {
             selectNext();
         }
 
-        if (InputHandler.getInstance().up.clicked) {
+        if (InputHandler.getInstance(null).up.clicked) {
             selectPrev();
         }
 
-        if (InputHandler.getInstance().action.clicked) {
+        if (InputHandler.getInstance(null).action.clicked) {
             select();
         }
     }

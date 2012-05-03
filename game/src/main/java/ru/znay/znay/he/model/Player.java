@@ -73,7 +73,7 @@ public class Player extends Mob {
         int xa = 0;
         int ya = 0;
 
-        InputHandler inputHandler = InputHandler.getInstance();
+        InputHandler inputHandler = InputHandler.getInstance(null);
 
         if (!GuiManager.isOpenedMenu) {
             if (inputHandler.up.down) {
@@ -374,13 +374,13 @@ public class Player extends Mob {
     public void moveToXY(int x, int y) {
         this.x = x;
         this.y = y;
-        InputHandler.getInstance().releaseAll();
+        InputHandler.getInstance(null).releaseAll();
     }
 
     public void moveLevel(int newLevel, int x, int y) {
         respPoint = new Point(x, y);
         this.game.loadLevel(newLevel);
-        InputHandler.getInstance().releaseAll();
+        InputHandler.getInstance(null).releaseAll();
     }
 
     public Point getRespPoint() {

@@ -115,22 +115,22 @@ public class Level {
         }
     };
 
-    public Level(Player pl, int lv, Game game) {
-        init(pl, lv, game);
+    public Level(int lv, Game game) {
+        init(lv, game);
     }
 
     @SuppressWarnings("unchecked")
-    public void init(final Player player, int level, Game game) {
+    public void init(int level, Game game) {
 
         this.number = level;
         this.game = game;
-        this.player = player;
+        this.player = game.getPlayer();
+        this.questHandler = game.getQuestHandler();
 
         messages = TextFileHelper.LoadMessages(level);
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
-        this.questHandler = new QuestHandler();
 
         this.loadLevelObject(level, player);
 
@@ -139,8 +139,6 @@ public class Level {
         this.add(player);
 
         GuiManager.getInstance().initDefaultGui(this);
-
-        questHandler.setPlayer(this.player);
 
         questManager = new QuestManager(this);
 

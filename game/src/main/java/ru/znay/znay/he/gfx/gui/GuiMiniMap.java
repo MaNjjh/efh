@@ -60,7 +60,7 @@ public class GuiMiniMap extends GuiPanel {
 
     public void tick() {
         tick++;
-        if (InputHandler.getInstance().miniMap.clicked) {
+        if (InputHandler.getInstance(null).miniMap.clicked) {
             visible = !visible;
             changed = true;
         }

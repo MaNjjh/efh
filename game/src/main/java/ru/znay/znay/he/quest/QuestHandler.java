@@ -5,11 +5,12 @@ import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.npc.NpcTrigger;
+import ru.znay.znay.he.quest.template.QuestLog;
 import ru.znay.znay.he.quest.template.TemplateType;
 import ru.znay.znay.he.sound.Sound;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,15 +20,13 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class QuestHandler {
-    private Map<String, AbsQuest> quests = new HashMap<String, AbsQuest>();
+    private ConcurrentMap<String, AbsQuest> quests = new ConcurrentHashMap<String, AbsQuest>();
     private Player player;
+    private QuestManager questManager;
+    private QuestLog questLog;
 
     public QuestHandler(Player player) {
         this.player = player;
-    }
-
-    public QuestHandler() {
-
     }
 
     public boolean accept(AbsQuest absQuest) {
@@ -62,10 +61,10 @@ public class QuestHandler {
         }
     }
 
-    public void updateItems(String itemName){
-        for (String key: this.quests.keySet()){
+    public void updateItems(String itemName) {
+        for (String key : this.quests.keySet()) {
             AbsQuest quest = this.quests.get(key);
-            if (quest.isType(TemplateType.COLLECT)){
+            if (quest.isType(TemplateType.COLLECT)) {
                 quest.getMergedTemplate().incItems(itemName);
                 checkQuest(quest);
             }
@@ -108,5 +107,9 @@ public class QuestHandler {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setQuestManager(QuestManager questManager){
+        this.questManager = questManager;
     }
 }

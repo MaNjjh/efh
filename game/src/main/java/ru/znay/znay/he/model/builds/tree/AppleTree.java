@@ -21,7 +21,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
 public class AppleTree extends Tree {
 
     private boolean apple = false;
-    private long time = System.currentTimeMillis() + 60000;
+    private long time = System.currentTimeMillis() + 45000;
 
     public AppleTree(int x, int y) {
         super(x, y, 16, 12);

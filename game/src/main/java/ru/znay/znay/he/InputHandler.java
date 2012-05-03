@@ -162,9 +162,9 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
         defaultCursor = game.getCursor();
     }
 
-    public static InputHandler getInstance() {
+    public static InputHandler getInstance(Game game) {
         if (inputHandler == null)
-            inputHandler = new InputHandler();
+            inputHandler = new InputHandler(game);
 
         return inputHandler;
     }
