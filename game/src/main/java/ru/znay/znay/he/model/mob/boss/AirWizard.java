@@ -8,6 +8,8 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
@@ -111,8 +113,10 @@ public class AirWizard extends Mob {
         }
         if (random.nextInt(2) == 0) {
             this.level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-
         }
+        level.add(new ItemEntity(new EquipmentItem(Equipment.rareBow), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+        level.add(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+        level.add(new ItemEntity(new EquipmentItem(Equipment.rareShoes), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
     }
 
     public void render(Screen screen) {

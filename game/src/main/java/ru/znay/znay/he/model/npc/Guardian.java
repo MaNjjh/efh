@@ -20,7 +20,7 @@ import java.util.List;
 public class Guardian extends NPC {
     public Guardian(int x, int y) {
         super(x, y);
-        this.currentState = this.currentState.mergeStates(new CharacterState(10, 10, 10, 10, 10, 10));
+        this.currentState = this.currentState.mergeStates(new CharacterState(10, 10, 10, 10, 10, 5));
     }
 
     public void tick() {

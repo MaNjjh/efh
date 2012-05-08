@@ -53,6 +53,8 @@ public class Snake extends SnakePart {
         }*/
         super.die();
         level.add(new ItemEntity(new EquipmentItem(Equipment.rareBow), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+        level.add(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+        level.add(new ItemEntity(new EquipmentItem(Equipment.rareShoes), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
     }
 
     public void render(Screen screen) {

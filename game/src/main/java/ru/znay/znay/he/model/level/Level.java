@@ -12,6 +12,7 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
+import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.building.Bakery;
 import ru.znay.znay.he.model.builds.building.House;
 import ru.znay.znay.he.model.builds.building.Sawmill;
@@ -25,7 +26,9 @@ import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
+import ru.znay.znay.he.model.mob.boss.AirWizard;
 import ru.znay.znay.he.model.mob.boss.snake.Snake;
 import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
@@ -168,7 +171,7 @@ public class Level {
                 add(mob);
             }
 
-            /*mob = new Mushroom();
+            mob = new Mushroom();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
@@ -177,11 +180,11 @@ public class Level {
             if (mob.findStartPos(this)) {
                 add(mob);
             }
-
-            /*mob = new AppleTree();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }  */
+            /*
+          /*mob = new AppleTree();
+          if (mob.findStartPos(this)) {
+              add(mob);
+          }  */
         }
 
     }
@@ -461,6 +464,13 @@ public class Level {
                         prev = new SnakeNeck(xx, yy, prev);
                         this.add(prev);
                     }
+                    continue;
+                } else if (value == 0xFF21FFFF) {
+                    int xx = (i << 4) + Tile.HALF_SIZE;
+                    int yy = (j << 4) + Tile.HALF_SIZE;
+
+                    this.add(new AirWizard(xx, yy));
+
                     continue;
                 }
                 switch (((value >> 16) & 0xFF)) {

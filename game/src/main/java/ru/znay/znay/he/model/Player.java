@@ -282,17 +282,7 @@ public class Player extends Mob {
         if (itemEntity.getItem() instanceof ResourceItem) {
             ResourceItem resourceItem = (ResourceItem) itemEntity.getItem();
 
-            if (resourceItem.getResource() == Resource.apple) {
-                GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
-                if (guiInventory != null) {
-
-                    ResourceItem apples = inventory.findResource(Resource.apple);
-                    if (apples != null) {
-                        guiInventory.setApple(apples);
-                    }
-                }
-
-            } else if (resourceItem.getResource() == Resource.life) {
+            if (resourceItem.getResource() == Resource.life) {
                 CharacterState lifeState = new CharacterState(0, resourceItem.getCount(), 0, 0, 0);
 
                 this.defaultState = this.defaultState.mergeStates(lifeState);
