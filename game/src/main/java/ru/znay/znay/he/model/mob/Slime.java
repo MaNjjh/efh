@@ -34,7 +34,7 @@ public class Slime extends Mob {
     public void tick() {
         super.tick();
         int speed = 1;
-        if (!move(xa * speed, ya * speed) || random.nextInt(40) == 0) {
+        if (!move(xa * speed, ya * speed) || random.nextInt(40 / (level.getNumber() + 1)) == 0) {
             if (jumpTime <= -10) {
                 xa = (random.nextInt(3) - 1);
                 ya = (random.nextInt(3) - 1);
@@ -84,7 +84,7 @@ public class Slime extends Mob {
     @Override
     public void touchedBy(Entity entity) {
         if (entity.getTeam() != this.team) {
-            entity.hurt(this, 1, dir);
+            entity.hurt(this, level.getNumber() + 1, dir);
         }
         super.touchedBy(entity);
     }
@@ -92,10 +92,12 @@ public class Slime extends Mob {
     @Override
     public void die() {
         super.die();
-        int count = random.nextInt(8) + 4;
+        int count = random.nextInt((level.getNumber() + 1) * 2) + 1;
+
         for (int i = 0; i < count; i++) {
             this.level.add(new ItemEntity(new ResourceItem(Resource.coin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
         }
+
         if (random.nextInt(20) == 0) {
             this.level.add(new ItemEntity(new ResourceItem(Resource.life), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
 
@@ -115,7 +117,7 @@ public class Slime extends Mob {
             xt += 1;
             yo -= 4;
         }
-        int col = PaletteHelper.getColor(-1, 10, 242, 555);
+        int col = PaletteHelper.getColor(-1, 10, 242 + level.getNumber() * 10, 555);
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 

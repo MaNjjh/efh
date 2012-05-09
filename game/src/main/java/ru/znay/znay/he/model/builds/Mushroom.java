@@ -2,7 +2,6 @@ package ru.znay.znay.he.model.builds;
 
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Screen;
-import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.item.ItemEntity;
@@ -21,29 +20,11 @@ public class Mushroom extends Mob {
 
     private int tx = 0;
     private Long time;
-    public final static int cost = 300;
-
-    public Mushroom(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.xr = 1;
-        this.yr = 1;
-        this.team = ETeam.PLAYER_TEAM;
-        this.time = System.currentTimeMillis();
-    }
 
     public Mushroom() {
         this.xr = 1;
         this.yr = 1;
-        this.team = ETeam.PLAYER_TEAM;
         this.time = System.currentTimeMillis();
-    }
-
-    @Override
-    public void touchedBy(Entity entity) {
-        if ((entity.getTeam() != this.team)) {
-            entity.touchedBy(this);
-        }
     }
 
     public void tick() {
@@ -52,7 +33,10 @@ public class Mushroom extends Mob {
 
             if (tx == 2) {
                 if (this.level != null) {
-                    for (int i = 0; i < 50; i++) {
+
+                    int count = level.getNumber() * 2 + 4;
+
+                    for (int i = 0; i < count; i++) {
                         this.level.add(new ItemEntity(new ResourceItem(Resource.coin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
                         if (random.nextInt(10) == 0) {
                             this.level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
@@ -77,7 +61,7 @@ public class Mushroom extends Mob {
 
     public void render(Screen screen) {
 
-        int col = PaletteHelper.getColor(-1, 0, 510, 552);
+        int col = PaletteHelper.getColor(-1, level.getNumber() * 10, 510 + level.getNumber() * 10, 552 + level.getNumber());
 
         screen.render(x - 4, y - 5, tx * Tile.HALF_SIZE, 3 * Tile.HALF_SIZE, Tile.HALF_SIZE, Tile.HALF_SIZE, col, 0);
 

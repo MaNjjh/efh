@@ -40,7 +40,7 @@ public class Player extends Mob {
     private Item activeItem;
     private int clearFogRadius = 5;
     private Point respPoint = null;
-    private EArrowType arrowType = EArrowType.FIRE;
+    private EArrowType arrowType = EArrowType.SIMPLE;
     private int fireDelay = 10;
     private EquipmentItem weapon;
     private EquipmentItem shoes;
@@ -53,18 +53,14 @@ public class Player extends Mob {
         this.team = ETeam.PLAYER_TEAM;
         this.game = game;
         this.bloodColor = 0xcc00cc;
-
+        touchItem(new ItemEntity(new ResourceItem(Resource.apple, 10), x, y));
+        touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), 0, 0));
     }
 
     @Override
     public void init(Level level) {
         super.init(level);
-        touchItem(new ItemEntity(new ResourceItem(Resource.apple, 10), x, y));
-        /*
-        touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), x, y));
-        touchItem(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x, y));
-        touchItem(new ItemEntity(new EquipmentItem(Equipment.strongShoes), x, y));
-        */
+        this.health = this.maxHealth = currentState.getEndurance();
     }
 
     @Override
@@ -369,7 +365,7 @@ public class Player extends Mob {
 
     public void moveLevel(int newLevel, int x, int y) {
         respPoint = new Point(x, y);
-        this.game.loadLevel(newLevel);
+        this.game.changeLevel(newLevel);
         InputHandler.getInstance(null).releaseAll();
     }
 

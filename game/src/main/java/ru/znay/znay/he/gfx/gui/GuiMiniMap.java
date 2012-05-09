@@ -121,7 +121,11 @@ public class GuiMiniMap extends GuiPanel {
                     }
 
                 }
-                markObject(level.getPlayer().getX(), level.getPlayer().getY(), 0x1cc);
+
+
+                if (level.getPlayer() != null) {
+                    markObject(level.getPlayer().getX(), level.getPlayer().getY(), 0x1cc);
+                }
 
                 /*if (i < 2 || j < 2 || i >= level.getWidth() - 1 || j >= level.getHeight() - 1) {
                     this.miniMap.getPixels()[i + j * this.miniMap.getWidth()] = 0xffcc00;

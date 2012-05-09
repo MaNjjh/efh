@@ -4,7 +4,6 @@ import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
-import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
@@ -14,11 +13,6 @@ import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.Mushroom;
-import ru.znay.znay.he.model.builds.building.Bakery;
-import ru.znay.znay.he.model.builds.building.House;
-import ru.znay.znay.he.model.builds.building.Sawmill;
-import ru.znay.znay.he.model.builds.building.TownHall;
-import ru.znay.znay.he.model.builds.building.Warehouse;
 import ru.znay.znay.he.model.builds.tree.AppleTree;
 import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
@@ -37,8 +31,6 @@ import ru.znay.znay.he.model.npc.NpcTrigger;
 import ru.znay.znay.he.model.npc.Warp;
 import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
-import ru.znay.znay.he.quest.QuestHandler;
-import ru.znay.znay.he.quest.QuestManager;
 import ru.znay.znay.he.sound.Sound;
 
 import java.util.ArrayList;
@@ -71,12 +63,7 @@ public class Level {
     private final static int PLAYER_SPAWN = 0xFFFF0000;
     private final static int SHRUBBERY = 0xFF005500;
 
-    public ParticleSystem getFireParticles() {
-        return fireParticles;
-    }
-
     private ParticleSystem fireParticles;
-
 
     private int number;
 
@@ -91,19 +78,16 @@ public class Level {
 
     private byte[] tiles;
 
-    private static Fog[] fogs = new Fog[7];
-
     private Fog fog;
-    //private NewFog newFog = null;
     private int monsterDensity = 4;
     private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
 
     private List<Entity> entities = new ArrayList<Entity>();
 
-    private QuestHandler questHandler;
-
     private SpriteCollector spriteCollector;
+    private int respX = 0;
+    private int respY = 0;
 
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
@@ -113,33 +97,16 @@ public class Level {
         }
     };
 
-    public Level(int lv, Game game) {
-        init(lv, game);
-    }
-
-    @SuppressWarnings("unchecked")
-    public void init(int level, Game game) {
+    public Level(int level, Game game) {
 
         this.number = level;
         this.game = game;
-        this.player = game.getPlayer();
-        //this.questHandler = game.getQuestHandler();
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
+        this.loadTiles(level);
 
-        this.loadLevelObject(level, player);
-
-        if (player.isRemoved()) player.setHealth(1);
-
-        this.add(player);
-
-        GuiManager.getInstance().initDefaultGui(this);
-
-        //questManager = new QuestManager(this);
-
-        /*if (newFog != null)
-            newFog.tick(player); */
+        this.loadObjects(level);
 
         try {
             fireParticles = new ParticleSystem(FireParticle.class, 2000, 0.03, -0.01, 40);
@@ -147,377 +114,21 @@ public class Level {
             //ignore
         }
 
-
-        fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
-
-        //Не включать!Работают люди!
         trySpawn();
 
         Sound.startGame.play();
     }
 
-    public void trySpawn() {
-        for (int i = 0; i < 100; i++) {
-
-            Mob mob = new SlimeFactory();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }
-
-            mob = new Mushroom();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }
-
-            mob = new Bird();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }
-            /*
-          /*mob = new AppleTree();
-          if (mob.findStartPos(this)) {
-              add(mob);
-          }  */
-        }
-
-    }
-
-    public void tick() {
-
-        for (int i = 0; i < this.width * this.height / 50; i++) {
-            int xt = random.nextInt(this.width);
-            int yt = random.nextInt(this.height);
-            getTile(xt, yt).tick(this, xt, yt);
-        }
-
-        /*if (tickTime % 100 == 0) {
-            this.questHandler.checkAllQuest();
-        }*/
-
-        GuiManager.getInstance().tick();
-
-        for (int i = 0; i < entities.size(); i++) {
-            Entity entity = entities.get(i);
-            int xto = entity.getX() >> 4;
-            int yto = entity.getY() >> 4;
-
-            entity.tick();
-
-            if (entity.isRemoved()) {
-                entities.remove(i--);
-                removeEntity(xto, yto, entity);
-/*
-                if (entity instanceof Mob) {
-
-                this.questHandler.updateKills(((Mob) entity));
-                }
-                */
-            } else {
-                int xt = entity.getX() >> 4;
-                int yt = entity.getY() >> 4;
-
-                if (xto != xt || yto != yt) {
-                    removeEntity(xto, yto, entity);
-                    insertEntity(xt, yt, entity);
-                    if (entity instanceof Player /*&& newFog != null*/) {
-                        fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
-                        //newFog.tick((Player) entity);
-                    }
-                }
-            }
-        }
-        this.fireParticles.tick();
-        tickTime++;
-    }
-
-    private void insertEntity(int x, int y, Entity entity) {
-        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
-        entitiesInTiles[x + y * this.width].add(entity);
-    }
-
-    private void removeEntity(int x, int y, Entity entity) {
-        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
-        entitiesInTiles[x + y * this.width].remove(entity);
-    }
-
-
-    private void sortAndRender(Screen screen, List<Entity> list) {
-        Collections.sort(list, spriteSorter);
-        for (Entity entity : list) {
-            entity.render(screen);
-
-            if (Constants.isDebugMode) {
-                int xt = entity.getX() - screen.getXOffset();
-                int yt = entity.getY() - screen.getYOffset();
-                int xr = entity.getXr();
-                int yr = entity.getYr();
-
-                BitmapHelper.drawLine(xt - xr, yt - yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
-                BitmapHelper.drawLine(xt - xr, yt - yr, xt - xr, yt + yr, 0xff00, screen.getViewPort());
-                BitmapHelper.drawLine(xt - xr, yt + yr, xt + xr, yt + yr, 0xff00, screen.getViewPort());
-                BitmapHelper.drawLine(xt + xr, yt + yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
-            }
-        }
-
-        /*if (Constants.isDebugMode) {
-            for (int i = 0; i < width << 1; i++) {
-                for (int j = 0; j < height << 1; j++) {
-                    for (Entity entity : getEntities((i << 3)-8, (j << 3)-8, (i << 3)+8, (j << 3)+8, null)) {
-                        int xt = entity.getX() - screen.getXOffset();
-                        int yt = entity.getY() - screen.getYOffset();
-                        int xr = entity.getXr();
-                        int yr = entity.getYr();
-
-                        BitmapHelper.drawLine(xt - xr, yt - yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
-                        BitmapHelper.drawLine(xt - xr, yt - yr, xt - xr, yt + yr, 0xff00, screen.getViewPort());
-                        BitmapHelper.drawLine(xt - xr, yt + yr, xt + xr, yt + yr, 0xff00, screen.getViewPort());
-                        BitmapHelper.drawLine(xt + xr, yt + yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
-                    }
-                }
-            }
-        }*/
-    }
-
-
-    public void renderBackground(Screen screen, int xScroll, int yScroll) {
-        int xo = xScroll >> 4;
-        int yo = yScroll >> 4;
-        int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
-        int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
-        screen.setOffset(xScroll, yScroll);
-        for (int y = yo; y <= h + yo; y++) {
-            for (int x = xo; x <= w + xo; x++) {
-                getTile(x, y).render(screen, this, x, y);
-
-            }
-        }
-        screen.setOffset(0, 0);
-    }
-
-    private List<Entity> rowSprites = new ArrayList<Entity>();
-
-    public void renderSprites(Screen screen, int xScroll, int yScroll) {
-
-        int offScreen = 4;
-        int xo = Math.max((xScroll >> 4), 0);
-        int yo = Math.max((yScroll >> 4), 0);
-        int w = ((screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4) + offScreen;
-        int h = ((screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4) + offScreen;
-
-        screen.setOffset(xScroll, yScroll);
-        for (int y = yo - offScreen; y <= h + yo; y++) {
-            for (int x = xo - offScreen; x <= w + xo; x++) {
-                if (x < 0 || y < 0 || x >= this.width || y >= this.height) continue;
-                // if (fog.getFog(x, y)) continue;
-                rowSprites.addAll(entitiesInTiles[x + y * this.width]);
-            }
-            if (rowSprites.size() > 0) {
-                sortAndRender(screen, rowSprites);
-            }
-            rowSprites.clear();
-        }
-        this.fireParticles.render(screen);
-        screen.setOffset(0, 0);
-    }
-
-    public void renderFog(Screen screen, int xScroll, int yScroll) {
-        int xo = xScroll >> 4;
-        int yo = yScroll >> 4;
-        int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
-        int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
-        screen.setOffset(xScroll, yScroll);
-        for (int y = yo; y <= h + yo; y++) {
-            for (int x = xo; x <= w + xo; x++) {
-                //fog.render(screen, x - 1, y - 1);
-                fog.render(screen, x, y);
-            }
-        }
-        /* if (newFog == null) return;
-        screen.setOffset(xScroll, yScroll);
-        newFog.render(screen);*/
-        screen.setOffset(0, 0);
-    }
-
-    public void add(Entity entity) {
-        if (entity instanceof Player) {
-            player = (Player) entity;
-        }
-        entity.setRemoved(false);
-        entities.add(entity);
-        entity.init(this);
-
-        insertEntity(entity.getX() >> 4, entity.getY() >> 4, entity);
-    }
-
-    public List<Entity> getEntities(int x0, int y0, int x1, int y1, ETeam team) {
-        List<Entity> result = new ArrayList<Entity>();
-        int xt0 = (x0 >> 4) - 1;
-        int yt0 = (y0 >> 4) - 1;
-        int xt1 = (x1 >> 4) + 1;
-        int yt1 = (y1 >> 4) + 1;
-        for (int y = yt0; y <= yt1; y++) {
-            for (int x = xt0; x <= xt1; x++) {
-                if (x < 0 || y < 0 || x >= this.width || y >= this.height) continue;
-                List<Entity> entities = entitiesInTiles[x + y * this.width];
-                for (Entity e : entities) {
-
-                    boolean isTeam = team == null || team == e.getTeam();
-
-                    if (isTeam) {
-                        if (e.intersects(x0, y0, x1, y1)) result.add(e);
-                    }
-                }
-            }
-        }
-        return result;
-    }
-
-    public Tile getTile(int x, int y) {
-        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return Tile.rock;
-        return Tile.tiles[tiles[x + y * this.width]];
-    }
-
-    public void setTile(int x, int y, Tile tile, int dataVal) {
-        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
-        tiles[x + y * this.width] = tile.getId();
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public List<Entity> getEntities() {
-        return entities;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public int getMonsterDensity() {
-        return monsterDensity;
-    }
-
-    public void setMonsterDensity(int monsterDensity) {
-        this.monsterDensity = monsterDensity;
-    }
-
-    public /*NewFog*/ Fog getFog() {
-        return fog;
-        //return newFog;
-    }
-
-    public QuestHandler getQuestHandler() {
-        return questHandler;
-    }
-
-    private void loadLevelObject(int level, Player player) {
+    @SuppressWarnings("unchecked")
+    private void loadTiles(int level) {
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + ".png");
 
         this.width = map.getWidth();
         this.height = map.getHeight();
 
+        this.fog = new Fog(this.width, this.height, level != 1);
+
         this.tiles = new byte[this.width * this.height];
-
-        if (fogs[level] == null) {
-            fogs[level] = new Fog(this.width, this.height, level != 1);
-        }
-        this.fog = fogs[level];
-
-        //if (level != 1)
-        //    this.newFog = new NewFog(this, this.game.getScreen());
-
-        loadLandscape(map);
-        loadNPC(level);
-    }
-
-    private void loadNPC(int level) {
-        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.png");
-        for (int j = 0; j < this.height; j++) {
-            for (int i = 0; i < this.width; i++) {
-                int value = map.getPixels()[i + j * this.width];
-                if (value == 0xFFFFFFFF) continue;
-                if (value == 0xFF20FFFF) {
-                    int xx = (i << 4) + Tile.HALF_SIZE;
-                    int yy = (j << 4) + Tile.HALF_SIZE;
-
-                    SnakePart prev = new Snake(xx, yy);
-                    this.add(prev);
-                    for (int a = 0; a < 16; a++) {
-                        prev = new SnakeNeck(xx, yy, prev);
-                        this.add(prev);
-                    }
-                    continue;
-                } else if (value == 0xFF21FFFF) {
-                    int xx = (i << 4) + Tile.HALF_SIZE;
-                    int yy = (j << 4) + Tile.HALF_SIZE;
-
-                    this.add(new AirWizard(xx, yy));
-
-                    continue;
-                }
-                switch (((value >> 16) & 0xFF)) {
-                    case 0xFF: {
-                        if (this.player.getRespPoint() != null) {
-                            this.player.moveToXY(this.player.getRespPoint().x, this.player.getRespPoint().y);
-                        } else {
-                            this.player.moveToXY((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
-                            this.player.setRespPoint((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE);
-                        }
-                        break;
-                    }
-                    case 0x10:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level + 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector));
-                        break;
-                    case 0x11:
-                        add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector));
-                        break;
-                    case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, Messages.getInstance().getMessage(value & 0xFF), spriteCollector));
-                        break;
-                    case 0x40:
-                        switch (((value >> 8) & 0xFF)) {
-                            case 0x01:
-                                add(new TownHall((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
-                                break;
-                            case 0x02:
-                                add(new House((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
-                                break;
-                            case 0x03:
-                                add(new Sawmill((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
-                                break;
-                            case 0x04:
-                                add(new Bakery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
-                                break;
-                            case 0x05:
-                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
-                                break;
-                            case 0x06:
-                                add(new Warehouse((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
-                                break;
-                        }
-                    case 0x55:
-                        add(new NpcTrigger((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, value & 0xFF));
-                        break;
-                }
-            }
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private void loadLandscape(Bitmap map) {
 
         this.entitiesInTiles = new ArrayList[this.width * this.height];
         for (int i = 0; i < this.width * height; i++) {
@@ -597,11 +208,303 @@ public class Level {
         }
     }
 
+    private void loadObjects(int level) {
+        Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.png");
+        for (int j = 0; j < this.height; j++) {
+            for (int i = 0; i < this.width; i++) {
+                int value = map.getPixels()[i + j * this.width];
+                if (value == 0xFFFFFFFF) continue;
+                if (value == 0xFF20FFFF) {
+                    int xx = (i << 4) + Tile.HALF_SIZE;
+                    int yy = (j << 4) + Tile.HALF_SIZE;
+
+                    SnakePart prev = new Snake(xx, yy);
+                    this.add(prev);
+                    for (int a = 0; a < 16; a++) {
+                        prev = new SnakeNeck(xx, yy, prev);
+                        this.add(prev);
+                    }
+                    continue;
+                } else if (value == 0xFF21FFFF) {
+                    int xx = (i << 4) + Tile.HALF_SIZE;
+                    int yy = (j << 4) + Tile.HALF_SIZE;
+
+                    this.add(new AirWizard(xx, yy));
+
+                    continue;
+                }
+                switch (((value >> 16) & 0xFF)) {
+                    case 0xFF: {
+                        respX = (i << 4) + Tile.HALF_SIZE;
+                        respY = (j << 4) + Tile.HALF_SIZE;
+                        break;
+                    }
+                    case 0x25:
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, Messages.getInstance().getMessage(value & 0xFF), spriteCollector));
+                        break;
+                    case 0x40:
+                        switch (((value >> 8) & 0xFF)) {
+                            case 0x05:
+                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                                break;
+
+                        }
+                    case 0x55:
+                        add(new NpcTrigger((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, value & 0xFF));
+                        break;
+                }
+            }
+        }
+    }
+
+    public void trySpawn() {
+        for (int i = 0; i < 100; i++) {
+
+            Mob mob = new SlimeFactory();
+            if (mob.findStartPos(this)) {
+                add(mob);
+            }
+
+            mob = new Mushroom();
+            if (mob.findStartPos(this)) {
+                add(mob);
+            }
+
+            mob = new Bird();
+            if (mob.findStartPos(this)) {
+                add(mob);
+            }
+        }
+
+    }
+
+    public void tick() {
+
+        for (int i = 0; i < this.width * this.height / 50; i++) {
+            int xt = random.nextInt(this.width);
+            int yt = random.nextInt(this.height);
+            getTile(xt, yt).tick(this, xt, yt);
+        }
+
+        GuiManager.getInstance().tick();
+
+        for (int i = 0; i < entities.size(); i++) {
+            Entity entity = entities.get(i);
+            int xto = entity.getX() >> 4;
+            int yto = entity.getY() >> 4;
+
+            entity.tick();
+
+            if (entity.isRemoved()) {
+                entities.remove(i--);
+                removeEntity(xto, yto, entity);
+
+            } else {
+                int xt = entity.getX() >> 4;
+                int yt = entity.getY() >> 4;
+
+                if (xto != xt || yto != yt) {
+                    removeEntity(xto, yto, entity);
+                    insertEntity(xt, yt, entity);
+                    if (entity instanceof Player) {
+                        fog.clearFog2(xt, yt, ((Player) entity).getClearFogRadius());
+                    }
+                }
+            }
+        }
+        this.fireParticles.tick();
+        tickTime++;
+    }
+
+    private void insertEntity(int x, int y, Entity entity) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
+        entitiesInTiles[x + y * this.width].add(entity);
+    }
+
+    private void removeEntity(int x, int y, Entity entity) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
+        entitiesInTiles[x + y * this.width].remove(entity);
+    }
+
+
+    private void sortAndRender(Screen screen, List<Entity> list) {
+        Collections.sort(list, spriteSorter);
+        for (Entity entity : list) {
+            entity.render(screen);
+
+            if (Constants.isDebugMode) {
+                int xt = entity.getX() - screen.getXOffset();
+                int yt = entity.getY() - screen.getYOffset();
+                int xr = entity.getXr();
+                int yr = entity.getYr();
+
+                BitmapHelper.drawLine(xt - xr, yt - yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
+                BitmapHelper.drawLine(xt - xr, yt - yr, xt - xr, yt + yr, 0xff00, screen.getViewPort());
+                BitmapHelper.drawLine(xt - xr, yt + yr, xt + xr, yt + yr, 0xff00, screen.getViewPort());
+                BitmapHelper.drawLine(xt + xr, yt + yr, xt + xr, yt - yr, 0xff00, screen.getViewPort());
+            }
+        }
+    }
+
+
+    public void renderBackground(Screen screen, int xScroll, int yScroll) {
+        int xo = xScroll >> 4;
+        int yo = yScroll >> 4;
+        int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
+        int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
+        screen.setOffset(xScroll, yScroll);
+        for (int y = yo; y <= h + yo; y++) {
+            for (int x = xo; x <= w + xo; x++) {
+                getTile(x, y).render(screen, this, x, y);
+
+            }
+        }
+        screen.setOffset(0, 0);
+    }
+
+    private List<Entity> rowSprites = new ArrayList<Entity>();
+
+    public void renderSprites(Screen screen, int xScroll, int yScroll) {
+
+        int offScreen = 4;
+        int xo = Math.max((xScroll >> 4), 0);
+        int yo = Math.max((yScroll >> 4), 0);
+        int w = ((screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4) + offScreen;
+        int h = ((screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4) + offScreen;
+
+        screen.setOffset(xScroll, yScroll);
+        for (int y = yo - offScreen; y <= h + yo; y++) {
+            for (int x = xo - offScreen; x <= w + xo; x++) {
+                if (x < 0 || y < 0 || x >= this.width || y >= this.height) continue;
+                // if (fog.getFog(x, y)) continue;
+                rowSprites.addAll(entitiesInTiles[x + y * this.width]);
+            }
+            if (rowSprites.size() > 0) {
+                sortAndRender(screen, rowSprites);
+            }
+            rowSprites.clear();
+        }
+        this.fireParticles.render(screen);
+        screen.setOffset(0, 0);
+    }
+
+    public void renderFog(Screen screen, int xScroll, int yScroll) {
+        int xo = xScroll >> 4;
+        int yo = yScroll >> 4;
+        int w = (screen.getViewPort().getWidth() + Tile.SIZE - 1) >> 4;
+        int h = (screen.getViewPort().getHeight() + Tile.SIZE - 1) >> 4;
+        screen.setOffset(xScroll, yScroll);
+        for (int y = yo; y <= h + yo; y++) {
+            for (int x = xo; x <= w + xo; x++) {
+                fog.render(screen, x, y);
+            }
+        }
+        screen.setOffset(0, 0);
+    }
+
+    public void add(Entity entity) {
+        if (entity instanceof Player) {
+            player = (Player) entity;
+            player.setX(respX);
+            player.setY(respY);
+            fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
+        }
+        entity.setRemoved(false);
+        entities.add(entity);
+        entity.init(this);
+
+        insertEntity(entity.getX() >> 4, entity.getY() >> 4, entity);
+    }
+
+    public void remove(Entity e) {
+        entities.remove(e);
+        int xto = e.getX() >> 4;
+        int yto = e.getY() >> 4;
+        removeEntity(xto, yto, e);
+    }
+
+    public List<Entity> getEntities(int x0, int y0, int x1, int y1, ETeam team) {
+        List<Entity> result = new ArrayList<Entity>();
+        int xt0 = (x0 >> 4) - 1;
+        int yt0 = (y0 >> 4) - 1;
+        int xt1 = (x1 >> 4) + 1;
+        int yt1 = (y1 >> 4) + 1;
+        for (int y = yt0; y <= yt1; y++) {
+            for (int x = xt0; x <= xt1; x++) {
+                if (x < 0 || y < 0 || x >= this.width || y >= this.height) continue;
+                List<Entity> entities = entitiesInTiles[x + y * this.width];
+                for (Entity e : entities) {
+
+                    boolean isTeam = team == null || team == e.getTeam();
+
+                    if (isTeam) {
+                        if (e.intersects(x0, y0, x1, y1)) result.add(e);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public Tile getTile(int x, int y) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return Tile.rock;
+        return Tile.tiles[tiles[x + y * this.width]];
+    }
+
+    public void setTile(int x, int y, Tile tile, int dataVal) {
+        if (x < 0 || y < 0 || x >= this.width || y >= this.height) return;
+        tiles[x + y * this.width] = tile.getId();
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getMonsterDensity() {
+        return monsterDensity;
+    }
+
+    public void setMonsterDensity(int monsterDensity) {
+        this.monsterDensity = monsterDensity;
+    }
+
+    public Fog getFog() {
+        return fog;
+    }
+
     public int getNumber() {
         return number;
     }
 
+    public ParticleSystem getFireParticles() {
+        return fireParticles;
+    }
+
     public SpriteCollector getSpriteCollector() {
         return spriteCollector;
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

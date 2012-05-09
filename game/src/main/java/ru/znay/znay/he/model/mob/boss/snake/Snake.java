@@ -37,7 +37,7 @@ public class Snake extends SnakePart {
         this.y = y;
         this.xr = 6;
         this.yr = 6;
-        this.health = 100;
+        this.health = 200;
         currentState = new CharacterState(0, 100, 0, 0, 0);
         this.team = ETeam.ENEMY_TEAM;
     }
@@ -47,21 +47,11 @@ public class Snake extends SnakePart {
         this.ya = ya;
     }
 
-    public void die() {
-        /*for (int i = 0; i < 100; i++) {
-            level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        }*/
-        super.die();
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareBow), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareShoes), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-    }
-
     public void render(Screen screen) {
         int xd = x - 8;
         int yd = y - 7;
 
-        int col = PaletteHelper.getColor(-1, 500, 411, 322);
+        int col = PaletteHelper.getColor(-1, 500 - (level.getNumber() % 5) * 100, 411- (level.getNumber() % 4) * 100, 322);
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 

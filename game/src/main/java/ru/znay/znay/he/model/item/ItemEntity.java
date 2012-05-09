@@ -21,7 +21,7 @@ public class ItemEntity extends SmashParticle {
     public ItemEntity(Item item, int x, int y) {
         super(x, y, 0);
         this.item = item;
-        this.time = 600;
+        this.time = item.getMaxTime();
     }
 
     @Override
@@ -50,11 +50,11 @@ public class ItemEntity extends SmashParticle {
 
 
     public void render(Screen screen) {
-        if (time < 200) {
+        if (time < item.getMaxTime() / 3) {
             if (time / 6 % 2 == 0) return;
         }
-        screen.render(x - 4, y - 4, item.getxSprite() * Tile.HALF_SIZE, item.getySprite() * Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 0, 0), 0);
-        screen.render(x - 4, y - 4 - (int) (zz), item.getxSprite() * Tile.HALF_SIZE, item.getySprite() * Tile.HALF_SIZE, item.getColor(), 0);
+        screen.render(item.getScale(), x - 4 * item.getScale(), y - 4 * item.getScale(), item.getxSprite() * Tile.HALF_SIZE, item.getySprite() * Tile.HALF_SIZE, PaletteHelper.getColor(-1, 0, 0, 0), 0);
+        screen.render(item.getScale(), x - 4 * item.getScale(), y - 4 * item.getScale() - (int) (zz), item.getxSprite() * Tile.HALF_SIZE, item.getySprite() * Tile.HALF_SIZE, item.getColor(), 0);
     }
 
     public void touchedBy(Entity entity) {

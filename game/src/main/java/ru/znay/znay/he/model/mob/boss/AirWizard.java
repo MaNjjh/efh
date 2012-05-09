@@ -15,18 +15,17 @@ import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.weapon.Spark;
 
-public class AirWizard extends Mob {
+public class AirWizard extends Boss {
     private int xa, ya;
     private int randomWalkTime = 0;
     private int attackDelay = 0;
     private int attackTime = 0;
     private int attackType = 0;
-    private int maxHealth;
 
     public AirWizard(int x, int y) {
         this.x = x;
         this.y = y;
-        health = maxHealth = 2000;
+        health = 200;
         this.team = ETeam.ENEMY_TEAM;
     }
 
@@ -42,8 +41,8 @@ public class AirWizard extends Mob {
             attackDelay--;
             if (attackDelay == 0) {
                 attackType = 0;
-                if (health < 1000) attackType = 1;
-                if (health < 200) attackType = 2;
+                if (health < maxHealth / 2) attackType = 1;
+                if (health < maxHealth / 10) attackType = 2;
                 attackTime = 60 * 2;
             }
             return;
@@ -104,21 +103,6 @@ public class AirWizard extends Mob {
         }
     }
 
-    @Override
-    public void die() {
-        super.die();
-        int count = random.nextInt(80) + 40;
-        for (int i = 0; i < count; i++) {
-            this.level.add(new ItemEntity(new ResourceItem(Resource.coin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        }
-        if (random.nextInt(2) == 0) {
-            this.level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        }
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareBow), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareShoes), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
-    }
-
     public void render(Screen screen) {
         int xt = 0;
         int yt = 14;
@@ -142,14 +126,14 @@ public class AirWizard extends Mob {
         int xo = x - 8;
         int yo = y - 11;
 
-        int col1 = PaletteHelper.getColor(-1, 100, 550, 555);
-        int col2 = PaletteHelper.getColor(-1, 100, 550, 532);
-        if (health < 200) {
+        int col1 = PaletteHelper.getColor(-1, 100, 550 - (level.getNumber() % 5) * 100, 555);
+        int col2 = PaletteHelper.getColor(-1, 100, 550 - (level.getNumber() % 5) * 100, 532);
+        if (health < maxHealth / 10) {
             if (tickTime / 3 % 2 == 0) {
                 col1 = PaletteHelper.getColor(-1, 500, 100, 555);
                 col2 = PaletteHelper.getColor(-1, 500, 100, 532);
             }
-        } else if (health < 1000) {
+        } else if (health < maxHealth / 2) {
             if (tickTime / 5 % 4 == 0) {
                 col1 = PaletteHelper.getColor(-1, 500, 100, 555);
                 col2 = PaletteHelper.getColor(-1, 500, 100, 532);
@@ -171,7 +155,7 @@ public class AirWizard extends Mob {
 
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            entity.hurt(this, 3, dir);
+            entity.hurt(this, 3 * (level.getNumber() + 1), dir);
         }
         super.touchedBy(entity);
     }

@@ -23,6 +23,7 @@ public class Mob extends Entity {
     protected int walkDist = 0;
     protected int dir = 0;
     protected int health = 10;
+    protected int maxHealth;
     protected int xKnockback, yKnockback;
     protected int viewRadius = 4;
     protected Mob target = null;
@@ -31,6 +32,13 @@ public class Mob extends Entity {
     protected CharacterState defaultState = new CharacterState(0, 10, 0, 0, 50);
     protected CharacterState currentState = new CharacterState(0, 10, 0, 0, 50);
     protected CharacterState compareState = new CharacterState(0, 10, 0, 0, 50);
+
+    @Override
+    public void init(Level level) {
+        super.init(level);
+        this.health *= (level.getNumber() + 1);
+        this.maxHealth = this.health;
+    }
 
     @Override
     public void tick() {

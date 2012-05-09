@@ -9,23 +9,18 @@ import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
-import ru.znay.znay.he.messages.Messages;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.utensils.Chest;
-import ru.znay.znay.he.model.item.ItemEntity;
-import ru.znay.znay.he.model.item.equipment.Equipment;
-import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.npc.Guardian;
-import ru.znay.znay.he.quest.QuestHandler;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,9 +32,11 @@ import java.awt.*;
 public class Game extends Graphics implements Runnable {
 
     private boolean running = false;
+    private final static int MAX_LEVEL_COUNT = 3;
     private Level level;
+    private Level[] levels = new Level[MAX_LEVEL_COUNT];
+
     private Player player;
-    //private QuestHandler questHandler;
     private int xScroll;
     private int yScroll;
     private Entity selectedEntity;
@@ -56,11 +53,16 @@ public class Game extends Graphics implements Runnable {
 
     public void init() {
         InputHandler.getInstance(this);
+
         player = new Player(this);
-        player.touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), 0, 0));
-        //questHandler = new QuestHandler(player);
+
         Sound.backMusic.loop();
-        loadLevel(0);
+
+        for (int i = 0; i < MAX_LEVEL_COUNT; i++) {
+            this.levels[i] = new Level(i, this);
+        }
+
+        changeLevel(0);
     }
 
     public void tick() {
@@ -71,7 +73,7 @@ public class Game extends Graphics implements Runnable {
 
             if (player.isRemoved()) {
                 if (InputHandler.getInstance(null).action.clicked) {
-                    loadLevel(this.level);
+                    changeLevelByDir(0);
                 }
             }
 
@@ -235,27 +237,34 @@ public class Game extends Graphics implements Runnable {
         return yScroll;
     }
 
-    public Player getPlayer() {
-        return player;
+    public void changeLevelByDir(int dir) {
+        changeLevel(this.level.getNumber() + dir);
     }
 
-    public void loadLevel(int i) {
-        this.level = new Level(i, this);
-        //GuiManager.getInstance().initDefaultGui(this);
-        this.level.add(new Guardian(player.getX() - 10, player.getY() - 10));
+    public void changeLevel(int level) {
+
+        if (this.level != null) {
+            this.level.remove(player);
+        }
+
+        this.level = this.levels[level % MAX_LEVEL_COUNT];
+
+        this.level.add(player);
+
+        GuiManager.getInstance().initDefaultGui(this.level);
+
+        Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            this.level.add(new Guardian(player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
+        }
+
+
+
         //this.level.add(new Chest(player.getX() - 10, player.getY() - 10, level.getSpriteCollector()));
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
         InputHandler.getInstance(null).releaseAll();
     }
-
-    public void loadLevel(Level level) {
-        loadLevel(level.getNumber());
-    }
-/*
-    public QuestHandler getQuestHandler() {
-        return questHandler;
-    }
-    */
 }

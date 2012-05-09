@@ -57,6 +57,11 @@ public class SnakeNeck extends SnakePart {
         }
     }
 
+    @Override
+    public void die() {
+        removed = true;
+    }
+
     public void setMovement(double xa, double ya, double rotate) {
         this.xa = xa;
         this.ya = ya;
@@ -67,7 +72,7 @@ public class SnakeNeck extends SnakePart {
         int xd = x - 8;
         int yd = y - 9;
 
-        int col = PaletteHelper.getColor(-1, 040, 051, 150);
+        int col = PaletteHelper.getColor(-1, 040 + level.getNumber() * 100, 051 + level.getNumber() * 100, 150);
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 

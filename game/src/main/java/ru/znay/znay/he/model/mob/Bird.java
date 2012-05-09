@@ -10,6 +10,7 @@ import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.Inventory;
 import ru.znay.znay.he.model.item.Item;
 import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.particle.FlowText;
@@ -135,6 +136,10 @@ public class Bird extends Mob {
                     this.level.add(new ItemEntity(new ResourceItem(resourceItem.getResource()), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
                 }
             }
+            if (item instanceof EquipmentItem) {
+                EquipmentItem equipmentItem = (EquipmentItem) item;
+                this.level.add(new ItemEntity(new EquipmentItem(equipmentItem.getEquipment()), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
+            }
         }
     }
 
@@ -146,11 +151,10 @@ public class Bird extends Mob {
         level.add(new FlowText("+1", x, y - Tile.HALF_SIZE, Font.yellowColor));
     }
 
-
     @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            entity.hurt(this, 1, dir);
+            entity.hurt(this, level.getNumber() + 1, dir);
         }
 
         super.touchedBy(entity);
@@ -167,7 +171,7 @@ public class Bird extends Mob {
         int xo = x - 4;
         int yo = y - 4;
 
-        int col = PaletteHelper.getColor(-1, 0, 421, 532);
+        int col = PaletteHelper.getColor(-1, 0, 421 + level.getNumber() * 10, 532);
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 

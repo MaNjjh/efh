@@ -38,6 +38,14 @@ public class Item implements ListItem {
         return 0;
     }
 
+    public int getScale() {
+        return 1;
+    }
+
+    public int getMaxTime() {
+        return 600;
+    }
+
     public void onTake(ItemEntity itemEntity) {
     }
 

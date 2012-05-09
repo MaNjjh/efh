@@ -36,7 +36,7 @@ public class SlimeFactory extends Mob {
     public void tick() {
         super.tick();
 
-        if (hurtTime <= 0) spawnTime--;
+        if (hurtTime <= 0) spawnTime -= level.getNumber() / 2 + 1;
         if (spawnTime <= 0) {
             spawnTime = MIN_SPAWN_TIME + random.nextInt(MIN_SPAWN_TIME);
             level.add(new Slime(x, y));
@@ -51,7 +51,8 @@ public class SlimeFactory extends Mob {
     @Override
     public void die() {
         super.die();
-        int count = random.nextInt(6) + 2;
+        int count = random.nextInt((level.getNumber() + 1) * 2) + 1;
+
         for (int i = 0; i < count; i++) {
             this.level.add(new ItemEntity(new ResourceItem(Resource.bigCoin), x + random.nextInt(11) - 5, y + random.nextInt(11) - 5));
         }
@@ -60,7 +61,7 @@ public class SlimeFactory extends Mob {
     @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
-            entity.hurt(this, 2, dir);
+            entity.hurt(this, 2 * (level.getNumber() + 1), dir);
         }
         super.touchedBy(entity);
     }
@@ -74,7 +75,7 @@ public class SlimeFactory extends Mob {
         int xo = x - 8;
         int yo = y - 11;
 
-        int col = PaletteHelper.getColor(-1, 10, 242, 555);
+        int col = PaletteHelper.getColor(-1, 10, 242 + level.getNumber() * 10, 555);
         if (hurtTime > 0)
             col = PaletteHelper.getColor(-1, 555, 555, 555);
 

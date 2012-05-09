@@ -42,7 +42,7 @@ public class Spark extends Entity {
         List<Entity> toHit = level.getEntities(x, y, x, y, null);
         for (Entity e : toHit) {
             if (e instanceof Mob && !(e instanceof AirWizard)) {
-                e.hurt(owner, 1, ((Mob) e).getDir() ^ 1);
+                e.hurt(owner, level.getNumber() + 1, ((Mob) e).getDir() ^ 1);
             }
         }
     }

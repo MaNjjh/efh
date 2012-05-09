@@ -1,5 +1,6 @@
 package ru.znay.znay.he.model.npc;
 
+import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.model.CharacterState;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
@@ -20,7 +21,12 @@ import java.util.List;
 public class Guardian extends NPC {
     public Guardian(int x, int y) {
         super(x, y);
+        //this.currentState = this.currentState.mergeStates(new CharacterState(0, 15, 8, 0, 10, 30));
         this.currentState = this.currentState.mergeStates(new CharacterState(10, 10, 10, 10, 10, 5));
+        int col = (random.nextInt(7) - 3) * 10;
+        this.color1 = PaletteHelper.getColor(-1, 100, 335 + col, 532);
+        this.color2 = PaletteHelper.getColor(-1, 100, 335 + col, 532);
+
     }
 
     public void tick() {
@@ -36,7 +42,8 @@ public class Guardian extends NPC {
                 if (xd > 0) xa = -1;
                 if (yd < 0) ya = +1;
                 if (yd > 0) ya = -1;
-            } else */if (xd * xd + yd * yd > 80 * 80) {
+            } else */
+            if (xd * xd + yd * yd > 80 * 80) {
                 xa = 0;
                 ya = 0;
                 if (xd < 0) xa = -1;
@@ -86,7 +93,8 @@ public class Guardian extends NPC {
                 double vy = yDiff / m;
 
                 if (tickTime % currentState.getAttackDelay() == 0) {
-                    Weapon.fire(EArrowType.SIMPLE, this.team, x, y, vx, vy, currentState.getForce(), level);
+                    boolean isFireArrow = random.nextInt(5) == 0;
+                    Weapon.fire(isFireArrow ? EArrowType.FIRE : EArrowType.SIMPLE, this.team, x, y, vx, vy, currentState.getForce() + (isFireArrow ? currentState.getForce() : 0), level);
                 }
             }
         }

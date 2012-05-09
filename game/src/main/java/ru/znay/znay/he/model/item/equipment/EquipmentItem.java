@@ -34,6 +34,16 @@ public class EquipmentItem extends Item {
         return this.equipment.getySprite();
     }
 
+    @Override
+    public int getScale() {
+        return 3;
+    }
+
+    @Override
+    public int getMaxTime() {
+        return 2000;
+    }
+
     public void renderIcon(Screen screen, int x, int y) {
         screen.render(x, y, equipment.getxSprite() * Tile.HALF_SIZE, equipment.getySprite() * Tile.HALF_SIZE, equipment.getColor(), 0);
     }

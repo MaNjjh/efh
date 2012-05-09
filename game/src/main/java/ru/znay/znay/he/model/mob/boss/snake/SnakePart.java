@@ -3,6 +3,7 @@ package ru.znay.znay.he.model.mob.boss.snake;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.boss.Boss;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * 27.04.12: Original version (WHo)
  * 10:01: Time
  */
-public class SnakePart extends Mob {
+public class SnakePart extends Boss {
     protected double xa = 0.0;
     protected double ya = 0.0;
     protected int time;
@@ -53,11 +54,11 @@ public class SnakePart extends Mob {
         for (Entity entity : entities) {
             doHurt(entity);
         }
-        if (health < 100) {
-            this.level.getFireParticles().createExplosion(x, y, 0.5, -1.0, (100 - health) / 30);
+        if (health < maxHealth) {
+            this.level.getFireParticles().createExplosion(x, y, 0.5, -1.0, (maxHealth - health) / 30);
         }
 
-        if (health < 10) {
+        if (health < maxHealth / 10) {
             this.level.setTile(x >> 4, y >> 4, Tile.lava, 0);
         }
 
@@ -65,7 +66,7 @@ public class SnakePart extends Mob {
 
     private void doHurt(Entity entity) {
         if (entity instanceof SnakePart) return;
-        entity.hurt(this, 2, dir);
+        entity.hurt(this, 2 * (level.getNumber() + 1), dir);
     }
 
     public void touchedBy(Entity entity) {
