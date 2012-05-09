@@ -186,7 +186,7 @@ public class Player extends Mob {
             screen.render(xo + Tile.HALF_SIZE, yo + 3, 5 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, waterColor, 1);
         }
 
-        int col1 = PaletteHelper.getColor(-1, 100, 500, 555);
+        int col1 = PaletteHelper.getColor(-1, 100, 500, 532);
         int col2 = PaletteHelper.getColor(-1, 100, 500, 532);
 
         if (hurtTime > 0) {
@@ -269,7 +269,7 @@ public class Player extends Mob {
     public void touchItem(ItemEntity itemEntity) {
         if (itemEntity.isRemoved()) return;
 
-        level.getQuestHandler().updateItems(itemEntity.getItem().getName());
+        //level.getQuestHandler().updateItems(itemEntity.getItem().getName());
 
         itemEntity.take(this);
         inventory.add(itemEntity.getItem());

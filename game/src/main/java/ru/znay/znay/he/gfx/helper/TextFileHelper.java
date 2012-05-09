@@ -1,5 +1,7 @@
 package ru.znay.znay.he.gfx.helper;
 
+import ru.znay.znay.he.cfg.Constants;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,11 +19,11 @@ import java.util.List;
  */
 public class TextFileHelper {
 
-    public static List<String> LoadMessages(int level) {
+    public static List<String> LoadMessages() {
         InputStreamReader in = null;
         BufferedReader reader = null;
         try {
-            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/messages/" + level + ".txt"), Charset.forName("UTF-8"));
+            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream(Constants.DB_DIR + Constants.MESSAGES_FILE), Charset.forName("UTF-8"));
             reader = new BufferedReader(in);
             List<String> messages = new ArrayList<String>();
             String buff;
@@ -51,13 +53,13 @@ public class TextFileHelper {
         }
     }
 
-    public static List<String> LoadTextDB(String fileName) {
+    public static List<String> LoadQuestDB() {
         List<String> quests = new LinkedList<String>();
         InputStreamReader in = null;
         BufferedReader reader = null;
 
         try {
-            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream("/quests/" + fileName), Charset.forName("UTF-8"));
+            in = new InputStreamReader(TextFileHelper.class.getResourceAsStream(Constants.DB_DIR + Constants.QUESTS_FILE), Charset.forName("UTF-8"));
             reader = new BufferedReader(in);
             String buff;
             while ((buff = reader.readLine()) != null) {

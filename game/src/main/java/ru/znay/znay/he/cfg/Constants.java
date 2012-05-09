@@ -19,6 +19,10 @@ public class Constants {
 
     public static final String SPRITES_FILE = "/sprites.png";
 
+    public static final String DB_DIR = "/db/";
+    public static final String MESSAGES_FILE = "messages.txt";
+    public static final String QUESTS_FILE = "quests.txt";
+
     private static final String FOREST = "Лес";
     private static final String VILLAGE = "Деревня";
     private static final String DARK_WOOD = "Темный лес";

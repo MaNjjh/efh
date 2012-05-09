@@ -28,11 +28,6 @@ public class AbsQuest implements QuestStatus, NextQuest {
     private QuestPromotion questPromotion;
     private MergedTemplate mergedTemplate;
 
-    public boolean accept(QuestHandler questHandler) {
-        if (id == null) id = UUID.randomUUID().toString();
-        return questHandler.accept(this);
-    }
-
     public String getName() {
         return name;
     }
@@ -122,7 +117,7 @@ public class AbsQuest implements QuestStatus, NextQuest {
 
     @Override
     public void initNextQuest(QuestHandler questHandler) {
-        this.nextQuest.accept(questHandler);
+        questHandler.accept(nextQuest);
     }
 
     public void setType(int type){

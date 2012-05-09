@@ -1,5 +1,6 @@
 package ru.znay.znay.he.quest;
 
+import ru.znay.znay.he.messages.Messages;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.quest.promotion.MergedPromotion;
 import ru.znay.znay.he.quest.promotion.PromotionFactory;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class QuestParser {
 
-    public List<AbsQuest> parseQuests(List<String> strings, Level level) {
+    public List<AbsQuest> parseQuests(List<String> strings) {
         List<AbsQuest> list = new LinkedList<AbsQuest>();
 
         if (strings == null || strings.isEmpty()) {
@@ -30,7 +31,7 @@ public class QuestParser {
         for (String str : strings) {
             if (str.isEmpty()) continue;
             //str = ","+str;
-            AbsQuest temp = parseQuest(str.split(","), level);
+            AbsQuest temp = parseQuest(str.split(","));
             if (temp == null) continue;
 
             list.add(temp);
@@ -39,7 +40,7 @@ public class QuestParser {
         return list;
     }
 
-    private AbsQuest parseQuest(String[] str, Level level) {
+    private AbsQuest parseQuest(String[] str) {
         if (str == null || str.length == 0) {
             System.out.println("ParseQuest - str is null or empty");
             return null;
@@ -50,8 +51,8 @@ public class QuestParser {
 
         quest.setType(str[1].equalsIgnoreCase("true")?0: TemplateType.SHOW_COMPLETE);
 
-        quest.setName(level.getMessage(Integer.decode(str[2])));
-        quest.setDescription(level.getMessage(Integer.decode(str[3])));
+        quest.setName(Messages.getInstance().getMessage(Integer.decode(str[2])));
+        quest.setDescription(Messages.getInstance().getMessage(Integer.decode(str[3])));
 
         int count = Integer.decode(str[5]);
         MergedTemplate templates = new MergedTemplate();

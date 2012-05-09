@@ -24,9 +24,11 @@ public class NpcTrigger extends Entity {
 
     @Override
     public void touchedBy(Entity entity) {
+/*
         if (entity instanceof Player) {
-            level.getQuestHandler().onTrigger(this);
+        level.getQuestHandler().onTrigger(this);
         }
+        */
     }
 
     public int getId() {

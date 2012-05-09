@@ -8,6 +8,7 @@ import ru.znay.znay.he.gfx.helper.TextFileHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
+import ru.znay.znay.he.messages.Messages;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
@@ -54,9 +55,6 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public class Level {
-
-    private List<String> messages = null;
-
     private final static int GRASS_TILE = 0xFFFFFFFF;
     private final static int WATER_TILE = 0xFF0000FF;
     private final static int DEEP_WATER_TILE = 0xFF0000CC;
@@ -107,9 +105,6 @@ public class Level {
 
     private SpriteCollector spriteCollector;
 
-    private QuestManager questManager;
-
-
     private Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
             if (e1.getY() < e0.getY()) return 1;
@@ -128,9 +123,7 @@ public class Level {
         this.number = level;
         this.game = game;
         this.player = game.getPlayer();
-        this.questHandler = game.getQuestHandler();
-
-        messages = TextFileHelper.LoadMessages(level);
+        //this.questHandler = game.getQuestHandler();
 
         this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
@@ -143,7 +136,7 @@ public class Level {
 
         GuiManager.getInstance().initDefaultGui(this);
 
-        questManager = new QuestManager(this);
+        //questManager = new QuestManager(this);
 
         /*if (newFog != null)
             newFog.tick(player); */
@@ -213,10 +206,12 @@ public class Level {
             if (entity.isRemoved()) {
                 entities.remove(i--);
                 removeEntity(xto, yto, entity);
+/*
                 if (entity instanceof Mob) {
 
-                    this.questHandler.updateKills(((Mob) entity));
+                this.questHandler.updateKills(((Mob) entity));
                 }
+                */
             } else {
                 int xt = entity.getX() >> 4;
                 int yt = entity.getY() >> 4;
@@ -490,7 +485,7 @@ public class Level {
                         add(new Warp(level, (i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, level - 1, (((value >> 8) & 0xFF) << 4) + Tile.HALF_SIZE, ((value & 0xFF) << 4) + Tile.HALF_SIZE, spriteCollector));
                         break;
                     case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, getMessage(value & 0xFF), spriteCollector));
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, Messages.getInstance().getMessage(value & 0xFF), spriteCollector));
                         break;
                     case 0x40:
                         switch (((value >> 8) & 0xFF)) {
@@ -600,13 +595,6 @@ public class Level {
                 }
             }
         }
-    }
-
-    public String getMessage(int index) {
-        if (messages == null) return "null pointer";
-        if (index < 0 || index >= messages.size()) return "пустое сообщение";
-
-        return messages.get(index);
     }
 
     public int getNumber() {

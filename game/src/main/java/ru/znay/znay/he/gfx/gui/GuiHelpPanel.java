@@ -30,7 +30,6 @@ public class GuiHelpPanel extends GuiTextPanel {
         messages.add("e - употребить ягоду");
         messages.add("интерфейс:");
         messages.add("i - инвентарь");
-        messages.add("l - (отключен)журнал заданий");
         messages.add("h - это окно");
 
         this.setFormatedText(messages, ((int) (Constants.SCREEN_WIDTH - Constants.SCREEN_HEIGHT * 0.40)) >> 3);

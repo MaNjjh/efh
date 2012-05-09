@@ -5,7 +5,6 @@ import ru.znay.znay.he.gfx.gui.GuiTypedTextPanel;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.npc.NpcTrigger;
-import ru.znay.znay.he.quest.template.QuestLog;
 import ru.znay.znay.he.quest.template.TemplateType;
 import ru.znay.znay.he.sound.Sound;
 
@@ -23,17 +22,19 @@ public class QuestHandler {
     private ConcurrentMap<String, AbsQuest> quests = new ConcurrentHashMap<String, AbsQuest>();
     private Player player;
     private QuestManager questManager;
-    private QuestLog questLog;
+    protected QuestLog questLog;
 
     public QuestHandler(Player player) {
         this.player = player;
+        questLog = new QuestLog();
+        questManager = new QuestManager(this);
     }
 
     public boolean accept(AbsQuest absQuest) {
         if (absQuest == null) return false;
         String id = absQuest.getId();
 
-        if (this.quests.get(id) != null) return false;
+        questLog.setCurrentQuest(id);
 
         this.quests.put(id, absQuest);
         GuiManager.getInstance().add(new GuiTypedTextPanel(absQuest.getDescription(), 4, 4, 100), "quest_accept");
@@ -83,10 +84,12 @@ public class QuestHandler {
             }
 
             if (quest.hasNextPart()) {
-                quest.nextQuest.accept(this);
+                this.accept(quest.nextQuest);
             }
 
             Sound.questBegin.play();
+
+            questLog.complete(quest.getId());
 
             this.quests.remove(quest.getId());
         }

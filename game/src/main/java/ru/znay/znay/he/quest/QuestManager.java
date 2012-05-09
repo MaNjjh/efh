@@ -15,20 +15,8 @@ import java.util.List;
 public class QuestManager {
     List<AbsQuest> quests;
 
-    public QuestManager(Level level) {
-        quests = new QuestParser().parseQuests(TextFileHelper.LoadTextDB(level.getNumber() + ".txt"), level);
-
-        for (AbsQuest quest : quests) {
-            //quest.accept(questHandler);
-            if (quest.getId().equals("1")) quest.accept(level.getQuestHandler());
-            if (quest.getNextQuestID() > 0) {
-                for (AbsQuest nquest : quests) {
-                    if (quest.getNextQuestID() == Integer.decode(nquest.getId())) {
-                        quest.setNextQuest(nquest);
-                    }
-                }
-            }
-        }
+    public QuestManager(QuestHandler questHandler) {
+        quests = new QuestParser().parseQuests(TextFileHelper.LoadQuestDB());
     }
 
 

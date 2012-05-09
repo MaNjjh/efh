@@ -9,9 +9,13 @@ import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
+import ru.znay.znay.he.messages.Messages;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.builds.utensils.Chest;
+import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.Equipment;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
@@ -35,7 +39,7 @@ public class Game extends Graphics implements Runnable {
     private boolean running = false;
     private Level level;
     private Player player;
-    private QuestHandler questHandler;
+    //private QuestHandler questHandler;
     private int xScroll;
     private int yScroll;
     private Entity selectedEntity;
@@ -53,7 +57,8 @@ public class Game extends Graphics implements Runnable {
     public void init() {
         InputHandler.getInstance(this);
         player = new Player(this);
-        questHandler = new QuestHandler(player);
+        player.touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), 0, 0));
+        //questHandler = new QuestHandler(player);
         Sound.backMusic.loop();
         loadLevel(0);
     }
@@ -235,7 +240,6 @@ public class Game extends Graphics implements Runnable {
     }
 
     public void loadLevel(int i) {
-
         this.level = new Level(i, this);
         //GuiManager.getInstance().initDefaultGui(this);
         this.level.add(new Guardian(player.getX() - 10, player.getY() - 10));
@@ -243,24 +247,13 @@ public class Game extends Graphics implements Runnable {
         //this.level.add(new AirWizard(player.getX() - 10, player.getY() - 10));
         //this.level.add(new StoneMan(player.getX() - 30, player.getY() - 10));
 
-/*        int xx = player.getX() - 30;
-        int yy = player.getY() - 50;
-
-        SnakePart prev = new Snake(xx, yy);
-        this.level.add(prev);
-        for (int a = 0; a < 16; a++) {
-            prev = new SnakeNeck(xx, yy, prev);
-            this.level.add(prev);
-        }*/
-
-
         InputHandler.getInstance(null).releaseAll();
     }
 
     public void loadLevel(Level level) {
         loadLevel(level.getNumber());
     }
-
+/*
     public QuestHandler getQuestHandler() {
         return questHandler;
     }
