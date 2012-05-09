@@ -257,4 +257,5 @@ public class Game extends Graphics implements Runnable {
     public QuestHandler getQuestHandler() {
         return questHandler;
     }
+    */
 }
