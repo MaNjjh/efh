@@ -26,8 +26,8 @@ public class Warper extends Entity {
     @Override
     public void render(Screen screen) {
 
-        int xd = (x - 4);
-        int yd = (y - 5 * 3 - yr);
+        int xd = x - 8;
+        int yd = y - 9;
 
         int colors = PaletteHelper.getColor(-1, 0, 222, 333);
 

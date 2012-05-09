@@ -47,8 +47,8 @@ public class Warp extends Entity {
     @Override
     public void render(Screen screen) {
 
-        int xt = (x - 4) - screen.getXOffset();
-        int yt = (y - 5 * 3 - yr) - screen.getYOffset();
+        int xt = (x - 8) - screen.getXOffset();
+        int yt = (y - 9) - screen.getYOffset();
 
         BitmapHelper.drawNormal(sprite, xt, yt, screen.getViewPort(), 0xFF00FF);
     }

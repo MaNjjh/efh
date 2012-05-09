@@ -27,6 +27,7 @@ import ru.znay.znay.he.model.mob.boss.AirWizard;
 import ru.znay.znay.he.model.mob.boss.snake.Snake;
 import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
+import ru.znay.znay.he.model.npc.Guardian;
 import ru.znay.znay.he.model.npc.NpcTrigger;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.sound.Sound;
@@ -114,7 +115,7 @@ public class Level {
         this.width = map.getWidth();
         this.height = map.getHeight();
 
-        this.fog = new Fog(this.width, this.height, level != 1);
+        this.fog = new Fog(this.width, this.height, true);
 
         this.tiles = new byte[this.width * this.height];
 
@@ -225,6 +226,14 @@ public class Level {
                     case 0xFF: {
                         respX = (i << 4) + Tile.HALF_SIZE;
                         respY = (j << 4) + Tile.HALF_SIZE;
+
+                        if (level == 0) {
+
+                            this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+                            this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+                            this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+
+                        }
                         break;
                     }
                     case 0x25:

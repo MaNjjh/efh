@@ -8,15 +8,13 @@ import ru.znay.znay.he.gfx.gui.GuiSpeedIndicator;
 import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
-import ru.znay.znay.he.gfx.sprite.SpriteCollector;
-import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.npc.Guardian;
+import ru.znay.znay.he.model.npc.Warper;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -255,10 +253,12 @@ public class Game extends Graphics implements Runnable {
 
         Random random = new Random();
 
+        this.level.add(new Warper(player.getX() - 10, player.getY() - 10, true));
+/*
         for (int i = 0; i < 3; i++) {
             this.level.add(new Guardian(player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));
         }
-
+*/
 
 
         //this.level.add(new Chest(player.getX() - 10, player.getY() - 10, level.getSpriteCollector()));
