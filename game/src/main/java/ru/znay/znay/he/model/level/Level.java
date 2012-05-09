@@ -28,8 +28,6 @@ import ru.znay.znay.he.model.mob.boss.snake.Snake;
 import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 import ru.znay.znay.he.model.npc.NpcTrigger;
-import ru.znay.znay.he.model.npc.Warp;
-import ru.znay.znay.he.model.particle.FireParticle;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.sound.Sound;
 
@@ -63,8 +61,6 @@ public class Level {
     private final static int PLAYER_SPAWN = 0xFFFF0000;
     private final static int SHRUBBERY = 0xFF005500;
 
-    private ParticleSystem fireParticles;
-
     private int number;
 
     private Random random = new Random();
@@ -85,7 +81,6 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<Entity>();
 
-    private SpriteCollector spriteCollector;
     private int respX = 0;
     private int respY = 0;
 
@@ -102,17 +97,10 @@ public class Level {
         this.number = level;
         this.game = game;
 
-        this.spriteCollector = new SpriteCollector(game.getScreen().getSprites());
 
         this.loadTiles(level);
 
         this.loadObjects(level);
-
-        try {
-            fireParticles = new ParticleSystem(FireParticle.class, 2000, 0.03, -0.01, 40);
-        } catch (Exception e) {
-            //ignore
-        }
 
         trySpawn();
 
@@ -179,23 +167,23 @@ public class Level {
                         int r = random.nextInt(100);
                         if (r < 72) break;
                         if (r < 75) {
-                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
                             break;
                         }
                         if (random.nextBoolean()) {
-                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
                         } else {
-                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
                         }
 
                         break;
                     }
                     case TREE_STUMP: {
-                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
                         break;
                     }
                     case SHRUBBERY: {
-                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
                         break;
                     }
 
@@ -240,12 +228,12 @@ public class Level {
                         break;
                     }
                     case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, Messages.getInstance().getMessage(value & 0xFF), spriteCollector));
+                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, Messages.getInstance().getMessage(value & 0xFF), this.game.getSpriteCollector()));
                         break;
                     case 0x40:
                         switch (((value >> 8) & 0xFF)) {
                             case 0x05:
-                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, spriteCollector));
+                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
                                 break;
 
                         }
@@ -312,7 +300,7 @@ public class Level {
                 }
             }
         }
-        this.fireParticles.tick();
+        this.game.getFireParticles().tick();
         tickTime++;
     }
 
@@ -384,7 +372,7 @@ public class Level {
             }
             rowSprites.clear();
         }
-        this.fireParticles.render(screen);
+        this.game.getFireParticles().render(screen);
         screen.setOffset(0, 0);
     }
 
@@ -497,11 +485,11 @@ public class Level {
     }
 
     public ParticleSystem getFireParticles() {
-        return fireParticles;
+        return game.getFireParticles();
     }
 
     public SpriteCollector getSpriteCollector() {
-        return spriteCollector;
+        return game.getSpriteCollector();
     }
 
     public Game getGame() {

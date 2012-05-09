@@ -8,6 +8,7 @@ import ru.znay.znay.he.gfx.gui.GuiSpeedIndicator;
 import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
+import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.weather.WeatherManager;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
@@ -40,7 +41,6 @@ public class Game extends Graphics implements Runnable {
     private int xScroll;
     private int yScroll;
     private Entity selectedEntity;
-    private WeatherManager weatherManager = new WeatherManager();
 
     public void start() {
         running = true;
@@ -156,7 +156,7 @@ public class Game extends Graphics implements Runnable {
             Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 120, PaletteHelper.getColor(555, 111, 111, 115));
         }
 
-        super.render(player.isRemoved(), this.weatherManager.getWeather());
+        super.render(player.isRemoved());
     }
 
     @Override
