@@ -29,6 +29,7 @@ import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 import ru.znay.znay.he.model.npc.Guardian;
 import ru.znay.znay.he.model.npc.NpcTrigger;
+import ru.znay.znay.he.model.npc.Warper;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.sound.Sound;
 
@@ -226,6 +227,13 @@ public class Level {
                     case 0xFF: {
                         respX = (i << 4) + Tile.HALF_SIZE;
                         respY = (j << 4) + Tile.HALF_SIZE;
+
+
+                        this.add(new Warper(respX - 30, respY - 30, true));
+
+                        if (level != 0) {
+                            this.add(new Warper(respX + 30, respY - 30, false));
+                        }
 
                         if (level == 0) {
 

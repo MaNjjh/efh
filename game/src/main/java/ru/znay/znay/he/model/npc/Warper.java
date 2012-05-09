@@ -29,7 +29,13 @@ public class Warper extends Entity {
         int xd = x - 8;
         int yd = y - 9;
 
-        int colors = PaletteHelper.getColor(-1, 0, 222, 333);
+        int col = isUp ? 214 : 222;
+        
+        int colors = PaletteHelper.getColor(-1, 0, col, 333);
+
+        if (System.currentTimeMillis() / 100 % 2 == 0) {
+            colors = PaletteHelper.getColor(-1, 111, col, 533);
+        }
 
         screen.render(2, xd, yd, 0, 11 * Tile.HALF_SIZE, colors, 0);
     }

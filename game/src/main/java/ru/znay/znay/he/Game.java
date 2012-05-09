@@ -252,8 +252,6 @@ public class Game extends Graphics implements Runnable {
         GuiManager.getInstance().initDefaultGui(this.level);
 
         Random random = new Random();
-
-        this.level.add(new Warper(player.getX() - 10, player.getY() - 10, true));
 /*
         for (int i = 0; i < 3; i++) {
             this.level.add(new Guardian(player.getX() + random.nextInt(61) - 30, player.getY() + random.nextInt(61) - 30));

@@ -15,14 +15,23 @@ import ru.znay.znay.he.model.npc.Warper;
  * To change this template use File | Settings | File Templates.
  */
 public class Boss extends Mob {
+    private Equipment[][] equipmentDrop = {
+            {Equipment.simpleShoes}, // 1-level
+            {Equipment.strongBow, Equipment.secondArmor}, // 2-level
+            {Equipment.secondStrongArmor}, // 2-level
+            {Equipment.thirdArmor}, // 3-level
+            {Equipment.thirdStrongArmor, Equipment.strongShoes}, // 4-level
+            {Equipment.rareArmor, Equipment.rareBow, Equipment.rareBow}, // 5-level
+            {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}};
 
     @Override
     public void die() {
         super.die();
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareBow), x + random.nextInt(31) - 15, y + random.nextInt(31) - 15));
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareArmor), x + random.nextInt(31) - 15, y + random.nextInt(31) - 15));
-        level.add(new ItemEntity(new EquipmentItem(Equipment.rareShoes), x + random.nextInt(31) - 15, y + random.nextInt(31) - 15));
 
+        int numLevel = this.level.getNumber();
+        for (int i = 0; i < equipmentDrop[numLevel].length; i++) {
+            this.level.add(new ItemEntity(new EquipmentItem(equipmentDrop[numLevel][i]), x + random.nextInt(31) - 15, y + random.nextInt(31) - 15));
+        }
 
         int offsetX = 0;
         int offsetY = 0;
