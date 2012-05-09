@@ -275,10 +275,10 @@ public class Level {
                 add(mob);
             }
 
-            mob = new Bird();
+            /*mob = new Bird();
             if (mob.findStartPos(this)) {
                 add(mob);
-            }
+            }*/
         }
 
     }
