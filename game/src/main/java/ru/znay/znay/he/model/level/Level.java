@@ -21,7 +21,6 @@ import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.mob.boss.AirWizard;
 import ru.znay.znay.he.model.mob.boss.snake.Snake;
@@ -486,7 +485,7 @@ public class Level {
     }
 
     public int getMonsterDensity() {
-        return monsterDensity;
+        return Math.max(0, monsterDensity - number);
     }
 
     public void setMonsterDensity(int monsterDensity) {

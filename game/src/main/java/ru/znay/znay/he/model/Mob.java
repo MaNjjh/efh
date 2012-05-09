@@ -169,7 +169,7 @@ public class Mob extends Entity {
 
         if (!this.canFly()) {
             int r = level.getMonsterDensity() * Tile.SIZE;
-            if (level.getEntities(xx - r, yy - r, xx + r, yy + r, null).size() > 0) return false;
+            if (level.getEntities(xx - r, yy - r, xx + r, yy + r, ETeam.ENEMY_TEAM).size() > 0) return false;
             if (!level.getTile(x, y).mayPass(level, x, y, this)) return false;
         }
 
