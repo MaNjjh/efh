@@ -230,6 +230,7 @@ public class Level {
                             this.add(new Warper(respX + 30, respY - 30, false));
                         }
 
+/*
                         if (level == 0) {
 
                             this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
@@ -237,6 +238,7 @@ public class Level {
                             this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
 
                         }
+*/
                         break;
                     }
                     case 0x40:

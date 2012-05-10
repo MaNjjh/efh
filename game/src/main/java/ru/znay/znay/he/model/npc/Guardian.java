@@ -18,6 +18,7 @@ import java.util.List;
  * Time: 20:33
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Guardian extends NPC {
     public Guardian(int x, int y) {
         super(x, y);
