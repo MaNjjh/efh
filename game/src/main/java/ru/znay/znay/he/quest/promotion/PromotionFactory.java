@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest.promotion;
  * Time: 20:27
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class PromotionFactory {
     private static PromotionFactory instance = new PromotionFactory();
 

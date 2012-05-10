@@ -11,6 +11,7 @@ import ru.znay.znay.he.model.item.resource.ResourceItem;
  * Time: 20:17
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class GoldPromotion implements QuestPromotion {
 
     private int gold;

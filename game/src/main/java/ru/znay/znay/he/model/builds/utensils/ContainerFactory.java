@@ -11,6 +11,7 @@ import java.util.List;
  * Time: 14:56
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ContainerFactory {
     private static ContainerFactory instance = new ContainerFactory();
 

@@ -10,6 +10,7 @@ import ru.znay.znay.he.model.Player;
  * Time: 23:11
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class NpcTrigger extends Entity {
     private int id;
 

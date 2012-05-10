@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest.template;
  * Time: 21:29
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class TemplateFactory {
     private static TemplateFactory instance = new TemplateFactory();
 

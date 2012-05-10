@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest;
  * Time: 19:45
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public interface QuestStatus {
     boolean isCompleted();
 

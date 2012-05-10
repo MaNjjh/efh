@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest.template;
  * Time: 15:46
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class MoveTemplate extends DefaultTemplate {
     private int npcID;
 

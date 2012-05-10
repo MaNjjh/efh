@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest.template;
  * Time: 15:26
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class KillTemplate extends DefaultTemplate {
     private int needToKill;
     private int currentKills = 0;

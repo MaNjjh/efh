@@ -18,6 +18,7 @@ import java.util.List;
  * Time: 12:08
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestParser {
 
     public List<AbsQuest> parseQuests(List<String> strings) {

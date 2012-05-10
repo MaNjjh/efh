@@ -16,6 +16,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 12:54
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Waymark extends Utensils {
     private long tick;
     private String message;

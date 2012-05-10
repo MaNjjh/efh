@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest.template;
  * Time: 15:10
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class TemplateType {
     public static final int SHOW_COMPLETE = 1;
     public static final int KILL = 2;

@@ -9,6 +9,7 @@ import ru.znay.znay.he.model.Mob;
  * Time: 14:11
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class MobFactory {
     private static MobFactory instance = new MobFactory();
 

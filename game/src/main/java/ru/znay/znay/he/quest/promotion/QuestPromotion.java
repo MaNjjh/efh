@@ -9,6 +9,7 @@ import ru.znay.znay.he.model.Player;
  * Time: 21:28
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public interface QuestPromotion {
     void promotion(Player player);
 

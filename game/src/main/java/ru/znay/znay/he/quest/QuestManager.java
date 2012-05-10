@@ -12,6 +12,7 @@ import java.util.List;
  * Time: 12:06
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestManager {
     List<AbsQuest> quests;
 

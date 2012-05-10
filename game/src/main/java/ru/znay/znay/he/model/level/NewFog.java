@@ -14,6 +14,7 @@ import java.util.Random;
  * Time: 18:22
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class NewFog {
     private boolean[] fog;
     private int h;

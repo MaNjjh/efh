@@ -14,20 +14,20 @@ import ru.znay.znay.he.model.level.tile.Tile;
  */
 public class Chest extends Container {
     public Chest(int x, int y, SpriteCollector spriteCollector) {
-        super(x, y, 4, 1);
+        super(x, y, 4, 2);
         wrapSprite(spriteCollector);
     }
 
     public void wrapSprite(SpriteCollector spriteCollector) {
         spriteCollector.resetWrappers();
-        spriteCollector.addWrapper(new SpriteWrapper(2 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(30, 20, 40, -1)));
-        spriteCollector.addWrapper(new SpriteWrapper(4 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(10, 20, 10, -1)));
-        spriteCollector.addWrapper(new SpriteWrapper(6 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(100, 210, 320, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(2 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(530, 520, 540, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(4 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(510, 520, 510, -1)));
+        spriteCollector.addWrapper(new SpriteWrapper(6 * Tile.HALF_SIZE, 5 * Tile.HALF_SIZE, Tile.HALF_SIZE << 1, Tile.HALF_SIZE << 1, PaletteHelper.getColor(500, 510, 520, -1)));
 
         this.sprite = spriteCollector.mergedWrappers("chest", 1, random.nextInt(2), 0x01000000);
     }
 
     public Chest() {
-        super(0, 0, 4, 1);
+        super(0, 0, 4, 2);
     }
 }

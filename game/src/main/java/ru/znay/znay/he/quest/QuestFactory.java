@@ -9,6 +9,7 @@ import java.io.InputStream;
  * Time: 21:12
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestFactory {
 
     private static QuestFactory instance = new QuestFactory();

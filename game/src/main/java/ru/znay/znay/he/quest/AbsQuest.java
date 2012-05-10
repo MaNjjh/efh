@@ -14,6 +14,7 @@ import java.util.UUID;
  * Time: 19:46
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class AbsQuest implements QuestStatus, NextQuest {
     private String id = null;
     private String name;

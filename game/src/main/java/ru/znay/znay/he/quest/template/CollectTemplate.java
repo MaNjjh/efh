@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest.template;
  * Time: 20:32
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class CollectTemplate extends DefaultTemplate {
     private int countToCollect;
     private int currentCount  = 0;

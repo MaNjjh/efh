@@ -14,6 +14,7 @@ import java.util.List;
  * Time: 15:11
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ContainerPromotion implements QuestPromotion {
     private String name;
     private List<String> items = new ArrayList<String>();

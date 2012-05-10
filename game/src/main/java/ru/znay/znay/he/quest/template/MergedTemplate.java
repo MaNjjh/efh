@@ -12,6 +12,7 @@ import java.util.List;
  * Time: 16:04
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class MergedTemplate {
     private List<DefaultTemplate> list = new LinkedList<DefaultTemplate>();
 

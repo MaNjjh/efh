@@ -9,6 +9,7 @@ import ru.znay.znay.he.model.Player;
  * Time: 20:20
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class LifePromotion implements QuestPromotion {
 
     private int life;

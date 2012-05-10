@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
  * Time: 19:42
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestHandler {
     private ConcurrentMap<String, AbsQuest> quests = new ConcurrentHashMap<String, AbsQuest>();
     private Player player;

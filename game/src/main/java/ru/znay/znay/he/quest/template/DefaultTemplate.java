@@ -9,6 +9,7 @@ import ru.znay.znay.he.quest.AbsQuest;
  * Time: 15:08
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public abstract class DefaultTemplate {
     private int type;
     protected boolean complete;

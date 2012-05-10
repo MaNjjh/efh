@@ -23,6 +23,7 @@ import java.util.List;
  * Time: 12:10
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class Warp extends Entity {
     private int srcLevel;
     private int dstLevel;

@@ -12,6 +12,7 @@ import ru.znay.znay.he.model.mob.MobFactory;
  * Time: 18:51
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class SpawnPromotion implements QuestPromotion {
     private String mobName;
     private int count;

@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest;
  * Time: 13:17
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class QuestLog {
     private boolean[] completeQuests = new boolean[128];
     private int currentQuest = 1;

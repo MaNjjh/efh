@@ -12,6 +12,7 @@ import java.util.List;
  * Time: 20:23
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class MergedPromotion implements QuestPromotion {
     private List<QuestPromotion> questPromotionList = new ArrayList<QuestPromotion>();
 

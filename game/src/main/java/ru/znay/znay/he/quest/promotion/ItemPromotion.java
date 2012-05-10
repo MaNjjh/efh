@@ -12,6 +12,7 @@ import ru.znay.znay.he.model.item.equipment.EquipmentItem;
  * Time: 20:56
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public class ItemPromotion implements QuestPromotion {
     private String itemName;
     private int count;

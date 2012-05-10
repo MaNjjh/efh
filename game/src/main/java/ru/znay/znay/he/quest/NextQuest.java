@@ -7,6 +7,7 @@ package ru.znay.znay.he.quest;
  * Time: 19:12
  * To change this template use File | Settings | File Templates.
  */
+@Deprecated
 public interface NextQuest {
     public void initNextQuest(QuestHandler questHandler);
 }
