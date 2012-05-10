@@ -7,7 +7,6 @@ import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
-import ru.znay.znay.he.messages.Messages;
 import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
@@ -18,7 +17,6 @@ import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
 import ru.znay.znay.he.model.builds.tree.Shrubbery;
 import ru.znay.znay.he.model.builds.tree.TreeStump;
-import ru.znay.znay.he.model.builds.utensils.Waymark;
 import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.SlimeFactory;
@@ -27,7 +25,6 @@ import ru.znay.znay.he.model.mob.boss.snake.Snake;
 import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
 import ru.znay.znay.he.model.npc.Guardian;
-import ru.znay.znay.he.model.npc.NpcTrigger;
 import ru.znay.znay.he.model.npc.Warper;
 import ru.znay.znay.he.model.particle.ParticleSystem;
 import ru.znay.znay.he.sound.Sound;
@@ -76,7 +73,7 @@ public class Level {
     private byte[] tiles;
 
     private Fog fog;
-    private int monsterDensity = 4;
+    private int monsterDensity = 6;
     private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
 
@@ -127,6 +124,8 @@ public class Level {
         for (int j = 0; j < this.height; j++) {
             for (int i = 0; i < this.width; i++) {
                 int value = map.getPixels()[i + j * this.width];
+                int xx = (i << 4) + Tile.HALF_SIZE;
+                int yy = (j << 4) + Tile.HALF_SIZE;
                 switch (value) {
                     case GRASS_TILE: {
                         setTile(i, j, Tile.grass, 0);
@@ -161,30 +160,30 @@ public class Level {
                         break;
                     }
                     case APPLE_TREE: {
-                        add(new AppleTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE));
+                        add(new AppleTree(xx, yy));
                         break;
                     }
                     case FIR_TREE: {
                         int r = random.nextInt(100);
                         if (r < 72) break;
                         if (r < 75) {
-                            add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
+                            add(new TreeStump(xx, yy, this.game.getSpriteCollector()));
                             break;
                         }
                         if (random.nextBoolean()) {
-                            add(new FirTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
+                            add(new FirTree(xx, yy, this.game.getSpriteCollector()));
                         } else {
-                            add(new PineTree((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
+                            add(new PineTree(xx, yy, this.game.getSpriteCollector()));
                         }
 
                         break;
                     }
                     case TREE_STUMP: {
-                        add(new TreeStump((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
+                        add(new TreeStump(xx, yy, this.game.getSpriteCollector()));
                         break;
                     }
                     case SHRUBBERY: {
-                        add(new Shrubbery((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
+                        add(new Shrubbery(xx, yy, this.game.getSpriteCollector()));
                         break;
                     }
 
@@ -199,14 +198,14 @@ public class Level {
 
     private void loadObjects(int level) {
         Bitmap map = BitmapHelper.loadBitmapFromResources("/maps/" + level + "O.png");
-        for (int j = 0; j < this.height; j++) {
-            for (int i = 0; i < this.width; i++) {
-                int value = map.getPixels()[i + j * this.width];
+        for (int j = 0; j < map.getHeight(); j++) {
+            for (int i = 0; i < map.getWidth(); i++) {
+                int value = map.getPixels()[i + j * map.getWidth()];
+                int xx = (i << 4) + Tile.HALF_SIZE;
+                int yy = (j << 4) + Tile.HALF_SIZE;
+
                 if (value == 0xFFFFFFFF) continue;
                 if (value == 0xFF20FFFF) {
-                    int xx = (i << 4) + Tile.HALF_SIZE;
-                    int yy = (j << 4) + Tile.HALF_SIZE;
-
                     SnakePart prev = new Snake(xx, yy);
                     this.add(prev);
                     for (int a = 0; a < 16; a++) {
@@ -215,17 +214,14 @@ public class Level {
                     }
                     continue;
                 } else if (value == 0xFF21FFFF) {
-                    int xx = (i << 4) + Tile.HALF_SIZE;
-                    int yy = (j << 4) + Tile.HALF_SIZE;
-
                     this.add(new AirWizard(xx, yy));
 
                     continue;
                 }
                 switch (((value >> 16) & 0xFF)) {
                     case 0xFF: {
-                        respX = (i << 4) + Tile.HALF_SIZE;
-                        respY = (j << 4) + Tile.HALF_SIZE;
+                        respX = xx;
+                        respY = yy;
 
 
                         this.add(new Warper(respX - 30, respY - 30, true));
@@ -243,19 +239,13 @@ public class Level {
                         }
                         break;
                     }
-                    case 0x25:
-                        add(new Waymark((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, Messages.getInstance().getMessage(value & 0xFF), this.game.getSpriteCollector()));
-                        break;
                     case 0x40:
                         switch (((value >> 8) & 0xFF)) {
                             case 0x05:
-                                add(new Well((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, this.game.getSpriteCollector()));
+                                add(new Well(xx, yy, this.game.getSpriteCollector()));
                                 break;
 
                         }
-                    case 0x55:
-                        add(new NpcTrigger((i << 4) + Tile.HALF_SIZE, (j << 4) + Tile.HALF_SIZE, value & 0xFF));
-                        break;
                 }
             }
         }
