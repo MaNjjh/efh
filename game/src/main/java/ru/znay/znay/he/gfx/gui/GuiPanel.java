@@ -57,16 +57,11 @@ public class GuiPanel {
     }
 
     public void show() {
-        if (!visible) {
-            visible = true;
-            changed = true;
-        }
+        setVisible(true);
     }
 
     public void hide() {
-        if (visible) {
-            visible = false;
-        }
+        setVisible(false);
     }
 
     public void setPanelColor(int color) {

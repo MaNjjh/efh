@@ -33,6 +33,8 @@ public class GuiManager {
     public static final int MENU_COLOR = PaletteHelper.getColor(-1, 1, 30, 445);
     public static final int MENU_COLOR_SEL = PaletteHelper.getColor(-1, 1, 141, 445);
 
+    public static boolean mainMenu = false;
+
     public static boolean isOpenedMenu = false;
 
     private GuiManager() {
@@ -132,10 +134,8 @@ public class GuiManager {
         add(new GuiInventory(1, 5, level.getPlayer()), "inventory");
         add(new GuiMenu(50, 100), "menu");
         add(new GuiHelpPanel(1,5),"helpPanel");
+        add(new GuiMainMenu(null),"mainMenu");
 
         GuiManager.getInstance().add(new GuiMiniMap(Constants.SCREEN_WIDTH - (level.getWidth() + Tile.HALF_SIZE * 5) / 2, Tile.HALF_SIZE / 2, level), "minimap");
-
-        //todo сделать добавление статов
-
     }
 }

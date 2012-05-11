@@ -75,11 +75,15 @@ public class Game extends Graphics implements Runnable {
                 }
             }
 
-            this.level.tick();
-            Tile.tickCount++;
+            GuiManager.getInstance().tick();
 
-            this.weatherManager.tick(level);
-            mouseTick();
+            if (!GuiManager.mainMenu) {
+                this.level.tick();
+                Tile.tickCount++;
+
+                this.weatherManager.tick(level);
+                mouseTick();
+            }
         }
 
     }

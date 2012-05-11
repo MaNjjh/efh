@@ -19,9 +19,9 @@ public class GuiMenu extends GuiPanel {
         public void result(int result);
     }
 
-    private List<GuiTextPanel> panels = new LinkedList<GuiTextPanel>();
-    private Callback callback = null;
-    private int currentCell = -1;
+    protected List<GuiTextPanel> panels = new LinkedList<GuiTextPanel>();
+    protected Callback callback = null;
+    protected int currentCell = -1;
 
     public GuiMenu(int x, int y) {
         this.x = x;
@@ -106,7 +106,7 @@ public class GuiMenu extends GuiPanel {
     public void select() {
         if (!visible) return;
         callback.result(currentCell);
-        visible = false;
+        setVisible(false);
         GuiManager.isOpenedMenu = false;
     }
 

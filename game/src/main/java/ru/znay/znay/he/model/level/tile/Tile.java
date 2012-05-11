@@ -12,6 +12,7 @@ import ru.znay.znay.he.model.level.tile.ground.HoleTile;
 import ru.znay.znay.he.model.level.tile.ground.RoadTile;
 import ru.znay.znay.he.model.level.tile.ground.RockTile;
 import ru.znay.znay.he.model.level.tile.ground.SandTile;
+import ru.znay.znay.he.model.level.tile.liquid.DeepSwampTile;
 import ru.znay.znay.he.model.level.tile.liquid.DeepWaterTile;
 import ru.znay.znay.he.model.level.tile.liquid.LavaTile;
 import ru.znay.znay.he.model.level.tile.liquid.SwampTile;
@@ -52,6 +53,7 @@ public class Tile {
     public int deepWaterColor = PaletteHelper.getColor(004, deepWaterMainColor, 114, 114);
     public int waterColor = PaletteHelper.getColor(005, waterMainColor, 115, 115);
     public int swampColor = PaletteHelper.getColor(-1, swampMainColor, swampMainColor - 110, -1);
+    public int deepSwampColor = PaletteHelper.getColor(-1, swampMainColor - 110, swampMainColor-120, -1);
 
     public static final int GRASS_TILE = 0;
     public static final int ROCK_TILE = 1;
@@ -73,6 +75,7 @@ public class Tile {
     public static Tile road = new RoadTile(6);
     public static Tile swamp = new SwampTile(7);
     public static Tile deepWater = new DeepWaterTile(8);
+    public static Tile deepSwamp = new DeepSwampTile(9);
     public static int tickCount = 0;
 
     public boolean connectsToGrass = false;
