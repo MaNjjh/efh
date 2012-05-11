@@ -11,7 +11,6 @@ import ru.znay.znay.he.model.ETeam;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
 import ru.znay.znay.he.model.Player;
-import ru.znay.znay.he.model.builds.Mushroom;
 import ru.znay.znay.he.model.builds.tree.AppleTree;
 import ru.znay.znay.he.model.builds.tree.FirTree;
 import ru.znay.znay.he.model.builds.tree.PineTree;
@@ -76,6 +75,8 @@ public class Level {
     private int monsterDensity = 6;
     private long tickTime = 0;
     private List<Entity>[] entitiesInTiles;
+
+    private int mobCount = 0;
 
     private List<Entity> entities = new ArrayList<Entity>();
 
@@ -175,7 +176,6 @@ public class Level {
                         } else {
                             add(new PineTree(xx, yy, this.game.getSpriteCollector()));
                         }
-
                         break;
                     }
                     case TREE_STUMP: {
@@ -230,15 +230,13 @@ public class Level {
                             this.add(new Warper(respX + 30, respY - 30, false));
                         }
 
-/*
-                        if (level == 0) {
+                        //if (level == 0) {
 
-                            this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
-                            this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
-                            this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+                        this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+                        this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+                        this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
 
-                        }
-*/
+                        //}
                         break;
                     }
                     case 0x40:
@@ -257,11 +255,6 @@ public class Level {
         for (int i = 0; i < 100; i++) {
 
             Mob mob = new SlimeFactory();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }
-
-            mob = new Mushroom();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
@@ -292,9 +285,9 @@ public class Level {
             entity.tick();
 
             if (entity.isRemoved()) {
+                if (entity instanceof Mob) mobCount--;
                 entities.remove(i--);
                 removeEntity(xto, yto, entity);
-
             } else {
                 int xt = entity.getX() >> 4;
                 int yt = entity.getY() >> 4;
@@ -405,9 +398,12 @@ public class Level {
             player.setY(respY);
             fog.clearFog2(player.getX() >> 4, player.getY() >> 4, player.getClearFogRadius());
         }
+
         entity.setRemoved(false);
         entities.add(entity);
         entity.init(this);
+
+        if (entity instanceof Mob) mobCount++;
 
         insertEntity(entity.getX() >> 4, entity.getY() >> 4, entity);
     }
@@ -474,6 +470,10 @@ public class Level {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getMobCount() {
+        return mobCount;
     }
 
     public int getMonsterDensity() {

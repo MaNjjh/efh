@@ -59,8 +59,7 @@ public class GuiSpeedIndicator extends GuiPanel {
     public void changeSpeed(int val) {
         if (speed == val) {
             return;
-        }
-        else {
+        } else {
             speed = val;
         }
 
@@ -71,19 +70,12 @@ public class GuiSpeedIndicator extends GuiPanel {
     protected void paintF(Screen screen) {
         if (speed < 3) {
             image = slow;
-            return;
-        }
-        if (speed < 10) {
+        } else if (speed < 10) {
             image = walk;
-            return;
-        }
-        if (speed < 40) {
+        } else if (speed < 40) {
             image = run;
-            return;
-        }
-        if (speed < 60) {
+        } else {
             image = sprint;
-            return;
         }
     }
 

@@ -233,18 +233,19 @@ public class Player extends Mob {
         GuiInventory guiInventory = (GuiInventory) GuiManager.getInstance().get("inventory");
         if (guiInventory != null) {
 
-            int speed = 0;
-            int slowPeriod = currentState.getSlowPeriod();
+            int speed;
+            int slowPeriod = currentState.getSlowPeriod() + groundSlowPeriod;
             if (slowPeriod < 3) {
                 speed = 30;
             } else if (slowPeriod < 10) {
                 speed = 60;
             } else if (slowPeriod < 40) {
                 speed = 90;
-            } else if (slowPeriod < 60) {
+            } else {
                 speed = 120;
             }
 
+            System.out.println(slowPeriod);
             guiInventory.setSpeed(speed);
             guiInventory.setDef(currentState.getDefense());
             guiInventory.setSta(currentState.getEndurance());
@@ -357,12 +358,14 @@ public class Player extends Mob {
         this.activeItem = activeItem;
     }
 
+    @Deprecated
     public void moveToXY(int x, int y) {
         this.x = x;
         this.y = y;
         InputHandler.getInstance(null).releaseAll();
     }
 
+    @Deprecated
     public void moveLevel(int newLevel, int x, int y) {
         respPoint = new Point(x, y);
         this.game.changeLevel(newLevel);

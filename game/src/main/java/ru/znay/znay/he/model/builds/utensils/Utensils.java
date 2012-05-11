@@ -13,7 +13,7 @@ import ru.znay.znay.he.model.Mob;
  * Time: 20:50
  * To change this template use File | Settings | File Templates.
  */
-public abstract class Utensils extends Mob {
+public abstract class Utensils extends Entity {
     protected Utensils(int x, int y, int xr, int yr) {
         this.x = x;
         this.y = y;

@@ -28,10 +28,11 @@ public class Mob extends Entity {
     protected int viewRadius = 4;
     protected Mob target = null;
     protected int bloodColor = 0xcc1100;
+    protected int groundSlowPeriod = 50;
 
-    protected CharacterState defaultState = new CharacterState(0, 10, 0, 0, 50);
-    protected CharacterState currentState = new CharacterState(0, 10, 0, 0, 50);
-    protected CharacterState compareState = new CharacterState(0, 10, 0, 0, 50);
+    protected CharacterState defaultState = new CharacterState(0, 10, 0, 0, 0);
+    protected CharacterState currentState = new CharacterState(0, 10, 0, 0, 0);
+    protected CharacterState compareState = new CharacterState(0, 10, 0, 0, 0);
 
     @Override
     public void init(Level level) {
@@ -57,9 +58,9 @@ public class Mob extends Entity {
             level.add(new FlowText("+" + (health - oldHealth), x, y, Font.greenColor));
         }
 
-        if (!compareState.match(currentState)) {
+        if (!compareState.match(currentState.mergeStates(new CharacterState(0, 0, 0, 0, groundSlowPeriod)))) {
             updateState();
-            compareState = currentState.mergeStates(new CharacterState());
+            compareState = currentState.mergeStates(new CharacterState(0, 0, 0, 0, groundSlowPeriod));
         }
 
         if (hurtTime > 0) hurtTime--;
@@ -98,7 +99,7 @@ public class Mob extends Entity {
             if (ya > 0) dir = 0;
         }
 
-        if (tickTime % currentState.getSlowPeriod() == 0) {
+        if (tickTime % (groundSlowPeriod + currentState.getSlowPeriod()) == 0) {
             return true;
         }
 
@@ -205,11 +206,11 @@ public class Mob extends Entity {
     }
 
     public void setSlowPeriod(int slowPeriod) {
-        this.currentState.setSlowPeriod(slowPeriod);
+        this.groundSlowPeriod = slowPeriod;
     }
 
     public int getSlowPeriod() {
-        return this.currentState.getSlowPeriod();
+        return this.groundSlowPeriod + this.currentState.getSlowPeriod();
     }
 
     public void setHealth(int health) {

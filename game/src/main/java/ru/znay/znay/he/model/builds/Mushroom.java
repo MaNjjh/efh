@@ -16,7 +16,7 @@ import ru.znay.znay.he.model.level.tile.Tile;
  * Time: 14:10
  * To change this template use File | Settings | File Templates.
  */
-public class Mushroom extends Mob {
+public class Mushroom extends Entity {
 
     private int tx = 0;
     private Long time;
