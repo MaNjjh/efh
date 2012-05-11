@@ -126,7 +126,10 @@ public class Player extends Mob {
             }
         }
 
-        move(xa, ya);
+        if (!move(xa, ya) && shoes != null && shoes.getEquipment() == Equipment.ultraShoes) {
+            x += xa;
+            y += ya;
+        }
 
         if (System.currentTimeMillis() - collectTime > 300) {
             updateAveragedNotify();
