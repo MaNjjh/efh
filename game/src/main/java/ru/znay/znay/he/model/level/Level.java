@@ -227,20 +227,17 @@ public class Level {
                         respX = xx;
                         respY = yy;
 
-
-                        this.add(new Warper(respX - 30, respY - 30, true));
+                        //this.add(new Warper(respX - 30, respY - 30, true));
 
                         if (level != 0) {
                             this.add(new Warper(respX + 30, respY - 30, false));
                         }
 
-                        //if (level == 0) {
-
-                        this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
-                        this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
-                        this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
-
-                        //}
+                        if (level > 3) {
+                            for (int aa = 0; aa < level - 3; aa++) {
+                                this.add(new Guardian(respX + random.nextInt(61) - 30, respY + random.nextInt(61) - 30));
+                            }
+                        }
                         break;
                     }
                     case 0x40:

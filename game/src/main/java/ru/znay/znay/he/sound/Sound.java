@@ -12,7 +12,7 @@ public class Sound {
     public static final Sound monsterHurt = new Sound("/sound/monsterhurt.wav");
     public static final Sound hit = new Sound("/sound/hit.wav");
     public static final Sound startGame = new Sound("/sound/startgame.wav");
-    public static final Sound questBegin = new Sound("/sound/questbegin.wav");
+    public static final Sound takeEquip = new Sound("/sound/questbegin.wav");
 
     private AudioClip clip;
 

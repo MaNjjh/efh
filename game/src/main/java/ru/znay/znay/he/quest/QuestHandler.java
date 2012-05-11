@@ -88,8 +88,6 @@ public class QuestHandler {
                 this.accept(quest.nextQuest);
             }
 
-            Sound.questBegin.play();
-
             questLog.complete(quest.getId());
 
             this.quests.remove(quest.getId());

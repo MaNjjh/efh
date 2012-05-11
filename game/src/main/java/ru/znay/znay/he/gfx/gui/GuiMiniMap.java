@@ -104,7 +104,7 @@ public class GuiMiniMap extends GuiPanel {
 
                     for (Entity entity : level.getEntities((i - 1) << 4, (j - 1) << 4, (i + 1) << 4, (j + 1) << 4, null)) {
 
-                        if (!(entity instanceof Mob) || !(entity instanceof Tree)) {
+                        if (!(entity instanceof Tree) && !(entity instanceof Mob)) {
                             continue;
                         }
 

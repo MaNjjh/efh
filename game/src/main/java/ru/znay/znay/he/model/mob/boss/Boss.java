@@ -16,7 +16,7 @@ import ru.znay.znay.he.model.npc.Warper;
  */
 public class Boss extends Mob {
     public static Equipment[][] equipmentDrop = {
-            {Equipment.ultraShoes, Equipment.ultraBow, Equipment.ultraArmor}, // 1-level
+           // {Equipment.ultraShoes, Equipment.ultraBow, Equipment.ultraArmor}, // 1-level
             {Equipment.simpleShoes}, // 1-level
             {Equipment.strongBow, Equipment.secondArmor}, // 2-level
             {Equipment.secondStrongArmor}, // 2-level

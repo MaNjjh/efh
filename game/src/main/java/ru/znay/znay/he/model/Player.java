@@ -22,6 +22,7 @@ import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.particle.FlowTextIcon;
 import ru.znay.znay.he.model.weapon.Weapon;
 import ru.znay.znay.he.model.weapon.arrow.EArrowType;
+import ru.znay.znay.he.sound.Sound;
 
 import java.awt.*;
 import java.util.List;
@@ -265,14 +266,13 @@ public class Player extends Mob {
     public void touchItem(ItemEntity itemEntity) {
         if (itemEntity.isRemoved()) return;
 
-        //level.getQuestHandler().updateItems(itemEntity.getItem().getName());
-
         itemEntity.take(this);
         inventory.add(itemEntity.getItem());
         averagedPickups.add(itemEntity.getItem());
 
         if (itemEntity.getItem() instanceof EquipmentItem) {
             updateEquip();
+            Sound.takeEquip.play();
         }
 
         if (itemEntity.getItem() instanceof ResourceItem) {
