@@ -29,13 +29,13 @@ public class Equipment {
     public static final Equipment ultraBow = new Equipment("U.Bow", 2, 12, PaletteHelper.getColor(-1, 100, 541, 555), new CharacterState(0, 0, 20, 0, 0, 5), EQUIP_TYPE.WEAPON);
 
 
-    public static final Equipment simpleArmor = new Equipment("Armor", 3, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(0, 0, 0, 0, 0), EQUIP_TYPE.ARMOR);
-    public static final Equipment secondArmor = new Equipment("Sec.Armor", 4, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(1, 0, 0, 0, 0), EQUIP_TYPE.ARMOR);
-    public static final Equipment secondStrongArmor = new Equipment("S.Armor", 5, 12, PaletteHelper.getColor(-1, 100, 500, 555), new CharacterState(2, 0, 0, 0, 0), EQUIP_TYPE.ARMOR);
-    public static final Equipment thirdArmor = new Equipment("Thi.Armor", 6, 12, PaletteHelper.getColor(-1, 100, 0, 555), new CharacterState(3, 0, 0, 0, 0), EQUIP_TYPE.ARMOR);
-    public static final Equipment thirdStrongArmor = new Equipment("T.Armor", 7, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(5, 0, 0, 0, 0), EQUIP_TYPE.ARMOR);
-    public static final Equipment rareArmor = new Equipment("R.Armor", 8, 12, PaletteHelper.getColor(-1, 100, 0, 555), new CharacterState(7, 0, 0, 5, 0), EQUIP_TYPE.ARMOR);
-    public static final Equipment ultraArmor = new Equipment("U.Armor", 8, 12, PaletteHelper.getColor(-1, 100, 541, 555), new CharacterState(10, 0, 0, 10, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment simpleArmor = new Equipment("Armor", 3, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(0, 5, 0, 0, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment secondArmor = new Equipment("Sec.Armor", 4, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(1, 10, 0, 0, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment secondStrongArmor = new Equipment("S.Armor", 5, 12, PaletteHelper.getColor(-1, 100, 500, 555), new CharacterState(2, 15, 0, 0, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment thirdArmor = new Equipment("Thi.Armor", 6, 12, PaletteHelper.getColor(-1, 100, 0, 555), new CharacterState(3, 20, 0, 0, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment thirdStrongArmor = new Equipment("T.Armor", 7, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(5, 25, 0, 0, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment rareArmor = new Equipment("R.Armor", 8, 12, PaletteHelper.getColor(-1, 100, 0, 555), new CharacterState(7, 50, 0, 5, 0), EQUIP_TYPE.ARMOR);
+    public static final Equipment ultraArmor = new Equipment("U.Armor", 8, 12, PaletteHelper.getColor(-1, 100, 541, 555), new CharacterState(10, 100, 0, 10, 0), EQUIP_TYPE.ARMOR);
 
 
     public static final Equipment simpleShoes = new Equipment("Shoes", 9, 12, PaletteHelper.getColor(-1, 100, 220, 555), new CharacterState(0, 0, 0, 0, 1), EQUIP_TYPE.SHOES);

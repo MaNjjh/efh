@@ -57,11 +57,6 @@ public class SnakeNeck extends SnakePart {
         }
     }
 
-    @Override
-    public void die() {
-        removed = true;
-    }
-
     public void setMovement(double xa, double ya, double rotate) {
         this.xa = xa;
         this.ya = ya;

@@ -17,9 +17,12 @@ import ru.znay.znay.he.model.builds.tree.PineTree;
 import ru.znay.znay.he.model.builds.tree.Shrubbery;
 import ru.znay.znay.he.model.builds.tree.TreeStump;
 import ru.znay.znay.he.model.builds.utensils.Well;
+import ru.znay.znay.he.model.item.ItemEntity;
+import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.mob.boss.AirWizard;
+import ru.znay.znay.he.model.mob.boss.Boss;
 import ru.znay.znay.he.model.mob.boss.snake.Snake;
 import ru.znay.znay.he.model.mob.boss.snake.SnakeNeck;
 import ru.znay.znay.he.model.mob.boss.snake.SnakePart;
@@ -77,6 +80,7 @@ public class Level {
     private List<Entity>[] entitiesInTiles;
 
     private int mobCount = 0;
+    private int bossCount = 0;
 
     private List<Entity> entities = new ArrayList<Entity>();
 
@@ -286,6 +290,35 @@ public class Level {
 
             if (entity.isRemoved()) {
                 if (entity instanceof Mob) mobCount--;
+                if (entity instanceof Boss) bossCount--;
+
+                if (bossCount == 0) {
+
+                    for (int aa = 0; aa < Boss.equipmentDrop[number].length; aa++) {
+                        this.add(new ItemEntity(new EquipmentItem(Boss.equipmentDrop[number][aa]), entity.getX() + random.nextInt(31) - 15, entity.getY() + random.nextInt(31) - 15));
+                    }
+
+                    int offsetX = 0;
+                    int offsetY = 0;
+                    int xx;
+                    int yy;
+                    while (true) {
+
+                        xx = (player.getX() >> 4) + offsetX;
+                        yy = (player.getY() >> 4) + offsetY;
+
+                        offsetX += random.nextInt(2) * 2 - 1;
+                        offsetY += random.nextInt(2) * 2 - 1;
+
+                        if (xx == player.getX() >> 4 && yy == player.getY() >> 4) continue;
+                        if (this.getTile(xx, yy) == Tile.lava) continue;
+                        break;
+                    }
+
+                    this.add(new Warper(xx << 4, yy << 4, true));
+                    bossCount = 100;
+                }
+
                 entities.remove(i--);
                 removeEntity(xto, yto, entity);
             } else {
@@ -404,6 +437,7 @@ public class Level {
         entity.init(this);
 
         if (entity instanceof Mob) mobCount++;
+        if (entity instanceof Boss) bossCount++;
 
         insertEntity(entity.getX() >> 4, entity.getY() >> 4, entity);
     }
@@ -474,6 +508,10 @@ public class Level {
 
     public int getMobCount() {
         return mobCount;
+    }
+
+    public int getBossCount() {
+        return bossCount;
     }
 
     public int getMonsterDensity() {
