@@ -40,7 +40,6 @@ public class Player extends Mob {
     private Item activeItem;
     private int clearFogRadius = 5;
     private Point respPoint = null;
-    private EArrowType arrowType = EArrowType.SIMPLE;
     private int fireDelay = 10;
     private EquipmentItem weapon;
     private EquipmentItem shoes;
@@ -120,7 +119,8 @@ public class Player extends Mob {
                 double vy = yDiff / m;
 
                 if (tickTime % currentState.getAttackDelay() == 0) {
-                    Weapon.fire(this.arrowType, this.team, x, y, vx, vy, currentState.getForce(), level);
+                    boolean isFireArrow = random.nextInt(5) == 0;
+                    Weapon.fire(isFireArrow ? EArrowType.FIRE : EArrowType.SIMPLE, this.team, x, y, vx, vy, currentState.getForce() + (isFireArrow ? currentState.getForce() : 0), level);
                 }
 
             }
@@ -213,17 +213,14 @@ public class Player extends Mob {
         currentState = defaultState.mergeStates(new CharacterState());
         weapon = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.WEAPON);
         if (weapon != null) {
-            System.out.println("found weapon " + weapon.getEquipment().getName());
             currentState = currentState.mergeStates(weapon.getBonusState());
         }
         shoes = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.SHOES);
         if (shoes != null) {
-            System.out.println("found shoes " + shoes.getEquipment().getName());
             currentState = currentState.mergeStates(shoes.getBonusState());
         }
         armor = inventory.findEquipmentByType(Equipment.EQUIP_TYPE.ARMOR);
         if (armor != null) {
-            System.out.println("found armor " + armor.getEquipment().getName());
             currentState = currentState.mergeStates(armor.getBonusState());
         }
     }
@@ -245,7 +242,6 @@ public class Player extends Mob {
                 speed = 120;
             }
 
-            System.out.println(slowPeriod);
             guiInventory.setSpeed(speed);
             guiInventory.setDef(currentState.getDefense());
             guiInventory.setSta(currentState.getEndurance());
