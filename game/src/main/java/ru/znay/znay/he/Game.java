@@ -31,7 +31,7 @@ import java.util.Random;
 public class Game extends Graphics implements Runnable {
 
     private boolean running = false;
-    private final static int MAX_LEVEL_COUNT = 3;
+    private final static int MAX_LEVEL_COUNT = 5;
     private Level level;
     private Level[] levels = new Level[MAX_LEVEL_COUNT];
 
