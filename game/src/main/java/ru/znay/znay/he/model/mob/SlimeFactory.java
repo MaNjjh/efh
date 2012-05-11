@@ -39,7 +39,6 @@ public class SlimeFactory extends Mob {
         if (hurtTime <= 0) spawnTime -= level.getNumber() / 5 + 1;
 
         if (spawnTime <= 0 && level.getMobCount() < 500) {
-            System.out.println(level.getMobCount());
             spawnTime = MIN_SPAWN_TIME + random.nextInt(MIN_SPAWN_TIME);
             level.add(new Slime(x, y));
         }
