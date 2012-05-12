@@ -160,7 +160,7 @@ public class Player extends Mob {
     @Override
     public void render(Screen screen) {
 
-        int xt = 8;
+        int xt = 0;
         int yt = 18;
 
         int flip1 = (walkDist >> 3) & 1;
