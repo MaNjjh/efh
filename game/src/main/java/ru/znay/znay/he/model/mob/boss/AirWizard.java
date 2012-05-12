@@ -126,6 +126,16 @@ public class AirWizard extends Boss {
         int xo = x - 8;
         int yo = y - 11;
 
+        if (isSwimming()) {
+            yo += 4;
+            int waterColor = PaletteHelper.getColor(-1, -1, -1, 444);
+            if (tickTime / 8 % 2 == 0) {
+                waterColor = PaletteHelper.getColor(-1, 444, -1, -1);
+            }
+            screen.render(xo + 0, yo + 3, 5 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, waterColor, 0);
+            screen.render(xo + Tile.HALF_SIZE, yo + 3, 5 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, waterColor, 1);
+        }
+
         int col1 = PaletteHelper.getColor(-1, 100, 550 - (level.getNumber() % 5) * 100, 555);
         int col2 = PaletteHelper.getColor(-1, 100, 550 - (level.getNumber() % 5) * 100, 532);
         if (health < maxHealth / 10) {
@@ -147,9 +157,10 @@ public class AirWizard extends Boss {
         screen.render(xo + Tile.HALF_SIZE * flip1, yo + 0, xt * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
         screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip1, yo + 0, (xt + 1) * Tile.HALF_SIZE, yt * Tile.HALF_SIZE, col1, flip1);
 
-        screen.render(xo + Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, xt * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
-        screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, (xt + 1) * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
-
+        if (!isSwimming()) {
+            screen.render(xo + Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, xt * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
+            screen.render(xo + Tile.HALF_SIZE - Tile.HALF_SIZE * flip2, yo + Tile.HALF_SIZE, (xt + 1) * Tile.HALF_SIZE, (yt + 1) * Tile.HALF_SIZE, col2, flip2);
+        }
     }
 
 
