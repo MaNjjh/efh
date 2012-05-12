@@ -13,7 +13,9 @@ public class Constants {
     public static final int SCREEN_SCALE = 2;
 
     public static final boolean isDebugMode = false;
-    public static final boolean soundOn = true;
+    public static final boolean soundOn = false;
+
+    public final static int MAX_LEVEL_COUNT = 5;
 
     public static final String GAME_TITLE = "Escape from hell";
 

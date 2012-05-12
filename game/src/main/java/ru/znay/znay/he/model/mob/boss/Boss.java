@@ -13,13 +13,12 @@ import ru.znay.znay.he.model.item.equipment.Equipment;
  */
 public class Boss extends Mob {
     public static Equipment[][] equipmentDrop = {
-            {Equipment.ultraShoes, Equipment.ultraBow, Equipment.ultraArmor}, // 1-level
-            {Equipment.simpleShoes}, // 1-level
-            {Equipment.strongBow, Equipment.secondArmor}, // 2-level
-            {Equipment.secondStrongArmor}, // 2-level
-            {Equipment.thirdArmor}, // 3-level
-            {Equipment.thirdStrongArmor, Equipment.strongShoes}, // 4-level
-            {Equipment.rareArmor, Equipment.rareBow, Equipment.rareBow}, // 5-level
+            {Equipment.simpleArmor, Equipment.simpleShoes}, // 1-level
+            {Equipment.strongBow}, // 2-level
+            {Equipment.secondStrongArmor, Equipment.strongShoes}, // 3-level
+            {Equipment.thirdStrongArmor}, // 4-level
+            {Equipment.rareArmor, Equipment.rareBow, Equipment.rareShoes}, // 5-level
+            {Equipment.ultraShoes, Equipment.ultraBow, Equipment.ultraArmor}, // 6-level
             {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}};
 
     @Override

@@ -2,7 +2,7 @@ package ru.znay.znay.he.model.level;
 
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.cfg.Constants;
-import ru.znay.znay.he.gfx.gui.GuiManager;
+import ru.znay.znay.he.gfx.AboutScreen;
 import ru.znay.znay.he.gfx.helper.BitmapHelper;
 import ru.znay.znay.he.gfx.model.Bitmap;
 import ru.znay.znay.he.gfx.model.Screen;
@@ -20,6 +20,7 @@ import ru.znay.znay.he.model.builds.utensils.Well;
 import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.equipment.EquipmentItem;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.Bird;
 import ru.znay.znay.he.model.mob.SlimeFactory;
 import ru.znay.znay.he.model.mob.boss.AirWizard;
 import ru.znay.znay.he.model.mob.boss.Boss;
@@ -253,19 +254,19 @@ public class Level {
     }
 
     public void trySpawn() {
-        for (int i = 0; i < 100; i++) {
-
+        for (int i = 0; i < 50; i++) {
             Mob mob = new SlimeFactory();
             if (mob.findStartPos(this)) {
                 add(mob);
             }
-
-            /*mob = new Bird();
-            if (mob.findStartPos(this)) {
-                add(mob);
-            }*/
         }
 
+        for (int i = 0; i < 10; i++) {
+            Mob mob = new Bird();
+            if (mob.findStartPos(this)) {
+                add(mob);
+            }
+        }
     }
 
     public void tick() {
@@ -311,7 +312,13 @@ public class Level {
                     }
 
                     this.add(new Warper(xx << 4, yy << 4, true));
+
+                    if (number == Constants.MAX_LEVEL_COUNT - 1) {
+                        AboutScreen.getInstance().show();
+                    }
+
                     bossCount = 100;
+
                 }
 
                 entities.remove(i--);

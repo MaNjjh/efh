@@ -1,6 +1,7 @@
 package ru.znay.znay.he;
 
 import ru.znay.znay.he.cfg.Constants;
+import ru.znay.znay.he.gfx.AboutScreen;
 import ru.znay.znay.he.gfx.Graphics;
 import ru.znay.znay.he.gfx.gui.GuiManager;
 import ru.znay.znay.he.gfx.gui.GuiPanel;
@@ -8,7 +9,6 @@ import ru.znay.znay.he.gfx.gui.GuiSpeedIndicator;
 import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
-import ru.znay.znay.he.model.AboutScreen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.resource.Resource;
@@ -31,9 +31,8 @@ import java.util.Random;
 public class Game extends Graphics implements Runnable {
 
     private boolean running = false;
-    private final static int MAX_LEVEL_COUNT = 5;
     private Level level;
-    private Level[] levels = new Level[MAX_LEVEL_COUNT];
+    private Level[] levels = new Level[Constants.MAX_LEVEL_COUNT];
 
     private Player player;
     private int xScroll;
@@ -56,7 +55,7 @@ public class Game extends Graphics implements Runnable {
 
         Sound.backMusic.loop();
 
-        for (int i = 0; i < MAX_LEVEL_COUNT; i++) {
+        for (int i = 0; i < Constants.MAX_LEVEL_COUNT; i++) {
             this.levels[i] = new Level(i, this);
         }
 
@@ -117,7 +116,7 @@ public class Game extends Graphics implements Runnable {
 
         prepareGraphics();
 
-        if (AboutScreen.getInstance().isShow()){
+        if (AboutScreen.getInstance().isShow()) {
             AboutScreen.getInstance().render(screen);
         } else {
             xScroll = this.player.getX() - this.screen.getViewPort().getWidth() / 2;
@@ -257,7 +256,7 @@ public class Game extends Graphics implements Runnable {
             this.level.remove(player);
         }
 
-        this.level = this.levels[level % MAX_LEVEL_COUNT];
+        this.level = this.levels[level % Constants.MAX_LEVEL_COUNT];
 
         this.level.add(player);
 

@@ -1,4 +1,4 @@
-package ru.znay.znay.he.model;
+package ru.znay.znay.he.gfx;
 
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.gfx.gui.GuiManager;
@@ -35,12 +35,12 @@ public class AboutScreen {
     public AboutScreen() {
         strings.add("над игрой работали;");
         strings.add("программист");
-        strings.add("<имя отчество>");
-        strings.add("сайт: www.ru");
-        strings.add("email: mail@mail.mail");
+        strings.add("Александр Сергеевич");
+        strings.add("сайт: www.znay-znay.ru");
+        strings.add("email: mr.gmaker@yandex.ru");
         strings.add(" ");
         strings.add("программист");
-        strings.add("<имя отчество>");
+        strings.add("Денис Сергеевич");
         strings.add("сайт: www.ru");
         strings.add("email: mail@mail.mail");
         strings.add(" ");
@@ -77,7 +77,7 @@ public class AboutScreen {
         return show;
     }
 
-    public void Show() {
+    public void show() {
         show = true;
         textY = 240;
     }

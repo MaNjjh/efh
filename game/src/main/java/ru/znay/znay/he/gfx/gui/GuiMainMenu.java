@@ -3,7 +3,7 @@ package ru.znay.znay.he.gfx.gui;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.cfg.Constants;
-import ru.znay.znay.he.model.AboutScreen;
+import ru.znay.znay.he.gfx.AboutScreen;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
@@ -52,7 +52,7 @@ public class GuiMainMenu extends GuiMenu implements GuiMenu.Callback{
                 GuiManager.getInstance().get("helpPanel").show();
                 return true;
             case 2:
-                AboutScreen.getInstance().Show();
+                AboutScreen.getInstance().show();
                 return true;
         }
 
