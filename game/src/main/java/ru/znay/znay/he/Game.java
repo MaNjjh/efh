@@ -8,13 +8,13 @@ import ru.znay.znay.he.gfx.gui.GuiSpeedIndicator;
 import ru.znay.znay.he.gfx.gui.GuiStatusPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.model.Font;
+import ru.znay.znay.he.model.AboutScreen;
 import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Player;
 import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.npc.Warper;
 import ru.znay.znay.he.sound.Sound;
 
 import javax.swing.*;
@@ -69,20 +69,24 @@ public class Game extends Graphics implements Runnable {
         } else {
             InputHandler.getInstance(null).tick();
 
-            if (player.isRemoved()) {
-                if (InputHandler.getInstance(null).action.clicked) {
-                    changeLevelByDir(0);
+            if (AboutScreen.getInstance().isShow()) {
+                AboutScreen.getInstance().tick();
+            } else {
+                if (player.isRemoved()) {
+                    if (InputHandler.getInstance(null).action.clicked) {
+                        changeLevelByDir(0);
+                    }
                 }
-            }
 
-            GuiManager.getInstance().tick();
+                GuiManager.getInstance().tick();
 
-            if (!GuiManager.mainMenu) {
-                this.level.tick();
-                Tile.tickCount++;
+                if (!GuiManager.mainMenu) {
+                    this.level.tick();
+                    Tile.tickCount++;
 
-                this.weatherManager.tick(level);
-                mouseTick();
+                    this.weatherManager.tick(level);
+                    mouseTick();
+                }
             }
         }
 
@@ -113,49 +117,53 @@ public class Game extends Graphics implements Runnable {
 
         prepareGraphics();
 
-        xScroll = this.player.getX() - this.screen.getViewPort().getWidth() / 2;
-        yScroll = this.player.getY() - (this.screen.getViewPort().getHeight() - Tile.HALF_SIZE) / 2;
-        if (xScroll < Tile.SIZE) xScroll = Tile.SIZE;
-        if (yScroll < Tile.SIZE) yScroll = Tile.SIZE;
-        if (xScroll > this.level.getWidth() * Tile.SIZE - this.screen.getViewPort().getWidth() - Tile.SIZE) {
-            xScroll = this.level.getWidth() * Tile.SIZE - this.screen.getViewPort().getWidth() - Tile.SIZE;
-        }
-        if (yScroll > this.level.getHeight() * Tile.SIZE - this.screen.getViewPort().getHeight() - Tile.SIZE) {
-            yScroll = this.level.getHeight() * Tile.SIZE - this.screen.getViewPort().getHeight() - Tile.SIZE;
-        }
+        if (AboutScreen.getInstance().isShow()){
+            AboutScreen.getInstance().render(screen);
+        } else {
+            xScroll = this.player.getX() - this.screen.getViewPort().getWidth() / 2;
+            yScroll = this.player.getY() - (this.screen.getViewPort().getHeight() - Tile.HALF_SIZE) / 2;
+            if (xScroll < Tile.SIZE) xScroll = Tile.SIZE;
+            if (yScroll < Tile.SIZE) yScroll = Tile.SIZE;
+            if (xScroll > this.level.getWidth() * Tile.SIZE - this.screen.getViewPort().getWidth() - Tile.SIZE) {
+                xScroll = this.level.getWidth() * Tile.SIZE - this.screen.getViewPort().getWidth() - Tile.SIZE;
+            }
+            if (yScroll > this.level.getHeight() * Tile.SIZE - this.screen.getViewPort().getHeight() - Tile.SIZE) {
+                yScroll = this.level.getHeight() * Tile.SIZE - this.screen.getViewPort().getHeight() - Tile.SIZE;
+            }
 
-        level.renderBackground(this.screen, xScroll, yScroll);
-        level.renderSprites(this.screen, xScroll, yScroll);
+            level.renderBackground(this.screen, xScroll, yScroll);
+            level.renderSprites(this.screen, xScroll, yScroll);
 
-        if (selectedEntity != null) {
-            Font.draw("selected", this.screen, selectedEntity.getX() - xScroll, selectedEntity.getY() - yScroll, PaletteHelper.getColor(-1, 111, 111, 555));
-        }
+            if (selectedEntity != null) {
+                Font.draw("selected", this.screen, selectedEntity.getX() - xScroll, selectedEntity.getY() - yScroll, PaletteHelper.getColor(-1, 111, 111, 555));
+            }
 
-        level.renderFog(this.screen, xScroll, yScroll);
+            level.renderFog(this.screen, xScroll, yScroll);
 
-        GuiPanel panel;
-        if ((panel = GuiManager.getInstance().get("money")) != null) {
-            ResourceItem coin = player.getInventory().findResource(Resource.coin);
-            ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
-            int score = ((coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount() << 1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
+            GuiPanel panel;
+            if ((panel = GuiManager.getInstance().get("money")) != null) {
+                ResourceItem coin = player.getInventory().findResource(Resource.coin);
+                ResourceItem bigCoin = player.getInventory().findResource(Resource.bigCoin);
+                int score = ((coin != null ? coin.getCount() : 0) + (bigCoin != null ? (bigCoin.getCount() << 1) : 0));//String.format("%s/%s", (coin != null ? coin.getCount() : 0), (bigCoin != null ? bigCoin.getCount() : 0));
 
-            ((GuiStatusPanel) panel).setText(score);
-        }
+                ((GuiStatusPanel) panel).setText(score);
+            }
 
-        if ((panel = GuiManager.getInstance().get("health")) != null)
-            ((GuiStatusPanel) panel).setText(player.getHealth());
+            if ((panel = GuiManager.getInstance().get("health")) != null)
+                ((GuiStatusPanel) panel).setText(player.getHealth());
 
-        if ((panel = GuiManager.getInstance().get("speed")) != null)
-            ((GuiSpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
+            if ((panel = GuiManager.getInstance().get("speed")) != null)
+                ((GuiSpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
 
-        GuiManager.getInstance().render(this.screen);
+            GuiManager.getInstance().render(this.screen);
 
-        if (player.isRemoved()) {
+            if (player.isRemoved()) {
 
-            String msg = "конец игры";
-            Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 100, PaletteHelper.getColor(555, 111, 111, 115));
-            msg = "нажмите пробел чтобы начать играть";
-            Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 120, PaletteHelper.getColor(555, 111, 111, 115));
+                String msg = "вы мертвы!";
+                Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 100, PaletteHelper.getColor(555, 111, 111, 115));
+                msg = "нажмите пробел чтобы начать играть";
+                Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 120, PaletteHelper.getColor(555, 111, 111, 115));
+            }
         }
 
         super.render(player.isRemoved());

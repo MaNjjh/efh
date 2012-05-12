@@ -3,6 +3,7 @@ package ru.znay.znay.he.gfx.gui;
 import ru.znay.znay.he.Game;
 import ru.znay.znay.he.InputHandler;
 import ru.znay.znay.he.cfg.Constants;
+import ru.znay.znay.he.model.AboutScreen;
 import ru.znay.znay.he.model.level.tile.Tile;
 
 /**
@@ -20,7 +21,7 @@ public class GuiMainMenu extends GuiMenu implements GuiMenu.Callback{
 
         panels.add(new GuiTextPanel("Играть",x,y,GuiManager.FONT_COLOR,GuiManager.MENU_COLOR_SEL));
         panels.add(new GuiTextPanel("Управление",x,y+ Tile.HALF_SIZE*3,GuiManager.FONT_COLOR,GuiManager.PANEL_COLOR));
-        //panels.add(new GuiTextPanel("Авторы",x,y+ Tile.HALF_SIZE*6,GuiManager.FONT_COLOR,GuiManager.MENU_COLOR_SEL));
+        panels.add(new GuiTextPanel("Авторы",x,y+ Tile.HALF_SIZE*6,GuiManager.FONT_COLOR,GuiManager.MENU_COLOR));
 
         callback = this;
 
@@ -51,7 +52,8 @@ public class GuiMainMenu extends GuiMenu implements GuiMenu.Callback{
                 GuiManager.getInstance().get("helpPanel").show();
                 return true;
             case 2:
-                break;
+                AboutScreen.getInstance().Show();
+                return true;
         }
 
         return false;
