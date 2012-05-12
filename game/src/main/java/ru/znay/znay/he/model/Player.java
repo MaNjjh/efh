@@ -127,10 +127,7 @@ public class Player extends Mob {
             }
         }
 
-        if (!move(xa, ya) && shoes != null && shoes.getEquipment() == Equipment.ultraShoes) {
-            x += xa;
-            y += ya;
-        }
+        move(xa, ya);
 
         if (System.currentTimeMillis() - collectTime > 300) {
             updateAveragedNotify();
@@ -138,6 +135,11 @@ public class Player extends Mob {
         }
 
         super.tick();
+    }
+
+    @Override
+    public boolean canFly() {
+        return shoes != null && shoes.getEquipment() == Equipment.ultraShoes;
     }
 
     @Override

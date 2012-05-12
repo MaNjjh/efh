@@ -1,11 +1,8 @@
 package ru.znay.znay.he.model.mob.boss;
 
+import ru.znay.znay.he.model.Entity;
 import ru.znay.znay.he.model.Mob;
-import ru.znay.znay.he.model.item.ItemEntity;
 import ru.znay.znay.he.model.item.equipment.Equipment;
-import ru.znay.znay.he.model.item.equipment.EquipmentItem;
-import ru.znay.znay.he.model.level.tile.Tile;
-import ru.znay.znay.he.model.npc.Warper;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,7 +13,7 @@ import ru.znay.znay.he.model.npc.Warper;
  */
 public class Boss extends Mob {
     public static Equipment[][] equipmentDrop = {
-           // {Equipment.ultraShoes, Equipment.ultraBow, Equipment.ultraArmor}, // 1-level
+            {Equipment.ultraShoes, Equipment.ultraBow, Equipment.ultraArmor}, // 1-level
             {Equipment.simpleShoes}, // 1-level
             {Equipment.strongBow, Equipment.secondArmor}, // 2-level
             {Equipment.secondStrongArmor}, // 2-level
@@ -24,4 +21,14 @@ public class Boss extends Mob {
             {Equipment.thirdStrongArmor, Equipment.strongShoes}, // 4-level
             {Equipment.rareArmor, Equipment.rareBow, Equipment.rareBow}, // 5-level
             {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}};
+
+    @Override
+    public boolean canSwim() {
+        return true;
+    }
+
+    @Override
+    public boolean blocks(Entity entity) {
+        return true;
+    }
 }

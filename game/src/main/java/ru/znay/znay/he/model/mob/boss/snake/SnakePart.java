@@ -81,9 +81,4 @@ public class SnakePart extends Boss {
         }
         super.hurt(mob, damage, attackDir);
     }
-
-    @Override
-    public boolean blocks(Entity entity) {
-        return true;
-    }
 }
