@@ -276,8 +276,6 @@ public class Level {
             getTile(xt, yt).tick(this, xt, yt);
         }
 
-        GuiManager.getInstance().tick();
-
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
             int xto = entity.getX() >> 4;

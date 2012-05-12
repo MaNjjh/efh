@@ -127,7 +127,7 @@ public class GuiInventory extends GuiPanel {
     @Override
     public void tick() {
         if (InputHandler.getInstance(null).inventory.clicked) {
-            visible = !visible;
+            setVisible(!visible);
         }
     }
 

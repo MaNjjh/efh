@@ -1,8 +1,5 @@
 package ru.znay.znay.he.model.builds.tree;
 
-import ru.znay.znay.he.gfx.gui.GuiManager;
-import ru.znay.znay.he.gfx.gui.GuiMenu;
-import ru.znay.znay.he.gfx.gui.GuiTextPanel;
 import ru.znay.znay.he.gfx.helper.PaletteHelper;
 import ru.znay.znay.he.gfx.sprite.SpriteCollector;
 import ru.znay.znay.he.gfx.sprite.SpriteWrapper;
@@ -14,9 +11,6 @@ import ru.znay.znay.he.model.item.resource.Resource;
 import ru.znay.znay.he.model.item.resource.ResourceItem;
 import ru.znay.znay.he.model.level.tile.Tile;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: Денис Сергеевич
@@ -24,7 +18,7 @@ import java.util.List;
  * Time: 20:49
  * To change this template use File | Settings | File Templates.
  */
-public class Shrubbery extends Tree implements GuiMenu.Callback {
+public class Shrubbery extends Tree {
     private boolean berry = false;
     private boolean type = random.nextBoolean();
     private long tick = System.currentTimeMillis() + 60000;
@@ -52,20 +46,6 @@ public class Shrubbery extends Tree implements GuiMenu.Callback {
         if (tick > System.currentTimeMillis() || berry) return;
 
         wrapSprite((berry = !berry));
-    }
-
-    @Override
-    public void result(int result) {
-
-        GuiManager.getInstance().remove("shrubbery");
-        tick2 = System.currentTimeMillis() + 2000;
-
-        if (result == 1) return;
-
-        wrapSprite((berry = !berry));
-
-        tick = System.currentTimeMillis() + 120000;
-
     }
 
     @Override

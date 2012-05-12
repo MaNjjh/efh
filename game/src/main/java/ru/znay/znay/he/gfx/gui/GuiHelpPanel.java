@@ -40,7 +40,7 @@ public class GuiHelpPanel extends GuiTextPanel {
     public void tick() {
 
         if (InputHandler.getInstance(null).helpWindow.clicked) {
-            visible = !visible;
+            setVisible(!visible);
         }
     }
 }

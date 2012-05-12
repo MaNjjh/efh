@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class GuiMenu extends GuiPanel {
     public interface Callback {
-        public void result(int result);
+        public boolean result(int result);
     }
 
     protected List<GuiTextPanel> panels = new LinkedList<GuiTextPanel>();
@@ -105,9 +105,9 @@ public class GuiMenu extends GuiPanel {
 
     public void select() {
         if (!visible) return;
-        callback.result(currentCell);
-        setVisible(false);
-        GuiManager.isOpenedMenu = false;
+        if (!callback.result(currentCell)) {
+            setVisible(false);
+        }
     }
 
     @Override

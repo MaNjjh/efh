@@ -80,12 +80,13 @@ public class Warp extends Entity {
 
         ((GuiMenu) GuiManager.getInstance().get("menu")).showMenu(strings, new GuiMenu.Callback() {
             @Override
-            public void result(int result) {
+            public boolean result(int result) {
                 GuiManager.getInstance().remove("warp_menu");
                 if (result == 0)
                     doWarp();
 
                 tick = System.currentTimeMillis() + 2000;
+                return false;
             }
         });
     }

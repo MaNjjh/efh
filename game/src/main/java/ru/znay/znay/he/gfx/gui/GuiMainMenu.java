@@ -16,10 +16,10 @@ public class GuiMainMenu extends GuiMenu implements GuiMenu.Callback{
     private Game game;
 
     public GuiMainMenu(Game game) {
-        super(Constants.SCREEN_WIDTH / 3, Constants.SCREEN_HEIGHT / 3);
+        super(Constants.SCREEN_WIDTH / 3, Constants.SCREEN_HEIGHT / 2);
 
         panels.add(new GuiTextPanel("Играть",x,y,GuiManager.FONT_COLOR,GuiManager.MENU_COLOR_SEL));
-        panels.add(new GuiTextPanel("Управление",x,y+ Tile.HALF_SIZE*3,GuiManager.FONT_COLOR,GuiManager.MENU_COLOR_SEL));
+        panels.add(new GuiTextPanel("Управление",x,y+ Tile.HALF_SIZE*3,GuiManager.FONT_COLOR,GuiManager.PANEL_COLOR));
         //panels.add(new GuiTextPanel("Авторы",x,y+ Tile.HALF_SIZE*6,GuiManager.FONT_COLOR,GuiManager.MENU_COLOR_SEL));
 
         callback = this;
@@ -40,7 +40,7 @@ public class GuiMainMenu extends GuiMenu implements GuiMenu.Callback{
     }
 
     @Override
-    public void result(int result) {
+    public boolean result(int result) {
         switch (result) {
             case 0:
                 hide();
@@ -49,10 +49,12 @@ public class GuiMainMenu extends GuiMenu implements GuiMenu.Callback{
                 break;
             case 1:
                 GuiManager.getInstance().get("helpPanel").show();
-                break;
+                return true;
             case 2:
                 break;
         }
+
+        return false;
     }
 
     @Override

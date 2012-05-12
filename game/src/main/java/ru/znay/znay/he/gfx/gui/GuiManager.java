@@ -78,13 +78,6 @@ public class GuiManager {
     }
 
     public void tick() {
-        /*Iterator<GuiPanel> items = panels.values().iterator();
-        GuiPanel panel;
-
-        for (; items.hasNext(); )
-            if ((panel = items.next()).isClosed())
-                items.remove();
-            else panel.tick();*/
         List<String> strings = new LinkedList<String>();
 
         Set<String> keys = panels.keySet();
