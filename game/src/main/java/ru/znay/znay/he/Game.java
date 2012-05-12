@@ -38,6 +38,7 @@ public class Game extends Graphics implements Runnable {
     private int xScroll;
     private int yScroll;
     private Entity selectedEntity;
+    public static boolean soundOn = true;
 
     public void start() {
         running = true;
@@ -67,6 +68,15 @@ public class Game extends Graphics implements Runnable {
             InputHandler.getInstance(null).releaseAll();
         } else {
             InputHandler.getInstance(null).tick();
+
+            if (InputHandler.getInstance(null).sound.clicked) {
+                soundOn = !soundOn;
+                if (soundOn) {
+                    Sound.backMusic.loop();
+                } else {
+                    Sound.backMusic.stop();
+                }
+            }
 
             if (AboutScreen.getInstance().isShow()) {
                 AboutScreen.getInstance().tick();

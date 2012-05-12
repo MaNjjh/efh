@@ -29,6 +29,7 @@ public class GuiHelpPanel extends GuiTextPanel {
         messages.add("q - употребить яблоко");
         messages.add("e - употребить ягоду");
         messages.add("интерфейс:");
+        messages.add("z - вкл\\выкл звук");
         messages.add("i - инвентарь");
         messages.add("h - это окно");
 

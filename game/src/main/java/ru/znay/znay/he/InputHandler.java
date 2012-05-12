@@ -124,6 +124,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
     public Key berryUse = new Key();
     public Key helpWindow = new Key();
     public Key mainMenu = new Key();
+    public Key sound = new Key();
 
     public void releaseAll() {
         for (Key key : keys) {
@@ -200,6 +201,7 @@ public class InputHandler implements KeyListener, MouseMotionListener, MouseList
 
         if (ke.getKeyCode() == KeyEvent.VK_Q) appleUse.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_E) berryUse.toggle(pressed);
+        if (ke.getKeyCode() == KeyEvent.VK_Z) sound.toggle(pressed);
 
         if (ke.getKeyCode() == KeyEvent.VK_SPACE) action.toggle(pressed);
         if (ke.getKeyCode() == KeyEvent.VK_CONTROL) action.toggle(pressed);
