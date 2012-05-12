@@ -26,6 +26,10 @@ public class GameApplet extends Applet {
         game.start();
     }
 
+    public void destroy() {
+        game = null;
+    }
+
     public void stop() {
         game.stop();
         Sound.backMusic.stop();
