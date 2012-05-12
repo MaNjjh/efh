@@ -43,6 +43,7 @@ public class AboutScreen {
         strings.add("Денис Сергеевич");
         strings.add("email: denuss@gmail.com");
         strings.add(" ");
+        strings.add("отдельное спасибо всем тестерам");
 
         strings.add("исходный код и все материалы по игре");
         strings.add("можно найти на:");
