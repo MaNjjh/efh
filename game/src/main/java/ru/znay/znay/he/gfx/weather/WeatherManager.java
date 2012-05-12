@@ -55,7 +55,7 @@ public class WeatherManager {
             rainTime = 5000;
         }
 
-        if (currentWeather.isRain() && rainTime < 4000 && rainTime > 1000 && random.nextInt(20) == 0) {
+        if (currentWeather.isRain() && rainTime < 4000 && rainTime > 1000 && random.nextInt(100) == 0) {
 
             currentWeather.setStorm(true);
         }
