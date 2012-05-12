@@ -3,6 +3,7 @@ package ru.znay.znay.he.model;
 import ru.znay.znay.he.gfx.model.Font;
 import ru.znay.znay.he.model.level.Level;
 import ru.znay.znay.he.model.level.tile.Tile;
+import ru.znay.znay.he.model.mob.boss.Boss;
 import ru.znay.znay.he.model.particle.BloodParticle;
 import ru.znay.znay.he.model.particle.FlowText;
 import ru.znay.znay.he.model.weapon.arrow.Arrow;
@@ -44,8 +45,8 @@ public class Mob extends Entity {
     @Override
     public void tick() {
         tickTime++;
-        if (!this.canFly() && level.getTile(x >> 4, y >> 4) == Tile.lava) {
-            hurt(this, 4, dir ^ 1);
+        if (!this.canFly() && level.getTile(x >> 4, y >> 4) == Tile.lava && !(this instanceof Boss)) {
+            hurt(this, 10, dir ^ 1);
         }
 
         if (health <= 0) {
@@ -137,7 +138,7 @@ public class Mob extends Entity {
             // level.add(new TextParticle(damage + "", x, y, bloodColor));
         }
 
-        for (int i = 0; i < damage; i++) {
+        for (int i = 0; i < Math.min(damage, 10); i++) {
             level.add(new BloodParticle(x, y, bloodColor));
         }
 

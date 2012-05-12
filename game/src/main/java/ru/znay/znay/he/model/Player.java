@@ -55,6 +55,9 @@ public class Player extends Mob {
         this.bloodColor = 0xcc00cc;
         touchItem(new ItemEntity(new ResourceItem(Resource.apple, 10), x, y));
         touchItem(new ItemEntity(new EquipmentItem(Equipment.simpleBow), 0, 0));
+/*        touchItem(new ItemEntity(new EquipmentItem(Equipment.rareArmor), 0, 0));
+        touchItem(new ItemEntity(new EquipmentItem(Equipment.rareBow), 0, 0));
+        touchItem(new ItemEntity(new EquipmentItem(Equipment.rareShoes), 0, 0));*/
     }
 
     @Override

@@ -23,7 +23,7 @@ public class Guardian extends NPC {
     public Guardian(int x, int y) {
         super(x, y);
         //this.currentState = this.currentState.mergeStates(new CharacterState(0, 15, 8, 0, 10, 30));
-        this.currentState = this.currentState.mergeStates(new CharacterState(10, 10, 10, 10, 10, 5));
+        this.currentState = this.currentState.mergeStates(new CharacterState(3, 20, 10, 10, 10, 20));
         int col = (random.nextInt(7) - 3) * 10;
         this.color1 = PaletteHelper.getColor(-1, 100, 335 + col, 532);
         this.color2 = PaletteHelper.getColor(-1, 100, 335 + col, 532);

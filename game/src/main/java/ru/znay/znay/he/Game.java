@@ -38,7 +38,7 @@ public class Game extends Graphics implements Runnable {
     private int xScroll;
     private int yScroll;
     private Entity selectedEntity;
-    public static boolean soundOn = true;
+    public static boolean soundOn = false;
 
     public void start() {
         running = true;
@@ -167,7 +167,6 @@ public class Game extends Graphics implements Runnable {
             GuiManager.getInstance().render(this.screen);
 
             if (player.isRemoved()) {
-
                 String msg = "вы мертвы!";
                 Font.draw(msg, this.screen, (Constants.SCREEN_WIDTH - msg.length() * 8) >> 1, 100, PaletteHelper.getColor(555, 111, 111, 115));
                 msg = "нажмите пробел чтобы начать играть";

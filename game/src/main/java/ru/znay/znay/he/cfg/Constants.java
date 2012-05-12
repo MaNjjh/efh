@@ -14,7 +14,7 @@ public class Constants {
 
     public static final boolean isDebugMode = false;
 
-    public final static int MAX_LEVEL_COUNT = 5;
+    public final static int MAX_LEVEL_COUNT = 6;
 
     public static final String GAME_TITLE = "Escape from hell";
 

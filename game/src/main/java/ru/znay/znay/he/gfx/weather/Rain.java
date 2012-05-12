@@ -60,7 +60,7 @@ public class Rain extends Entity {
             level.add(new Separation(x, y));
             int xx = x >> 4;
             int yy = y >> 4;
-            if (level.getTile(xx, yy) == Tile.lava || level.getTile(xx, yy) == Tile.hole) {
+            if (/*level.getTile(xx, yy) == Tile.lava || */level.getTile(xx, yy) == Tile.hole) {
                 level.setTile(xx, yy, Tile.water, 0);
             }
             return;
