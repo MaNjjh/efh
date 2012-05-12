@@ -191,8 +191,8 @@ public class Player extends Mob {
             screen.render(xo + Tile.HALF_SIZE, yo + 3, 5 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, waterColor, 1);
         }
 
-        int col1 = PaletteHelper.getColor(-1, 100, 0, 555);
-        int col2 = PaletteHelper.getColor(-1, 100, 0, 555);
+        int col1 = PaletteHelper.getColor(-1, 100, 0, 542);
+        int col2 = PaletteHelper.getColor(-1, 100, 0, 542);
 
         if (hurtTime > 0) {
             col1 = PaletteHelper.getColor(-1, 555, 555, 555);
