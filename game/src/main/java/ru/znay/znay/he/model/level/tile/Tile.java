@@ -33,7 +33,7 @@ public class Tile {
     public static final int SIZE = HALF_SIZE << 1;
 
     public int lavaMainColor = 500;
-    public int grassMainColor = 141;
+    public int grassMainColor = 131;
     public int dirtMainColor = 322;
     public int sandMainColor = 550;
     public int roadMainColor = 431;
@@ -46,7 +46,7 @@ public class Tile {
 
     public int holeColor = PaletteHelper.getColor(111, holeMainColor, 110, 110);
     public int dirtColor = PaletteHelper.getColor(211, dirtMainColor, 433, 544);
-    public int grassColor = PaletteHelper.getColor(030, grassMainColor, 252, 353);
+    public int grassColor = PaletteHelper.getColor(030, grassMainColor, 242, 333);
     public int lavaColor = PaletteHelper.getColor(500, lavaMainColor, 520, 550);
     public int sandColor = PaletteHelper.getColor(552, sandMainColor, 440, 440);
     public int roadColor = PaletteHelper.getColor(431, roadMainColor, roadMainColor - 110, 330);

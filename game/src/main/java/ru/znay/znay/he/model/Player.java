@@ -161,7 +161,7 @@ public class Player extends Mob {
     public void render(Screen screen) {
 
         int xt = 8;
-        int yt = 14;
+        int yt = 18;
 
         int flip1 = (walkDist >> 3) & 1;
         int flip2 = (walkDist >> 3) & 1;
@@ -191,8 +191,8 @@ public class Player extends Mob {
             screen.render(xo + Tile.HALF_SIZE, yo + 3, 5 * Tile.HALF_SIZE, 13 * Tile.HALF_SIZE, waterColor, 1);
         }
 
-        int col1 = PaletteHelper.getColor(-1, 100, 500, 555);
-        int col2 = PaletteHelper.getColor(-1, 100, 500, 532);
+        int col1 = PaletteHelper.getColor(-1, 100, 0, 555);
+        int col2 = PaletteHelper.getColor(-1, 100, 0, 555);
 
         if (hurtTime > 0) {
             col1 = PaletteHelper.getColor(-1, 555, 555, 555);
