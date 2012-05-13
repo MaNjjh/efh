@@ -122,7 +122,7 @@ public class GuiManager {
         panels.clear();
 
         add(new GuiStatusPanel(10, 220, 3, 3, 123, PaletteHelper.getColor(430, 430, 540, -1)), "money");
-        add(new GuiStatusPanel(100, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
+        add(new GuiStatusPanel(70, 220, 5, 3, 123, PaletteHelper.getColor(300, 555, 311, -1)), "health");
         add(new GuiSpeedIndicator(150, 220, PaletteHelper.getColor(531, 531, 531, -1), level.getSpriteCollector()), "speed");
         add(new GuiInventory(1, 5, level.getPlayer()), "inventory");
         add(new GuiMenu(50, 100), "menu");

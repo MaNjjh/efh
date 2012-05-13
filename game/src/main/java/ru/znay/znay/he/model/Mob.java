@@ -217,4 +217,8 @@ public class Mob extends Entity {
     public void setHealth(int health) {
         this.health = Math.min(currentState.getEndurance(), health);
     }
+
+    public CharacterState getCurrentState() {
+        return currentState;
+    }
 }

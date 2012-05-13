@@ -159,7 +159,7 @@ public class Game extends Graphics implements Runnable {
             }
 
             if ((panel = GuiManager.getInstance().get("health")) != null)
-                ((GuiStatusPanel) panel).setText(player.getHealth());
+                ((GuiStatusPanel) panel).setText2(player.getHealth() + "/" + player.getCurrentState().getEndurance());
 
             if ((panel = GuiManager.getInstance().get("speed")) != null)
                 ((GuiSpeedIndicator) panel).changeSpeed(player.getSlowPeriod());
